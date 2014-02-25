@@ -1,0 +1,78 @@
+What follows is a detailed specification of key features to be shown on the AR view and expected locations, subject to some change.
+
+
+Main AR view:
+    sidebar hidden as default but can be swiped on or off the screen.  Shown here with all onscreen
+
+    +----------+--------------------------------------------+
+    |          |                                            |
+    | Route    |                Icons           +---------+ |
+    |  planning|                                | Circular| |
+    |          |                                |  radar  | |
+    +----------+        Icons                   +---------+ |
+    |          |                                            |
+    | Filters  |                                            |
+    |          |                                            |
+    |          |                        Icons               |
+    |          |                                            |
+    +----------+                                            |
+    |          |                                            |
+    | Settings |                                Distance    |
+    |          |                            filter slider   |
+    +----------+--------------------------------------------+
+
+
+For individual locations on the GUI:
+
+        First appearance:
+        There will be an icon for each type of location (possibly using Font Awesome) colourcoded for type and possibly other variables (such as whether we've already visited, or greyed out if it's not on our current tour etc.)
+        +-----------+
+        |           |
+        |    Icon   |
+        |           |
+        +-----------+
+
+            |
+            |
+            |
+            v
+            
+        Detailed view (one tap of icon):
+        Rating probably shown as a number within a star for aesthetics.
+        +--------------------------------------------+
+        |    Name - Precise Distance        Rating   |
+        +--------------------------------------------+
+        | Quick shortcuts (probs. just icons here)   |
+        +--------------------------------------------+
+        
+            |
+            |
+            |
+            v
+            
+        Full view (fullscreen or at least most of it)
+        +----------------------------------------------------+
+        |    Name - Precise Distance                 Rating  |
+        |                                                    |
+        |                                                    |
+        |                        +-----------------------+   |
+        |                        |    Social media feed  |   |
+        |    Image               |    - tweets           |   |
+        |                        |    - facebook posts   |   |
+        |                        |   - news articles     |   |
+        |                        +-----------------------+   |
+        |                                                    |
+        |    Description                                     |
+        +----------------------------------------------------+
+        | Shortcuts to features (tick off/route planning)    |
+        +----------------------------------------------------+
+
+
+
+
+
+
+
+
+
+
