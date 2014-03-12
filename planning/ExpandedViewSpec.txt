@@ -1,0 +1,39 @@
+Specification Of Expanded Views Of Icons For Augmented Reality Oxford - Matthew Sjödin
+
+For the purposes of this document the first tap of an icon takes us to the "expanded" view (that showing us the basic details of a location) and the second to the "full" view (the view with more information covering almost all  - if not all - of the screen).  The appearance of these screens has already been discussed; this document deals with 
+
+The full view contains all of the information held by the expanded view and these common features will be discussed first:
+	- Name
+		- The name will be stored locally, simply as a string (e.g. "The White Rabbit") in the database of information
+	- Type
+		- What type of location it is (e.g. pub, museum)
+		- Displayed through the icon of the location/colour coding
+	- Rating
+		- Probably pulled from a web resource if we have wifi, but with perhaps a rating stored locally in case we don't
+	- Distance
+		- Location stored locally, as locations are static and it is essential to the use of the app, even if we don't have wifi
+		- Simple matter of using gps location of device and calculating offset from the location
+	- Shortcuts
+		- Route planning - send an identifier of the location for the purposes of adding to the current route, making a new plan just to go there etc.
+		- Ticking off - send an identifier, again, to see similar places or tick it off etc.
+
+
+And things exclusive to the full view:
+	- Image
+		- The image is non-essential so could be taken off the Internet, perhaps from Wikipedia or some other trusted source
+		- It would take up way too much space to store locally for so little gain
+	- Description
+		- The description would probably be stored locally but gathered from the Internet (again, perhaps Wikipedia or the location's own website)
+		- That said, we might want to write short descriptions ourselves for the personal touch and so users don't dismiss it all as advertisements
+			- As in, give practical information, rather than a formal description from a boring website
+	- News Feed
+		- The news feed sources data from several news modules if there is wifi access
+		- Each module simply gets snippets of data from the Internet if possible (such as tweets or headlines), assigns them a priority and gives them to the news feed with the added information of what source they are from for the purposes of colour coding etc.
+		- Probably Twitter and some news source (undecided)
+		
+In terms of implementation we will either access data directly from a local database/the Internet based on an identifier for the icon or have an object for each location loaded from the data sources.  Either way both the expanded and full view will take data the same way; their differences are primarily UI-based.  An example implementation would have a location as a current state (icon, expanded or full) and displaying information appropriately.  That said, the full view may have a separate activity associated with it:  the other two states are superimposed on the world, whereas the full view is static on the screen.  The exact implementation will be discussed further.
+
+The interface to the News Feed will be very simple; all we want, given wifi access, is a list of stories to display, if any.  The internal workings will be totally hidden from the rest of the program.  
+
+	
+

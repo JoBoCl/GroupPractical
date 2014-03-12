@@ -59,7 +59,7 @@ For individual locations on the GUI:
         |                        |    Social media feed  |   |
         |    Image               |    - tweets           |   |
         |                        |    - facebook posts   |   |
-        |                        |   - news articles     |   |
+        |                        |    - news articles    |   |
         |                        +-----------------------+   |
         |                                                    |
         |    Description                                     |
