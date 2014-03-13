@@ -27,6 +27,8 @@ GooglePlayServicesClient.OnConnectionFailedListener {
 	private BeyondarGLSurfaceView mBeyondarGLSurfaceView;
 	private World world;
 	private GeoObject museum = new GeoObject(1);
+	private GeoObject rdb = new GeoObject(2);
+	private GeoObject keble = new GeoObject(3);
 	
 	private LocationClient mLocationClient;
 	private Location mCurrentLocation;
@@ -45,10 +47,22 @@ GooglePlayServicesClient.OnConnectionFailedListener {
         
         world = new World(this);
         world.setArViewDistance(10000);
+        
         museum.setGeoPosition(51.758692, -1.255523);
-        museum.setImageResource(R.drawable.ic_launcher);
+        museum.setImageResource(R.drawable.red);
         museum.setName("Natural History Museum");
         world.addBeyondarObject(museum);
+        
+        museum.setGeoPosition(51.762360, -1.261361);
+        rdb.setImageResource(R.drawable.green);
+        rdb.setName("Ruth Deech Building");
+        world.addBeyondarObject(rdb);
+        
+        keble.setGeoPosition(51.759065, -1.257919);
+        keble.setImageResource(R.drawable.blue);
+        keble.setName("Keble College");
+        world.addBeyondarObject(keble);
+        
         mBeyondarGLSurfaceView.setWorld(world);
     }
     
@@ -78,9 +92,9 @@ GooglePlayServicesClient.OnConnectionFailedListener {
             case R.id.action_location:
             	updateUserLocation();
                 return true;
-            case R.id.action_dist:
+            /*case R.id.action_dist:
             	showDistanceToTarget();
-                return true;
+                return true;*/
             default:
                 return super.onOptionsItemSelected(item);
         }
