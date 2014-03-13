@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">BeyondAR Demo</string>
+    <string name="action_location">Update Location</string>
+    <string name="action_dist">Distance to Target</string>
+
+</resources>
