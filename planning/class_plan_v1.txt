@@ -1,0 +1,167 @@
+/* 
+ * Class Plan
+ * 
+ * Outline of key classes and their key interfaces.
+ * Note that the 'Activity' class is part of the Android API, and represents an
+ * activity in their app life cycle. The Sidebar is an integral part of the
+ * program structure, not an Activity, so is not listed here.
+ * Note also that, as internal and implementation-specific methods are not
+ * listed here, neither will there be listed those methods of Activity that are
+ * required to be overidden for the implementation to work.
+ * ANOTHER NOTE: When an Activity calls another Activity in the Android API, it
+ * does so using an 'Intent'. All parameters are also passed as members of this
+ * Intent - hence the lack of methods specified in the Activity definitions
+ * below about handling their construction. This will all be dealt with when
+ * the required 'onCreate' methods of the Activities are implemented.
+ */
+
+ /*
+  * Design decisions:
+  * - Each key feature / screen of program is an Activity.
+  * - Store key data in singleton objects, to minimise fiddly data passing
+  *   between activities and keep persistent data:
+  *   > Global Settings
+  *   > Places Database
+  *   > GPS Service/Wrapper
+  *   (as a result of this decision, a lot of the simple Activities have no
+  *   prescribed public methods! yay!)
+  */
+
+
+
+
+/*
+ * Database of Places
+ * All the places will be stored in here. This will be a singleton object, with
+ * various query functions that return PlaceData objects.
+ */
+public class PlacesDatabase {
+
+// ...TODO... what kinds of information will we want to filter by for queries?
+
+}
+
+/*
+ * Place Data Object
+ * These are stored in the database! They will contain data and getter methods.
+ */
+public class PlaceData {
+}
+
+/*
+ * Program Settings Singleton Object
+ * A singleton object to hold global settings in. It will contain various
+ * settings, either public or private with accessors. All global and persistent
+ * settings will be stored here - namely those from the Settings and Filter
+ * control panels.
+ */
+public class GlobalSettings {
+}
+
+/*
+ * GPS Singleton Object
+ * A singleton object to handle connection to the GPS service and retrieving
+ * location data for the various parts of the program that request it.
+ * Basically a wrapper.
+ */
+public class GPSService {
+	/*
+	 * Retrieve location.
+	 */
+	public double getLatitude();
+	public double getLongitude();
+}
+
+/*
+ * Main Screen Activity
+ * This is the central screen in the program, where the AR View and such like
+ * is handled.
+ */
+public class MainScreenActivity extends Activity {
+	/*
+	 * Screen components the activity owns
+	 */
+	private RadarComponent radar;
+	private RangeSliderComponent distanceslider;
+	// Also BeyondAR stuff
+
+	/*
+	 * Update viewing range (called back from the RangeSliderComponent)
+	 */
+	public void updateViewRange(double viewRange);
+}
+
+/*
+ * Radar Component for Main Screen
+ */
+public class RadarComponent {
+	/*
+	 * Constructor
+	 */
+	public RadarComponent(MainScreenActivity owner);
+
+	/*
+	 * Update the state of the radar display
+	 */
+	public void updateState(double centreX, double centreY, double viewRange, ...);
+}
+
+/*
+ * Range Slider Component for Main Screen
+ */
+public class RangeSliderComponent {
+	/*
+	 * Constructor
+	 */
+	public RangeSliderComponent(MainScreenActivity owner);
+}
+
+/*
+ * Place Full Information Activity
+ * The full place information screen thingy. Note: by making it an activity, I
+ * am asserting it will be its own fullscreen thing. I think this makes the
+ * most sense in terms of app structure.
+ * I'll leave all of its internal stuff up to the implementer, including all
+ * the necessary subclasses.
+ */
+public class PlaceFullInfoActivity {
+}
+
+/*
+ * Settings Panel Activity
+ * Where the settings are handled. This activity will manipulate the global
+ * settings singleton object.
+ */
+public class SettingsPanelActivity {
+}
+
+/*
+ * Filter Panel Activity
+ * Sets filter settings for AR View. These will be stored in the global
+ * settings singleton object.
+ */
+public class FilterPanelActivity {
+}
+
+/*
+ * List Places Activity
+ * List the places!
+ */
+public class ListPlacesActivity {
+}
+
+/*
+ * Route Planner Activity
+ * Route the plans!
+ * Note that initial setup information will be passed to the required
+ * 'onCreate' method in an Intent by the calling Activity, as this Activity can
+ * be called by the Full Info Screen, Auto Planner, or via the the Sidebar.
+ */
+public class RoutePlannerActivity {
+}
+
+/* Auto Planner Activity
+ * Auto the plan routes plans auto routes words typing!
+ */
+public class AutoPlannerActivity {
+}
