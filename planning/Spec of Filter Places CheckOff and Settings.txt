@@ -1,0 +1,36 @@
+APPLICATION SPECIFICATION OF THE FILTER, PLACES AND CHECK OFF PANELS AND THE SETTINGS
+
+THE FILTER PANEL
+Tapping the Filters button on the sidebar will bring up a panel, the "Filters" panel. This will contain check boxes for each of the different filters in 3 sections.
+(1) Show All - this top level filter will enable or disable all of the filters at once
+(2) Types - this set will list each type of place as a filter e.g colleges, museums, pubs
+(3) Visited Locations - this includes two filters, seen and unseen which will filter according to which places have been visited or not.
+
+The Filter Panel, like other panels will be scrollable by swiping up and down if the number of items in the panel is too great to fit in one column. Also, it will be closed in the same way as other panels.
+
+The current state of each filter will be stored so that it cana be accessed from different places in the app, due to multiple features requiring access to it. Every filter except the Show All filter will be implemented in this way, the Show All filter will affect the other filters universally, either enabling all or disabling all.
+
+The Panel itself will be designed in a similar style to the other panels in the app.
+
+THE PLACES PANEL
+Tapping the Places button on the sidebar opens the "Places" panel. This contains a list of all places available in Oxford. There are two modes of display in this panel, ABC and Type. ABC lists all of the places in groups corresponding to the first letter of the place and Type groups the places into the filter groups such as Restaurants, Cafes and Museums. The top row of the panel contains two buttons which switch between the two display types.
+
+Tapping a group will bring up the list of places in this group, sorted by distance by default. The Settings contains a setting allowing the user to change this sort to an alphabetical sort. Tapping one of these places will then open up the screen showing detailed information about the place over the top of the panel.
+
+Non-changing data for each place is stored in the app, and the places panel draws from this to list the places. This data will be stored in a location accessible across the app, so other features can access it too.
+
+THE CHECK OFF PANEL
+The app will allow users to check off places they have visited, so they can filter out places they have already seen as well as being able to keep a record of these visited places. This can be done on the detailed information screen for a place.
+
+Tapping the Visited Button on the sidebar open the "Visited" Panel. On the panel are two tabs Visited Places and Unvisited Places. Visited Places will display a list of all places that have been visited which can be scrolled through and tapped on to go to the detailed information screen on that place. Unvisited Places works the same except for Unvisited Places.
+
+This panel will be implemented in a very similar way to the Places Panel, using a TabView containing a TabWidget and a FrameLayout containing three others. Again, the individual places will be buttons linking to the detailed view on that place.
+
+The app will store a piece of information on each place, indicating whether the place has been visited or not, and this feature will use this sort the places into visited and not visited.
+
+THE SETTINGS
+Tapping the Settings button on the sidebar will take the user to the Settings Screen. It will include various settings that will affect the default functionality of the app, across all of the different features.. Settings include:
+o Visited Places Appearance (Hidden,Faded,Visible) - The visual appearance of places which have been visited on the AR view.
+o Places Sort (Distance, Alphabetical) - Changes the sorting within the groups of places in the Places Panel.
+
+The Settings screen will follow the standards for Android apps, by using the Preference APIs. Each individual setting will be an extension of the Preference class and will be saved in the default SharedPreferences file. This extension allows specification of the different options this setting can take, for example a CheckBoxPreference for a simple on off setting or a ListPreference for a setting with multiple options. Also the SharedPreferences file can be accessed from anywhere in the application via a static method, so the current settings can be used in the implementation of each feature.

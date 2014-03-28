@@ -1,0 +1,20 @@
+API Information
+
+TWITTER
+The Twitter search API allows queries of popular and recent Tweets. A search query is required which could be for example a hashtag or a twitter handle. Note that the search API does not guarantee completeness, it only shows a set of recent tweets, generally between 6-9 of tweets. There are multiple parameters that can be used to filter a search:
+o geocode  - a geocodearameter can be provided so that the query only returns tweets within a given radious of a given location (in terms of longitude and latitude). If no tweets are found, the query will use user's profile location to try and find tweets in the region.
+o lan - The lan parameter (eu for english) may also be useful for filtering tweets by language
+o result_type - This allows filtration of the tweets by restricting only to "recent" or "popular" tweets. "mixed" is default
+
+An alternative is using the streaming API. An applications can establish a connection to a streaming endpoint through which a feed of Tweets is delivered.
+A locations parameter can be used which takes a list of longitude latitude pairs which specify bounding boxes (south west corner first). When used, this parameter filters the stream to only include tweets with geotags in one of the boxes.
+This does not work well with 3G connections from mobile devices due to the relatively unstable connections so not recommended. WiFi will work.
+
+Authentication is required for either method, but this can be done using the OAuth authentactation type, which uses a set of keys and secrets to authorize requests. There are already existing twitter client libraries which implement the OAuth protocol.
+
+GOOGLE NEWS API
+o No longer exists, alternatives include a different search provider or filtering RSS feeds. Replace SEARCHTERM in the URL below to create an rss feed for any search term in Google News.
+http://news.google.com/news?q=SEARCHTERM&output=rss
+
+FACEBOOK
+o Not sure on how useful this will be, due to the limited number of Facebook public posts, and the difficulty in filtering compared to Twitter.
