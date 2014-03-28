@@ -1,0 +1,22 @@
+I found it useful for myself to be able to see all the class names on one screen
+so in case anyone else wants to be able to visualise a basic overview all at
+once here it is:
+
+Normal classes (data 'n' stuff):
+
+public class PlacesDatabase // singleton object with query functions
+public class PlaceData // what's stored in the database
+public class GlobalSettings // singleton object for global settings
+public class GPSService // basically a wrapper for getting location
+public class RadarComponent // the radar
+public class RangeSliderComponent // oh so obvious
+
+Activities (screens):
+
+public class MainScreenActivity extends Activity  // central screen
+public class PlaceFullInfoActivity // how to display full information
+public class SettingsPanelActivity // where GlobalSettings handled
+public class FilterPanelActivity // filter settings stored in GlobalSettings
+public class ListPlacesActivity // Listing places
+public class RoutePlannerActivity // planning routes manually.  simple
+public class AutoPlannerActivity // plans routes automatically.  yay
