@@ -14,9 +14,9 @@ public class RangeSliderComponent // oh so obvious
 Activities (screens):
 
 public class MainScreenActivity extends Activity  // central screen
-public class PlaceFullInfoActivity // how to display full information
-public class SettingsPanelActivity // where GlobalSettings handled
-public class FilterPanelActivity // filter settings stored in GlobalSettings
-public class ListPlacesActivity // Listing places
-public class RoutePlannerActivity // planning routes manually.  simple
-public class AutoPlannerActivity // plans routes automatically.  yay
+public class PlaceFullInfoActivity extends Activity // how to display full information
+public class SettingsPanelActivity extends Activity // where GlobalSettings handled
+public class FilterPanelActivit extends Activity // filter settings stored in GlobalSettings
+public class ListPlacesActivity extends Activity // Listing places
+public class RoutePlannerActivity extends Activity // planning routes manually.  simple
+public class AutoPlannerActivity extends Activity // plans routes automatically.  yay

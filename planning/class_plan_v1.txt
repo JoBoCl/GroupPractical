@@ -124,7 +124,7 @@ public class RangeSliderComponent {
  * I'll leave all of its internal stuff up to the implementer, including all
  * the necessary subclasses.
  */
-public class PlaceFullInfoActivity {
+public class PlaceFullInfoActivity extends Activity {
 }
 
 /*
@@ -132,7 +132,7 @@ public class PlaceFullInfoActivity {
  * Where the settings are handled. This activity will manipulate the global
  * settings singleton object.
  */
-public class SettingsPanelActivity {
+public class SettingsPanelActivity extends Activity {
 }
 
 /*
@@ -140,14 +140,14 @@ public class SettingsPanelActivity {
  * Sets filter settings for AR View. These will be stored in the global
  * settings singleton object.
  */
-public class FilterPanelActivity {
+public class FilterPanelActivity extends Activity {
 }
 
 /*
  * List Places Activity
  * List the places!
  */
-public class ListPlacesActivity {
+public class ListPlacesActivity extends Activity {
 }
 
 /*
@@ -157,11 +157,11 @@ public class ListPlacesActivity {
  * 'onCreate' method in an Intent by the calling Activity, as this Activity can
  * be called by the Full Info Screen, Auto Planner, or via the the Sidebar.
  */
-public class RoutePlannerActivity {
+public class RoutePlannerActivity extends Activity {
 }
 
 /* Auto Planner Activity
  * Auto the plan routes plans auto routes words typing!
  */
-public class AutoPlannerActivity {
+public class AutoPlannerActivity extends Activity {
 }
