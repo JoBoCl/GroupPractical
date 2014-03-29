@@ -1,5 +1,5 @@
 /* 
- * Class Plan
+ * Classes
  * 
  * Outline of key classes and their key interfaces.
  * Note that the 'Activity' class is part of the Android API, and represents an
@@ -21,10 +21,13 @@
   * - Store key data in singleton objects, to minimise fiddly data passing
   *   between activities and keep persistent data:
   *   > Global Settings
+  *   > Filter Settings
   *   > Places Database
+  *   > Place Category Wrapper
   *   > GPS Service/Wrapper
   *   (as a result of this decision, a lot of the simple Activities have no
   *   prescribed public methods! yay!)
+  * - All measurements in metric.
   */
 
 
@@ -36,26 +39,125 @@
  * various query functions that return PlaceData objects.
  */
 public class PlacesDatabase {
+	/*
+	 * Return list of all Places within the given locus (radius in km), in
+	 * order of distance from centre.
+	 */
+	public List<PlaceData> getPlacesInLocus(double latitude, double longitude, double radius);
 
-// ...TODO... what kinds of information will we want to filter by for queries?
-
+	/** Add other getters / setters as is deemed necessary later **/
 }
 
 /*
  * Place Data Object
- * These are stored in the database! They will contain data and getter methods.
+ * Represents a single Place.
+ * These are stored in the database!
  */
 public class PlaceData {
+	/*
+	 * Permanent Data - stored forever
+	 */
+	private String name;
+	private double latitude;
+	private double longitude;
+	private int rating;
+	private boolean visited;
+	private PlaceCategory category;
+	private String description;
+	private OpeningHours openinghours;
+	// social addresses; e.g. twitter handle; to be added once planned
+
+	/*
+	 * Semi-Persistent Data - initially null, can be set, but may be wiped at
+	 * any time in the future to conserve space
+	 */
+	private SOMEIMAGETYPE image;
+
+	/*
+	 * Session Data - initially takes a default / null value, which can be
+	 * modified, but will be wiped between sessions.
+	 */
+	private boolean clicked;
+	// social caching; to be added once planned
+
+	/*
+	 * Getters
+	 */
+	public String getName();
+	public double getLatitude();
+	public double getLongitude();
+	public int getRating();
+	public boolean getVisited();
+	public PlaceCategory getCategory();
+	public String getDescription();
+	public OpeningHours getOpeningHours();
+	// social address getters
+	public SOMEIMAGETYPE getImage();
+	public boolean getClicked();
+	// social caching getters
+
+	/*
+	 * Updaters (or 'setters', but 'updaters' covers their intended use better)
+	 */
+	public void updateRating(int rating);
+	public void updateClicked(boolean clicked);
+}
+
+/*
+ * Opening Hours Datatype
+ * Represents the times something is open / closed.
+ * Should be able to handle varying days on which a place is open / closed, as
+ * well as times. Public accessors are designed to be generic in this respect.
+ */
+public class OpeningHours {
+	/*
+	 * Return if the thing is open at give time and date.
+	 */
+	public boolean isOpenAt(Date date);
+
+	/*
+	 * Return the time and date at which the thing next transitions to being
+	 * open / closed after the given time and date.
+	 */
+	public Date nextOpen(Date date);
+	public Date nextClosed(Date date);
+
+	/*
+	 * Return a summary of the opening times as a human-readable String.
+	 */
+	public String getOpeningSummary();
+}
+
+/*
+ * Place Category Processing Services Singleton
+ * A singleton object to provide services related to Place Categories.
+ */
+public class PlaceCategoryService {
+	/*
+	 * Return the human-readable name of the given Category.
+	 */
+	public String getName(PlaceCategory cat);
+
+	/*
+	 * Return the icon representing the given Category.
+	 */
+	public SOMEIMAGETYPE getIcon(PlaceCategory cat);
 }
 
 /*
  * Program Settings Singleton Object
- * A singleton object to hold global settings in. It will contain various
- * settings, either public or private with accessors. All global and persistent
- * settings will be stored here - namely those from the Settings and Filter
- * control panels.
+ * A singleton object to hold persistent global settings in.
  */
 public class GlobalSettings {
+	// TBA
+}
+
+/*
+ * Filter Settings Singleton Object
+ * A singleton object to hold place filtering settings in.
+ */
+public class FilterSettings {
+	// TBA
 }
 
 /*
@@ -125,6 +227,11 @@ public class RangeSliderComponent {
  * the necessary subclasses.
  */
 public class PlaceFullInfoActivity extends Activity {
+	/*
+	 * Intent Constants
+	 */
+	public final static String EXTRA_PLACE = "uk.ac.ox.cs.GPT9.augox.PLACE";
+	public final static String EXTRA_BACKGROUND = "uk.ac.ox.cs.GPT9.augox.BACKGROUND";
 }
 
 /*
@@ -158,6 +265,10 @@ public class ListPlacesActivity extends Activity {
  * be called by the Full Info Screen, Auto Planner, or via the the Sidebar.
  */
 public class RoutePlannerActivity extends Activity {
+	/*
+	 * Intent Constants
+	 */
+	public final static String EXTRA_PLACELIST = "uk.ac.ox.cs.GPT9.augox.PLACELIST";
 }
 
 /* Auto Planner Activity

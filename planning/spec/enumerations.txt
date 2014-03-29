@@ -1,0 +1,13 @@
+/*
+ * Enumerations
+ */
+
+
+public enum PlaceCategory {
+	MUSEUM,
+	COLLEGE,
+	RESTAURANT,
+	BAR
+
+	// add more as needed
+}

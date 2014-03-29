@@ -1,0 +1,21 @@
+/*
+ * Intents
+ */
+
+/*
+ * For starting a new PlaceFullInfoActivity:
+ */
+Intent intent = new Intent(this, PlaceFullInfoActivity.class);
+PlaceData place = functionReturningPlaceData();
+intent.putExtra(PlaceFullInfoActivity.EXTRA_PLACE, place);
+SOMEIMAGETYPE background = functionReturningImage();
+intent.putExtra(PlaceFullInfoActivity.EXTRA_BACKGROUND, background);
+startActivity(intent);
+
+/*
+ * For starting a new RoutePlannerActivity:
+ */
+Intent intent = new Intent(this, RoutePlannerActivity.class);
+List<PlaceData> placelist = functionReturningPlaceList();
+intent.putExtra(RoutePlannerActivity.EXTRA_PLACELIST, placelist);
+startActivity(intent);
