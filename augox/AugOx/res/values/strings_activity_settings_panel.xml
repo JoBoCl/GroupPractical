@@ -1,0 +1,7 @@
+<resources>
+    
+    <string name="title_activity_settings_panel">Settings</string>
+    
+    <!-- originally similar to strings_activity_filter_panel - wiped to avoid conflicts -->
+    
+</resources>
