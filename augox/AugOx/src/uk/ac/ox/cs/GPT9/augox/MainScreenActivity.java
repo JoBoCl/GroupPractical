@@ -1,12 +1,14 @@
 package uk.ac.ox.cs.GPT9.augox;
 
 import uk.ac.ox.cs.GPT9.augox.util.SystemUiHider;
-
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -119,6 +121,50 @@ public class MainScreenActivity extends Activity {
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
         findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
+    }
+    
+    @Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main_screen, menu);
+		return true;
+	}
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle presses on the action bar items
+    	// DEBUG VERSION
+        switch (item.getItemId()) {
+            case R.id.action_dbg_placefullinfo:
+            	Intent intent1 = new Intent(this, PlaceFullInfoActivity.class);
+                intent1.putExtra(PlaceFullInfoActivity.EXTRA_PLACE, "");
+                intent1.putExtra(PlaceFullInfoActivity.EXTRA_BACKGROUND, "");
+                startActivity(intent1);
+                return true;
+            case R.id.action_dbg_listplaces:
+            	Intent intent2 = new Intent(this, ListPlacesActivity.class);
+                startActivity(intent2);
+                return true;
+            case R.id.action_dbg_settingspanel:
+            	Intent intent3 = new Intent(this, SettingsPanelActivity.class);
+                startActivity(intent3);
+                return true;
+            case R.id.action_dbg_filterpanel:
+            	Intent intent4 = new Intent(this, FilterPanelActivity.class);
+                startActivity(intent4);
+                return true;
+            case R.id.action_dbg_routeplanner:
+            	Intent intent5 = new Intent(this, RoutePlannerActivity.class);
+            	intent5.putExtra(RoutePlannerActivity.EXTRA_PLACELIST, "");
+                startActivity(intent5);
+                return true;
+            case R.id.action_dbg_autoplanner:
+            	Intent intent6 = new Intent(this, AutoPlannerActivity.class);
+                startActivity(intent6);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override
