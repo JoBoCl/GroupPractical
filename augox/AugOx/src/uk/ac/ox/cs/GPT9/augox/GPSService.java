@@ -29,5 +29,6 @@ public class GPSService {
 	 * Calculate the distance between two world coordinates, in km
 	 */
 	public double getDistanceBetween(double lat1, double long1, double lat2, double long2) {
+		return 0.0d;
 	}
 }
