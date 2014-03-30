@@ -33,6 +33,29 @@ public class PlaceData {
 	 */
 	private boolean clicked;
 	// social caching; to be added once planned
+	
+	/*
+	 * Constructor
+	 */
+	public PlaceData(	String name, double latitude, double longitude,
+						int rating, boolean visited, PlaceCategory category,
+						String description, OpeningHours openinghours) {
+		// Initialise permanent data
+		this.name = name;
+		this.latitude = latitude;
+		this.longitude = longitude;
+		this.rating = rating;
+		this.visited = visited;
+		this.category = category;
+		this.description = description;
+		this.openinghours = openinghours;
+		
+		// Initialise semi-persistent data
+		// image = null;
+		
+		// Initialise session data
+		clicked = false;
+	}
 
 	/*
 	 * Getters
