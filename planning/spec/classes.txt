@@ -18,15 +18,14 @@
  /*
   * Design decisions:
   * - Each key feature / screen of program is an Activity.
-  * - Store key data in singleton objects, to minimise fiddly data passing
-  *   between activities and keep persistent data:
+  * - Store key data in static, single instance objects in MainScreenActivity,
+  *   to minimise fiddly data passing between activities and keep persistent
+  *   data:
   *   > Global Settings
   *   > Filter Settings
   *   > Places Database
   *   > Place Category Wrapper
   *   > GPS Service/Wrapper
-  *   (as a result of this decision, a lot of the simple Activities have no
-  *   prescribed public methods! yay!)
   * - All measurements in metric.
   */
 
@@ -35,8 +34,9 @@
 
 /*
  * Database of Places
- * All the places will be stored in here. This will be a singleton object, with
- * various query functions that return PlaceData objects.
+ * All the places will be stored in here. This will be a single object in
+ * MainScreenActivity, with various query functions that return PlaceData
+ * objects.
  */
 public class PlacesDatabase {
 	/*
@@ -130,7 +130,8 @@ public class OpeningHours {
 
 /*
  * Place Category Processing Services Singleton
- * A singleton object to provide services related to Place Categories.
+ * A single object in MainScreenActivity, to provide services related to Place
+ * Categories.
  */
 public class PlaceCategoryService {
 	/*
@@ -146,7 +147,8 @@ public class PlaceCategoryService {
 
 /*
  * Program Settings Singleton Object
- * A singleton object to hold persistent global settings in.
+ * A single object in MainScreenActivity, to hold persistent global settings
+ * in.
  */
 public class GlobalSettings {
 	// TBA
@@ -154,7 +156,7 @@ public class GlobalSettings {
 
 /*
  * Filter Settings Singleton Object
- * A singleton object to hold place filtering settings in.
+ * A single object in MainScreenActivity, to hold place filtering settings in.
  */
 public class FilterSettings {
 	// TBA
@@ -162,8 +164,9 @@ public class FilterSettings {
 
 /*
  * GPS Singleton Object
- * A singleton object to handle connection to the GPS service and retrieving
- * location data for the various parts of the program that request it.
+ * A single object in MainScreenActivity, to handle connection to the GPS
+ * service and retrieving location data for the various parts of the program
+ * that request it.
  * Basically a wrapper.
  */
 public class GPSService {
@@ -185,6 +188,20 @@ public class GPSService {
  * is handled.
  */
 public class MainScreenActivity extends Activity {
+	/*
+	 * Single objects and accessors
+	 */
+	private static PlacesDatabase placesdatabase;
+	public static PlacesDatabase getPlacesDatabase();
+	private static PlaceCategoryService placecategoryservice;
+	public static PlaceCategoryService getPlaceCategoryService();
+	private static GlobalSettings globalsettings;
+	public static GlobalSettings getGlobalSettings();
+	private static FilterSettings filtersettings;
+	public static FilterSettings getFilterSettings();
+	private static GPSService gpsservice;
+	public static GPSService getGPSService();
+
 	/*
 	 * Screen components the activity owns
 	 */

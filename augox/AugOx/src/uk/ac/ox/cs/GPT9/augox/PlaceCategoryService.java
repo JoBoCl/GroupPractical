@@ -1,22 +1,13 @@
 package uk.ac.ox.cs.GPT9.augox;
 
 /**
- * Provides services related to place categories. A singleton.
+ * Provides services related to place categories.
  */
 public class PlaceCategoryService {
 	/*
-	 * Singleton Mechanism 
-	 */
-	private static final PlaceCategoryService INSTANCE = new PlaceCategoryService();
-	
-	public static PlaceCategoryService getInstance() {
-		return INSTANCE;
-	}
-	
-	/*
 	 * Constructor
 	 */
-	private PlaceCategoryService() {
+	public PlaceCategoryService() {
 	}
 	
 	/*

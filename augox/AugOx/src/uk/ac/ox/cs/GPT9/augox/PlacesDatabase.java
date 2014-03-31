@@ -4,22 +4,13 @@ import java.util.List;
 import java.util.ArrayList;
 
 /**
- * A database of all Places known to the program. This is a singleton.
+ * A database of all Places known to the program.
  */
 public class PlacesDatabase {
 	/*
-	 * Singleton Mechanism 
-	 */
-	private static final PlacesDatabase INSTANCE = new PlacesDatabase();
-	
-	public static PlacesDatabase getInstance() {
-		return INSTANCE;
-	}
-	
-	/*
 	 * Constructor
 	 */
-	private PlacesDatabase() {
+	public PlacesDatabase() {
 	}
 	
 	/*

@@ -48,6 +48,20 @@ public class MainScreenActivity extends Activity {
     private SystemUiHider mSystemUiHider;
     
     /*
+	 * Single objects and accessors
+	 */
+	private static PlacesDatabase placesdatabase = new PlacesDatabase();
+	public static PlacesDatabase getPlacesDatabase() { return placesdatabase; }
+	private static PlaceCategoryService placecategoryservice = new PlaceCategoryService();
+	public static PlaceCategoryService getPlaceCategoryService() { return placecategoryservice; }
+	private static GlobalSettings globalsettings = new GlobalSettings();
+	public static GlobalSettings getGlobalSettings() { return globalsettings; }
+	private static FilterSettings filtersettings = new FilterSettings();
+	public static FilterSettings getFilterSettings() { return filtersettings; }
+	private static GPSService gpsservice = new GPSService();
+	public static GPSService getGPSService() { return gpsservice; }
+    
+    /*
 	 * Screen components the activity owns
 	 */
 	private RadarComponent radar;

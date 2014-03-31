@@ -1,22 +1,13 @@
 package uk.ac.ox.cs.GPT9.augox;
 
 /**
- * Wrapper for GPS system. A singleton.
+ * Wrapper for GPS system.
  */
 public class GPSService {
 	/*
-	 * Singleton Mechanism 
-	 */
-	private static final GPSService INSTANCE = new GPSService();
-	
-	public static GPSService getInstance() {
-		return INSTANCE;
-	}
-	
-	/*
 	 * Constructor
 	 */
-	private GPSService() {
+	public GPSService() {
 	}
 	
 	/*
