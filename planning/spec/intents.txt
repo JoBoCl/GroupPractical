@@ -13,6 +13,16 @@ intent.putExtra(PlaceFullInfoActivity.EXTRA_BACKGROUND, background);
 startActivity(intent);
 
 /*
+ * For starting a new ListPlacesActivity:
+ */
+Intent intent = new Intent(this, ListPlacesActivity.class);
+double latitude = functionReturningLatitude();
+intent.putExtra(ListPlacesActivity.EXTRA_LATITUDE, latitude);
+double longitude = functionReturningLongitude();
+intent.putExtra(ListPlacesActivity.EXTRA_LONGITUDE, longitude);
+startActivity(intent);
+
+/*
  * For starting a new RoutePlannerActivity:
  */
 Intent intent = new Intent(this, RoutePlannerActivity.class);

@@ -54,12 +54,6 @@ public class MainScreenActivity extends Activity {
 	public static PlacesDatabase getPlacesDatabase() { return placesdatabase; }
 	private static PlaceCategoryService placecategoryservice = new PlaceCategoryService();
 	public static PlaceCategoryService getPlaceCategoryService() { return placecategoryservice; }
-	private static GlobalSettings globalsettings = new GlobalSettings();
-	public static GlobalSettings getGlobalSettings() { return globalsettings; }
-	private static FilterSettings filtersettings = new FilterSettings();
-	public static FilterSettings getFilterSettings() { return filtersettings; }
-	private static GPSService gpsservice = new GPSService();
-	public static GPSService getGPSService() { return gpsservice; }
     
     /*
 	 * Screen components the activity owns
@@ -157,6 +151,9 @@ public class MainScreenActivity extends Activity {
                 return true;
             case R.id.action_dbg_listplaces:
             	Intent intent2 = new Intent(this, ListPlacesActivity.class);
+            	// debug values: CS dept entrance!
+            	intent2.putExtra(ListPlacesActivity.EXTRA_LATITUDE, 51.760039);
+            	intent2.putExtra(ListPlacesActivity.EXTRA_LONGITUDE, -1.258464);
                 startActivity(intent2);
                 return true;
             case R.id.action_dbg_settingspanel:
