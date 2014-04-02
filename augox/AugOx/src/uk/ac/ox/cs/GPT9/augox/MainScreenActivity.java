@@ -1,16 +1,34 @@
 package uk.ac.ox.cs.GPT9.augox;
 
+import com.beyondar.android.util.location.BeyondarLocationHelper;
+import com.beyondar.android.view.BeyondarGLSurfaceView;
+import com.beyondar.android.view.CameraView;
+import com.beyondar.android.world.GeoObject;
+import com.beyondar.android.world.World;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesClient;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.location.LocationClient;
+
 import uk.ac.ox.cs.GPT9.augox.util.SystemUiHider;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentSender;
+import android.hardware.Camera;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.Toast;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -18,34 +36,177 @@ import android.view.View;
  *
  * @see SystemUiHider
  */
-public class MainScreenActivity extends Activity {
-    /**
-     * Whether or not the system UI should be auto-hidden after
-     * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
-     */
-    private static final boolean AUTO_HIDE = true;
+public class MainScreenActivity extends Activity implements
+	GooglePlayServicesClient.ConnectionCallbacks,
+	GooglePlayServicesClient.OnConnectionFailedListener {
+   
+	private CameraView mCameraView;
+	private BeyondarGLSurfaceView mBeyondarGLSurfaceView;
+	private World world;
+	
+	private LocationClient mLocationClient;
+	private Location mCurrentLocation;
+	
+	private final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
+	
+	private com.beyondar.android.util.location.BeyondarLocationHelper BLH;
+	
+   @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main_screen);
+        
+        BeyondarLocationHelper.setLocationManager((LocationManager) this.getSystemService(Context.LOCATION_SERVICE));
+        
+        mBeyondarGLSurfaceView = (BeyondarGLSurfaceView) findViewById(R.id.customGLSurface);
+        mCameraView = (CameraView) findViewById(R.id.camera);
+        
+        mLocationClient = new LocationClient(this, this, this);
+        
+        world = new World(this);
+        world.setArViewDistance(((android.widget.SeekBar)findViewById(R.id.distanceSlider)).getProgress());
+        BeyondarLocationHelper.addWorldLocationUpdate(world);
+        
+        mBeyondarGLSurfaceView.setWorld(world);
+    }
+   
+   @Override
+   protected void onResume() {
+        super.onResume();
+        BeyondarLocationHelper.enable();
+        mBeyondarGLSurfaceView.onResume();
+   }
 
-    /**
-     * If {@link #AUTO_HIDE} is set, the number of milliseconds to wait after
-     * user interaction before hiding the system UI.
-     */
-    private static final int AUTO_HIDE_DELAY_MILLIS = 3000;
+   @Override
+   protected void onPause() {
+        super.onPause();
+        BeyondarLocationHelper.disable();
+        mBeyondarGLSurfaceView.onPause();
+   }
 
-    /**
-     * If set, will toggle the system UI visibility upon interaction. Otherwise,
-     * will show the system UI visibility upon interaction.
-     */
-    private static final boolean TOGGLE_ON_CLICK = true;
+   @Override
+   public boolean onCreateOptionsMenu(Menu menu) {
+       // Inflate the menu; this adds items to the action bar if it is present.
+       getMenuInflater().inflate(R.menu.main_screen, menu);
+       return true;
+   }
+   
+   private void updateUserLocation() {
+   	mCurrentLocation = mLocationClient.getLastLocation();
+       String dbg = String.format("%s | %s", mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude());
+       Toast.makeText(this, dbg, Toast.LENGTH_LONG).show();
+       world.setLocation(mCurrentLocation);
+   }
+   
+   @Override
+   protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+       // Decide what to do based on the original request code
+       switch (requestCode) {
+           case CONNECTION_FAILURE_RESOLUTION_REQUEST :
+           /*
+            * If the result code is Activity.RESULT_OK, try
+            * to connect again
+            */
+               switch (resultCode) {
+                   case Activity.RESULT_OK :
+                   /*
+                    * Try the request again
+                    */
+                   break;
+               }            
+       }
+    }
+   
+   private boolean servicesConnected() {
+       // Check that Google Play services is available
+       int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
+       // If Google Play services is available
+       if (ConnectionResult.SUCCESS == resultCode) {
+           // In debug mode, log the status
+           Log.d("Location Updates",
+                   "Google Play services is available.");
+           // Continue
+           return true;
+       // Google Play services was not available for some reason
+       } else {
+       	/*
+           // Get the error code
+           int errorCode = ConnectionResult.getErrorCode();
+           // Get the error dialog from Google Play services
+           Dialog errorDialog = GooglePlayServicesUtil.getErrorDialog(
+                   errorCode,
+                   this,
+                   CONNECTION_FAILURE_RESOLUTION_REQUEST);
 
-    /**
-     * The flags to pass to {@link SystemUiHider#getInstance}.
-     */
-    private static final int HIDER_FLAGS = SystemUiHider.FLAG_HIDE_NAVIGATION;
-
-    /**
-     * The instance of the {@link SystemUiHider} for this activity.
-     */
-    private SystemUiHider mSystemUiHider;
+           // If Google Play services can provide an error dialog
+           if (errorDialog != null) {
+           	// bluh
+           }
+           */
+       	return false;
+       }
+   }
+   
+   @Override
+   public void onConnected(Bundle dataBundle) {
+       // Display the connection status
+       Toast.makeText(this, "Connected", Toast.LENGTH_SHORT).show();
+       
+       updateUserLocation();
+   }
+   
+   @Override
+   public void onDisconnected() {
+       // Display the connection status
+       Toast.makeText(this, "Disconnected. Please re-connect.",
+               Toast.LENGTH_SHORT).show();
+   }
+   
+   @Override
+   public void onConnectionFailed(ConnectionResult connectionResult) {
+       /*
+        * Google Play services can resolve some errors it detects.
+        * If the error has a resolution, try sending an Intent to
+        * start a Google Play services activity that can resolve
+        * error.
+        */
+       if (connectionResult.hasResolution()) {
+           try {
+               // Start an Activity that tries to resolve the error
+               connectionResult.startResolutionForResult(
+                       this,
+                       CONNECTION_FAILURE_RESOLUTION_REQUEST);
+               /*
+                * Thrown if Google Play services canceled the original
+                * PendingIntent
+                */
+           } catch (IntentSender.SendIntentException e) {
+               // Log the error
+               e.printStackTrace();
+           }
+       } else {
+           /*
+            * If no resolution is available, display a dialog to the
+            * user with the error.
+            */
+           //showErrorDialog(connectionResult.getErrorCode());
+       }
+   }
+   
+   @Override
+   protected void onStart() {
+       super.onStart();
+       // Connect the client.
+       mLocationClient.connect();
+   }
+   
+   @Override
+   protected void onStop() {
+       // Disconnecting the client invalidates it.
+       mLocationClient.disconnect();
+       super.onStop();
+   }
+   
     
     /*
 	 * Single objects and accessors
@@ -55,90 +216,7 @@ public class MainScreenActivity extends Activity {
 	private static PlaceCategoryService placecategoryservice = new PlaceCategoryService();
 	public static PlaceCategoryService getPlaceCategoryService() { return placecategoryservice; }
     
-    /*
-	 * Screen components the activity owns
-	 */
-	private RadarComponent radar;
-	private RangeSliderComponent distanceslider;
-	// Also BeyondAR stuff
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.activity_main_screen);
-
-        final View controlsView = findViewById(R.id.fullscreen_content_controls);
-        final View contentView = findViewById(R.id.fullscreen_content);
-
-        // Set up an instance of SystemUiHider to control the system UI for
-        // this activity.
-        mSystemUiHider = SystemUiHider.getInstance(this, contentView, HIDER_FLAGS);
-        mSystemUiHider.setup();
-        mSystemUiHider
-                .setOnVisibilityChangeListener(new SystemUiHider.OnVisibilityChangeListener() {
-                    // Cached values.
-                    int mControlsHeight;
-                    int mShortAnimTime;
-
-                    @Override
-                    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
-                    public void onVisibilityChange(boolean visible) {
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-                            // If the ViewPropertyAnimator API is available
-                            // (Honeycomb MR2 and later), use it to animate the
-                            // in-layout UI controls at the bottom of the
-                            // screen.
-                            if (mControlsHeight == 0) {
-                                mControlsHeight = controlsView.getHeight();
-                            }
-                            if (mShortAnimTime == 0) {
-                                mShortAnimTime = getResources().getInteger(
-                                        android.R.integer.config_shortAnimTime);
-                            }
-                            controlsView.animate()
-                                    .translationY(visible ? 0 : mControlsHeight)
-                                    .setDuration(mShortAnimTime);
-                        } else {
-                            // If the ViewPropertyAnimator APIs aren't
-                            // available, simply show or hide the in-layout UI
-                            // controls.
-                            controlsView.setVisibility(visible ? View.VISIBLE : View.GONE);
-                        }
-
-                        if (visible && AUTO_HIDE) {
-                            // Schedule a hide().
-                            delayedHide(AUTO_HIDE_DELAY_MILLIS);
-                        }
-                    }
-                });
-
-        // Set up the user interaction to manually show or hide the system UI.
-        contentView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (TOGGLE_ON_CLICK) {
-                    mSystemUiHider.toggle();
-                } else {
-                    mSystemUiHider.show();
-                }
-            }
-        });
-
-        // Upon interacting with UI controls, delay any scheduled hide()
-        // operations to prevent the jarring behavior of controls going away
-        // while interacting with the UI.
-        findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
-    }
-    
-    @Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main_screen, menu);
-		return true;
-	}
-    
-    @Override
+    /*@Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle presses on the action bar items
     	// DEBUG VERSION
@@ -176,54 +254,6 @@ public class MainScreenActivity extends Activity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
-
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-
-        // Trigger the initial hide() shortly after the activity has been
-        // created, to briefly hint to the user that UI controls
-        // are available.
-        delayedHide(100);
-    }
-
-
-    /**
-     * Touch listener to use for in-layout UI controls to delay hiding the
-     * system UI. This is to prevent the jarring behavior of controls going away
-     * while interacting with activity UI.
-     */
-    View.OnTouchListener mDelayHideTouchListener = new View.OnTouchListener() {
-        @Override
-        public boolean onTouch(View view, MotionEvent motionEvent) {
-            if (AUTO_HIDE) {
-                delayedHide(AUTO_HIDE_DELAY_MILLIS);
-            }
-            return false;
-        }
-    };
-
-    Handler mHideHandler = new Handler();
-    Runnable mHideRunnable = new Runnable() {
-        @Override
-        public void run() {
-            mSystemUiHider.hide();
-        }
-    };
-
-    /**
-     * Schedules a call to hide() in [delay] milliseconds, canceling any
-     * previously scheduled calls.
-     */
-    private void delayedHide(int delayMillis) {
-        mHideHandler.removeCallbacks(mHideRunnable);
-        mHideHandler.postDelayed(mHideRunnable, delayMillis);
-    }
+    }*/
     
-    /*
-	 * Update viewing range (called back from the RangeSliderComponent)
-	 */
-	public void updateViewRange(double viewRange) {
-	}
 }
