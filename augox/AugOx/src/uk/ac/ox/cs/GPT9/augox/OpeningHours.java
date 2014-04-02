@@ -16,7 +16,7 @@ public class OpeningHours {
 	 * is open/closed during that block.
 	 * 
 	 * Other notes:
-	 * All times UTC.
+	 * All times local.
 	 */
 	
 	/*
@@ -47,10 +47,15 @@ public class OpeningHours {
 	 * Return a summary of the opening times as a human-readable String.
 	 */
 	public String getOpeningSummary() {
+		// Prepare result to build
 		String result = "";
+		
+		// Loop through periods in priority order, adding summaries
 		for(Period p : periods) {
 			result += p.getSummary();
 		}
+		
+		// Return result
 		return result;
 	}
 	
@@ -104,11 +109,9 @@ public class OpeningHours {
 			if(hasGeneralSpan) {
 				// Describe the span
 				if(!(startDay == endDay && startMonth == endMonth)) {
-					result += String.format("%s%s %s - ", startDay,
-							getOrdinal(startDay), getMonthName(startMonth));
+					result += getDateString(startMonth, startDay) + " - ";
 				}
-				result += String.format("%s%s %s :\n", endDay,
-						getOrdinal(endDay), getMonthName(endMonth));
+				result += getDateString(endMonth, endDay) + ":\n";
 			}
 			
 			// Does this period have a generic open/closed state, or specify
@@ -119,11 +122,11 @@ public class OpeningHours {
 				if(isOpen[0]) {
 					if(!(openHour[0] == closeHour[0]
 							&& openMinute[0] == closeMinute[0])) {
-						result += String.format("%s:%s - ", openHour[0],
-								openMinute[0]);
+						result += getTimeString(openHour[0], openMinute[0])
+								+ "-";
 					}
-					result += String.format("%s:%s : Open\n", closeHour[0],
-							closeMinute[0]);
+					result += getTimeString(closeHour[0], closeMinute[0])
+							+ " : Open\n";
 				} else {
 					result += "Closed\n";
 				}
@@ -135,19 +138,38 @@ public class OpeningHours {
 					if(isOpen[i]) {
 						if(!(openHour[i] == closeHour[i]
 								&& openMinute[i] == closeMinute[i])) {
-							result += String.format("%s:%s - ", openHour[i],
-									openMinute[i]);
+							result += getTimeString(openHour[i], openMinute[i])
+									+ "-";
 						}
-						result += String.format("%s:%s : Open\n", closeHour[i],
-								closeMinute[i]);
+						result += getTimeString(closeHour[i], closeMinute[i])
+								+ " : Open\n";
 					} else {
-						result += "Closed\n";
+						result += ": Closed\n";
 					}
 				}
 			}
 			
 			// Return result
 			return result;
+		}
+		
+		/*
+		 * Get a string representing the given day/month combo
+		 */
+		private static String getDateString(int month, int day) {
+			return String.format("%s%s %s", day, getOrdinal(day),
+					getMonthName(month));
+		}
+		
+		/*
+		 * Get a string representing the given time
+		 */
+		private static String getTimeString(int hour, int minute) {
+			if(minute < 10) {
+				return String.format("%s:0%s", hour, minute);
+			} else {
+				return String.format("%s:%s", hour, minute);
+			}
 		}
 		
 		/*
