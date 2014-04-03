@@ -101,6 +101,19 @@ public class PlaceData {
 }
 
 /*
+ * Local Time Datatype
+ * Represents a date and time, in the 'local timezone' of the program, for use
+ * with the OpeningHours class.
+ */
+public class LocalTime {
+	/*
+	 * Comparison Operators
+	 */
+	public boolean isBefore(LocalTime rhs);
+	public boolean isEqualTo(LocalTime rhs);
+}
+
+/*
  * Opening Hours Datatype
  * Represents the times something is open / closed.
  * Should be able to handle varying days on which a place is open / closed, as
@@ -110,14 +123,14 @@ public class OpeningHours {
 	/*
 	 * Return if the thing is open at give time and date.
 	 */
-	public boolean isOpenAt(Date date);
+	public boolean isOpenAt(LocalTime date);
 
 	/*
 	 * Return the time and date at which the thing next transitions to being
 	 * open / closed after the given time and date.
 	 */
-	public Date nextOpen(Date date);
-	public Date nextClosed(Date date);
+	public LocalTime nextOpen(LocalTime date);
+	public LocalTime nextClosed(LocalTime date);
 
 	/*
 	 * Return a summary of the opening times as a human-readable String.
