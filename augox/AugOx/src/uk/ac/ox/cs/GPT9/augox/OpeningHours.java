@@ -1,7 +1,8 @@
 package uk.ac.ox.cs.GPT9.augox;
 
-import java.util.Date;
 import java.util.List;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 /**
  * Represents the times that some place is open. Given that there are complex
@@ -34,14 +35,25 @@ public class OpeningHours {
 	/*
 	 * Return if the thing is open at give time and date.
 	 */
-	public boolean isOpenAt(Date date) { return true; }
+	public boolean isOpenAt(LocalTime date) {
+		// Consider each period in priority order
+		for(Period p : periods) {
+			// What is the state of this period on the given date?
+			Period.PeriodOpenState state = p.isOpen(date);
+			if(state == Period.PeriodOpenState.OPEN) return true;
+			if(state == Period.PeriodOpenState.CLOSED) return false;
+		}
+		
+		// No periods applicable - assume closed
+		return false;
+	}
 
 	/*
 	 * Return the time and date at which the thing next transitions to being
 	 * open / closed after the given time and date.
 	 */
-	public Date nextOpen(Date date) { return new Date(); }
-	public Date nextClosed(Date date) { return new Date(); }
+	public LocalTime nextOpen(LocalTime date) { return null; }
+	public LocalTime nextClosed(LocalTime date) { return null; }
 
 	/*
 	 * Return a summary of the opening times as a human-readable String.
@@ -79,6 +91,15 @@ public class OpeningHours {
 		private int[] closeHour, closeMinute;	// Closing times
 		
 		/*
+		 * Enumerations
+		 */
+		public enum PeriodOpenState {
+			NA,
+			OPEN,
+			CLOSED
+		}
+		
+		/*
 		 * Constructor
 		 */
 		public Period(	boolean hasGeneralSpan, int startMonth, int startDay,
@@ -96,6 +117,66 @@ public class OpeningHours {
 			this.openMinute = openMinute;
 			this.closeHour = closeHour;
 			this.closeMinute = closeMinute;
+		}
+		
+		/*
+		 * Does this period cover the given date, and if so what is its state?
+		 */
+		public PeriodOpenState isOpen(LocalTime date) {
+			// Does this period apply to the given date?
+			boolean isApplicable;
+			
+			// No general span specified => always applicable
+			if(hasGeneralSpan) {
+				// Find latest start date before given date
+				LocalTime periodstart = new LocalTime(date.getYear(), startMonth,
+						startDay, 0, 0);
+				if(date.isBefore(periodstart)) periodstart = new LocalTime(
+						date.getYear() - 1, startMonth, startDay, 0, 0);
+				
+				// Find matching end date
+				LocalTime periodend = new LocalTime(periodstart.getYear(),
+						endMonth, endDay, 23, 59);
+				if(periodend.isBefore(periodstart)) periodend = new LocalTime(
+						periodstart.getYear() + 1, endMonth, endDay, 23, 59);
+				
+				// We already know that date occurs on or after periodstart
+				// Hence period is applicable if date occurs before or on periodend
+				isApplicable = !periodend.isBefore(date);
+			} else {
+				isApplicable = true;
+			}
+			
+			// If not applicable, return not applicable
+			if(!isApplicable) return PeriodOpenState.NA;
+			
+			// Calculate which day data to use
+			int dayid;
+			if(useGenericTimes) {
+				dayid = 0;
+			} else {
+				Calendar cal = new GregorianCalendar(date.getYear(),
+						date.getMonth() - 1, date.getDay());
+				dayid = cal.get(Calendar.DAY_OF_WEEK) - 1;
+			}
+			
+			// If the period is closed on this day, return closed
+			if(!isOpen[dayid]) return PeriodOpenState.CLOSED;
+			
+			// Calculate opening and closing times for this date
+			LocalTime opentime = new LocalTime(date.getYear(), date.getMonth(),
+					date.getDay(), openHour[dayid], openMinute[dayid]);
+			LocalTime closetime = new LocalTime(date.getYear(), date.getMonth(),
+					date.getDay(), closeHour[dayid], closeMinute[dayid]);
+			
+			// Does the given date fall within the opening times?
+			if(date.isBefore(opentime) || closetime.isBefore(date)) {
+				// No
+				return PeriodOpenState.CLOSED;
+			} else {
+				// Yes
+				return PeriodOpenState.OPEN;
+			}
 		}
 		
 		/*
