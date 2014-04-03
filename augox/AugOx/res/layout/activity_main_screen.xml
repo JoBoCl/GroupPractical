@@ -21,4 +21,17 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true" />
 
+    <!--<FrameLayout
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_gravity="right|top"
+	    android:background="@drawable/radar_bg_small" >
+	
+	    <com.beyondar.android.module.radar.RadarView
+	        android:id="@+id/radarView"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:src="@drawable/radar_north_small" />
+	</FrameLayout>-->
+	
 </RelativeLayout>

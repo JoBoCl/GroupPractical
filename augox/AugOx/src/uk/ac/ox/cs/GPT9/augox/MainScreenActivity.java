@@ -3,7 +3,6 @@ package uk.ac.ox.cs.GPT9.augox;
 import com.beyondar.android.util.location.BeyondarLocationHelper;
 import com.beyondar.android.view.BeyondarGLSurfaceView;
 import com.beyondar.android.view.CameraView;
-import com.beyondar.android.world.GeoObject;
 import com.beyondar.android.world.World;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
@@ -11,23 +10,17 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.location.LocationClient;
 
 import uk.ac.ox.cs.GPT9.augox.util.SystemUiHider;
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
-import android.hardware.Camera;
 import android.location.Location;
 import android.location.LocationManager;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.View;
-import android.widget.FrameLayout;
+import android.widget.SeekBar;
+import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.Toast;
 
 /**
@@ -49,8 +42,6 @@ public class MainScreenActivity extends Activity implements
 	
 	private final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
 	
-	private com.beyondar.android.util.location.BeyondarLocationHelper BLH;
-	
    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +59,30 @@ public class MainScreenActivity extends Activity implements
         BeyondarLocationHelper.addWorldLocationUpdate(world);
         
         mBeyondarGLSurfaceView.setWorld(world);
+        
+        ((android.widget.SeekBar)findViewById(R.id.distanceSlider)).setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+        	@Override       
+            public void onStopTrackingTouch(SeekBar seekBar) { }       
+
+            @Override       
+            public void onStartTrackingTouch(SeekBar seekBar) { }       
+
+            @Override       
+            public void onProgressChanged(SeekBar seekBar, int progress,boolean fromUser) {        
+            	world.setArViewDistance(((android.widget.SeekBar)findViewById(R.id.distanceSlider)).getProgress());
+            	// update radar distance too
+            }       
+        });
+        
+        //com.beyondar.android.plugin.radar.RadarView radarView = (com.beyondar.android.module.radar.RadarView) findViewById(R.id.radarView);
+        // Create the Radar module
+        //com.beyondar.android.module.radar.RadarViewModule mRadarModule = new com.beyondar.android.module.radar.RadarWorldModule();
+        // set the radar view in to our radar module
+        //mRadarModule.setRadarView(RadarView);
+        // Set how far (in meters) we want to display in the view
+        //mRadarModule.setMaxDistance(100);
+        // and finally let's add the module
+        //world.addModule(mRadarModule);
     }
    
    @Override
