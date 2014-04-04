@@ -1,6 +1,6 @@
 package uk.ac.ox.cs.GPT9.augox;
 
-import com.beyondar.android.util.location.BeyondarLocationHelper;
+import com.beyondar.android.util.location.BeyondarLocationManager;
 import com.beyondar.android.view.BeyondarGLSurfaceView;
 import com.beyondar.android.view.CameraView;
 import com.beyondar.android.world.World;
@@ -29,9 +29,9 @@ import android.widget.Toast;
  *
  * @see SystemUiHider
  */
-public class MainScreenActivity extends Activity implements
-	GooglePlayServicesClient.ConnectionCallbacks,
-	GooglePlayServicesClient.OnConnectionFailedListener {
+public class MainScreenActivity extends Activity /*implements*/ {
+	//GooglePlayServicesClient.ConnectionCallbacks,
+	//GooglePlayServicesClient.OnConnectionFailedListener {
    
 	private CameraView mCameraView;
 	private BeyondarGLSurfaceView mBeyondarGLSurfaceView;
@@ -47,16 +47,16 @@ public class MainScreenActivity extends Activity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
         
-        BeyondarLocationHelper.setLocationManager((LocationManager) this.getSystemService(Context.LOCATION_SERVICE));
+        BeyondarLocationManager.setLocationManager((LocationManager) this.getSystemService(Context.LOCATION_SERVICE));
         
         mBeyondarGLSurfaceView = (BeyondarGLSurfaceView) findViewById(R.id.customGLSurface);
         mCameraView = (CameraView) findViewById(R.id.camera);
         
-        mLocationClient = new LocationClient(this, this, this);
+        //mLocationClient = new LocationClient(this, this, this);
         
         world = new World(this);
         world.setArViewDistance(((android.widget.SeekBar)findViewById(R.id.distanceSlider)).getProgress());
-        BeyondarLocationHelper.addWorldLocationUpdate(world);
+        BeyondarLocationManager.addWorldLocationUpdate(world);
         
         mBeyondarGLSurfaceView.setWorld(world);
         
@@ -74,28 +74,28 @@ public class MainScreenActivity extends Activity implements
             }       
         });
         
-        //com.beyondar.android.plugin.radar.RadarView radarView = (com.beyondar.android.module.radar.RadarView) findViewById(R.id.radarView);
+        com.beyondar.android.plugin.radar.RadarView radarView = (com.beyondar.android.plugin.radar.RadarView) findViewById(R.id.radarView);
         // Create the Radar module
-        //com.beyondar.android.module.radar.RadarViewModule mRadarModule = new com.beyondar.android.module.radar.RadarWorldModule();
+        com.beyondar.android.plugin.radar.RadarWorldPlugin mRadarPlugin = new com.beyondar.android.plugin.radar.RadarWorldPlugin(this);
         // set the radar view in to our radar module
-        //mRadarModule.setRadarView(RadarView);
+        mRadarPlugin.setRadarView(radarView);
         // Set how far (in meters) we want to display in the view
-        //mRadarModule.setMaxDistance(100);
+        mRadarPlugin.setMaxDistance(100);
         // and finally let's add the module
-        //world.addModule(mRadarModule);
+        world.addPlugin(mRadarPlugin);
     }
    
    @Override
    protected void onResume() {
         super.onResume();
-        BeyondarLocationHelper.enable();
+        BeyondarLocationManager.enable();
         mBeyondarGLSurfaceView.onResume();
    }
 
    @Override
    protected void onPause() {
         super.onPause();
-        BeyondarLocationHelper.disable();
+        BeyondarLocationManager.disable();
         mBeyondarGLSurfaceView.onPause();
    }
 
@@ -162,7 +162,7 @@ public class MainScreenActivity extends Activity implements
        }
    }
    
-   @Override
+   /*@Override
    public void onConnected(Bundle dataBundle) {
        // Display the connection status
        Toast.makeText(this, "Connected", Toast.LENGTH_SHORT).show();
@@ -175,9 +175,9 @@ public class MainScreenActivity extends Activity implements
        // Display the connection status
        Toast.makeText(this, "Disconnected. Please re-connect.",
                Toast.LENGTH_SHORT).show();
-   }
+   }*/
    
-   @Override
+   //@Override
    public void onConnectionFailed(ConnectionResult connectionResult) {
        /*
         * Google Play services can resolve some errors it detects.
