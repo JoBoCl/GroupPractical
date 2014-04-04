@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 public class AutoPlannerActivity extends FragmentActivity {
 
@@ -32,6 +31,7 @@ public class AutoPlannerActivity extends FragmentActivity {
 	private Button startTime, endTime;
 	private int startHour; private int startMinute;
 	private int endHour; private int endMinute;
+	private final int[] intervals = new int[]{8*60,9*60,12*60+30,13*60+30,18*60,19*60,22*60};
 
 	static final int START_TIME_DIALOG_ID = 999;
 	static final int END_TIME_DIALOG_ID = 998;
@@ -73,14 +73,29 @@ public class AutoPlannerActivity extends FragmentActivity {
 				//tpd.show(fm, "fragment_edit_time");
 
 				showDialog(v==startTime ? START_TIME_DIALOG_ID : v==endTime ? END_TIME_DIALOG_ID : null);
-
-			}
+		}
 
 		};
 
 		startTime.setOnClickListener(listener);
 		endTime.setOnClickListener(listener);
 
+	}
+
+	private void updateGalleries() {
+		int galleries = findIntervals();
+		
+	}
+	
+	private int findIntervals() {
+		int sessions = 0;
+		int i = 0;
+		int n = intervals.length;
+		while(i<n) {
+			if(startHour*60+startMinute < intervals[i] && intervals[i] < endHour*60+endMinute ) sessions++;
+			i++;
+		}	
+	return sessions;
 	}
 
 	@Override
@@ -102,7 +117,8 @@ public class AutoPlannerActivity extends FragmentActivity {
 
 			// set current time into textview
 			endTime.setText(String.format("End time: %02d:%02d", selectedHour, selectedMinute)); 
-		}
+			updateGalleries();
+	}
 	};
 
 	private TimePickerDialog.OnTimeSetListener timePickerListenerStart = new TimePickerDialog.OnTimeSetListener() {
@@ -112,7 +128,8 @@ public class AutoPlannerActivity extends FragmentActivity {
 
 			// set current time into textview
 			startTime.setText(String.format("Start time: %02d:%02d", selectedHour, selectedMinute));
-
+	
+			updateGalleries();
 		}
 	};
 }
