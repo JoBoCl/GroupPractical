@@ -97,6 +97,7 @@ public class PlaceData {
 	 * Updaters (or 'setters', but 'updaters' covers their intended use better)
 	 */
 	public void updateRating(int rating);
+	public void updateVisited(boolean visited);
 	public void updateClicked(boolean clicked);
 }
 

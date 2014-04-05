@@ -77,5 +77,6 @@ public class PlaceData {
 	 * Updaters (or 'setters', but 'updaters' covers their intended use better)
 	 */
 	public void updateRating(int rating) { this.rating = rating; }
+	public void updateVisited(boolean visited) { this.visited = visited; }
 	public void updateClicked(boolean clicked) { this.clicked = clicked; }
 }
