@@ -48,17 +48,21 @@ public class OpeningHours {
 		return false;
 	}
 
-	/*
+	/* ***NOT IMPLEMENTED***
 	 * Return the time and date at which the thing next transitions to being
 	 * open after the given time and date (or null if it will never open).
+	 * Note that if it is already open, this returns the *next* time it
+	 * *becomes* open.
 	 */
 	public LocalTime nextOpen(LocalTime date) {
 		return null;
 	}
 	
-	/*
+	/* ***NOT IMPLEMENTED***
 	 * Return the time and date at which the thing next transitions to being
 	 * closed after the given time and date (or null if it will never close).
+	 * Note that if it is already closed, this returns the *next* time it
+	 * *becomes* closed.
 	 */
 	public LocalTime nextClosed(LocalTime date) {
 		return null;
