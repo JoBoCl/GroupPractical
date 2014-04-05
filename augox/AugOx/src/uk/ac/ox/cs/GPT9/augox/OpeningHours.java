@@ -39,7 +39,7 @@ public class OpeningHours {
 		// Consider each period in priority order
 		for(Period p : periods) {
 			// What is the state of this period on the given date?
-			Period.PeriodOpenState state = p.isOpen(date);
+			Period.PeriodOpenState state = p.isOpenAt(date);
 			if(state == Period.PeriodOpenState.OPEN) return true;
 			if(state == Period.PeriodOpenState.CLOSED) return false;
 		}
@@ -50,10 +50,19 @@ public class OpeningHours {
 
 	/*
 	 * Return the time and date at which the thing next transitions to being
-	 * open / closed after the given time and date.
+	 * open after the given time and date (or null if it will never open).
 	 */
-	public LocalTime nextOpen(LocalTime date) { return null; }
-	public LocalTime nextClosed(LocalTime date) { return null; }
+	public LocalTime nextOpen(LocalTime date) {
+		return null;
+	}
+	
+	/*
+	 * Return the time and date at which the thing next transitions to being
+	 * closed after the given time and date (or null if it will never close).
+	 */
+	public LocalTime nextClosed(LocalTime date) {
+		return null;
+	}
 
 	/*
 	 * Return a summary of the opening times as a human-readable String.
@@ -120,35 +129,35 @@ public class OpeningHours {
 		}
 		
 		/*
+		 * Does this period cover the given date?
+		 */
+		public boolean isApplicable(LocalTime date) {
+			// No general span specified => always applicable
+			if(!hasGeneralSpan) return true;
+			
+			// Find latest start date before given date
+			LocalTime periodstart = new LocalTime(date.getYear(), startMonth,
+					startDay, 0, 0);
+			if(date.isBefore(periodstart)) periodstart = new LocalTime(
+					date.getYear() - 1, startMonth, startDay, 0, 0);
+			
+			// Find matching end date
+			LocalTime periodend = new LocalTime(periodstart.getYear(),
+					endMonth, endDay, 23, 59);
+			if(periodend.isBefore(periodstart)) periodend = new LocalTime(
+					periodstart.getYear() + 1, endMonth, endDay, 23, 59);
+			
+			// We already know that date occurs on or after periodstart
+			// Hence period is applicable if date occurs before or on periodend
+			return !periodend.isBefore(date);
+		}
+		
+		/*
 		 * Does this period cover the given date, and if so what is its state?
 		 */
-		public PeriodOpenState isOpen(LocalTime date) {
-			// Does this period apply to the given date?
-			boolean isApplicable;
-			
-			// No general span specified => always applicable
-			if(hasGeneralSpan) {
-				// Find latest start date before given date
-				LocalTime periodstart = new LocalTime(date.getYear(), startMonth,
-						startDay, 0, 0);
-				if(date.isBefore(periodstart)) periodstart = new LocalTime(
-						date.getYear() - 1, startMonth, startDay, 0, 0);
-				
-				// Find matching end date
-				LocalTime periodend = new LocalTime(periodstart.getYear(),
-						endMonth, endDay, 23, 59);
-				if(periodend.isBefore(periodstart)) periodend = new LocalTime(
-						periodstart.getYear() + 1, endMonth, endDay, 23, 59);
-				
-				// We already know that date occurs on or after periodstart
-				// Hence period is applicable if date occurs before or on periodend
-				isApplicable = !periodend.isBefore(date);
-			} else {
-				isApplicable = true;
-			}
-			
+		public PeriodOpenState isOpenAt(LocalTime date) {
 			// If not applicable, return not applicable
-			if(!isApplicable) return PeriodOpenState.NA;
+			if(!isApplicable(date)) return PeriodOpenState.NA;
 			
 			// Calculate which day data to use
 			int dayid;
