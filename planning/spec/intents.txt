@@ -10,6 +10,8 @@ PlaceData place = functionReturningPlaceData();
 intent.putExtra(PlaceFullInfoActivity.EXTRA_PLACE, place);
 SOMEIMAGETYPE background = functionReturningImage();
 intent.putExtra(PlaceFullInfoActivity.EXTRA_BACKGROUND, background);
+double distance = functionReturningDistanceToPlaceAsDouble();
+intent.putExtra(PlaceFullInfoActivity.EXTRA_DISTANCE, distance);
 startActivity(intent);
 
 /*

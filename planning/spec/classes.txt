@@ -208,6 +208,7 @@ public class PlaceFullInfoActivity extends Activity {
 	 */
 	public final static String EXTRA_PLACE = "uk.ac.ox.cs.GPT9.augox.PLACE";
 	public final static String EXTRA_BACKGROUND = "uk.ac.ox.cs.GPT9.augox.BACKGROUND";
+	public final static String EXTRA_DISTANCE = "uk.ac.ox.cs.GPT9.augox.DISTANCE";
 }
 
 /*
