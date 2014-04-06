@@ -8,6 +8,7 @@
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_list_places">Local Places</string>
+    <string name="title_activity_list_choose">Places</string>
     <string name="title_activity_route_planner">Route Planner</string>
     <string name="title_activity_auto_planner">AutoPlanner</string>
     

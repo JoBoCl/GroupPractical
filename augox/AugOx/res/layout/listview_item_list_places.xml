@@ -15,8 +15,7 @@
         android:layout_toRightOf="@+id/list_places_item_name"
         android:layout_toLeftOf="@+id/list_places_item_distance"
         android:contentDescription="Place Type"
-        android:src="@drawable/ic_launcher" 
-        	/>
+        android:src="@drawable/ic_launcher" />
     <TextView
         android:id="@+id/list_places_item_distance"
         android:layout_width="wrap_content"

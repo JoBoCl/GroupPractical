@@ -150,7 +150,7 @@ public class MainScreenActivity extends Activity {
                 startActivity(intent1);
                 return true;
             case R.id.action_dbg_listplaces:
-            	Intent intent2 = new Intent(this, ListPlacesActivity.class);
+            	Intent intent2 = new Intent(this, ListChooseActivity.class);
             	// debug values: CS dept entrance!
             	intent2.putExtra(ListPlacesActivity.EXTRA_LATITUDE, 51.760039);
             	intent2.putExtra(ListPlacesActivity.EXTRA_LONGITUDE, -1.258464);

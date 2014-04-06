@@ -41,6 +41,10 @@
             android:label="@string/title_activity_list_places" >
         </activity>
         <activity
+            android:name="uk.ac.ox.cs.GPT9.augox.ListChooseActivity"
+            android:label="@string/title_activity_list_choose" >
+        </activity>
+        <activity
             android:name="uk.ac.ox.cs.GPT9.augox.RoutePlannerActivity"
             android:label="@string/title_activity_route_planner" >
         </activity>
