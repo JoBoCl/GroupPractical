@@ -22,7 +22,6 @@
   *   to minimise fiddly data passing between activities and keep persistent
   *   data:
   *   > Places Database
-  *   > Place Category Wrapper
   * - All measurements in metric.
   */
 
@@ -140,23 +139,6 @@ public class OpeningHours {
 }
 
 /*
- * Place Category Processing Services Singleton
- * A single object in MainScreenActivity, to provide services related to Place
- * Categories.
- */
-public class PlaceCategoryService {
-	/*
-	 * Return the human-readable name of the given Category.
-	 */
-	public String getName(PlaceCategory cat);
-
-	/*
-	 * Return the icon representing the given Category.
-	 */
-	public SOMEIMAGETYPE getIcon(PlaceCategory cat);
-}
-
-/*
  * Main Screen Activity
  * This is the central screen in the program, where the AR View and such like
  * is handled.
@@ -167,8 +149,6 @@ public class MainScreenActivity extends Activity {
 	 */
 	private static PlacesDatabase placesdatabase;
 	public static PlacesDatabase getPlacesDatabase();
-	private static PlaceCategoryService placecategoryservice;
-	public static PlaceCategoryService getPlaceCategoryService();
 
 	/*
 	 * Screen components the activity owns

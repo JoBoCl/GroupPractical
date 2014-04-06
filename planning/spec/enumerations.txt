@@ -10,4 +10,16 @@ public enum PlaceCategory {
 	BAR
 
 	// add more as needed
+
+	// ----
+
+	/*
+	 * Return the human-readable name of the given Category.
+	 */
+	public String getName(PlaceCategory cat);
+
+	/*
+	 * Return the icon representing the given Category.
+	 */
+	public SOMEIMAGETYPE getIcon(PlaceCategory cat);
 }

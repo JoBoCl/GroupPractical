@@ -52,8 +52,6 @@ public class MainScreenActivity extends Activity {
 	 */
 	private static PlacesDatabase placesdatabase = new PlacesDatabase();
 	public static PlacesDatabase getPlacesDatabase() { return placesdatabase; }
-	private static PlaceCategoryService placecategoryservice = new PlaceCategoryService();
-	public static PlaceCategoryService getPlaceCategoryService() { return placecategoryservice; }
     
     /*
 	 * Screen components the activity owns
