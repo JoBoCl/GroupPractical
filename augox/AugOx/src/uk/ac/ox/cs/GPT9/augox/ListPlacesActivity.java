@@ -12,8 +12,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class ListPlacesActivity extends ListActivity {
 	/*
@@ -39,7 +39,7 @@ public class ListPlacesActivity extends ListActivity {
 		PlaceCategory p = null;
 		double d = (double) 0;
 		for(int i = 0; i < 30; i ++){
-			places.add(new PlaceData("TEST" + String.valueOf(i),d,d,0,false,p,"desc1",h));
+			places.add(new PlaceData("Test Place " + String.valueOf(i),d,d,0,false,p,"desc1",h));
 		}		
 		
 		//set click listener for clicking on a list element
@@ -76,8 +76,11 @@ public class ListPlacesActivity extends ListActivity {
 			LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			View rowView = inflater.inflate(R.layout.listview_item_list_places, parent,false);
 			TextView nameView = (TextView) rowView.findViewById(R.id.list_places_item_name);
+			ImageView typeView = (ImageView) rowView.findViewById(R.id.list_places_item_type);
 			TextView distView = (TextView) rowView.findViewById(R.id.list_places_item_distance);
 			nameView.setText(item.getName());
+			//after we have icons for each type of place, set it here
+			typeView.setImageResource(R.drawable.testing_image);
 			distView.setText(String.format("%.1f", getDistanceBetween(
 					latitude,longitude,item.getLatitude(),item.getLongitude()))+"km"); 
 			return rowView;

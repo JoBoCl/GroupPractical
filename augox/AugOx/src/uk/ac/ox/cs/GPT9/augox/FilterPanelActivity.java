@@ -1,5 +1,6 @@
 package uk.ac.ox.cs.GPT9.augox;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
@@ -15,7 +16,7 @@ import android.preference.PreferenceFragment;
  * href="http://developer.android.com/guide/topics/ui/settings.html">Settings
  * API Guide</a> for more information on developing a Settings UI.
  */
-public class FilterPanelActivity extends PreferenceActivity {
+public class FilterPanelActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

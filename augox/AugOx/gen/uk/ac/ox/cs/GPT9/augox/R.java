@@ -39,19 +39,21 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     }
     public static final class drawable {
         public static final int ic_launcher=0x7f020000;
+        public static final int testing_image=0x7f020001;
     }
     public static final class id {
-        public static final int action_dbg_autoplanner=0x7f0b000a;
-        public static final int action_dbg_filterpanel=0x7f0b0008;
-        public static final int action_dbg_listplaces=0x7f0b0006;
-        public static final int action_dbg_placefullinfo=0x7f0b0005;
-        public static final int action_dbg_routeplanner=0x7f0b0009;
-        public static final int action_dbg_settingspanel=0x7f0b0007;
+        public static final int action_dbg_autoplanner=0x7f0b000b;
+        public static final int action_dbg_filterpanel=0x7f0b0009;
+        public static final int action_dbg_listplaces=0x7f0b0007;
+        public static final int action_dbg_placefullinfo=0x7f0b0006;
+        public static final int action_dbg_routeplanner=0x7f0b000a;
+        public static final int action_dbg_settingspanel=0x7f0b0008;
         public static final int dummy_button=0x7f0b0002;
         public static final int fullscreen_content=0x7f0b0000;
         public static final int fullscreen_content_controls=0x7f0b0001;
-        public static final int list_places_item_distance=0x7f0b0004;
+        public static final int list_places_item_distance=0x7f0b0005;
         public static final int list_places_item_name=0x7f0b0003;
+        public static final int list_places_item_type=0x7f0b0004;
     }
     public static final class layout {
         public static final int activity_auto_planner=0x7f030000;
