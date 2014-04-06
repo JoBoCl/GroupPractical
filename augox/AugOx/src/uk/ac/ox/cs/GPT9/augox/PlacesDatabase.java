@@ -49,12 +49,24 @@ public class PlacesDatabase {
 	 * Note that the database is cleared first, and opening/closing the stream
 	 * should be handled by the calling method.
 	 */
-	public void loadFromStream(InputStream stream) {
+	public void loadFromStream(InputStream stream) throws IOException {
 		// Reinitialise database
 		db = new ArrayList<PlaceData>();
 		
 		// Create data input stream
 		DataInputStream dstream = new DataInputStream(stream);
+		
+		// Read all places in the stream into the database
+		try {
+			while(true) {
+				PlaceData place = PlaceData.buildPlaceDataFromStream(dstream);
+				if(place != null) {
+					db.add(place);
+				}
+			}
+		} catch(EOFException e) {
+			// End of file reached - good!
+		}
 	}
 	
 	/*
@@ -68,6 +80,34 @@ public class PlacesDatabase {
 		for(PlaceData place : db) {
 			place.writeToStream(dstream);
 		}
+	}
+	
+	/*
+	 * Load a null-terminated string from the given data stream
+	 */
+	public static String loadStringFromStream(DataInputStream dstream)
+			throws IOException {
+		// Prepare string to build
+		String result = "";
+		
+		// Loop through, reading bytes, until the null character is reached
+		char c;
+		do {
+			c = dstream.readChar();
+			if(c != 0) result += c;
+		} while(c != 0);
+		
+		// Return result
+		return result;
+	}
+	
+	/*
+	 * Write a null-terminated string to the given data stream
+	 */
+	public static void writeStringToStream(DataOutputStream dstream,
+			String str) throws IOException {
+		dstream.writeChars(str);
+		dstream.writeChar(0);
 	}
 	
 	/*

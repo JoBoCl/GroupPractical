@@ -1,6 +1,7 @@
 package uk.ac.ox.cs.GPT9.augox;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -89,9 +90,33 @@ public class OpeningHours {
 	 * Write the opening hours into the given data stream
 	 */
 	public void writeToStream(DataOutputStream dstream) throws IOException {
+		// Write number of periods to stream
+		dstream.writeInt(periods.size());
+		
+		// Write periods to stream
 		for(Period p : periods) {
 			p.writeToStream(dstream);
 		}
+	}
+	
+	/*
+	 * Create and return an OpeningHours object from the given data stream
+	 */
+	public static OpeningHours buildOpeningHoursFromStream(DataInputStream
+			dstream) throws IOException {
+		// Load number of periods from stream
+		int n = dstream.readInt();
+		
+		// Load all periods
+		List<Period> periods = new ArrayList<Period>();
+		for(int i = 0; i < n; i++) {
+			Period p = Period.buildPeriodFromStream(dstream);
+			if(p != null) periods.add(p);
+		}
+		
+		// Build and return object
+		OpeningHours openinghours = new OpeningHours(periods);
+		return openinghours;
 	}
 	
 	/*
@@ -277,6 +302,45 @@ public class OpeningHours {
 				dstream.writeInt(closeHour[i]);
 				dstream.writeInt(closeMinute[i]);
 			}
+		}
+		
+		/*
+		 * Create and return a Period object from the given data stream
+		 */
+		public static Period buildPeriodFromStream(DataInputStream dstream)
+				throws IOException {
+			// Load values from stream
+			boolean hasGeneralSpan = dstream.readBoolean();
+			int startMonth = 0;
+			int startDay = 0;
+			int endMonth = 0;
+			int endDay = 0;
+			if(hasGeneralSpan) {
+				startMonth = dstream.readInt();
+				startDay = dstream.readInt();
+				endMonth = dstream.readInt();
+				endDay = dstream.readInt();
+			}
+			boolean useGenericTimes = dstream.readBoolean();
+			int n = useGenericTimes ? 1 : 7;
+			boolean[] isOpen = new boolean[n];
+			int[] openHour = new int[n];
+			int[] openMinute = new int[n];
+			int[] closeHour = new int[n];
+			int[] closeMinute = new int[n];
+			for(int i = 0; i < n; i++) {
+				isOpen[i] = dstream.readBoolean();
+				openHour[i] = dstream.readInt();
+				openMinute[i] = dstream.readInt();
+				closeHour[i] = dstream.readInt();
+				closeMinute[i] = dstream.readInt();
+			}
+			
+			// Build and return object
+			Period period = new Period(hasGeneralSpan, startMonth, startDay,
+					endMonth, endDay, useGenericTimes, isOpen, openHour,
+					openMinute, closeHour, closeMinute);
+			return period;
 		}
 		
 		/*

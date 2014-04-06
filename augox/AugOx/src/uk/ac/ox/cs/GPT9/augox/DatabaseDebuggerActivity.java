@@ -31,6 +31,8 @@ public class DatabaseDebuggerActivity extends Activity {
 			InputStream inp = ast.open("testdb.dat");
 			MainScreenActivity.getPlacesDatabase().loadFromStream(inp);
 			inp.close();
+			Toast toast = Toast.makeText(getApplicationContext(), "File Loaded", Toast.LENGTH_SHORT);
+			toast.show();
 		} catch (IOException e) {
 			Toast toast = Toast.makeText(getApplicationContext(), e.getLocalizedMessage(), Toast.LENGTH_SHORT);
 			toast.show();
@@ -39,14 +41,15 @@ public class DatabaseDebuggerActivity extends Activity {
 	
 	public void writeDatabaseToExternal(View view) {
 	    if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
-	    	File root = Environment.getExternalStorageDirectory();
-	    	File dir = new File(root.getAbsolutePath() + "/augoxdbg");
-	    	dir.mkdirs();
+	    	//File root = Environment.getExternalStorageDirectory();
+	    	File dir = getExternalFilesDir(null);
 	    	File file = new File(dir, "testdb.dat");
 	    	try {
 	    		FileOutputStream f = new FileOutputStream(file);
 	    		MainScreenActivity.getPlacesDatabase().writeToStream(f);
 	    		f.close();
+	    		Toast toast = Toast.makeText(getApplicationContext(), "File Written", Toast.LENGTH_SHORT);
+				toast.show();
 	    	} catch (FileNotFoundException e) {
 	    		Toast toast = Toast.makeText(getApplicationContext(), e.getLocalizedMessage(), Toast.LENGTH_SHORT);
 				toast.show();
