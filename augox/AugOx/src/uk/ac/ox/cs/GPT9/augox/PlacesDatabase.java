@@ -1,9 +1,6 @@
 package uk.ac.ox.cs.GPT9.augox;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +18,6 @@ public class PlacesDatabase {
 	 */
 	public PlacesDatabase() {
 		// debuggery
-		/*
 		List<OpeningHours.Period> periods = new ArrayList<OpeningHours.Period>();
 		boolean[] isOpen2 = {false};
 		int[] openHour2 = {0};
@@ -42,9 +38,10 @@ public class PlacesDatabase {
 		int[] closeMinute = {0, 0, 0, 0, 0, 0, 0};
 		periods.add(new OpeningHours.Period(true, 3, 1, 8, 31, false, isOpen, openHour, openMinute, closeHour, closeMinute));
 		OpeningHours test = new OpeningHours(periods);
-		Log.d("DBG_Database", test.getOpeningSummary());
-		Log.d("DBG_Database", test.isOpenAt(new LocalTime(2014,12,25,23,59))?"Open":"Closed");
-		*/
+		
+		PlaceData p1 = new PlaceData("Dorridge Station", 52.372167, -1.752943,
+				5, false, PlaceCategory.RESTAURANT, "TRAINS", test);
+		db.add(p1);
 	}
 	
 	/*
@@ -63,9 +60,14 @@ public class PlacesDatabase {
 	/*
 	 * Dump the database into the given stream.
 	 */
-	public void writeToStream(OutputStream stream) {
+	public void writeToStream(OutputStream stream) throws IOException {
 		// Create data output stream
 		DataOutputStream dstream = new DataOutputStream(stream);
+		
+		// Write all places in the database to the stream
+		for(PlaceData place : db) {
+			place.writeToStream(dstream);
+		}
 	}
 	
 	/*

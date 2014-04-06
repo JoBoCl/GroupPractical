@@ -1,5 +1,6 @@
 package uk.ac.ox.cs.GPT9.augox;
 
+import java.io.*;
 import java.util.List;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -82,6 +83,15 @@ public class OpeningHours {
 		
 		// Return result
 		return result;
+	}
+	
+	/*
+	 * Write the opening hours into the given data stream
+	 */
+	public void writeToStream(DataOutputStream dstream) throws IOException {
+		for(Period p : periods) {
+			p.writeToStream(dstream);
+		}
 	}
 	
 	/*
@@ -245,6 +255,28 @@ public class OpeningHours {
 			
 			// Return result
 			return result;
+		}
+		
+		/*
+		 * Write the period into the given data stream
+		 */
+		public void writeToStream(DataOutputStream dstream) throws IOException {
+			dstream.writeBoolean(hasGeneralSpan);
+			if(hasGeneralSpan) {
+				dstream.writeInt(startMonth);
+				dstream.writeInt(startDay);
+				dstream.writeInt(endMonth);
+				dstream.writeInt(endDay);
+			}
+			dstream.writeBoolean(useGenericTimes);
+			int n = useGenericTimes ? 1 : 7;
+			for(int i = 0; i < n; i++) {
+				dstream.writeBoolean(isOpen[i]);
+				dstream.writeInt(openHour[i]);
+				dstream.writeInt(openMinute[i]);
+				dstream.writeInt(closeHour[i]);
+				dstream.writeInt(closeMinute[i]);
+			}
 		}
 		
 		/*

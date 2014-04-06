@@ -1,5 +1,8 @@
 package uk.ac.ox.cs.GPT9.augox;
 
+import java.io.DataOutputStream;
+import java.io.IOException;
+
 /**
  * Represents a Place - a location in the world that the program will deal
  * with. The primary storage of these is the singleton PlacesDatabase object
@@ -79,4 +82,20 @@ public class PlaceData {
 	public void updateRating(int rating) { this.rating = rating; }
 	public void updateVisited(boolean visited) { this.visited = visited; }
 	public void updateClicked(boolean clicked) { this.clicked = clicked; }
+	
+	/*
+	 * Write the place into the given data stream
+	 */
+	public void writeToStream(DataOutputStream dstream) throws IOException {
+		dstream.writeChars(name);
+		dstream.writeChar(0);
+		dstream.writeDouble(latitude);
+		dstream.writeDouble(longitude);
+		dstream.writeInt(rating);
+		dstream.writeBoolean(visited);
+		dstream.writeInt(category.getID());
+		dstream.writeChars(description);
+		dstream.writeChar(0);
+		openinghours.writeToStream(dstream);
+	}
 }
