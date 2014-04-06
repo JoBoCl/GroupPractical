@@ -14,5 +14,11 @@
         android:layout_height="wrap_content"
         android:text="Load Database"
         android:onClick="loadDatabase" />
+    <Button
+        android:id="@+id/btn_writedatabasetoexternal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Write Database To External Storage"
+        android:onClick="writeDatabaseToExternal" />
 
 </LinearLayout>

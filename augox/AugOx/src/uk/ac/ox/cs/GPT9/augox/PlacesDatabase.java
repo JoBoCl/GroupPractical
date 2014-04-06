@@ -1,7 +1,9 @@
 package uk.ac.ox.cs.GPT9.augox;
 
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,6 +58,14 @@ public class PlacesDatabase {
 		
 		// Create data input stream
 		DataInputStream dstream = new DataInputStream(stream);
+	}
+	
+	/*
+	 * Dump the database into the given stream.
+	 */
+	public void writeToStream(OutputStream stream) {
+		// Create data output stream
+		DataOutputStream dstream = new DataOutputStream(stream);
 	}
 	
 	/*
