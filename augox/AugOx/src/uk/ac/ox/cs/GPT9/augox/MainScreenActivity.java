@@ -173,6 +173,10 @@ public class MainScreenActivity extends Activity {
             	Intent intent6 = new Intent(this, AutoPlannerActivity.class);
                 startActivity(intent6);
                 return true;
+            case R.id.action_dbg_databasedebugger:
+            	Intent intent7 = new Intent(this, DatabaseDebuggerActivity.class);
+                startActivity(intent7);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
