@@ -21,7 +21,6 @@ public class ListPlacesActivity extends ListActivity {
 	 */
 	public final static String EXTRA_LATITUDE = "uk.ac.ox.cs.GPT9.augox.LATITUDE";
 	public final static String EXTRA_LONGITUDE = "uk.ac.ox.cs.GPT9.augox.LONGITUDE";
-	public final static String QUERY_TYPE = "uk.ac.ox.cs.GPT9.augox.QUERYTYPE";
 	private double radius = 0;
 	private double latitude = 0;
 	private double longitude = 0;
