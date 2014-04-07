@@ -116,6 +116,15 @@ public class PlacesDatabase {
 	 * Process a query on the database
 	 */
 	public List<PlaceData> query(DatabaseQuery q) {
-		return new ArrayList<PlaceData>();
+		// Prepare result list
+		List<PlaceData> result = new ArrayList<PlaceData>();
+		
+		// Populate result list with places that are accepted by the query
+		for(PlaceData p : db) {
+			if(q.accepts(p)) result.add(p);
+		}
+		
+		// Return result list
+		return result;
 	}
 }
