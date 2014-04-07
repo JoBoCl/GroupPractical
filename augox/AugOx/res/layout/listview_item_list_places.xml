@@ -1,0 +1,28 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="?android:attr/listPreferredItemHeight"
+    android:padding="6dip" >
+
+    <TextView
+        android:id="@+id/list_places_item_name"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:singleLine = "true" />
+    <ImageView
+        android:id="@+id/list_places_item_type"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_toRightOf="@+id/list_places_item_name"
+        android:layout_toLeftOf="@+id/list_places_item_distance"
+        android:contentDescription="Place Type"
+        android:src="@drawable/ic_launcher" 
+        	/>
+    <TextView
+        android:id="@+id/list_places_item_distance"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:singleLine = "true" 
+        android:layout_alignParentRight="true"
+        android:gravity="right"/>
+
+</RelativeLayout>

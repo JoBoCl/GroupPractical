@@ -105,6 +105,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         /**  Example settings for Data & Sync 
          */
         public static final int pref_header_data_sync=0x7f07001b;
+        /**  Example General settings 
         /**  Strings related to Settings 
  Example General settings 
          */
@@ -165,9 +166,10 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     }
     public static final class xml {
         public static final int pref_data_sync=0x7f040000;
-        public static final int pref_general=0x7f040001;
-        public static final int pref_headers=0x7f040002;
-        public static final int pref_notification=0x7f040003;
+        public static final int pref_filters=0x7f040001;
+        public static final int pref_general=0x7f040002;
+        public static final int pref_headers=0x7f040003;
+        public static final int pref_notification=0x7f040004;
     }
     public static final class styleable {
         /** 
