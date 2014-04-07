@@ -1,5 +1,6 @@
 package uk.ac.ox.cs.GPT9.augox;
 
+import java.util.ArrayList;
 import java.util.List;
 import android.app.ListActivity;
 import android.content.Context;
@@ -31,9 +32,11 @@ public class ListPlacesActivity extends ListActivity {
 		latitude = intent.getDoubleExtra(EXTRA_LATITUDE,Double.valueOf(0));
 		longitude = intent.getDoubleExtra(EXTRA_LONGITUDE,Double.valueOf(0));
 		radius = 100;
-		PlacesDatabase db = MainScreenActivity.getPlacesDatabase();
-		final List<PlaceData> places = db.getPlacesInLocus(latitude,longitude,radius);
 		
+		//final version will use this after database implemented
+		//PlacesDatabase db = MainScreenActivity.getPlacesDatabase();
+		//final List<PlaceData> places = db.getPlacesInLocus(latitude,longitude,radius);
+		final List<PlaceData> places = new ArrayList<PlaceData>();
 		//test place data
 		OpeningHours h = null;
 		PlaceCategory p = null;
@@ -80,7 +83,7 @@ public class ListPlacesActivity extends ListActivity {
 			TextView distView = (TextView) rowView.findViewById(R.id.list_places_item_distance);
 			nameView.setText(item.getName());
 			//after we have icons for each type of place, set it here
-			typeView.setImageResource(R.drawable.testing_image);
+			typeView.setImageResource(R.drawable.ic_launcher);
 			distView.setText(String.format("%.1f", getDistanceBetween(
 					latitude,longitude,item.getLatitude(),item.getLongitude()))+"km"); 
 			return rowView;
