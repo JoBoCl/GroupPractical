@@ -3,7 +3,6 @@ package uk.ac.ox.cs.GPT9.augox.dbquery;
 import uk.ac.ox.cs.GPT9.augox.PlaceData;
 
 /**
- * DatabaseQuery Interface
  * All query classes must implement this.
  * 
  * @see PlacesDatabase
