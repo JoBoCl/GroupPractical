@@ -4,6 +4,8 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import uk.ac.ox.cs.GPT9.augox.dbquery.*;
+
 /**
  * A database of all Places known to the program.
  */
@@ -111,12 +113,9 @@ public class PlacesDatabase {
 	}
 	
 	/*
-	 * Return list of all Places within the given locus (radius in km), in
-	 * order of distance from centre.
+	 * Process a query on the database
 	 */
-	public List<PlaceData> getPlacesInLocus(double latitude, double longitude, double radius) {
+	public List<PlaceData> query(DatabaseQuery q) {
 		return new ArrayList<PlaceData>();
 	}
-
-	/* Add other getters / setters as is deemed necessary later */
 }

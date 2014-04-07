@@ -31,17 +31,13 @@
 /*
  * Database of Places
  * All the places will be stored in here. This will be a single object in
- * MainScreenActivity, with various query functions that return PlaceData
- * objects.
+ * MainScreenActivity, with a query function that returns PlaceData objects.
  */
 public class PlacesDatabase {
 	/*
-	 * Return list of all Places within the given locus (radius in km), in
-	 * order of distance from centre.
+	 * Process a query on the database
 	 */
-	public List<PlaceData> getPlacesInLocus(double latitude, double longitude, double radius);
-
-	/** Add other getters / setters as is deemed necessary later **/
+	public List<PlaceData> query(DatabaseQuery q);
 }
 
 /*
