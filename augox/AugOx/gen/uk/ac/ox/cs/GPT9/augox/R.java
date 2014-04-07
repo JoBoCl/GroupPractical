@@ -51,9 +51,18 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int button2=0x7f0b0011;
         public static final int button3=0x7f0b0012;
         public static final int button4=0x7f0b0013;
-        public static final int dummy_button=0x7f0b0002;
-        public static final int fullscreen_content=0x7f0b0000;
-        public static final int fullscreen_content_controls=0x7f0b0001;
+        public static final int action_dbg_autoplanner=0x7f0b000a;
+        public static final int action_dbg_databasedebugger=0x7f0b000b;
+        public static final int action_dbg_filterpanel=0x7f0b0008;
+        public static final int action_dbg_listplaces=0x7f0b0006;
+        public static final int action_dbg_placefullinfo=0x7f0b0005;
+        public static final int action_dbg_routeplanner=0x7f0b0009;
+        public static final int action_dbg_settingspanel=0x7f0b0007;
+        public static final int btn_loaddatabase=0x7f0b0000;
+        public static final int btn_writedatabasetoexternal=0x7f0b0001;
+        public static final int dummy_button=0x7f0b0004;
+        public static final int fullscreen_content=0x7f0b0002;
+        public static final int fullscreen_content_controls=0x7f0b0003;
         public static final int imageViewBackground=0x7f0b0003;
         public static final int imageViewForeground=0x7f0b0004;
         public static final int imageViewImage=0x7f0b000c;
@@ -73,22 +82,25 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     }
     public static final class layout {
         public static final int activity_auto_planner=0x7f030000;
-        public static final int activity_list_places=0x7f030001;
-        public static final int activity_main_screen=0x7f030002;
-        public static final int activity_place_full_info=0x7f030003;
-        public static final int activity_route_planner=0x7f030004;
+        public static final int activity_database_debugger=0x7f030001;
+        public static final int activity_list_places=0x7f030002;
+        public static final int activity_main_screen=0x7f030003;
+        public static final int activity_place_full_info=0x7f030004;
         public static final int listview_item_list_places=0x7f030005;
+        public static final int activity_route_planner=0x7f030005;
         public static final int news_feed_item_1=0x7f030006;
     }
     public static final class menu {
         public static final int auto_planner=0x7f0a0000;
-        public static final int list_places=0x7f0a0001;
-        public static final int main_screen=0x7f0a0002;
-        public static final int place_full_info=0x7f0a0003;
-        public static final int route_planner=0x7f0a0004;
+        public static final int database_debugger=0x7f0a0001;
+        public static final int list_places=0x7f0a0002;
+        public static final int main_screen=0x7f0a0003;
+        public static final int place_full_info=0x7f0a0004;
+        public static final int route_planner=0x7f0a0005;
     }
     public static final class string {
         public static final int action_dbg_autoplanner=0x7f070009;
+        public static final int action_dbg_databasedebugger=0x7f070010;
         public static final int action_dbg_filterpanel=0x7f07000a;
         public static final int action_dbg_listplaces=0x7f07000b;
         public static final int action_dbg_placefullinfo=0x7f07000c;
@@ -106,12 +118,16 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int hello_world=0x7f070005;
         public static final int pref_default_display_name=0x7f07001a;
         public static final int pref_description_social_recommendations=0x7f070018;
+        public static final int pref_default_display_name=0x7f070016;
+        public static final int pref_description_social_recommendations=0x7f070014;
         /**  Example settings for Data & Sync 
          */
         public static final int pref_header_data_sync=0x7f07001c;
+        public static final int pref_header_data_sync=0x7f070018;
         /**  Example General settings 
          */
         public static final int pref_header_general=0x7f070016;
+        public static final int pref_header_general=0x7f070012;
         /**  Example settings for Notifications 
          */
         public static final int pref_header_notifications=0x7f07001f;
@@ -124,12 +140,25 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int pref_title_sync_frequency=0x7f07001d;
         public static final int pref_title_system_sync_settings=0x7f07001e;
         public static final int pref_title_vibrate=0x7f070023;
+        public static final int pref_header_notifications=0x7f07001b;
+        public static final int pref_ringtone_silent=0x7f07001e;
+        public static final int pref_title_add_friends_to_messages=0x7f070017;
+        public static final int pref_title_display_name=0x7f070015;
+        public static final int pref_title_new_message_notifications=0x7f07001c;
+        public static final int pref_title_ringtone=0x7f07001d;
+        public static final int pref_title_social_recommendations=0x7f070013;
+        public static final int pref_title_sync_frequency=0x7f070019;
+        public static final int pref_title_system_sync_settings=0x7f07001a;
+        public static final int pref_title_vibrate=0x7f07001f;
         public static final int title_activity_auto_planner=0x7f070008;
         public static final int title_activity_filter_panel=0x7f070014;
+        public static final int title_activity_database_debugger=0x7f07000f;
+        public static final int title_activity_filter_panel=0x7f070011;
         public static final int title_activity_list_places=0x7f070006;
         public static final int title_activity_place_full_info=0x7f070003;
         public static final int title_activity_route_planner=0x7f070007;
         public static final int title_activity_settings_panel=0x7f070015;
+        public static final int title_activity_settings_panel=0x7f070020;
     }
     public static final class style {
         /** 
