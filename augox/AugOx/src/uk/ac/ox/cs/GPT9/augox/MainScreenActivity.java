@@ -1,135 +1,218 @@
 package uk.ac.ox.cs.GPT9.augox;
 
-import uk.ac.ox.cs.GPT9.augox.util.SystemUiHider;
-import android.annotation.TargetApi;
-import android.app.Activity;
+import uk.ac.ox.cs.GPT9.augox.route.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import uk.ac.ox.cs.GPT9.augox.dbquery.AllQuery;
+import uk.ac.ox.cs.GPT9.augox.dbquery.DatabaseQuery;
+import uk.ac.ox.cs.GPT9.augox.dbsort.DatabaseSorter;
+import uk.ac.ox.cs.GPT9.augox.dbsort.DistanceFromSorter;
+import uk.ac.ox.cs.GPT9.augox.dbsort.SortOrder;
+
+import com.beyondar.android.fragment.BeyondarFragmentSupport;
+import com.beyondar.android.plugin.googlemap.GoogleMapWorldPlugin;
+import com.beyondar.android.plugin.radar.RadarView;
+import com.beyondar.android.plugin.radar.RadarWorldPlugin;
+import com.beyondar.android.screenshot.OnScreenshotListener;
+import com.beyondar.android.util.location.BeyondarLocationManager;
+import com.beyondar.android.view.OnClickBeyondarObjectListener;
+import com.beyondar.android.world.BeyondarObject;
+import com.beyondar.android.world.GeoObject;
+import com.beyondar.android.world.World;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.OnMapLongClickListener;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+
+import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
+import android.graphics.Bitmap;
+import android.location.LocationManager;
 import android.os.Bundle;
-import android.os.Handler;
+import android.os.Parcelable;
+import android.preference.PreferenceManager;
+import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnLongClickListener;
+import android.widget.SeekBar;
+import android.widget.SeekBar.OnSeekBarChangeListener;
 
-/**
- * An example full-screen activity that shows and hides the system UI (i.e.
- * status bar and navigation/system bar) with user interaction.
- *
- * @see SystemUiHider
- */
-public class MainScreenActivity extends Activity {
-    /**
-     * Whether or not the system UI should be auto-hidden after
-     * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
-     */
-    private static final boolean AUTO_HIDE = true;
+public class MainScreenActivity extends FragmentActivity implements OnClickBeyondarObjectListener, OnSharedPreferenceChangeListener {
+   
+	private static PlacesDatabase placesDatabase = new PlacesDatabase();
+	public static PlacesDatabase getPlacesDatabase() { return placesDatabase; }
+	private static IRoute route = new Route();
+	public static IRoute getCurrentRoute() { return route; }
+	private final int USERID = 20000; // TODO guarantee uniqueness
+	private final int MAXICONDIST = 50;
+	
+	private BeyondarFragmentSupport mBeyondarFragment;
+	private RadarView mRadarView;
+	private RadarWorldPlugin mRadarPlugin;
+	private World mWorld;
+	private GoogleMap mMap;
+	private GoogleMapWorldPlugin mGoogleMapPlugin;
+	//private BeyondarViewAdapter mViewAdapter;
+	private List<Place> Places = new ArrayList<Place>();
 
-    /**
-     * If {@link #AUTO_HIDE} is set, the number of milliseconds to wait after
-     * user interaction before hiding the system UI.
-     */
-    private static final int AUTO_HIDE_DELAY_MILLIS = 3000;
-
-    /**
-     * If set, will toggle the system UI visibility upon interaction. Otherwise,
-     * will show the system UI visibility upon interaction.
-     */
-    private static final boolean TOGGLE_ON_CLICK = true;
-
-    /**
-     * The flags to pass to {@link SystemUiHider#getInstance}.
-     */
-    private static final int HIDER_FLAGS = SystemUiHider.FLAG_HIDE_NAVIGATION;
-
-    /**
-     * The instance of the {@link SystemUiHider} for this activity.
-     */
-    private SystemUiHider mSystemUiHider;
-    
-    /*
-	 * Single objects and accessors
-	 */
-	private static PlacesDatabase placesdatabase = new PlacesDatabase();
-	public static PlacesDatabase getPlacesDatabase() { return placesdatabase; }
-	private static PlaceCategoryService placecategoryservice = new PlaceCategoryService();
-	public static PlaceCategoryService getPlaceCategoryService() { return placecategoryservice; }
-    
-    /*
-	 * Screen components the activity owns
-	 */
-	private RadarComponent radar;
-	private RangeSliderComponent distanceslider;
-	// Also BeyondAR stuff
-
-    @Override
+	private SeekBar mSeekBarMaxDistance;
+	private View mMapFrame;
+	
+	private SharedPreferences sharedPref;
+	
+	private class Place {
+		public Place(Integer placeID, GeoObject geoPlace, Marker marker) {
+			this.placeID = placeID;
+			this.geoPlace = geoPlace;
+			//this.marker = marker;
+		}
+		public int placeID;
+		public GeoObject geoPlace;
+		//public Marker marker;
+	}
+	
+   @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        
+        //requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main_screen);
+        
+		mBeyondarFragment = (BeyondarFragmentSupport) getSupportFragmentManager().findFragmentById(R.id.beyondarFragment);
+        
+        mWorld = new World(this);
+		mBeyondarFragment.setWorld(mWorld);
+        mWorld.setArViewDistance(100);
+		
+		GeoObject user = new GeoObject(USERID);
+		user.setGeoPosition(mWorld.getLatitude(), mWorld.getLongitude());
+		user.setImageResource(R.drawable.ic_launcher); // TODO give user an oriented custom icon
+		user.setName("User position");
+		mWorld.addBeyondarObject(user);
+        
+        BeyondarLocationManager.addWorldLocationUpdate(mWorld);
+		BeyondarLocationManager.addGeoObjectLocationUpdate(user);
 
-        final View controlsView = findViewById(R.id.fullscreen_content_controls);
-        final View contentView = findViewById(R.id.fullscreen_content);
+		// We need to set the LocationManager to the BeyondarLocationManager.
+		BeyondarLocationManager
+				.setLocationManager((LocationManager) getSystemService(Context.LOCATION_SERVICE));
+		
+        mRadarView = (RadarView) findViewById(R.id.radarView);
+        // Create the Radar module
+        mRadarPlugin = new RadarWorldPlugin(this);
+        // set the radar view in to our radar module
+        mRadarPlugin.setRadarView(mRadarView);
+        // Set how far (in meters) we want to display in the view
+        mRadarPlugin.setMaxDistance(mWorld.getArViewDistance());
+        // and finally let's add the module
+        mWorld.addPlugin(mRadarPlugin);
+        
+        mSeekBarMaxDistance = ((android.widget.SeekBar)findViewById(R.id.distanceSlider));
+        mSeekBarMaxDistance.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+        	@Override       
+            public void onStopTrackingTouch(SeekBar seekBar) { }       
 
-        // Set up an instance of SystemUiHider to control the system UI for
-        // this activity.
-        mSystemUiHider = SystemUiHider.getInstance(this, contentView, HIDER_FLAGS);
-        mSystemUiHider.setup();
-        mSystemUiHider
-                .setOnVisibilityChangeListener(new SystemUiHider.OnVisibilityChangeListener() {
-                    // Cached values.
-                    int mControlsHeight;
-                    int mShortAnimTime;
+            @Override       
+            public void onStartTrackingTouch(SeekBar seekBar) { }       
 
-                    @Override
-                    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
-                    public void onVisibilityChange(boolean visible) {
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-                            // If the ViewPropertyAnimator API is available
-                            // (Honeycomb MR2 and later), use it to animate the
-                            // in-layout UI controls at the bottom of the
-                            // screen.
-                            if (mControlsHeight == 0) {
-                                mControlsHeight = controlsView.getHeight();
-                            }
-                            if (mShortAnimTime == 0) {
-                                mShortAnimTime = getResources().getInteger(
-                                        android.R.integer.config_shortAnimTime);
-                            }
-                            controlsView.animate()
-                                    .translationY(visible ? 0 : mControlsHeight)
-                                    .setDuration(mShortAnimTime);
-                        } else {
-                            // If the ViewPropertyAnimator APIs aren't
-                            // available, simply show or hide the in-layout UI
-                            // controls.
-                            controlsView.setVisibility(visible ? View.VISIBLE : View.GONE);
-                        }
-
-                        if (visible && AUTO_HIDE) {
-                            // Schedule a hide().
-                            delayedHide(AUTO_HIDE_DELAY_MILLIS);
-                        }
-                    }
-                });
-
-        // Set up the user interaction to manually show or hide the system UI.
-        contentView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (TOGGLE_ON_CLICK) {
-                    mSystemUiHider.toggle();
-                } else {
-                    mSystemUiHider.show();
-                }
-            }
+            @Override       
+            public void onProgressChanged(SeekBar seekBar, int progress,boolean fromUser) {
+            	mWorld.setArViewDistance(seekBar.getProgress());
+            	mRadarPlugin.setMaxDistance(mWorld.getArViewDistance());
+            }       
+        });
+        mWorld.setArViewDistance(mSeekBarMaxDistance.getProgress());
+        mRadarPlugin.setMaxDistance(mSeekBarMaxDistance.getProgress());
+        
+        mRadarView.setOnLongClickListener(new OnLongClickListener() {
+        	public boolean onLongClick(View rv) {
+        		
+        		if (mGoogleMapPlugin == null) initializeGMaps();
+        		centreCamera();
+        		mMapFrame.setVisibility(View.VISIBLE);
+				return true; }
         });
 
-        // Upon interacting with UI controls, delay any scheduled hide()
-        // operations to prevent the jarring behavior of controls going away
-        // while interacting with the UI.
-        findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
+        mBeyondarFragment.setOnClickBeyondarObjectListener(this);
+        
+        sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        sharedPref.registerOnSharedPreferenceChangeListener(this);
+        
+        /*
+		mViewAdapter = new CustomBeyondarViewAdapter(this);
+		mBeyondarFragment.setBeyondarViewAdapter(mViewAdapter); */
+    	mBeyondarFragment.setMaxFarDistance(MAXICONDIST);
+        
+        fillWorld();
     }
+   
+   private void startFullInfoActivity(final BeyondarObject geoPlace) {
+	   mBeyondarFragment.takeScreenshot(new OnScreenshotListener() {
+		   @Override
+		   public void onScreenshot (Bitmap screenshot) {
+			   Bundle bundle = new Bundle();
+			   Bitmap ss2 = Bitmap.createScaledBitmap(screenshot, screenshot.getWidth()/4, screenshot.getHeight()/4, true);
+			   bundle.putParcelable("background", (Parcelable)ss2);
+			   Intent intent = new Intent(getApplicationContext(), PlaceFullInfoActivity.class);
+			   intent.putExtra(PlaceFullInfoActivity.EXTRA_BACKGROUND, bundle);
+			   intent.putExtra(PlaceFullInfoActivity.EXTRA_DISTANCE, geoPlace.getDistanceFromUser()/1000);
+			   intent.putExtra(PlaceFullInfoActivity.EXTRA_PLACE, (int)geoPlace.getId());
+			   startActivity(intent);
+		   }
+	   });
+   }
+   
+   private void initializeGMaps() {
+		mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
+		if (mMap == null){
+			return;
+		}
+		
+		mMapFrame = (View)findViewById(R.id.map_frame);
+		mMap.setOnMapLongClickListener(new OnMapLongClickListener() {
+			public void onMapLongClick(LatLng l) {
+				mMapFrame.setVisibility(View.GONE);
+			}
+		});
+	   
+		mGoogleMapPlugin = new GoogleMapWorldPlugin(this);
+		mGoogleMapPlugin.setGoogleMap(mMap);
+        mWorld.addPlugin(mGoogleMapPlugin);
+        
+        /*for (Place place: Places) {
+        	mMap.addMarker(new MarkerOptions()
+        		.position(new LatLng(place.geoPlace.getLatitude(), place.geoPlace.getLongitude()))
+        		.title(place.geoPlace.getName())
+        		.snippet(placesDatabase.getPlaceByID(place.placeID).getDescription()));
+        }*/
+        refreshVisibility();
+   }
+   
+   private void centreCamera() {
+		mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(mWorld.getLatitude(), mWorld.getLongitude()), 15));
+		mMap.animateCamera(CameraUpdateFactory.zoomTo(19), 2000, null);
+   }
+   
+   @Override
+   protected void onResume() {
+        super.onResume();
+        BeyondarLocationManager.enable();
+   }
+
+
+   @Override
+   protected void onPause() {
+        super.onPause();
+        BeyondarLocationManager.disable();
+   }
     
     @Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -143,87 +226,135 @@ public class MainScreenActivity extends Activity {
         // Handle presses on the action bar items
     	// DEBUG VERSION
         switch (item.getItemId()) {
-            case R.id.action_dbg_placefullinfo:
-            	Intent intent1 = new Intent(this, PlaceFullInfoActivity.class);
-                intent1.putExtra(PlaceFullInfoActivity.EXTRA_PLACE, "");
-                intent1.putExtra(PlaceFullInfoActivity.EXTRA_BACKGROUND, "");
-                startActivity(intent1);
-                return true;
-            case R.id.action_dbg_listplaces:
+            case R.id.action_launch_listplaces:
             	Intent intent2 = new Intent(this, ListPlacesActivity.class);
             	// debug values: CS dept entrance!
-            	intent2.putExtra(ListPlacesActivity.EXTRA_LATITUDE, 51.760039);
-            	intent2.putExtra(ListPlacesActivity.EXTRA_LONGITUDE, -1.258464);
+            	intent2.putExtra(ListPlacesActivity.EXTRA_LATITUDE, mWorld.getLatitude());
+            	intent2.putExtra(ListPlacesActivity.EXTRA_LONGITUDE, mWorld.getLongitude());
                 startActivity(intent2);
                 return true;
-            case R.id.action_dbg_settingspanel:
+            case R.id.action_launch_settingspanel:
             	Intent intent3 = new Intent(this, SettingsPanelActivity.class);
                 startActivity(intent3);
                 return true;
-            case R.id.action_dbg_filterpanel:
+            case R.id.action_launch_filterpanel:
             	Intent intent4 = new Intent(this, FilterPanelActivity.class);
                 startActivity(intent4);
                 return true;
-            case R.id.action_dbg_routeplanner:
+            case R.id.action_launch_routeplanner:
             	Intent intent5 = new Intent(this, RoutePlannerActivity.class);
             	intent5.putExtra(RoutePlannerActivity.EXTRA_PLACELIST, "");
                 startActivity(intent5);
                 return true;
-            case R.id.action_dbg_autoplanner:
+            case R.id.action_launch_autoplanner:
             	Intent intent6 = new Intent(this, AutoPlannerActivity.class);
                 startActivity(intent6);
+                return true;
+            case R.id.action_launch_databasedebugger:
+            	Intent intent7 = new Intent(this, DatabaseDebuggerActivity.class);
+                startActivity(intent7);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
-
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-
-        // Trigger the initial hide() shortly after the activity has been
-        // created, to briefly hint to the user that UI controls
-        // are available.
-        delayedHide(100);
-    }
-
-
-    /**
-     * Touch listener to use for in-layout UI controls to delay hiding the
-     * system UI. This is to prevent the jarring behavior of controls going away
-     * while interacting with activity UI.
-     */
-    View.OnTouchListener mDelayHideTouchListener = new View.OnTouchListener() {
-        @Override
-        public boolean onTouch(View view, MotionEvent motionEvent) {
-            if (AUTO_HIDE) {
-                delayedHide(AUTO_HIDE_DELAY_MILLIS);
-            }
-            return false;
-        }
-    };
-
-    Handler mHideHandler = new Handler();
-    Runnable mHideRunnable = new Runnable() {
-        @Override
-        public void run() {
-            mSystemUiHider.hide();
-        }
-    };
-
-    /**
-     * Schedules a call to hide() in [delay] milliseconds, canceling any
-     * previously scheduled calls.
-     */
-    private void delayedHide(int delayMillis) {
-        mHideHandler.removeCallbacks(mHideRunnable);
-        mHideHandler.postDelayed(mHideRunnable, delayMillis);
-    }
     
-    /*
-	 * Update viewing range (called back from the RangeSliderComponent)
-	 */
-	public void updateViewRange(double viewRange) {
+	@Override
+	public void onClickBeyondarObject(ArrayList<BeyondarObject> beyondarObjects) {
+		/*if (beyondarObjects.size() > 0) {
+			Toast.makeText(this, "Clicked on: " + beyondarObjects.get(0).getName(),
+					Toast.LENGTH_LONG).show();
+		}*/
+		// TODO
+		BeyondarObject clicked = null;
+		for (BeyondarObject beyondarObject: beyondarObjects) {
+			if (beyondarObject.isVisible()) {
+				clicked = beyondarObject;
+				break;
+			}
+		}
+		if (clicked != null) startFullInfoActivity(clicked);
 	}
+
+	@Override
+	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+		refreshVisibility();
+	}
+	
+	private List<PlaceCategory> currentCategories() {
+		List<PlaceCategory> pcs = new ArrayList<PlaceCategory>();
+		/*for (PlaceCategory pc: PlaceCategory.values()) {
+			if (sharedPref.getBoolean(pc.getFilter(), true)) pcs.add(pc);
+		}*/
+		if (sharedPref.getBoolean("filter_bars", true)) pcs.add(PlaceCategory.BAR);
+		if (sharedPref.getBoolean("filter_colleges", true)) pcs.add(PlaceCategory.COLLEGE);
+		if (sharedPref.getBoolean("filter_museums", true)) pcs.add(PlaceCategory.MUSEUM);
+		if (sharedPref.getBoolean("filter_restaurants", true)) pcs.add(PlaceCategory.RESTAURANT);
+		return pcs;
+	}
+	
+	private void fillWorld() {
+		DatabaseQuery dq = new AllQuery();
+		DatabaseSorter ds = new DistanceFromSorter(mWorld.getLongitude(), mWorld.getLatitude(), SortOrder.ASC);
+		List<Integer> placeIDs = placesDatabase.query(dq, ds);
+		for (Integer placeID: placeIDs) {
+			PlaceData currPlace = placesDatabase.getPlaceByID(placeID);
+			GeoObject currPlaceGeo = new GeoObject(placeID);
+			currPlaceGeo.setGeoPosition(currPlace.getLatitude(), currPlace.getLongitude());
+			currPlaceGeo.setName(currPlace.getName());
+			currPlaceGeo.setImageResource(currPlace.getCategory().getImageRef()); // TODO custom icons per category
+			Places.add(new Place(placeID, currPlaceGeo, null));
+			mWorld.addBeyondarObject(currPlaceGeo);
+		}
+		refreshVisibility();
+	}
+	
+	private void refreshVisibility() { 
+		for (Place place: Places) {
+			boolean vis = (currentCategories().contains(placesDatabase.getPlaceByID(place.placeID).getCategory()));
+			place.geoPlace.setVisible(vis);
+		    //if (place.marker != null) place.marker.setVisible(vis);
+		}
+	}
+	
+	/*private int sizeIcon (double dist) {
+		return (int)((1-(dist/mSeekBarMaxDistance.getMax())) * (MAXICONSIZE-MINICONSIZE) + MINICONSIZE);
+	}
+	
+	private class CustomBeyondarViewAdapter extends BeyondarViewAdapter {
+
+		LayoutInflater inflater;
+
+		public CustomBeyondarViewAdapter(Context context) {
+			super(context);
+			inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		}
+
+		@Override
+		public View getView(BeyondarObject beyondarObject, View recycledView, ViewGroup parent) {
+			if (beyondarObject.getId() == USERID) return null;
+			if (!currentCategories().contains(placesDatabase.getPlaceByID((int)beyondarObject.getId()).getCategory())) {
+				return null;
+			}
+			if (recycledView == null) {
+				recycledView = inflater.inflate(R.layout.beyondar_object_view, null);
+			}
+
+			ImageView imageView = (ImageView) recycledView.findViewById(R.id.iconView);
+			imageView.setBackgroundResource(R.drawable.ic_launcher);
+			
+			int iconSize = sizeIcon((int)beyondarObject.getDistanceFromUser());
+			RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(iconSize, iconSize);
+			imageView.setLayoutParams(layoutParams);
+
+			// Once the view is ready we specify the position
+			Point2 poss = beyondarObject.getScreenPositionCenter();
+			pos.x = pos.x - iconSize/2;
+			pos.y = pos.y - iconSize/2;
+			setPosition(pos);
+			
+			return recycledView;
+		}
+
+	}*/
 }

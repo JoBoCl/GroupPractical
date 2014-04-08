@@ -22,7 +22,6 @@
   *   to minimise fiddly data passing between activities and keep persistent
   *   data:
   *   > Places Database
-  *   > Place Category Wrapper
   * - All measurements in metric.
   */
 
@@ -32,17 +31,18 @@
 /*
  * Database of Places
  * All the places will be stored in here. This will be a single object in
- * MainScreenActivity, with various query functions that return PlaceData
- * objects.
+ * MainScreenActivity, with a query function that returns PlaceData objects.
  */
 public class PlacesDatabase {
 	/*
-	 * Return list of all Places within the given locus (radius in km), in
-	 * order of distance from centre.
+	 * Fetch a specific Place by its id
 	 */
-	public List<PlaceData> getPlacesInLocus(double latitude, double longitude, double radius);
+	public PlaceData getPlaceByID(int id);
 
-	/** Add other getters / setters as is deemed necessary later **/
+	/*
+	 * Process a query on the database - return unique ids
+	 */
+	public List<int> query(DatabaseQuery q, DatabaseSorter s);
 }
 
 /*
@@ -62,13 +62,14 @@ public class PlaceData {
 	private PlaceCategory category;
 	private String description;
 	private OpeningHours openinghours;
-	// social addresses; e.g. twitter handle; to be added once planned
+	private String twitterhandle;
+	private String foursquareid;
 
 	/*
 	 * Semi-Persistent Data - initially null, can be set, but may be wiped at
 	 * any time in the future to conserve space
 	 */
-	private SOMEIMAGETYPE image;
+	private Drawable image;
 
 	/*
 	 * Session Data - initially takes a default / null value, which can be
@@ -88,8 +89,9 @@ public class PlaceData {
 	public PlaceCategory getCategory();
 	public String getDescription();
 	public OpeningHours getOpeningHours();
-	// social address getters
-	public SOMEIMAGETYPE getImage();
+	public String getTwitterHandle();
+	public String getFourSquareID();
+	public Drawable getImage();
 	public boolean getClicked();
 	// social caching getters
 
@@ -97,7 +99,22 @@ public class PlaceData {
 	 * Updaters (or 'setters', but 'updaters' covers their intended use better)
 	 */
 	public void updateRating(int rating);
+	public void updateVisited(boolean visited);
+	public void updateImage(Drawable image);
 	public void updateClicked(boolean clicked);
+}
+
+/*
+ * Local Time Datatype
+ * Represents a date and time, in the 'local timezone' of the program, for use
+ * with the OpeningHours class.
+ */
+public class LocalTime {
+	/*
+	 * Comparison Operators
+	 */
+	public boolean isBefore(LocalTime rhs);
+	public boolean isEqualTo(LocalTime rhs);
 }
 
 /*
@@ -110,36 +127,19 @@ public class OpeningHours {
 	/*
 	 * Return if the thing is open at give time and date.
 	 */
-	public boolean isOpenAt(Date date);
+	public boolean isOpenAt(LocalTime date);
 
 	/*
 	 * Return the time and date at which the thing next transitions to being
 	 * open / closed after the given time and date.
 	 */
-	public Date nextOpen(Date date);
-	public Date nextClosed(Date date);
+	public LocalTime nextOpen(LocalTime date);
+	public LocalTime nextClosed(LocalTime date);
 
 	/*
 	 * Return a summary of the opening times as a human-readable String.
 	 */
 	public String getOpeningSummary();
-}
-
-/*
- * Place Category Processing Services Singleton
- * A single object in MainScreenActivity, to provide services related to Place
- * Categories.
- */
-public class PlaceCategoryService {
-	/*
-	 * Return the human-readable name of the given Category.
-	 */
-	public String getName(PlaceCategory cat);
-
-	/*
-	 * Return the icon representing the given Category.
-	 */
-	public SOMEIMAGETYPE getIcon(PlaceCategory cat);
 }
 
 /*
@@ -153,8 +153,6 @@ public class MainScreenActivity extends Activity {
 	 */
 	private static PlacesDatabase placesdatabase;
 	public static PlacesDatabase getPlacesDatabase();
-	private static PlaceCategoryService placecategoryservice;
-	public static PlaceCategoryService getPlaceCategoryService();
 
 	/*
 	 * Screen components the activity owns
@@ -208,6 +206,7 @@ public class PlaceFullInfoActivity extends Activity {
 	 */
 	public final static String EXTRA_PLACE = "uk.ac.ox.cs.GPT9.augox.PLACE";
 	public final static String EXTRA_BACKGROUND = "uk.ac.ox.cs.GPT9.augox.BACKGROUND";
+	public final static String EXTRA_DISTANCE = "uk.ac.ox.cs.GPT9.augox.DISTANCE";
 }
 
 /*
