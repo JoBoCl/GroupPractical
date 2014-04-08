@@ -1,6 +1,8 @@
 package uk.ac.ox.cs.GPT9.augox;
 
 import java.io.*;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +15,8 @@ public class PlacesDatabase {
 	/*
 	 * Database Variables
 	 */
-	List<PlaceData> db = new ArrayList<PlaceData>();
+	private int nextKey = 0;
+	private Map<Integer, PlaceData> db = new HashMap<Integer, PlaceData>();
 	
 	/*
 	 * Constructor
@@ -43,7 +46,15 @@ public class PlacesDatabase {
 		
 		PlaceData p1 = new PlaceData("Dorridge Station", 52.372167, -1.752943,
 				5, false, PlaceCategory.RESTAURANT, "TRAINS", test);
-		db.add(p1);
+		addEntry(p1);
+	}
+	
+	/*
+	 * Add a new entry to the database
+	 */
+	private void addEntry(PlaceData place) {
+		db.put(nextKey, place);
+		nextKey++;
 	}
 	
 	/*
@@ -53,7 +64,7 @@ public class PlacesDatabase {
 	 */
 	public void loadFromStream(InputStream stream) throws IOException {
 		// Reinitialise database
-		db = new ArrayList<PlaceData>();
+		db = new HashMap<Integer, PlaceData>();
 		
 		// Create data input stream
 		DataInputStream dstream = new DataInputStream(stream);
@@ -63,7 +74,7 @@ public class PlacesDatabase {
 			while(true) {
 				PlaceData place = PlaceData.buildPlaceDataFromStream(dstream);
 				if(place != null) {
-					db.add(place);
+					addEntry(place);
 				}
 			}
 		} catch(EOFException e) {
@@ -79,8 +90,8 @@ public class PlacesDatabase {
 		DataOutputStream dstream = new DataOutputStream(stream);
 		
 		// Write all places in the database to the stream
-		for(PlaceData place : db) {
-			place.writeToStream(dstream);
+		for(Map.Entry<Integer, PlaceData> entry : db.entrySet()) {
+			entry.getValue().writeToStream(dstream);
 		}
 	}
 	
@@ -113,15 +124,38 @@ public class PlacesDatabase {
 	}
 	
 	/*
-	 * Process a query on the database
+	 * Fetch a specific Place by its id
 	 */
-	public List<PlaceData> query(DatabaseQuery q) {
+	public PlaceData getPlaceByID(int id) {
+		return db.get(id);
+	}
+	
+	/*
+	 * Process a query on the database - return unique ids
+	 */
+	public List<Integer> queryFetchID(DatabaseQuery q) {
+		// Prepare result list
+		List<Integer> result = new ArrayList<Integer>();
+		
+		// Populate result list with places that are accepted by the query
+		for(Map.Entry<Integer, PlaceData> entry : db.entrySet()) {
+			if(q.accepts(entry.getValue())) result.add(entry.getKey());
+		}
+		
+		// Return result list
+		return result;
+	}
+	
+	/*
+	 * Process a query on the database - return Places
+	 */
+	public List<PlaceData> queryFetchPlaces(DatabaseQuery q) {
 		// Prepare result list
 		List<PlaceData> result = new ArrayList<PlaceData>();
 		
 		// Populate result list with places that are accepted by the query
-		for(PlaceData p : db) {
-			if(q.accepts(p)) result.add(p);
+		for(Map.Entry<Integer, PlaceData> entry : db.entrySet()) {
+			if(q.accepts(entry.getValue())) result.add(entry.getValue());
 		}
 		
 		// Return result list
