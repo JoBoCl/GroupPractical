@@ -25,4 +25,21 @@
         android:layout_alignParentTop="true"
         android:text="End Time: " />
 
+    <LinearLayout
+        android:id="@+id/sessionList"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/startTimeButton"
+        android:layout_margin="0dp"
+        android:orientation="vertical" >
+        
+        <fragment
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            class="uk.ac.ox.cs.GPT9.augox.SessionPlanner"
+            tools:layout="@layout/session_planner" />
+
+    </LinearLayout>
+
 </RelativeLayout>

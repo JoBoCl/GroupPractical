@@ -2,9 +2,14 @@
 package uk.ac.ox.cs.GPT9.augox;
 
 import java.util.Calendar;
+import java.util.List;
+
+import uk.ac.ox.cs.GPT9.augox.R.layout;
 
 import android.os.Bundle;
 import android.app.Dialog;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.app.TimePickerDialog;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
@@ -31,7 +36,10 @@ public class AutoPlannerActivity extends FragmentActivity {
 	private Button startTime, endTime;
 	private int startHour; private int startMinute;
 	private int endHour; private int endMinute;
-	private final int[] intervals = new int[]{8*60,9*60,12*60+30,13*60+30,18*60,19*60,22*60};
+	private FragmentTransaction ft;
+	private List<GalleryPickerFragment> gpfs;
+	private final int[] intervals = new int[]{8*60,9*60,12*60+30,13*60+30,18*60,19*60,22*60,
+			8*60+24*60,9*60+24*60,12*60+30+24*60,13*60+30+24*60,18*60+24*60,19*60+24*60,22*60};
 
 	static final int START_TIME_DIALOG_ID = 999;
 	static final int END_TIME_DIALOG_ID = 998;
@@ -43,6 +51,8 @@ public class AutoPlannerActivity extends FragmentActivity {
 
 		startTime = (Button) findViewById(R.id.startTimeButton);
 		endTime = (Button) findViewById(R.id.endTimeButton);
+		
+		ft = getSupportFragmentManager().beginTransaction();
 
 		setCurrentTimeOnView();
 		addListenerOnButton();
@@ -84,18 +94,25 @@ public class AutoPlannerActivity extends FragmentActivity {
 
 	private void updateGalleries() {
 		int galleries = findIntervals();
-		
+		//GalleryPickerFragment gpf = new GalleryPickerFragment();
+		//ft.add((Fragment) gpf, "gallery picker");
+		//gpfs.add(gpf);
+		//ft.commit();
 	}
 	
 	private int findIntervals() {
 		int sessions = 0;
 		int i = 0;
 		int n = intervals.length;
+		int startTime = startHour*60+startMinute;
+		int endTime = endHour*60+endMinute;
+		endTime += endTime < startTime ? 36*24 : 0; 
+
 		while(i<n) {
-			if(startHour*60+startMinute < intervals[i] && intervals[i] < endHour*60+endMinute ) sessions++;
+			if(startTime < intervals[i] && intervals[i] < endTime) sessions++;
 			i++;
 		}	
-	return sessions;
+        return sessions;
 	}
 
 	@Override

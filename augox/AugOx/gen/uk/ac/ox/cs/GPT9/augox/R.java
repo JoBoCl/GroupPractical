@@ -41,16 +41,28 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int action_dbg_autoplanner=0x7f0b000a;
-        public static final int action_dbg_filterpanel=0x7f0b0008;
-        public static final int action_dbg_listplaces=0x7f0b0006;
-        public static final int action_dbg_placefullinfo=0x7f0b0005;
-        public static final int action_dbg_routeplanner=0x7f0b0009;
-        public static final int action_dbg_settingspanel=0x7f0b0007;
-        public static final int dummy_button=0x7f0b0004;
+        public static final int RadioGroup1=0x7f0b0006;
+        public static final int action_dbg_autoplanner=0x7f0b0016;
+        public static final int action_dbg_filterpanel=0x7f0b0014;
+        public static final int action_dbg_listplaces=0x7f0b0012;
+        public static final int action_dbg_placefullinfo=0x7f0b0011;
+        public static final int action_dbg_routeplanner=0x7f0b0015;
+        public static final int action_dbg_settingspanel=0x7f0b0013;
+        public static final int activityCount=0x7f0b000f;
+        public static final int activityText=0x7f0b000e;
+        public static final int dummy_button=0x7f0b0005;
         public static final int endTimeButton=0x7f0b0001;
-        public static final int fullscreen_content=0x7f0b0002;
-        public static final int fullscreen_content_controls=0x7f0b0003;
+        public static final int fragment1=0x7f0b0010;
+        public static final int fullscreen_content=0x7f0b0003;
+        public static final int fullscreen_content_controls=0x7f0b0004;
+        public static final int missSession=0x7f0b000d;
+        public static final int placeImage1=0x7f0b0007;
+        public static final int placeImage2=0x7f0b0009;
+        public static final int placeImage3=0x7f0b000b;
+        public static final int radio0=0x7f0b0008;
+        public static final int radio1=0x7f0b000a;
+        public static final int radio2=0x7f0b000c;
+        public static final int sessionList=0x7f0b0002;
         public static final int startTimeButton=0x7f0b0000;
     }
     public static final class layout {
@@ -59,6 +71,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int activity_main_screen=0x7f030002;
         public static final int activity_place_full_info=0x7f030003;
         public static final int activity_route_planner=0x7f030004;
+        public static final int gallery_picker=0x7f030005;
+        public static final int session_planner=0x7f030006;
     }
     public static final class menu {
         public static final int auto_planner=0x7f0a0000;
