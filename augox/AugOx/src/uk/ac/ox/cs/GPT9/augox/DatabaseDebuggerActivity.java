@@ -1,8 +1,13 @@
 package uk.ac.ox.cs.GPT9.augox;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.os.Environment;
@@ -61,6 +66,14 @@ public class DatabaseDebuggerActivity extends Activity {
 	    	Toast toast = Toast.makeText(getApplicationContext(), "External Storage Unwritable", Toast.LENGTH_SHORT);
 			toast.show();
 	    }
+	}
+	
+	public void testFullInfo(View view) {
+		Intent intent = new Intent(this, PlaceFullInfoActivity.class);
+		intent.putExtra(PlaceFullInfoActivity.EXTRA_PLACE, 0);
+		intent.putExtra(PlaceFullInfoActivity.EXTRA_BACKGROUND, "");
+		intent.putExtra(PlaceFullInfoActivity.EXTRA_DISTANCE, 13.37);
+		startActivity(intent);
 	}
 
 }

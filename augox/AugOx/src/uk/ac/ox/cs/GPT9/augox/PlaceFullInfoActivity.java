@@ -4,6 +4,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -24,6 +25,13 @@ public class PlaceFullInfoActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_place_full_info);
+		
+		// load place from intent
+		Intent intent = getIntent();
+		int _placeid = intent.getIntExtra(EXTRA_PLACE, 0); 
+		_place = MainScreenActivity.getPlacesDatabase().getPlaceByID(_placeid);
+		// todo: check it isn't null before continuing
+		_distance = intent.getDoubleExtra(EXTRA_DISTANCE, 0.0d);
 		
 		// display name
 		TextView nameView = (TextView)findViewById(R.id.textViewName);
@@ -58,10 +66,11 @@ public class PlaceFullInfoActivity extends Activity {
 		return true;
 	}
 	
-	private PlaceData _place = new PlaceData("Matthew's Awesome Pub", 0.0, 0.0, 5, false, PlaceCategory.BAR, "This isn't the greatest pub in the world.  This is a tribute.  I'm also going to try to make this description long so I can make sure it doesn't go too far to the right and wraps around properly, kind of ruining the preceding one-liner.  Which is a great shame, really.  At some point I'm going to have to make a way of sourcing the description from the Internet, which is going to be annoying and hard and stuff but at least for now I can get this prototype working.  And hey, getting the pretty layout is what really matters.  Having the most up-to-date data is not as important, as xkcd 937 tells us (there's an xkcd for everything)", new OpeningHours(new ArrayList<OpeningHours.Period>()));
+	private PlaceData _place; // = new PlaceData("Matthew's Awesome Pub", 0.0, 0.0, 5, false, PlaceCategory.BAR, "This isn't the greatest pub in the world.  This is a tribute.  I'm also going to try to make this description long so I can make sure it doesn't go too far to the right and wraps around properly, kind of ruining the preceding one-liner.  Which is a great shame, really.  At some point I'm going to have to make a way of sourcing the description from the Internet, which is going to be annoying and hard and stuff but at least for now I can get this prototype working.  And hey, getting the pretty layout is what really matters.  Having the most up-to-date data is not as important, as xkcd 937 tells us (there's an xkcd for everything)", new OpeningHours(new ArrayList<OpeningHours.Period>()));
+	private double _distance;
 	
 	private String name() {return _place.getName();}
-	private double distance() {return 1.33333333;}
+	private double distance() {return _distance;}
 	private String description() {return _place.getDescription();}
 	private PlaceCategory category() {return _place.getCategory();}
 	private int rating() {return _place.getRating();}
