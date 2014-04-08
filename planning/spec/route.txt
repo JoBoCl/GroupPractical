@@ -1,0 +1,75 @@
+HI GUYS
+Just 3 things you need to know before you annoy me:
+1.  Yes what appears below is just the interface.  But you wouldn't have looked at the interface
+2.  Functions are listed according to expected users so no excuses (but check the rest if you don't see the one you want)
+3.  Externally visible stuff in Google's offical Java style.  Internal implementation in C# style (apart from curly braces), in case anyone gets curious about all the underscores
+4.  Does not check for doubles.  That's your fault.  Also, may want to leave and come back.  That ought to be up to the user (if manually deciding order, of course, or returning to hotel in autoplanner or something).
+
+Also how to use it:
+import uk.ac.ox.cs.GPT9.augox.route.*;
+/* ... */
+final IRoute route = MainScreenActivity.getCurrentRoute();
+PlaceData nextPlaceOnRoute = route.getNext(); // for example
+
+
+interface IRoute {
+	
+	// Functions used probably exclusively by manual route planner
+	
+	// Get id of place at index
+	int idAtIndex(int index);
+	
+	// Is this place included in the current route?
+	boolean contains(PlaceData place);
+	boolean contains(int id);
+	
+	// Changes position in list of places - either for place to be found or place in position
+	void changePosition(PlaceData place, int index);
+	void changePosition(int start, int end);
+	
+	// Removes a place from the list from scanning or by position
+	void removePlace(PlaceData place);
+	void removePlace(int index);
+	
+	// Used by manual and auto route planners
+	
+	// Refreshes the list of places in the route, either through a list or an array (because I'm nice)
+	void setList(List<Integer> places);
+	void setList(Integer[] places);
+	
+	// Used by manual route planner and fullscreeninfo (and possibly mainscreen activity)
+	
+	// Adds a place to the end of the route
+	void addEnd(Integer id);
+	
+	// Used by fullscreeninfo (and possibly mainscreen activity)
+	
+	// Adds a place at the front of the route (next to be visited)
+	void addNext(Integer id);
+	
+	// Used by MainScreenActivity
+	
+	// Simply returns the next place to go to
+	PlaceData getNext();
+	
+	// Removes the first element of the list (move along to next point on route)
+	// If we've reached the end returns true, else return false
+	boolean moveOn();
+	
+	// Miscellaneous useful
+	
+	// Clears the list totally
+	void clear();
+	
+	// Gets the entire route as a list
+	List<PlaceData> getRouteAsList();
+	
+	// Gets the entire route as a list of ids
+	List<Integer> getRouteAsIDList();
+	
+	// Gets the entire route as an array
+	PlaceData[] getRouteAsArray();
+	
+	// Gets the entire route as an array of ids
+	Integer[] getRouteAsIDArray();
+}

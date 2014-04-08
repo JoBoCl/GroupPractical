@@ -1,16 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".PlaceFullInfoActivity" >
+    android:columnCount="1"
+    android:orientation="horizontal" >
 
-    <TextView
+    <ImageView
+        android:id="@+id/imageViewBackground"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:src="@android:drawable/screen_background_dark" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="39dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="39dp"
+        android:layout_marginBottom="30dp" >
+
+        <ImageView
+            android:id="@+id/imageViewForeground"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:src="@android:drawable/screen_background_light" />
+
+        <TextView
+            android:id="@+id/textViewName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="29dp"
+            android:layout_marginTop="23dp"
+            android:text="@string/fullinfo_namegoeshere"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/textViewDistance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/textViewName"
+            android:layout_marginLeft="29dp"
+            android:layout_toRightOf="@+id/textViewName"
+            android:text="@string/fullinfo_distancegoeshere"
+            android:textColor="#808080"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <ImageView
+            android:id="@+id/imageViewStar1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/imageViewStar2"
+            android:layout_alignTop="@+id/textViewDistance"
+            android:layout_marginRight="21dp"
+            android:src="@android:drawable/star_off" />
+
+        <ImageView
+            android:id="@+id/imageViewStar2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/imageViewStar3"
+            android:layout_alignTop="@+id/textViewDistance"
+            android:layout_marginRight="21dp"
+            android:src="@android:drawable/star_off" />
+
+        <ImageView
+            android:id="@+id/imageViewStar3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/imageViewStar4"
+            android:layout_alignTop="@+id/textViewDistance"
+            android:layout_marginRight="21dp"
+            android:src="@android:drawable/star_off" />
+
+        <ImageView
+            android:id="@+id/imageViewStar4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/imageViewStar5"
+            android:layout_alignTop="@+id/textViewDistance"
+            android:layout_marginRight="21dp"
+            android:src="@android:drawable/star_off" />
+
+        <ImageView
+            android:id="@+id/imageViewStar5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/textViewDistance"
+            android:layout_marginRight="21dp"
+            android:src="@android:drawable/star_off" />
+
+        <ImageView
+            android:id="@+id/imageViewImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/textViewName"
+            android:layout_alignRight="@+id/textViewDescription"
+            android:layout_below="@+id/imageViewStar1"
+            android:layout_marginTop="25dp"
+            android:visibility="invisible"
+            android:src="@android:drawable/ic_delete" />
+
+        <TextView
+            android:id="@+id/textViewFeedTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/listViewFeed"
+            android:layout_below="@+id/imageViewStar5"
+            android:layout_marginTop="15dp"
+            android:text="@string/fullinfo_feedtitle"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <ListView
+            android:id="@+id/listViewFeed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/imageViewStar5"
+            android:layout_alignLeft="@+id/imageViewStar1"
+            android:layout_marginLeft="-170dp"
+            android:layout_alignTop="@+id/imageViewStar5"
+            android:layout_marginTop="70dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="60dp" >
+        </ListView>
+
+        <LinearLayout
+		  android:layout_width="match_parent"
+		  android:layout_height="50dp"
+		  android:orientation="horizontal"
+          android:layout_alignParentBottom="true">
+
+        <Button
+            android:layout_weight="1"
+            android:id="@+id/buttonAddNext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Set as next on route" />
+
+        <Button
+            android:layout_weight="1"
+            android:id="@+id/buttonAddEnd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add to end of route" />
+
+        <Button
+            android:layout_weight="1"
+            android:id="@+id/buttonVisited"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Whether visited or not" />
+		</LinearLayout>
+
+        <TextView
+            android:id="@+id/textViewAcknowledgements"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/listViewFeed"
+            android:layout_alignLeft="@+id/textViewDescription"
+            android:layout_marginBottom="2dp"
+            android:layout_alignRight="@+id/imageViewStar1"
+            android:layout_marginRight="120dp"
+            android:text="@string/fullinfo_attribution"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/textViewDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/textViewName"
+            android:layout_alignRight="@+id/imageViewStar1"
+            android:layout_marginRight="220dp"
+            android:layout_below="@+id/imageViewImage"
+            android:layout_marginTop="30dp"
+            android:layout_alignBottom="@+id/textViewAcknowledgements"
+            android:maxLines = "100"
+            android:scrollbars = "vertical"
+            android:layout_marginBottom="24dp"
+            android:text="@string/fullinfo_descriptiongoeshere"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    </RelativeLayout>
 
 </RelativeLayout>
