@@ -9,34 +9,45 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
 
 public class SessionPlanner extends FragmentActivity {
 
+	private Session activity;
+	private PlaceCategory category;
+
+	public SessionPlanner(Session activity) {
+		this.activity = activity;
+	}
+
 	SeekBar activityCount;
 	TextView activityText;
+
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-	    super.onCreate(savedInstanceState);
-	
-	    activityCount = (SeekBar) findViewById(R.id.activityCount);
-	    activityText = (TextView) findViewById(R.id.activityText);
-	    
-	    activityCount.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
-	    	@Override
-	    	public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-	    		activityText.setText(String.format("How many things do you want to do?\n%d chosen", progress));
-	    	}
+		super.onCreate(savedInstanceState);
+
+		activityCount = (SeekBar) findViewById(R.id.activityCount);
+		activityText = (TextView) findViewById(R.id.activityText);
+
+		activityCount.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+			@Override
+			public void onProgressChanged(SeekBar seekBar, int progress,
+					boolean fromUser) {
+				activityText.setText(String.format(
+						"How many things do you want to do?\n%d chosen",
+						progress));
+			}
 
 			@Override
 			public void onStartTrackingTouch(SeekBar seekBar) {
 				// TODO Auto-generated method stub
-				
+
 			}
 
 			@Override
 			public void onStopTrackingTouch(SeekBar seekBar) {
 				// TODO Auto-generated method stub
-				
+
 			}
-	    });
+		});
 	}
 
 }
