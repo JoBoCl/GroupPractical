@@ -50,12 +50,11 @@ public class SessionHelper {
 
 	}
 
-	@SuppressWarnings("deprecation")
 	public static LocalTime getStartTimeForSession(Session session) {
-		Date date = new Date();
-		int year = date.getYear();
-		int month = date.getMonth();
-		int day = date.getDate();
+		final Calendar cal = Calendar.getInstance();
+		int year = cal.get(Calendar.YEAR);
+		int month = cal.get(Calendar.MONTH);
+		int day = cal.get(Calendar.DATE);
 		int hour;
 		int minute;
 		switch (session) {
