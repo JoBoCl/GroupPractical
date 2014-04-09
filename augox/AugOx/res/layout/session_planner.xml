@@ -6,12 +6,17 @@
     android:orientation="vertical"
     tools:context=".SessionPlanner" >
 
-        <TextView
-            android:id="@+id/activityText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="How many things do you want to do?"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:background="@android:color/holo_blue_dark" />
+
+    <TextView
+        android:id="@+id/activityText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="How many things do you want to do?"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <SeekBar
         android:id="@+id/activityCount"
@@ -30,7 +35,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:layout="@layout/gallery_picker" />
-
     </LinearLayout>
 
 </LinearLayout>
