@@ -52,8 +52,6 @@ public class MainScreenActivity extends Activity {
 	 */
 	private static PlacesDatabase placesdatabase = new PlacesDatabase();
 	public static PlacesDatabase getPlacesDatabase() { return placesdatabase; }
-	private static PlaceCategoryService placecategoryservice = new PlaceCategoryService();
-	public static PlaceCategoryService getPlaceCategoryService() { return placecategoryservice; }
     
     /*
 	 * Screen components the activity owns
@@ -145,8 +143,9 @@ public class MainScreenActivity extends Activity {
         switch (item.getItemId()) {
             case R.id.action_dbg_placefullinfo:
             	Intent intent1 = new Intent(this, PlaceFullInfoActivity.class);
-                intent1.putExtra(PlaceFullInfoActivity.EXTRA_PLACE, "");
-                intent1.putExtra(PlaceFullInfoActivity.EXTRA_BACKGROUND, "");
+            	intent1.putExtra(PlaceFullInfoActivity.EXTRA_PLACE, 0);
+        		intent1.putExtra(PlaceFullInfoActivity.EXTRA_BACKGROUND, "");
+        		intent1.putExtra(PlaceFullInfoActivity.EXTRA_DISTANCE, 13.37);
                 startActivity(intent1);
                 return true;
             case R.id.action_dbg_listplaces:
@@ -172,6 +171,10 @@ public class MainScreenActivity extends Activity {
             case R.id.action_dbg_autoplanner:
             	Intent intent6 = new Intent(this, AutoPlannerActivity.class);
                 startActivity(intent6);
+                return true;
+            case R.id.action_dbg_databasedebugger:
+            	Intent intent7 = new Intent(this, DatabaseDebuggerActivity.class);
+                startActivity(intent7);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

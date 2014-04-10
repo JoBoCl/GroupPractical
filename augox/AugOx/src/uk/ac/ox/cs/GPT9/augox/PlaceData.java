@@ -1,5 +1,7 @@
 package uk.ac.ox.cs.GPT9.augox;
 
+import java.io.*;
+
 /**
  * Represents a Place - a location in the world that the program will deal
  * with. The primary storage of these is the singleton PlacesDatabase object
@@ -77,5 +79,46 @@ public class PlaceData {
 	 * Updaters (or 'setters', but 'updaters' covers their intended use better)
 	 */
 	public void updateRating(int rating) { this.rating = rating; }
+	public void updateVisited(boolean visited) { this.visited = visited; }
 	public void updateClicked(boolean clicked) { this.clicked = clicked; }
+	
+	/*
+	 * Write the place into the given data stream
+	 */
+	public void writeToStream(DataOutputStream dstream) throws IOException {
+		PlacesDatabase.writeStringToStream(dstream, name);
+		dstream.writeDouble(latitude);
+		dstream.writeDouble(longitude);
+		dstream.writeInt(rating);
+		dstream.writeBoolean(visited);
+		dstream.writeInt(category.getID());
+		PlacesDatabase.writeStringToStream(dstream, description);
+		openinghours.writeToStream(dstream);
+	}
+	
+	/*
+	 * Create and return a PlaceData object from the given data stream
+	 */
+	public static PlaceData buildPlaceDataFromStream(DataInputStream dstream)
+			throws IOException {
+		// Load values from stream
+		String name = PlacesDatabase.loadStringFromStream(dstream);
+		double latitude = dstream.readDouble();
+		double longitude = dstream.readDouble();
+		int rating = dstream.readInt();
+		boolean visited = dstream.readBoolean();
+		PlaceCategory category = PlaceCategory.getCategoryByID(
+				dstream.readInt());
+		String description = PlacesDatabase.loadStringFromStream(dstream);
+		OpeningHours openinghours = OpeningHours.buildOpeningHoursFromStream(
+				dstream);
+		
+		// Check for invalid data
+		if(openinghours == null) return null;
+		
+		// Build and return object
+		PlaceData place = new PlaceData(name, latitude, longitude, rating,
+				visited, category, description, openinghours);
+		return place;
+	}
 }

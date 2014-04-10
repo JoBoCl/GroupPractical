@@ -1,0 +1,65 @@
+/*
+ * Database Query Classes
+ */
+
+/*
+ * DatabaseQuery Interface
+ * All query classes must implement this
+ */
+public interface DatabaseQuery {
+	/*
+	 * Does the given PlaceData match the criteria for this query?
+	 */
+	public boolean accepts(PlaceData place);
+}
+
+/*
+ * Standard Queries
+ */
+public class InLocusQuery implements DatabaseQuery {
+	public InLocusQuery(double latitude, double longitude, double radius);
+	public boolean accepts(PlaceData place);
+}
+
+public class RatingRangeQuery implements DatabaseQuery {
+	public RatingRangeQuery(int min, int max);
+	public boolean accepts(PlaceData place);
+}
+
+public class VisitedQuery implements DatabaseQuery {
+	public VisitedQuery();
+	public boolean accepts(PlaceData place);
+}
+
+public class CategoryQuery implements DatabaseQuery {
+	public CategoryQuery(List<PlaceCategory> cats);
+	public boolean accepts(PlaceData place);
+}
+
+public class OpenAtQuery implements DatabaseQuery {
+	public OpenAtQuery(LocalTime date);
+	public boolean accepts(PlaceData place);
+}
+
+public class ClickedQuery implements DatabaseQuery {
+	public ClickedQuery();
+	public boolean accepts(PlaceData place);
+}
+
+/*
+ * Meta Queries
+ */
+public class AndQuery implements DatabaseQuery {
+	public AndQuery(DatabaseQuery q1, DatabaseQuery q2);
+	public boolean accepts(PlaceData place);
+}
+
+public class OrQuery implements DatabaseQuery {
+	public OrQuery(DatabaseQuery q1, DatabaseQuery q2);
+	public boolean accepts(PlaceData place);
+}
+
+public class NotQuery implements DatabaseQuery {
+	public NotQuery(DatabaseQuery q);
+	public boolean accepts(PlaceData place);
+}

@@ -7,6 +7,9 @@
     <uses-sdk
         android:minSdkVersion="11"
         android:targetSdkVersion="19" />
+    
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -47,6 +50,10 @@
         <activity
             android:name="uk.ac.ox.cs.GPT9.augox.AutoPlannerActivity"
             android:label="@string/title_activity_auto_planner" >
+        </activity>
+        <activity
+            android:name="uk.ac.ox.cs.GPT9.augox.DatabaseDebuggerActivity"
+            android:label="@string/title_activity_database_debugger" >
         </activity>
     </application>
 
