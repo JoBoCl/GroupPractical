@@ -67,7 +67,7 @@ public class PlaceData {
 	private PlaceCategory category;
 	private String description;
 	private OpeningHours openinghours;
-	// social addresses; e.g. twitter handle; to be added once planned
+	private String twitterhandle;
 
 	/*
 	 * Semi-Persistent Data - initially null, can be set, but may be wiped at

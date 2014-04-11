@@ -42,7 +42,7 @@ public class ListPlacesActivity extends ListActivity {
 		PlaceCategory p = null;
 		double d = (double) 0;
 		for(int i = 0; i < 30; i ++){
-			places.add(new PlaceData("Test Place " + String.valueOf(i),d,d,0,false,p,"desc1",h));
+			places.add(new PlaceData("Test Place " + String.valueOf(i),d,d,0,false,p,"desc1",h,""));
 		}		
 		
 		//set click listener for clicking on a list element

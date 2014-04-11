@@ -21,7 +21,7 @@ public class PlaceData {
 	private PlaceCategory category;
 	private String description;
 	private OpeningHours openinghours;
-	// social addresses; e.g. twitter handle; to be added once planned
+	private String twitterhandle;
 
 	/*
 	 * Semi-Persistent Data - initially null, can be set, but may be wiped at
@@ -41,7 +41,8 @@ public class PlaceData {
 	 */
 	public PlaceData(	String name, double latitude, double longitude,
 						int rating, boolean visited, PlaceCategory category,
-						String description, OpeningHours openinghours) {
+						String description, OpeningHours openinghours,
+						String twitterhandle) {
 		// Initialise permanent data
 		this.name = name;
 		this.latitude = latitude;
@@ -51,6 +52,7 @@ public class PlaceData {
 		this.category = category;
 		this.description = description;
 		this.openinghours = openinghours;
+		this.twitterhandle = twitterhandle;
 		
 		// Initialise semi-persistent data
 		// image = null;
@@ -70,7 +72,7 @@ public class PlaceData {
 	public PlaceCategory getCategory() { return category; }
 	public String getDescription() { return description; }
 	public OpeningHours getOpeningHours() { return openinghours; }
-	// social address getters
+	public String getTwitterHandle() { return twitterhandle; }
 	//public SOMEIMAGETYPE getImage();
 	public boolean getClicked() { return clicked; }
 	// social caching getters
@@ -94,6 +96,7 @@ public class PlaceData {
 		dstream.writeInt(category.getID());
 		PlacesDatabase.writeStringToStream(dstream, description);
 		openinghours.writeToStream(dstream);
+		PlacesDatabase.writeStringToStream(dstream, twitterhandle);
 	}
 	
 	/*
@@ -112,13 +115,14 @@ public class PlaceData {
 		String description = PlacesDatabase.loadStringFromStream(dstream);
 		OpeningHours openinghours = OpeningHours.buildOpeningHoursFromStream(
 				dstream);
+		String twitterhandle = PlacesDatabase.loadStringFromStream(dstream);
 		
 		// Check for invalid data
 		if(openinghours == null) return null;
 		
 		// Build and return object
 		PlaceData place = new PlaceData(name, latitude, longitude, rating,
-				visited, category, description, openinghours);
+				visited, category, description, openinghours, twitterhandle);
 		return place;
 	}
 }
