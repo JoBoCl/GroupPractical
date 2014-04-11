@@ -42,7 +42,7 @@ public class PlacesDatabase {
 	/*
 	 * Process a query on the database - return unique ids
 	 */
-	public List<int> query(DatabaseQuery q);
+	public List<int> query(DatabaseQuery q, DatabaseSorter s);
 }
 
 /*

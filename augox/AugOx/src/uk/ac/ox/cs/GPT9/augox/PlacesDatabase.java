@@ -1,12 +1,10 @@
 package uk.ac.ox.cs.GPT9.augox;
 
 import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-import uk.ac.ox.cs.GPT9.augox.dbquery.*;
+import uk.ac.ox.cs.GPT9.augox.dbquery.DatabaseQuery;
+import uk.ac.ox.cs.GPT9.augox.dbsort.DatabaseSorter;
 
 /**
  * A database of all Places known to the program.
@@ -140,16 +138,17 @@ public class PlacesDatabase {
 	/*
 	 * Process a query on the database - return unique ids
 	 */
-	public List<Integer> query(DatabaseQuery q) {
-		// Prepare result list
-		List<Integer> result = new ArrayList<Integer>();
+	public List<Integer> query(DatabaseQuery q, DatabaseSorter s) {
+		// Prepare order result builder
+		SortedSet<Integer> builder = new TreeSet<Integer>(s.getComparator());
 		
 		// Populate result list with places that are accepted by the query
 		for(Map.Entry<Integer, PlaceData> entry : db.entrySet()) {
-			if(q.accepts(entry.getValue())) result.add(entry.getKey());
+			if(q.accepts(entry.getValue())) builder.add(entry.getKey());
 		}
 		
-		// Return result list
+		// Create and return result list
+		List<Integer> result = new ArrayList<Integer>(builder);
 		return result;
 	}
 }

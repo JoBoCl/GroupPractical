@@ -23,3 +23,9 @@ public enum PlaceCategory {
 	 */
 	public SOMEIMAGETYPE getIcon(PlaceCategory cat);
 }
+
+
+public enum SortOrder {
+	ASC,
+	DESC
+}
