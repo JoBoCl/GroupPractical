@@ -132,29 +132,13 @@ public class PlacesDatabase {
 	/*
 	 * Process a query on the database - return unique ids
 	 */
-	public List<Integer> queryFetchID(DatabaseQuery q) {
+	public List<Integer> query(DatabaseQuery q) {
 		// Prepare result list
 		List<Integer> result = new ArrayList<Integer>();
 		
 		// Populate result list with places that are accepted by the query
 		for(Map.Entry<Integer, PlaceData> entry : db.entrySet()) {
 			if(q.accepts(entry.getValue())) result.add(entry.getKey());
-		}
-		
-		// Return result list
-		return result;
-	}
-	
-	/*
-	 * Process a query on the database - return Places
-	 */
-	public List<PlaceData> queryFetchPlaces(DatabaseQuery q) {
-		// Prepare result list
-		List<PlaceData> result = new ArrayList<PlaceData>();
-		
-		// Populate result list with places that are accepted by the query
-		for(Map.Entry<Integer, PlaceData> entry : db.entrySet()) {
-			if(q.accepts(entry.getValue())) result.add(entry.getValue());
 		}
 		
 		// Return result list

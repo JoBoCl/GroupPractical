@@ -42,12 +42,7 @@ public class PlacesDatabase {
 	/*
 	 * Process a query on the database - return unique ids
 	 */
-	public List<int> queryFetchID(DatabaseQuery q);
-
-	/*
-	 * Process a query on the database - return Places
-	 */
-	public List<PlaceData> queryFetchPlaces(DatabaseQuery q);
+	public List<int> query(DatabaseQuery q);
 }
 
 /*
