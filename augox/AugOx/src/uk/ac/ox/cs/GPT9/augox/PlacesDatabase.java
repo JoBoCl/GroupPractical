@@ -57,13 +57,21 @@ public class PlacesDatabase {
 	}
 	
 	/*
+	 * Reset the database
+	 */
+	private void resetDatabase() {
+		nextKey = 0;
+		db = new HashMap<Integer, PlaceData>();
+	}
+	
+	/*
 	 * Populate the database from the given stream.
 	 * Note that the database is cleared first, and opening/closing the stream
 	 * should be handled by the calling method.
 	 */
 	public void loadFromStream(InputStream stream) throws IOException {
 		// Reinitialise database
-		db = new HashMap<Integer, PlaceData>();
+		resetDatabase();
 		
 		// Create data input stream
 		DataInputStream dstream = new DataInputStream(stream);
