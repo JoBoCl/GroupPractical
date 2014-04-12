@@ -43,6 +43,14 @@
             android:name="uk.ac.ox.cs.GPT9.augox.ListPlacesActivity"
             android:label="@string/title_activity_list_places" >
         </activity>
+         <activity
+            android:name="uk.ac.ox.cs.GPT9.augox.ListPlacesSubTypeActivity"
+            android:label="@string/title_activity_list_places_sub_type" >
+        </activity>
+         <activity
+            android:name="uk.ac.ox.cs.GPT9.augox.ListPlacesItemActivity"
+            android:label="@string/title_activity_list_places_item" >
+        </activity>
         <activity
             android:name="uk.ac.ox.cs.GPT9.augox.RoutePlannerActivity"
             android:label="@string/title_activity_route_planner" >
