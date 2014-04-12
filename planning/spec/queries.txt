@@ -21,6 +21,11 @@ public class AllQuery implements DatabaseQuery {
 	public boolean accepts(PlaceData place);
 }
 
+public class NameStartsWithQuery implements DatabaseQuery {
+	public NameStartsWithQuery(String sub);
+	public boolean accepts(PlaceData place);
+}
+
 public class InLocusQuery implements DatabaseQuery {
 	public InLocusQuery(double latitude, double longitude, double radius);
 	public boolean accepts(PlaceData place);
