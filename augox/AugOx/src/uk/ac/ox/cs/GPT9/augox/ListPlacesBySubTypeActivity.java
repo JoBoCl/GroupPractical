@@ -14,7 +14,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class ListPlacesBySubTypeActivity extends ListActivity {
 	/*
@@ -35,16 +34,19 @@ public class ListPlacesBySubTypeActivity extends ListActivity {
 		queryType = intent.getIntExtra(EXTRA_QUERYTYPE, 0);
 		final List<String> items = new ArrayList<String>();
 		switch(queryType){
-			case 0:
+			case 3:
 				for(char ch = '0' ; ch <= '9' ; ch++ )
 			        items.add(String.valueOf(ch));
 				for(char ch = 'A' ; ch <= 'Z' ; ch++ )
 			        items.add(String.valueOf(ch));
+				setTitle("Places by Name");
 				break;
-			case 1:
+			case 4:
 				for(PlaceCategory cat : PlaceCategory.values()){
-					items.add(cat.getName());
+					if(cat.getID() != 0)
+						items.add(cat.getName());
 				}
+				setTitle("Places by Type");
 				break;
 		}
 		
@@ -55,23 +57,23 @@ public class ListPlacesBySubTypeActivity extends ListActivity {
 					long arg3) {
 				//Starts activity PlaceFullInfoActivity for the clicked place
             	switch(queryType){
-            	case 0:
+            	case 3:
             		Intent intent0 = new Intent(getApplicationContext(), ListPlacesItemsActivity.class);
                 	intent0.putExtra(ListPlacesItemsActivity.EXTRA_LATITUDE, latitude);
                 	intent0.putExtra(ListPlacesItemsActivity.EXTRA_LONGITUDE, longitude);
-                	intent0.putExtra(ListPlacesItemsActivity.EXTRA_QUERYTYPE, 1);
+                	intent0.putExtra(ListPlacesItemsActivity.EXTRA_QUERYTYPE, 3);
                 	if(itemNoClicked <= 9){
-                    	intent0.putExtra(ListPlacesItemsActivity.EXTRA_QUERYDATA, 48+itemNoClicked);
+                    	intent0.putExtra(ListPlacesItemsActivity.EXTRA_QUERYDATA,(int) '0' +itemNoClicked);
                     	} else {
-                    	intent0.putExtra(ListPlacesItemsActivity.EXTRA_QUERYDATA, 47+itemNoClicked); //57-10
+                    	intent0.putExtra(ListPlacesItemsActivity.EXTRA_QUERYDATA, (int) 'A' - 10 + itemNoClicked);
                     }
                 	startActivity(intent0);
             		break;
-            	case 1:
+            	case 4:
             		Intent intent1 = new Intent(getApplicationContext(), ListPlacesItemsActivity.class);
                 	intent1.putExtra(ListPlacesItemsActivity.EXTRA_LATITUDE, latitude);
                 	intent1.putExtra(ListPlacesItemsActivity.EXTRA_LONGITUDE, longitude);
-                	intent1.putExtra(ListPlacesItemsActivity.EXTRA_QUERYTYPE, 2);
+                	intent1.putExtra(ListPlacesItemsActivity.EXTRA_QUERYTYPE, 4);
                     intent1.putExtra(ListPlacesItemsActivity.EXTRA_QUERYDATA, itemNoClicked); //id of PlaceCategory
                     startActivity(intent1);
             		break;
@@ -107,19 +109,6 @@ public class ListPlacesBySubTypeActivity extends ListActivity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.list_places, menu);
 		return true;
-	}
-	
-	public double getDistanceBetween(	double lat1, double long1,
-			double lat2, double long2	) {
-		// Formula based on spherical law of cosines
-		// http://www.movable-type.co.uk/scripts/latlong.html
-		double lat1r = Math.toRadians(lat1);
-		double lat2r = Math.toRadians(lat2);
-		double dlongr = Math.toRadians(long2 - long1);
-		double earthrad = 6371;		// Radius of earth (km)
-		double dist = Math.acos(Math.sin(lat1r) * Math.sin(lat2r)
-				+ Math.cos(lat1r) * Math.cos(lat2r) * Math.cos(dlongr)) * earthrad;
-		return dist;
 	}
 	
 }

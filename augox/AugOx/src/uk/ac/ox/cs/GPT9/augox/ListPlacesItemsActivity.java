@@ -6,6 +6,9 @@ import uk.ac.ox.cs.GPT9.augox.dbquery.CategoryQuery;
 import uk.ac.ox.cs.GPT9.augox.dbquery.ClickedQuery;
 import uk.ac.ox.cs.GPT9.augox.dbquery.DatabaseQuery;
 import uk.ac.ox.cs.GPT9.augox.dbquery.InLocusQuery;
+import uk.ac.ox.cs.GPT9.augox.dbquery.NameStartsWithQuery;
+import uk.ac.ox.cs.GPT9.augox.dbquery.NotQuery;
+import uk.ac.ox.cs.GPT9.augox.dbquery.VisitedQuery;
 import uk.ac.ox.cs.GPT9.augox.dbsort.DatabaseSorter;
 import uk.ac.ox.cs.GPT9.augox.dbsort.NameSorter;
 import uk.ac.ox.cs.GPT9.augox.dbsort.SortOrder;
@@ -50,15 +53,27 @@ public class ListPlacesItemsActivity extends ListActivity {
 		switch(queryType){
 		case 0: //local places
 			q = new InLocusQuery(latitude,longitude,radius);
+			setTitle("Local Places");
 			break;
-		case 1: //places by name, parameter in QUERYDATA
-			q = new ClickedQuery(); //temp until needed query implemented
+		case 1: //visited places
+			q = new VisitedQuery();
+			setTitle("Visited Places");
 			break;
-		case 2: //places by type, parameter in QUERYDATA
+		case 2: //unvisited places
+			q = new NotQuery(new VisitedQuery());
+			setTitle("Unvisited Places");
+			break;
+		case 3: //places by name
+			char queryDataChar = (char)intent.getIntExtra(EXTRA_QUERYDATA, 0);
+			q = new NameStartsWithQuery(String.valueOf(queryDataChar));
+			setTitle(queryDataChar + ".." + " Places");
+			break;
+		case 4: //places by type
 			int queryData = intent.getIntExtra(EXTRA_QUERYDATA, 0);
 			List<PlaceCategory> cats = new ArrayList<PlaceCategory>();
 			cats.add(PlaceCategory.getCategoryByID(queryData));
 			q = new CategoryQuery(cats);
+			setTitle(PlaceCategory.getCategoryByID(queryData) + " Places");
 			break;
 		default:
 			q = null;
@@ -66,30 +81,35 @@ public class ListPlacesItemsActivity extends ListActivity {
 		}		
 
 		final List<Integer> places = db.query(q,s);
-		
-		//set click listener for clicking on a list element
-		getListView().setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int itemNoClicked,
-					long arg3) {
-				//Starts activity PlaceFullInfoActivity for the clicked place
-            	Intent intent = new Intent(getApplicationContext(), PlaceFullInfoActivity.class);
-            	//put the place in the intent
-                intent.putExtra(PlaceFullInfoActivity.EXTRA_PLACE, places.get(itemNoClicked));
-                //put the background to include in the intent
-                intent.putExtra(PlaceFullInfoActivity.EXTRA_BACKGROUND, "");
-                startActivity(intent);
-			}
-		});	
-		//set up the ArrayAdapter
-		MyArrayAdapter adapter = new MyArrayAdapter(this,places);
-		setListAdapter(adapter);
+		if(places.size() != 0){
+			//set click listener for clicking on a list element
+			getListView().setOnItemClickListener(new OnItemClickListener() {
+				@Override
+				public void onItemClick(AdapterView<?> arg0, View arg1, int itemNoClicked,
+						long arg3) {
+					//Starts activity PlaceFullInfoActivity for the clicked place
+	            	Intent intent = new Intent(getApplicationContext(), PlaceFullInfoActivity.class);
+	            	//put the place in the intent
+	                intent.putExtra(PlaceFullInfoActivity.EXTRA_PLACE, places.get(itemNoClicked));
+	                //put the background to include in the intent
+	                intent.putExtra(PlaceFullInfoActivity.EXTRA_BACKGROUND, "");
+	                startActivity(intent);
+				}
+			});	
+			//set up the ArrayAdapter
+			MyPlaceAdapter adapter = new MyPlaceAdapter(this,places);
+			setListAdapter(adapter);
+		} else {
+			List<String> noneFoundList = new ArrayList<String>(); noneFoundList.add("No Places Found");
+			MyStringAdapter adapter = new MyStringAdapter(this,noneFoundList);
+			setListAdapter(adapter);
+		}
 	}
 	
-	public class MyArrayAdapter extends ArrayAdapter<Integer> {
+	public class MyPlaceAdapter extends ArrayAdapter<Integer> {
 		private Context context;
 		private List<Integer> values;
-		public MyArrayAdapter(Context context,List<Integer> values){
+		public MyPlaceAdapter(Context context,List<Integer> values){
 			super(context,R.layout.listview_item_list_places,values);
 			this.context = context;
 			this.values = values;
@@ -109,6 +129,25 @@ public class ListPlacesItemsActivity extends ListActivity {
 			typeView.setImageResource(R.drawable.ic_launcher);
 			distView.setText(String.format("%.1f", PlaceData.getDistanceBetween(
 					latitude,longitude,item.getLatitude(),item.getLongitude()))+"km"); 
+			return rowView;
+		}
+	}
+	
+	public class MyStringAdapter extends ArrayAdapter<String> {
+		private Context context;
+		private List<String> values;
+		public MyStringAdapter(Context context,List<String> values){
+			super(context,R.layout.listview_item_list_places,values);
+			this.context = context;
+			this.values = values;
+		}
+		
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			View rowView = inflater.inflate(R.layout.listview_standard_layout, parent,false);
+			TextView nameView = (TextView) rowView.findViewById(R.id.list_places_single_view);
+			nameView.setText(values.get(position));
 			return rowView;
 		}
 	}
