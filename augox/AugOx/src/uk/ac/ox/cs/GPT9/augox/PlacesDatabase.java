@@ -1,12 +1,10 @@
 package uk.ac.ox.cs.GPT9.augox;
 
 import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-import uk.ac.ox.cs.GPT9.augox.dbquery.*;
+import uk.ac.ox.cs.GPT9.augox.dbquery.DatabaseQuery;
+import uk.ac.ox.cs.GPT9.augox.dbsort.DatabaseSorter;
 
 /**
  * A database of all Places known to the program.
@@ -43,8 +41,7 @@ public class PlacesDatabase {
 		int[] closeMinute = {0, 0, 0, 0, 0, 0, 0};
 		periods.add(new OpeningHours.Period(true, 3, 1, 8, 31, false, isOpen, openHour, openMinute, closeHour, closeMinute));
 		OpeningHours test = new OpeningHours(periods);
-		
-		PlaceData p1 = new PlaceData("Matthew's Awesome Pub", 0.0, 0.0, 5, false, PlaceCategory.BAR, "This isn't the greatest pub in the world.  This is a tribute.  I'm also going to try to make this description long so I can make sure it doesn't go too far to the right and wraps around properly, kind of ruining the preceding one-liner.  Which is a great shame, really.  At some point I'm going to have to make a way of sourcing the description from the Internet, which is going to be annoying and hard and stuff but at least for now I can get this prototype working.  And hey, getting the pretty layout is what really matters.  Having the most up-to-date data is not as important, as xkcd 937 tells us (there's an xkcd for everything)", test);
+		PlaceData p1 = new PlaceData("Matthew's Awesome Pub", 0.0, 0.0, 5, false, PlaceCategory.BAR, "This isn't the greatest pub in the world.  This is a tribute.  I'm also going to try to make this description long so I can make sure it doesn't go too far to the right and wraps around properly, kind of ruining the preceding one-liner.  Which is a great shame, really.  At some point I'm going to have to make a way of sourcing the description from the Internet, which is going to be annoying and hard and stuff but at least for now I can get this prototype working.  And hey, getting the pretty layout is what really matters.  Having the most up-to-date data is not as important, as xkcd 937 tells us (there's an xkcd for everything)", test, "SjoHo");
 		addEntry(p1);
 	}
 	
@@ -57,13 +54,24 @@ public class PlacesDatabase {
 	}
 	
 	/*
+<<<<<<< HEAD
+=======
+	 * Reset the database
+	 */
+	private void resetDatabase() {
+		nextKey = 0;
+		db = new HashMap<Integer, PlaceData>();
+	}
+	
+	/*
+>>>>>>> origin/master
 	 * Populate the database from the given stream.
 	 * Note that the database is cleared first, and opening/closing the stream
 	 * should be handled by the calling method.
 	 */
 	public void loadFromStream(InputStream stream) throws IOException {
 		// Reinitialise database
-		db = new HashMap<Integer, PlaceData>();
+		resetDatabase();
 		
 		// Create data input stream
 		DataInputStream dstream = new DataInputStream(stream);
@@ -132,32 +140,17 @@ public class PlacesDatabase {
 	/*
 	 * Process a query on the database - return unique ids
 	 */
-	public List<Integer> queryFetchID(DatabaseQuery q) {
-		// Prepare result list
-		List<Integer> result = new ArrayList<Integer>();
+	public List<Integer> query(DatabaseQuery q, DatabaseSorter s) {
+		// Prepare order result builder
+		SortedSet<Integer> builder = new TreeSet<Integer>(s.getComparator());
 		
 		// Populate result list with places that are accepted by the query
 		for(Map.Entry<Integer, PlaceData> entry : db.entrySet()) {
-			if(q.accepts(entry.getValue())) result.add(entry.getKey());
+			if(q.accepts(entry.getValue())) builder.add(entry.getKey());
 		}
 		
-		// Return result list
-		return result;
-	}
-	
-	/*
-	 * Process a query on the database - return Places
-	 */
-	public List<PlaceData> queryFetchPlaces(DatabaseQuery q) {
-		// Prepare result list
-		List<PlaceData> result = new ArrayList<PlaceData>();
-		
-		// Populate result list with places that are accepted by the query
-		for(Map.Entry<Integer, PlaceData> entry : db.entrySet()) {
-			if(q.accepts(entry.getValue())) result.add(entry.getValue());
-		}
-		
-		// Return result list
+		// Create and return result list
+		List<Integer> result = new ArrayList<Integer>(builder);
 		return result;
 	}
 }

@@ -6,11 +6,13 @@ import uk.ac.ox.cs.GPT9.augox.dbquery.CategoryQuery;
 import uk.ac.ox.cs.GPT9.augox.dbquery.ClickedQuery;
 import uk.ac.ox.cs.GPT9.augox.dbquery.DatabaseQuery;
 import uk.ac.ox.cs.GPT9.augox.dbquery.InLocusQuery;
+import uk.ac.ox.cs.GPT9.augox.dbsort.DatabaseSorter;
+import uk.ac.ox.cs.GPT9.augox.dbsort.NameSorter;
+import uk.ac.ox.cs.GPT9.augox.dbsort.SortOrder;
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -20,7 +22,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class ListPlacesItemsActivity extends ListActivity {
 	/*
@@ -43,6 +44,7 @@ public class ListPlacesItemsActivity extends ListActivity {
 		radius = 100;
 		queryType = intent.getIntExtra(EXTRA_QUERYTYPE, 0);
 		DatabaseQuery q;
+		DatabaseSorter s = new NameSorter(SortOrder.ASC);
 		final PlacesDatabase db = MainScreenActivity.getPlacesDatabase();
 	
 		switch(queryType){
@@ -63,7 +65,7 @@ public class ListPlacesItemsActivity extends ListActivity {
 			break;
 		}		
 
-		final List<Integer> places = db.queryFetchID(q);
+		final List<Integer> places = db.query(q,s);
 		
 		//set click listener for clicking on a list element
 		getListView().setOnItemClickListener(new OnItemClickListener() {
@@ -105,7 +107,7 @@ public class ListPlacesItemsActivity extends ListActivity {
 			nameView.setText(item.getName());
 			//after we have icons for each type of place, set it here
 			typeView.setImageResource(R.drawable.ic_launcher);
-			distView.setText(String.format("%.1f", getDistanceBetween(
+			distView.setText(String.format("%.1f", PlaceData.getDistanceBetween(
 					latitude,longitude,item.getLatitude(),item.getLongitude()))+"km"); 
 			return rowView;
 		}
@@ -116,19 +118,6 @@ public class ListPlacesItemsActivity extends ListActivity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.list_places, menu);
 		return true;
-	}
-	
-	public double getDistanceBetween(	double lat1, double long1,
-			double lat2, double long2	) {
-		// Formula based on spherical law of cosines
-		// http://www.movable-type.co.uk/scripts/latlong.html
-		double lat1r = Math.toRadians(lat1);
-		double lat2r = Math.toRadians(lat2);
-		double dlongr = Math.toRadians(long2 - long1);
-		double earthrad = 6371;		// Radius of earth (km)
-		double dist = Math.acos(Math.sin(lat1r) * Math.sin(lat2r)
-				+ Math.cos(lat1r) * Math.cos(lat2r) * Math.cos(dlongr)) * earthrad;
-		return dist;
 	}
 	
 }

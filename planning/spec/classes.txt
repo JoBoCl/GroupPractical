@@ -42,12 +42,7 @@ public class PlacesDatabase {
 	/*
 	 * Process a query on the database - return unique ids
 	 */
-	public List<int> queryFetchID(DatabaseQuery q);
-
-	/*
-	 * Process a query on the database - return Places
-	 */
-	public List<PlaceData> queryFetchPlaces(DatabaseQuery q);
+	public List<int> query(DatabaseQuery q, DatabaseSorter s);
 }
 
 /*
@@ -67,7 +62,7 @@ public class PlaceData {
 	private PlaceCategory category;
 	private String description;
 	private OpeningHours openinghours;
-	// social addresses; e.g. twitter handle; to be added once planned
+	private String twitterhandle;
 
 	/*
 	 * Semi-Persistent Data - initially null, can be set, but may be wiped at

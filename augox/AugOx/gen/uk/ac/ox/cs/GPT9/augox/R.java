@@ -9,10 +9,8 @@ package uk.ac.ox.cs.GPT9.augox;
 
 public final class R {
     public static final class array {
-        public static final int pref_example_list_titles=0x7f080000;
-        public static final int pref_example_list_values=0x7f080001;
-        public static final int pref_sync_frequency_titles=0x7f080002;
-        public static final int pref_sync_frequency_values=0x7f080003;
+        public static final int pref_sync_frequency_titles=0x7f080000;
+        public static final int pref_sync_frequency_values=0x7f080001;
     }
     public static final class attr {
         /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
@@ -113,32 +111,29 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int fullinfo_feedtitle=0x7f070012;
         public static final int fullinfo_namegoeshere=0x7f070015;
         public static final int hello_world=0x7f070005;
-        public static final int pref_default_display_name=0x7f07001e;
-        public static final int pref_description_social_recommendations=0x7f07001c;
+        public static final int pref_description_tweets_english=0x7f07001c;
         /**  Example settings for Data & Sync 
          */
-        public static final int pref_header_data_sync=0x7f070020;
+        public static final int pref_header_data_sync=0x7f07001d;
         /**  Example General settings 
          */
         public static final int pref_header_general=0x7f07001a;
         /**  Example settings for Notifications 
          */
-        public static final int pref_header_notifications=0x7f070023;
-        public static final int pref_ringtone_silent=0x7f070026;
-        public static final int pref_title_add_friends_to_messages=0x7f07001f;
-        public static final int pref_title_display_name=0x7f07001d;
-        public static final int pref_title_new_message_notifications=0x7f070024;
-        public static final int pref_title_ringtone=0x7f070025;
-        public static final int pref_title_social_recommendations=0x7f07001b;
-        public static final int pref_title_sync_frequency=0x7f070021;
-        public static final int pref_title_system_sync_settings=0x7f070022;
-        public static final int pref_title_vibrate=0x7f070027;
+        public static final int pref_header_notifications=0x7f070020;
+        public static final int pref_ringtone_silent=0x7f070023;
+        public static final int pref_title_new_message_notifications=0x7f070021;
+        public static final int pref_title_ringtone=0x7f070022;
+        public static final int pref_title_sync_frequency=0x7f07001e;
+        public static final int pref_title_system_sync_settings=0x7f07001f;
+        public static final int pref_title_tweets_english=0x7f07001b;
+        public static final int pref_title_vibrate=0x7f070024;
         public static final int title_activity_auto_planner=0x7f07000a;
         public static final int title_activity_database_debugger=0x7f070013;
         public static final int title_activity_filter_panel=0x7f070018;
         public static final int title_activity_list_places=0x7f070006;
-        public static final int title_activity_list_places_item=0x7f070008;
-        public static final int title_activity_list_places_sub_type=0x7f070007;
+        public static final int title_activity_list_places_by_sub_type=0x7f070007;
+        public static final int title_activity_list_places_items=0x7f070008;
         public static final int title_activity_place_full_info=0x7f070003;
         public static final int title_activity_route_planner=0x7f070009;
         public static final int title_activity_settings_panel=0x7f070019;
