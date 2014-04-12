@@ -44,24 +44,24 @@ public class ListPlacesActivity extends ListActivity {
 				//Starts activity PlaceFullInfoActivity for the clicked place
             	switch(itemNoClicked){
             	case 0:
-                	Intent intent0 = new Intent(getApplicationContext(), ListPlacesItemActivity.class);
-                	intent0.putExtra(ListPlacesItemActivity.EXTRA_LATITUDE, latitude);
-                	intent0.putExtra(ListPlacesItemActivity.EXTRA_LONGITUDE, longitude);
-                	intent0.putExtra(ListPlacesItemActivity.EXTRA_QUERYTYPE, 0);
+                	Intent intent0 = new Intent(getApplicationContext(), ListPlacesItemsActivity.class);
+                	intent0.putExtra(ListPlacesItemsActivity.EXTRA_LATITUDE, latitude);
+                	intent0.putExtra(ListPlacesItemsActivity.EXTRA_LONGITUDE, longitude);
+                	intent0.putExtra(ListPlacesItemsActivity.EXTRA_QUERYTYPE, 0);
                 	startActivity(intent0);
             		break;
             	case 1:
-            		Intent intent1 = new Intent(getApplicationContext(), ListPlacesSubTypeActivity.class);
-                	intent1.putExtra(ListPlacesSubTypeActivity.EXTRA_LATITUDE, latitude);
-                	intent1.putExtra(ListPlacesSubTypeActivity.EXTRA_LONGITUDE, longitude);
-                	intent1.putExtra(ListPlacesSubTypeActivity.EXTRA_QUERYTYPE, 0);
+            		Intent intent1 = new Intent(getApplicationContext(), ListPlacesBySubTypeActivity.class);
+                	intent1.putExtra(ListPlacesBySubTypeActivity.EXTRA_LATITUDE, latitude);
+                	intent1.putExtra(ListPlacesBySubTypeActivity.EXTRA_LONGITUDE, longitude);
+                	intent1.putExtra(ListPlacesBySubTypeActivity.EXTRA_QUERYTYPE, 0);
                 	startActivity(intent1);
             		break;
             	case 2:
-            		Intent intent2 = new Intent(getApplicationContext(), ListPlacesSubTypeActivity.class);
-                	intent2.putExtra(ListPlacesSubTypeActivity.EXTRA_LATITUDE, latitude);
-                	intent2.putExtra(ListPlacesSubTypeActivity.EXTRA_LONGITUDE, longitude);
-                	intent2.putExtra(ListPlacesSubTypeActivity.EXTRA_QUERYTYPE, 1);
+            		Intent intent2 = new Intent(getApplicationContext(), ListPlacesBySubTypeActivity.class);
+                	intent2.putExtra(ListPlacesBySubTypeActivity.EXTRA_LATITUDE, latitude);
+                	intent2.putExtra(ListPlacesBySubTypeActivity.EXTRA_LONGITUDE, longitude);
+                	intent2.putExtra(ListPlacesBySubTypeActivity.EXTRA_QUERYTYPE, 1);
                 	startActivity(intent2);
             		break;
             	}

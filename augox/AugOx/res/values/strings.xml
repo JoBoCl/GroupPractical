@@ -8,8 +8,8 @@
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_list_places">Places</string>
-    <string name="title_activity_list_places_sub_type">Places</string>
-    <string name="title_activity_list_places_item">Places</string>
+    <string name="title_activity_list_places_by_sub_type">Places</string>
+    <string name="title_activity_list_places_items">Places</string>
     <string name="title_activity_route_planner">Route Planner</string>
     <string name="title_activity_auto_planner">AutoPlanner</string>
     <string name="action_dbg_autoplanner">Debug Load AutoPlanner</string>

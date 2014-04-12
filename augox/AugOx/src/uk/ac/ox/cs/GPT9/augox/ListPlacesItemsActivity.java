@@ -2,10 +2,15 @@ package uk.ac.ox.cs.GPT9.augox;
 import java.util.ArrayList;
 import java.util.List;
 
+import uk.ac.ox.cs.GPT9.augox.dbquery.CategoryQuery;
+import uk.ac.ox.cs.GPT9.augox.dbquery.ClickedQuery;
+import uk.ac.ox.cs.GPT9.augox.dbquery.DatabaseQuery;
+import uk.ac.ox.cs.GPT9.augox.dbquery.InLocusQuery;
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -13,16 +18,19 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class ListPlacesSubTypeActivity extends ListActivity {
+public class ListPlacesItemsActivity extends ListActivity {
 	/*
 	 * Intent Constants
 	 */
 	public final static String EXTRA_LATITUDE = "uk.ac.ox.cs.GPT9.augox.LATITUDE";
 	public final static String EXTRA_LONGITUDE = "uk.ac.ox.cs.GPT9.augox.LONGITUDE";
 	public final static String EXTRA_QUERYTYPE = "uk.ac.ox.cs.GPT9.augox.QUERYTYPE";
+	public final static String EXTRA_QUERYDATA = "uk.ac.ox.cs.GPT9.augox.QUERYDATA";
+	private double radius = 0;
 	private double latitude = 0;
 	private double longitude = 0;
 	private int queryType = 0;
@@ -32,21 +40,30 @@ public class ListPlacesSubTypeActivity extends ListActivity {
 		Intent intent = getIntent();
 		latitude = intent.getDoubleExtra(EXTRA_LATITUDE,Double.valueOf(0));
 		longitude = intent.getDoubleExtra(EXTRA_LONGITUDE,Double.valueOf(0));
+		radius = 100;
 		queryType = intent.getIntExtra(EXTRA_QUERYTYPE, 0);
-		final List<String> items = new ArrayList<String>();
+		DatabaseQuery q;
+		final PlacesDatabase db = MainScreenActivity.getPlacesDatabase();
+	
 		switch(queryType){
-			case 0:
-				for(char ch = '0' ; ch <= '9' ; ch++ )
-			        items.add(String.valueOf(ch));
-				for(char ch = 'A' ; ch <= 'Z' ; ch++ )
-			        items.add(String.valueOf(ch));
-				break;
-			case 1:
-				for(PlaceCategory cat : PlaceCategory.values()){
-					items.add(cat.getName());
-				}
-				break;
-		}
+		case 0: //local places
+			q = new InLocusQuery(latitude,longitude,radius);
+			break;
+		case 1: //places by name, parameter in QUERYDATA
+			q = new ClickedQuery(); //temp until needed query implemented
+			break;
+		case 2: //places by type, parameter in QUERYDATA
+			int queryData = intent.getIntExtra(EXTRA_QUERYDATA, 0);
+			List<PlaceCategory> cats = new ArrayList<PlaceCategory>();
+			cats.add(PlaceCategory.getCategoryByID(queryData));
+			q = new CategoryQuery(cats);
+			break;
+		default:
+			q = null;
+			break;
+		}		
+
+		final List<Integer> places = db.queryFetchID(q);
 		
 		//set click listener for clicking on a list element
 		getListView().setOnItemClickListener(new OnItemClickListener() {
@@ -54,39 +71,23 @@ public class ListPlacesSubTypeActivity extends ListActivity {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int itemNoClicked,
 					long arg3) {
 				//Starts activity PlaceFullInfoActivity for the clicked place
-            	switch(queryType){
-            	case 0:
-            		Intent intent0 = new Intent(getApplicationContext(), ListPlacesItemActivity.class);
-                	intent0.putExtra(ListPlacesItemActivity.EXTRA_LATITUDE, latitude);
-                	intent0.putExtra(ListPlacesItemActivity.EXTRA_LONGITUDE, longitude);
-                	intent0.putExtra(ListPlacesItemActivity.EXTRA_QUERYTYPE, 1);
-                	if(itemNoClicked <= 9){
-                    	intent0.putExtra(ListPlacesItemActivity.EXTRA_QUERYDATA, 48+itemNoClicked);
-                    	} else {
-                    	intent0.putExtra(ListPlacesItemActivity.EXTRA_QUERYDATA, 47+itemNoClicked); //57-10
-                    }
-                	startActivity(intent0);
-            		break;
-            	case 1:
-            		Intent intent1 = new Intent(getApplicationContext(), ListPlacesItemActivity.class);
-                	intent1.putExtra(ListPlacesItemActivity.EXTRA_LATITUDE, latitude);
-                	intent1.putExtra(ListPlacesItemActivity.EXTRA_LONGITUDE, longitude);
-                	intent1.putExtra(ListPlacesItemActivity.EXTRA_QUERYTYPE, 2);
-                    intent1.putExtra(ListPlacesItemActivity.EXTRA_QUERYDATA, itemNoClicked); //id of PlaceCategory
-                    startActivity(intent1);
-            		break;
-            	}
+            	Intent intent = new Intent(getApplicationContext(), PlaceFullInfoActivity.class);
+            	//put the place in the intent
+                intent.putExtra(PlaceFullInfoActivity.EXTRA_PLACE, places.get(itemNoClicked));
+                //put the background to include in the intent
+                intent.putExtra(PlaceFullInfoActivity.EXTRA_BACKGROUND, "");
+                startActivity(intent);
 			}
 		});	
 		//set up the ArrayAdapter
-		MyStringAdapter adapter = new MyStringAdapter(this,items);
+		MyArrayAdapter adapter = new MyArrayAdapter(this,places);
 		setListAdapter(adapter);
 	}
 	
-	public class MyStringAdapter extends ArrayAdapter<String> {
+	public class MyArrayAdapter extends ArrayAdapter<Integer> {
 		private Context context;
-		private List<String> values;
-		public MyStringAdapter(Context context,List<String> values){
+		private List<Integer> values;
+		public MyArrayAdapter(Context context,List<Integer> values){
 			super(context,R.layout.listview_item_list_places,values);
 			this.context = context;
 			this.values = values;
@@ -94,10 +95,18 @@ public class ListPlacesSubTypeActivity extends ListActivity {
 		
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
+			PlacesDatabase db = MainScreenActivity.getPlacesDatabase();
+			PlaceData item = db.getPlaceByID(values.get(position));
 			LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			View rowView = inflater.inflate(R.layout.listview_standard_layout, parent,false);
-			TextView nameView = (TextView) rowView.findViewById(R.id.list_places_single_view);
-			nameView.setText(values.get(position));
+			View rowView = inflater.inflate(R.layout.listview_item_list_places, parent,false);
+			TextView nameView = (TextView) rowView.findViewById(R.id.list_places_item_name);
+			ImageView typeView = (ImageView) rowView.findViewById(R.id.list_places_item_type);
+			TextView distView = (TextView) rowView.findViewById(R.id.list_places_item_distance);
+			nameView.setText(item.getName());
+			//after we have icons for each type of place, set it here
+			typeView.setImageResource(R.drawable.ic_launcher);
+			distView.setText(String.format("%.1f", getDistanceBetween(
+					latitude,longitude,item.getLatitude(),item.getLongitude()))+"km"); 
 			return rowView;
 		}
 	}

@@ -44,12 +44,12 @@
             android:label="@string/title_activity_list_places" >
         </activity>
          <activity
-            android:name="uk.ac.ox.cs.GPT9.augox.ListPlacesSubTypeActivity"
-            android:label="@string/title_activity_list_places_sub_type" >
+            android:name="uk.ac.ox.cs.GPT9.augox.ListPlacesBySubTypeActivity"
+            android:label="@string/title_activity_list_places_by_sub_type" >
         </activity>
          <activity
-            android:name="uk.ac.ox.cs.GPT9.augox.ListPlacesItemActivity"
-            android:label="@string/title_activity_list_places_item" >
+            android:name="uk.ac.ox.cs.GPT9.augox.ListPlacesItemsActivity"
+            android:label="@string/title_activity_list_places_items" >
         </activity>
         <activity
             android:name="uk.ac.ox.cs.GPT9.augox.RoutePlannerActivity"
