@@ -134,7 +134,8 @@ public class AutoPlannerActivity extends FragmentActivity {
 		// next day.
 		endTime += endTime < startTime ? 36 * 24 : 0;
 		while (i < n) {
-			if (startTime < intervals[i] && intervals[i] < endTime) sessions++;
+			if (startTime < intervals[i] && intervals[i] < endTime)
+				sessions++;
 			i++;
 		}
 		return sessions;
@@ -145,16 +146,16 @@ public class AutoPlannerActivity extends FragmentActivity {
 		switch (id) {
 			case START_TIME_DIALOG_ID:
 				// set time picker as current time
-				return new TimePickerDialog(this, timePickerListenerStart,
+			return new TimePickerDialog(this, startTimePickerListener,
 						startHour, startMinute, false);
 			case END_TIME_DIALOG_ID:
-				return new TimePickerDialog(this, timePickerListenerEnd,
-						endHour, endMinute, false);
+			return new TimePickerDialog(this, endTimePickerListener, endHour,
+					endMinute, false);
 		}
 		return null;
 	}
 
-	private TimePickerDialog.OnTimeSetListener timePickerListenerEnd = new TimePickerDialog.OnTimeSetListener() {
+	private TimePickerDialog.OnTimeSetListener endTimePickerListener = new TimePickerDialog.OnTimeSetListener() {
 		public void onTimeSet(TimePicker view, int selectedHour,
 				int selectedMinute) {
 			endHour = selectedHour;
@@ -171,7 +172,7 @@ public class AutoPlannerActivity extends FragmentActivity {
 		}
 	};
 
-	private TimePickerDialog.OnTimeSetListener timePickerListenerStart = new TimePickerDialog.OnTimeSetListener() {
+	private TimePickerDialog.OnTimeSetListener startTimePickerListener = new TimePickerDialog.OnTimeSetListener() {
 		public void onTimeSet(TimePicker view, int selectedHour,
 				int selectedMinute) {
 			startHour = selectedHour;
