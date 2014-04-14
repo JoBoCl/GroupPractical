@@ -33,7 +33,6 @@
         android:id="@+id/sessionList"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_margin="0dp"
         android:orientation="vertical" >
 
     </LinearLayout>
