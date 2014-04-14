@@ -1,11 +1,19 @@
 package uk.ac.ox.cs.GPT9.augox;
 
+import java.util.Arrays;
+import java.util.List;
+
+import uk.ac.ox.cs.GPT9.augox.dbquery.AndQuery;
+import uk.ac.ox.cs.GPT9.augox.dbquery.CategoryQuery;
+import uk.ac.ox.cs.GPT9.augox.dbquery.DatabaseQuery;
+import uk.ac.ox.cs.GPT9.augox.dbquery.OpenAtQuery;
+import android.app.Fragment;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.SeekBar.OnSeekBarChangeListener;
 
 public class SessionPlanner extends Fragment {
 
