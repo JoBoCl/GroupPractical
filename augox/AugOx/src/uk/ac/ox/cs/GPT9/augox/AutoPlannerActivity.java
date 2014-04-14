@@ -168,11 +168,11 @@ public class AutoPlannerActivity extends Activity {
 	@Override
 	protected Dialog onCreateDialog(int id) {
 		switch (id) {
-			case START_TIME_DIALOG_ID:
-				// set time picker as current time
+		case START_TIME_DIALOG_ID:
+			// set time picker as current time
 			return new TimePickerDialog(this, startTimePickerListener,
-						startHour, startMinute, false);
-			case END_TIME_DIALOG_ID:
+					startHour, startMinute, false);
+		case END_TIME_DIALOG_ID:
 			return new TimePickerDialog(this, endTimePickerListener, endHour,
 					endMinute, false);
 		}
