@@ -7,7 +7,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 
-public class SessionPlanner extends FragmentActivity {
+public class SessionPlanner extends Fragment {
 
 	private Session activity;
 	private PlaceCategory category;
@@ -19,27 +19,23 @@ public class SessionPlanner extends FragmentActivity {
 	SeekBar activityCount;
 	TextView activityText;
 
-	/** Called when the activity is first created. */
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-
-		activityCount = (SeekBar) findViewById(R.id.activityCount);
-		activityText = (TextView) findViewById(R.id.activityText);
-
-		activityCount.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 			@Override
-			public void onProgressChanged(SeekBar seekBar, int progress,
-					boolean fromUser) {
-				activityText.setText(String.format(
-						"How many things do you want to do?\n%d chosen",
-						progress));
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		return inflater.inflate(R.layout.session_planner, container, false);
 			}
 
-			@Override
-			public void onStartTrackingTouch(SeekBar seekBar) {
-				// TODO Auto-generated method stub
-
+	private PlaceData[] choosePlaces(Session session) {
+		PlaceCategory[] placecat = SessionHelper
+				.getCategoriesForSession(session);
+		DatabaseQuery plcat = new CategoryQuery(Arrays.asList(placecat));
+		DatabaseQuery open = new OpenAtQuery(
+				SessionHelper.getStartTimeForSession(session));
+		DatabaseQuery and = new AndQuery(plcat, open);
+		List<PlaceData> places = MainScreenActivity.getPlacesDatabase()
+				.queryFetchPlaces(and);
+		PlaceData[] chosenPlaces = choosePlaces(places);
+		return chosenPlaces;
 			}
 
 			@Override
@@ -47,7 +43,6 @@ public class SessionPlanner extends FragmentActivity {
 				// TODO Auto-generated method stub
 
 			}
-		});
 	}
 
 }
