@@ -27,11 +27,11 @@ public class SessionPlanner extends Fragment {
 	SeekBar activityCount;
 	TextView activityText;
 
-			@Override
+	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		return inflater.inflate(R.layout.session_planner, container, false);
-			}
+	}
 
 	private PlaceData[] choosePlaces(Session session) {
 		PlaceCategory[] placecat = SessionHelper
@@ -44,11 +44,7 @@ public class SessionPlanner extends Fragment {
 				.queryFetchPlaces(and);
 		PlaceData[] chosenPlaces = choosePlaces(places);
 		return chosenPlaces;
-			}
-
-			@Override
-			public void onStopTrackingTouch(SeekBar seekBar) {
-				// TODO Auto-generated method stub
+	}
 
 	private PlaceData[] choosePlaces(List<PlaceData> places) {
 		PlaceData dummy = new PlaceData();
@@ -65,7 +61,6 @@ public class SessionPlanner extends Fragment {
 		default:
 			return new PlaceData[] { places.get(0), places.get(1),
 					places.get(2) };
-			}
+		}
 	}
-
 }
