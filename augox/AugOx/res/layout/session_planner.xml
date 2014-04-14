@@ -24,17 +24,13 @@
         android:layout_height="wrap_content"
         android:max="4" />
 
-    <LinearLayout
+    <ScrollView 
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:layout_height="wrap_content">
 
-        <fragment
-            android:id="@+id/fragment1"
-            android:name="uk.ac.ox.cs.GPT9.augox.GalleryPickerFragment"
+        <LinearLayout 
+            android:id="@+id/galleryHolders"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:layout="@layout/gallery_picker" />
-    </LinearLayout>
-
+            android:layout_height="wrap_content"/>
+    </ScrollView>
 </LinearLayout>
