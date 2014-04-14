@@ -54,7 +54,7 @@
 
                 <RadioButton
                     android:id="@+id/chosenPlace1"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Place 2" />
@@ -74,7 +74,7 @@
 
                 <RadioButton
                     android:id="@+id/chosenPlace2"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Place 3" />
             </LinearLayout>
