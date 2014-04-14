@@ -27,7 +27,7 @@ public class GalleryPickerFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.gallery_picker, null);
+		View view = inflater.inflate(R.layout.gallery_picker, container);
 
 		// Here we are fetching the layoutParams from parent activity and
 		// setting it to the fragment's view.
@@ -43,6 +43,21 @@ public class GalleryPickerFragment extends Fragment {
 		chosenPlace0.setText(place0.getName());
 		chosenPlace1.setText(place1.getName());
 		chosenPlace2.setText(place2.getName());
+
+		RadioGroup placesGroup = (RadioGroup) getView().findViewById(
+				R.id.placesGroup);
+
+		placesGroup.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			@Override
+			public void onCheckedChanged(RadioGroup group, int checkedId) {
+				if (checkedId == chosenPlace0.getId())
+					place = place0;
+				else if (checkedId == chosenPlace1.getId())
+					place = place1;
+				else if (checkedId == chosenPlace2.getId())
+					place = place2;
+			}
+		});
 
 		/*
 		 * placeImage0.setImage(place0.getName());
