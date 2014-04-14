@@ -83,21 +83,14 @@ public class AutoPlannerActivity extends FragmentActivity {
 
 	public void addListenerOnButton() {
 		OnClickListener listener = new OnClickListener() {
-
 			@SuppressWarnings("deprecation")
 			@Override
 			public void onClick(View v) {
-				// FragmentManager fm = getSupportFragmentManager();
-				// TimePickerDialog tpd = new TimePickerDialog(getBaseContext(),
-				// timePickerListener, hour, minute, false);
-				// tpd.show(fm, "fragment_edit_time");
-
 				showDialog(v == startTime ? START_TIME_DIALOG_ID
 						: v == endTime ? END_TIME_DIALOG_ID : null);
 			}
 
 		};
-
 		startTime.setOnClickListener(listener);
 		endTime.setOnClickListener(listener);
 
