@@ -29,12 +29,17 @@
             android:text="End Time: " />
     </LinearLayout>
 
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_margin="0dp" >
+
     <LinearLayout
         android:id="@+id/sessionList"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical" >
-
     </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
