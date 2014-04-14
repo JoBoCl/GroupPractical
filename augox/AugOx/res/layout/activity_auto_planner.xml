@@ -36,11 +36,6 @@
         android:layout_margin="0dp"
         android:orientation="vertical" >
 
-        <fragment
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            class="uk.ac.ox.cs.GPT9.augox.SessionPlanner"
-            tools:layout="@layout/session_planner" />
     </LinearLayout>
 
 </LinearLayout>
