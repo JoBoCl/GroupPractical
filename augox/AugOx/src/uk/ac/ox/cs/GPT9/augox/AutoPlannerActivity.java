@@ -104,22 +104,43 @@ public class AutoPlannerActivity extends FragmentActivity {
 		int startTime = startHour * 60 + startMinute;
 		int endTime = endHour * 60 + endMinute;
 		for (int time : intervals) {
-			if (startTime < time && time < endTime) sessions.add(SessionHelper
-					.getSessionAtTime(time));
+			if (startTime < time && time < endTime)
+				sessions.add(SessionHelper.getSessionAtTime(time));
 		}
-		for (Session session : sessions) {
-			PlaceCategory[] placecat = SessionHelper
-					.getCategoriesForSession(session);
-			DatabaseQuery plcat = new CategoryQuery(Arrays.asList(placecat));
-			DatabaseQuery open = new OpenAtQuery(
-					SessionHelper.getStartTimeForSession(session));
-			DatabaseQuery and = new AndQuery(plcat, open);
-			List<PlaceData> places = MainScreenActivity.getPlacesDatabase()
-					.queryFetchPlaces(and);
-			Fragment gpf = new GalleryPickerFragment(places.get(0),
-					places.get(1), places.get(2));
-			ft.add(gpf, "gallery picker");
-			gpfs.add((GalleryPickerFragment) gpf);
+		Session[] ss = new Session[] { Session.BREAKFAST, Session.MORNING,
+				Session.LUNCH, Session.AFTERNOON, Session.TEA, Session.EVENING,
+				Session.NIGHT, Session.BREAKFAST, Session.MORNING,
+				Session.LUNCH, Session.AFTERNOON, Session.TEA, Session.EVENING,
+				Session.NIGHT };
+		FragmentManager fm = getFragmentManager();
+		FragmentTransaction ft = fm.beginTransaction();
+		int j = 0;
+		for (int i = 0; i < ss.length; i++) {
+			/*
+			 * PlaceCategory[] placecat =
+			 * SessionHelper.getCategoriesForSession(session); DatabaseQuery
+			 * plcat = new CategoryQuery(Arrays.asList(placecat)); DatabaseQuery
+			 * open = new OpenAtQuery(
+			 * SessionHelper.getStartTimeForSession(session)); DatabaseQuery and
+			 * = new AndQuery(plcat, open); List<PlaceData> places =
+			 * MainScreenActivity.getPlacesDatabase() .queryFetchPlaces(and);
+			 * PlaceData[] chosenPlaces = choosePlaces(places);
+			 */
+			Session session = ss[i];
+			if (j < sessions.size() && sessions.get(j) == session) {
+				Fragment spf = (Fragment) new SessionPlanner(session);
+				ft.add(R.id.sessionList, spf,
+						"session planner " + session.toString()
+								+ (i > ss.length / 2 ? "2" : "1"));
+				spfs.add(spf);
+				j++;
+			} else {
+				Fragment f = getFragmentManager().findFragmentByTag(
+						"session planner " + session.toString()
+								+ (i > ss.length / 2 ? "2" : "1"));
+				if (f != null)
+					ft.remove(f);
+			}
 		}
 		ft.commit();
 	}
