@@ -43,8 +43,6 @@ public class AutoPlannerActivity extends FragmentActivity {
 	private int startMinute;
 	private int endHour;
 	private int endMinute;
-	private FragmentTransaction ft;
-	private List<GalleryPickerFragment> gpfs;
 	private final int[] intervals = new int[] { 8 * 60, 9 * 60, 12 * 60 + 30,
 			13 * 60 + 30, 18 * 60, 19 * 60, 22 * 60, 8 * 60 + 24 * 60,
 			9 * 60 + 24 * 60, 12 * 60 + 30 + 24 * 60, 13 * 60 + 30 + 24 * 60,
@@ -61,7 +59,6 @@ public class AutoPlannerActivity extends FragmentActivity {
 		startTime = (Button) findViewById(R.id.startTimeButton);
 		endTime = (Button) findViewById(R.id.endTimeButton);
 
-		ft = getSupportFragmentManager().beginTransaction();
 
 		setCurrentTimeOnView();
 		addListenerOnButton();
