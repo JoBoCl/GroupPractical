@@ -14,15 +14,18 @@ import uk.ac.ox.cs.GPT9.augox.dbquery.OpenAtQuery;
 
 import android.os.Bundle;
 import android.app.Dialog;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.app.TimePickerDialog;
-import android.support.v4.app.FragmentActivity;
+import android.app.Activity;
+import android.text.format.DateFormat;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 public class AutoPlannerActivity extends Activity {
 
