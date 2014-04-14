@@ -24,7 +24,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TimePicker;
 
-public class AutoPlannerActivity extends FragmentActivity {
+public class AutoPlannerActivity extends Activity {
 
 	/*
 	 * @Override protected void onCreate(Bundle savedInstanceState) {
