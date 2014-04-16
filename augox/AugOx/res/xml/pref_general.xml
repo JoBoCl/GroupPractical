@@ -2,7 +2,7 @@
 
     <CheckBoxPreference
         android:defaultValue="true"
-        android:key="example_checkbox"
+        android:key="setting_tweets_english"
         android:summary="@string/pref_description_tweets_english"
         android:title="@string/pref_title_tweets_english" />
 
