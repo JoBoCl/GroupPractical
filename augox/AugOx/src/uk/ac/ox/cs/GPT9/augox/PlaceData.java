@@ -2,6 +2,8 @@ package uk.ac.ox.cs.GPT9.augox;
 
 import java.io.*;
 
+import android.graphics.drawable.Drawable;
+
 /**
  * Represents a Place - a location in the world that the program will deal
  * with. The primary storage of these is the singleton PlacesDatabase object
@@ -28,7 +30,7 @@ public class PlaceData {
 	 * Semi-Persistent Data - initially null, can be set, but may be wiped at
 	 * any time in the future to conserve space
 	 */
-	//private SOMEIMAGETYPE image;
+	private Drawable image;
 
 	/*
 	 * Session Data - initially takes a default / null value, which can be
@@ -57,7 +59,7 @@ public class PlaceData {
 		this.foursquareid = foursquareid;
 		
 		// Initialise semi-persistent data
-		// image = null;
+		image = null;
 		
 		// Initialise session data
 		clicked = false;
@@ -76,7 +78,7 @@ public class PlaceData {
 	public OpeningHours getOpeningHours() { return openinghours; }
 	public String getTwitterHandle() { return twitterhandle; }
 	public String getFourSquareID() { return foursquareid; }
-	//public SOMEIMAGETYPE getImage();
+	public Drawable getImage() { return image; }
 	public boolean getClicked() { return clicked; }
 	// social caching getters
 
@@ -85,6 +87,7 @@ public class PlaceData {
 	 */
 	public void updateRating(int rating) { this.rating = rating; }
 	public void updateVisited(boolean visited) { this.visited = visited; }
+	public void updateImage(Drawable image) { this.image = image; }
 	public void updateClicked(boolean clicked) { this.clicked = clicked; }
 	
 	/*

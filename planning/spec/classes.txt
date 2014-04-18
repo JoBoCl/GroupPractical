@@ -69,7 +69,7 @@ public class PlaceData {
 	 * Semi-Persistent Data - initially null, can be set, but may be wiped at
 	 * any time in the future to conserve space
 	 */
-	private SOMEIMAGETYPE image;
+	private Drawable image;
 
 	/*
 	 * Session Data - initially takes a default / null value, which can be
@@ -91,7 +91,7 @@ public class PlaceData {
 	public OpeningHours getOpeningHours();
 	public String getTwitterHandle();
 	public String getFourSquareID();
-	public SOMEIMAGETYPE getImage();
+	public Drawable getImage();
 	public boolean getClicked();
 	// social caching getters
 
@@ -100,6 +100,7 @@ public class PlaceData {
 	 */
 	public void updateRating(int rating);
 	public void updateVisited(boolean visited);
+	public void updateImage(Drawable image);
 	public void updateClicked(boolean clicked);
 }
 
