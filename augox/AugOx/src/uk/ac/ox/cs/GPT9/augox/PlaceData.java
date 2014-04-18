@@ -22,6 +22,7 @@ public class PlaceData {
 	private String description;
 	private OpeningHours openinghours;
 	private String twitterhandle;
+	private String foursquareid;
 
 	/*
 	 * Semi-Persistent Data - initially null, can be set, but may be wiped at
@@ -42,7 +43,7 @@ public class PlaceData {
 	public PlaceData(	String name, double latitude, double longitude,
 						int rating, boolean visited, PlaceCategory category,
 						String description, OpeningHours openinghours,
-						String twitterhandle) {
+						String twitterhandle, String foursquareid) {
 		// Initialise permanent data
 		this.name = name;
 		this.latitude = latitude;
@@ -53,6 +54,7 @@ public class PlaceData {
 		this.description = description;
 		this.openinghours = openinghours;
 		this.twitterhandle = twitterhandle;
+		this.foursquareid = foursquareid;
 		
 		// Initialise semi-persistent data
 		// image = null;
@@ -73,6 +75,7 @@ public class PlaceData {
 	public String getDescription() { return description; }
 	public OpeningHours getOpeningHours() { return openinghours; }
 	public String getTwitterHandle() { return twitterhandle; }
+	public String getFourSquareID() { return foursquareid; }
 	//public SOMEIMAGETYPE getImage();
 	public boolean getClicked() { return clicked; }
 	// social caching getters
@@ -97,6 +100,7 @@ public class PlaceData {
 		PlacesDatabase.writeStringToStream(dstream, description);
 		openinghours.writeToStream(dstream);
 		PlacesDatabase.writeStringToStream(dstream, twitterhandle);
+		PlacesDatabase.writeStringToStream(dstream, foursquareid);
 	}
 	
 	/*
@@ -116,13 +120,15 @@ public class PlaceData {
 		OpeningHours openinghours = OpeningHours.buildOpeningHoursFromStream(
 				dstream);
 		String twitterhandle = PlacesDatabase.loadStringFromStream(dstream);
+		String foursquareid = PlacesDatabase.loadStringFromStream(dstream);
 		
 		// Check for invalid data
 		if(openinghours == null) return null;
 		
 		// Build and return object
 		PlaceData place = new PlaceData(name, latitude, longitude, rating,
-				visited, category, description, openinghours, twitterhandle);
+				visited, category, description, openinghours, twitterhandle,
+				foursquareid);
 		return place;
 	}
 	
