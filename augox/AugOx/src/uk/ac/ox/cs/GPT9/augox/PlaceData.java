@@ -2,6 +2,8 @@ package uk.ac.ox.cs.GPT9.augox;
 
 import java.io.*;
 
+import android.graphics.drawable.Drawable;
+
 /**
  * Represents a Place - a location in the world that the program will deal
  * with. The primary storage of these is the singleton PlacesDatabase object
@@ -22,12 +24,13 @@ public class PlaceData {
 	private String description;
 	private OpeningHours openinghours;
 	private String twitterhandle;
+	private String foursquareid;
 
 	/*
 	 * Semi-Persistent Data - initially null, can be set, but may be wiped at
 	 * any time in the future to conserve space
 	 */
-	//private SOMEIMAGETYPE image;
+	private Drawable image;
 
 	/*
 	 * Session Data - initially takes a default / null value, which can be
@@ -42,7 +45,7 @@ public class PlaceData {
 	public PlaceData(	String name, double latitude, double longitude,
 						int rating, boolean visited, PlaceCategory category,
 						String description, OpeningHours openinghours,
-						String twitterhandle) {
+						String twitterhandle, String foursquareid) {
 		// Initialise permanent data
 		this.name = name;
 		this.latitude = latitude;
@@ -53,9 +56,10 @@ public class PlaceData {
 		this.description = description;
 		this.openinghours = openinghours;
 		this.twitterhandle = twitterhandle;
+		this.foursquareid = foursquareid;
 		
 		// Initialise semi-persistent data
-		// image = null;
+		image = null;
 		
 		// Initialise session data
 		clicked = false;
@@ -73,7 +77,8 @@ public class PlaceData {
 	public String getDescription() { return description; }
 	public OpeningHours getOpeningHours() { return openinghours; }
 	public String getTwitterHandle() { return twitterhandle; }
-	//public SOMEIMAGETYPE getImage();
+	public String getFourSquareID() { return foursquareid; }
+	public Drawable getImage() { return image; }
 	public boolean getClicked() { return clicked; }
 	// social caching getters
 
@@ -82,6 +87,7 @@ public class PlaceData {
 	 */
 	public void updateRating(int rating) { this.rating = rating; }
 	public void updateVisited(boolean visited) { this.visited = visited; }
+	public void updateImage(Drawable image) { this.image = image; }
 	public void updateClicked(boolean clicked) { this.clicked = clicked; }
 	
 	/*
@@ -97,6 +103,7 @@ public class PlaceData {
 		PlacesDatabase.writeStringToStream(dstream, description);
 		openinghours.writeToStream(dstream);
 		PlacesDatabase.writeStringToStream(dstream, twitterhandle);
+		PlacesDatabase.writeStringToStream(dstream, foursquareid);
 	}
 	
 	/*
@@ -116,13 +123,15 @@ public class PlaceData {
 		OpeningHours openinghours = OpeningHours.buildOpeningHoursFromStream(
 				dstream);
 		String twitterhandle = PlacesDatabase.loadStringFromStream(dstream);
+		String foursquareid = PlacesDatabase.loadStringFromStream(dstream);
 		
 		// Check for invalid data
 		if(openinghours == null) return null;
 		
 		// Build and return object
 		PlaceData place = new PlaceData(name, latitude, longitude, rating,
-				visited, category, description, openinghours, twitterhandle);
+				visited, category, description, openinghours, twitterhandle,
+				foursquareid);
 		return place;
 	}
 	

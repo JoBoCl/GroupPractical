@@ -34,6 +34,7 @@ public class ListPlacesActivity extends ListActivity {
 		places.add("Unvisited Places");
 		places.add("All Places by Name"); 
 		places.add("All Places by Type");
+			places.add(new PlaceData("Test Place " + String.valueOf(i),d,d,0,false,p,"desc1",h,"test","4b647488f964a52087b42ae3"));
 		
 		//set click listener for clicking on a list element
 		getListView().setOnItemClickListener(new OnItemClickListener() {
