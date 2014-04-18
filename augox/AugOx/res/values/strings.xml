@@ -4,25 +4,28 @@
     <string name="app_name">AugOx</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
-    <string name="title_activity_place_full_info">Full Info</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    
+    <string name="title_activity_place_full_info">Full Info</string>
     <string name="title_activity_list_places">Local Places</string>
     <string name="title_activity_route_planner">Route Planner</string>
     <string name="title_activity_auto_planner">AutoPlanner</string>
+    <string name="title_activity_database_debugger">Database Debugger</string>
+    
     <string name="action_dbg_autoplanner">Debug Load AutoPlanner</string>
     <string name="action_dbg_filterpanel">Debug Load Filter Panel</string>
     <string name="action_dbg_listplaces">Debug Load List of Places</string>
     <string name="action_dbg_placefullinfo">Debug Load Place Full Info</string>
     <string name="action_dbg_routeplanner">Debug Load Route Planner</string>
     <string name="action_dbg_settingspanel">Debug Load Settings Panel</string>
+    <string name="action_dbg_databasedebugger">Database Debugger</string>
     
     <string name="fullinfo_distanceaway">km away</string>
     <string name="fullinfo_feedtitle">Social Feed</string>
-    <string name="title_activity_database_debugger">Database Debugger</string>
-    <string name="action_dbg_databasedebugger">Database Debugger</string>
     <string name="fullinfo_namegoeshere">Name goes here</string>
     <string name="fullinfo_distancegoeshere">Distance goes here</string>
     <string name="fullinfo_descriptiongoeshere">Description goes here</string>
+    <string name="fullinfo_attribution">Image, rating and tips provided by Foursquare.  Tweets provided by Twitter</string>
 
 </resources>

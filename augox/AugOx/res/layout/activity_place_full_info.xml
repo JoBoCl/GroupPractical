@@ -184,6 +184,18 @@
             android:text="Button" />
 		</LinearLayout>
 
+        <TextView
+            android:id="@+id/textViewAcknowledgements"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/listViewFeed"
+            android:layout_alignLeft="@+id/textViewDescription"
+            android:layout_marginBottom="2dp"
+            android:layout_alignRight="@+id/imageViewStar1"
+            android:layout_marginRight="120dp"
+            android:text="@string/fullinfo_attribution"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
     </RelativeLayout>
 
 </RelativeLayout>
