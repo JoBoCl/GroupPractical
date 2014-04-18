@@ -42,12 +42,7 @@ public class PlacesDatabase {
 	/*
 	 * Process a query on the database - return unique ids
 	 */
-	public List<int> queryFetchID(DatabaseQuery q);
-
-	/*
-	 * Process a query on the database - return Places
-	 */
-	public List<PlaceData> queryFetchPlaces(DatabaseQuery q);
+	public List<int> query(DatabaseQuery q, DatabaseSorter s);
 }
 
 /*
@@ -67,13 +62,14 @@ public class PlaceData {
 	private PlaceCategory category;
 	private String description;
 	private OpeningHours openinghours;
-	// social addresses; e.g. twitter handle; to be added once planned
+	private String twitterhandle;
+	private String foursquareid;
 
 	/*
 	 * Semi-Persistent Data - initially null, can be set, but may be wiped at
 	 * any time in the future to conserve space
 	 */
-	private SOMEIMAGETYPE image;
+	private Drawable image;
 
 	/*
 	 * Session Data - initially takes a default / null value, which can be
@@ -93,8 +89,9 @@ public class PlaceData {
 	public PlaceCategory getCategory();
 	public String getDescription();
 	public OpeningHours getOpeningHours();
-	// social address getters
-	public SOMEIMAGETYPE getImage();
+	public String getTwitterHandle();
+	public String getFourSquareID();
+	public Drawable getImage();
 	public boolean getClicked();
 	// social caching getters
 
@@ -103,6 +100,7 @@ public class PlaceData {
 	 */
 	public void updateRating(int rating);
 	public void updateVisited(boolean visited);
+	public void updateImage(Drawable image);
 	public void updateClicked(boolean clicked);
 }
 

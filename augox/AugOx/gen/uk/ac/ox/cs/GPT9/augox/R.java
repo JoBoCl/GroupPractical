@@ -9,10 +9,8 @@ package uk.ac.ox.cs.GPT9.augox;
 
 public final class R {
     public static final class array {
-        public static final int pref_example_list_titles=0x7f080000;
-        public static final int pref_example_list_values=0x7f080001;
-        public static final int pref_sync_frequency_titles=0x7f080002;
-        public static final int pref_sync_frequency_values=0x7f080003;
+        public static final int pref_sync_frequency_titles=0x7f080000;
+        public static final int pref_sync_frequency_values=0x7f080001;
     }
     public static final class attr {
         /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
@@ -41,13 +39,13 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int action_dbg_autoplanner=0x7f0b001f;
-        public static final int action_dbg_databasedebugger=0x7f0b0020;
-        public static final int action_dbg_filterpanel=0x7f0b001d;
-        public static final int action_dbg_listplaces=0x7f0b001b;
-        public static final int action_dbg_placefullinfo=0x7f0b001a;
-        public static final int action_dbg_routeplanner=0x7f0b001e;
-        public static final int action_dbg_settingspanel=0x7f0b001c;
+        public static final int action_dbg_autoplanner=0x7f0b0020;
+        public static final int action_dbg_databasedebugger=0x7f0b0021;
+        public static final int action_dbg_filterpanel=0x7f0b001e;
+        public static final int action_dbg_listplaces=0x7f0b001c;
+        public static final int action_dbg_placefullinfo=0x7f0b001b;
+        public static final int action_dbg_routeplanner=0x7f0b001f;
+        public static final int action_dbg_settingspanel=0x7f0b001d;
         public static final int btn_loaddatabase=0x7f0b0000;
         public static final int btn_testFullInfo=0x7f0b0002;
         public static final int btn_writedatabasetoexternal=0x7f0b0001;
@@ -70,6 +68,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int list_places_item_distance=0x7f0b0019;
         public static final int list_places_item_name=0x7f0b0017;
         public static final int list_places_item_type=0x7f0b0018;
+        public static final int list_places_single_view=0x7f0b001a;
         public static final int textViewDescription=0x7f0b0010;
         public static final int textViewDistance=0x7f0b0009;
         public static final int textViewFeedTitle=0x7f0b0011;
@@ -83,7 +82,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int activity_place_full_info=0x7f030004;
         public static final int activity_route_planner=0x7f030005;
         public static final int listview_item_list_places=0x7f030006;
-        public static final int news_feed_item_1=0x7f030007;
+        public static final int listview_standard_layout=0x7f030007;
+        public static final int news_feed_item_1=0x7f030008;
     }
     public static final class menu {
         public static final int auto_planner=0x7f0a0000;
@@ -94,50 +94,49 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int route_planner=0x7f0a0005;
     }
     public static final class string {
-        public static final int action_dbg_autoplanner=0x7f070009;
-        public static final int action_dbg_databasedebugger=0x7f070012;
-        public static final int action_dbg_filterpanel=0x7f07000a;
-        public static final int action_dbg_listplaces=0x7f07000b;
-        public static final int action_dbg_placefullinfo=0x7f07000c;
-        public static final int action_dbg_routeplanner=0x7f07000d;
-        public static final int action_dbg_settingspanel=0x7f07000e;
+        public static final int action_dbg_autoplanner=0x7f07000b;
+        public static final int action_dbg_databasedebugger=0x7f070014;
+        public static final int action_dbg_filterpanel=0x7f07000c;
+        public static final int action_dbg_listplaces=0x7f07000d;
+        public static final int action_dbg_placefullinfo=0x7f07000e;
+        public static final int action_dbg_routeplanner=0x7f07000f;
+        public static final int action_dbg_settingspanel=0x7f070010;
         public static final int action_settings=0x7f070004;
         public static final int app_name=0x7f070000;
         public static final int dummy_button=0x7f070001;
         public static final int dummy_content=0x7f070002;
-        public static final int fullinfo_descriptiongoeshere=0x7f070015;
-        public static final int fullinfo_distanceaway=0x7f07000f;
-        public static final int fullinfo_distancegoeshere=0x7f070014;
-        public static final int fullinfo_feedtitle=0x7f070010;
-        public static final int fullinfo_namegoeshere=0x7f070013;
+        public static final int fullinfo_descriptiongoeshere=0x7f070017;
+        public static final int fullinfo_distanceaway=0x7f070011;
+        public static final int fullinfo_distancegoeshere=0x7f070016;
+        public static final int fullinfo_feedtitle=0x7f070012;
+        public static final int fullinfo_namegoeshere=0x7f070015;
         public static final int hello_world=0x7f070005;
-        public static final int pref_default_display_name=0x7f07001c;
-        public static final int pref_description_social_recommendations=0x7f07001a;
+        public static final int pref_description_tweets_english=0x7f07001c;
         /**  Example settings for Data & Sync 
          */
-        public static final int pref_header_data_sync=0x7f07001e;
+        public static final int pref_header_data_sync=0x7f07001d;
         /**  Example General settings 
          */
-        public static final int pref_header_general=0x7f070018;
+        public static final int pref_header_general=0x7f07001a;
         /**  Example settings for Notifications 
          */
-        public static final int pref_header_notifications=0x7f070021;
-        public static final int pref_ringtone_silent=0x7f070024;
-        public static final int pref_title_add_friends_to_messages=0x7f07001d;
-        public static final int pref_title_display_name=0x7f07001b;
-        public static final int pref_title_new_message_notifications=0x7f070022;
-        public static final int pref_title_ringtone=0x7f070023;
-        public static final int pref_title_social_recommendations=0x7f070019;
-        public static final int pref_title_sync_frequency=0x7f07001f;
-        public static final int pref_title_system_sync_settings=0x7f070020;
-        public static final int pref_title_vibrate=0x7f070025;
-        public static final int title_activity_auto_planner=0x7f070008;
-        public static final int title_activity_database_debugger=0x7f070011;
-        public static final int title_activity_filter_panel=0x7f070016;
+        public static final int pref_header_notifications=0x7f070020;
+        public static final int pref_ringtone_silent=0x7f070023;
+        public static final int pref_title_new_message_notifications=0x7f070021;
+        public static final int pref_title_ringtone=0x7f070022;
+        public static final int pref_title_sync_frequency=0x7f07001e;
+        public static final int pref_title_system_sync_settings=0x7f07001f;
+        public static final int pref_title_tweets_english=0x7f07001b;
+        public static final int pref_title_vibrate=0x7f070024;
+        public static final int title_activity_auto_planner=0x7f07000a;
+        public static final int title_activity_database_debugger=0x7f070013;
+        public static final int title_activity_filter_panel=0x7f070018;
         public static final int title_activity_list_places=0x7f070006;
+        public static final int title_activity_list_places_by_sub_type=0x7f070007;
+        public static final int title_activity_list_places_items=0x7f070008;
         public static final int title_activity_place_full_info=0x7f070003;
-        public static final int title_activity_route_planner=0x7f070007;
-        public static final int title_activity_settings_panel=0x7f070017;
+        public static final int title_activity_route_planner=0x7f070009;
+        public static final int title_activity_settings_panel=0x7f070019;
     }
     public static final class style {
         /** 
