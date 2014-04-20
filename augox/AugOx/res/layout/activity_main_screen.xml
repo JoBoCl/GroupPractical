@@ -1,25 +1,14 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity" >
+    tools:context=".MainScreenActivity" >
     
-    <com.beyondar.android.view.BeyondarGLSurfaceView
-        android:id="@+id/customGLSurface"
-        android:layout_width="match_parent" 
-        android:layout_height="match_parent" /> 
-
-    <com.beyondar.android.view.CameraView
-        android:id="@+id/camera"
-        android:layout_width="match_parent" 
+    <fragment
+        android:id="@+id/beyondarFragment"
+        android:name="com.beyondar.android.fragment.BeyondarFragmentSupport"
+        android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
-    <SeekBar
-        android:id="@+id/distanceSlider"
-        android:layout_width="240dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true" />
 
     <FrameLayout
 	    android:layout_width="wrap_content"
@@ -27,11 +16,17 @@
 	    android:layout_gravity="right|top"
 	    android:background="@drawable/radar_bg_small" >
 	
-	    <com.beyondar.android.module.radar.RadarView
+	    <com.beyondar.android.plugin.radar.RadarView
 	        android:id="@+id/radarView"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:src="@drawable/radar_north_small" />
 	</FrameLayout>
+
+    <SeekBar
+        android:id="@+id/distanceSlider"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content" 
+        android:layout_gravity="bottom|right" />
 	
-</RelativeLayout>
+</FrameLayout>
