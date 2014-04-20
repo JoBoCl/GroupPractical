@@ -1,7 +1,7 @@
 package uk.ac.ox.cs.GPT9.augox;
 
 import com.beyondar.android.util.location.BeyondarLocationManager;
-import com.beyondar.android.view.BeyondarGLSurfaceView;
+//import com.beyondar.android.view.BeyondarGLSurfaceView;
 import com.beyondar.android.view.CameraView;
 import com.beyondar.android.world.World;
 import com.google.android.gms.common.ConnectionResult;
@@ -34,7 +34,7 @@ public class MainScreenActivity extends Activity /*implements*/ {
 	//GooglePlayServicesClient.OnConnectionFailedListener {
    
 	private CameraView mCameraView;
-	private BeyondarGLSurfaceView mBeyondarGLSurfaceView;
+	//private BeyondarGLSurfaceView mBeyondarGLSurfaceView;
 	private World world;
 	
 	private LocationClient mLocationClient;
@@ -46,19 +46,17 @@ public class MainScreenActivity extends Activity /*implements*/ {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
-        
-        BeyondarLocationManager.setLocationManager((LocationManager) this.getSystemService(Context.LOCATION_SERVICE));
-        
-        mBeyondarGLSurfaceView = (BeyondarGLSurfaceView) findViewById(R.id.customGLSurface);
+                
+        //mBeyondarGLSurfaceView = (BeyondarGLSurfaceView) findViewById(R.id.customGLSurface);
         mCameraView = (CameraView) findViewById(R.id.camera);
-        
-        //mLocationClient = new LocationClient(this, this, this);
         
         world = new World(this);
         world.setArViewDistance(((android.widget.SeekBar)findViewById(R.id.distanceSlider)).getProgress());
         BeyondarLocationManager.addWorldLocationUpdate(world);
         
-        mBeyondarGLSurfaceView.setWorld(world);
+        BeyondarLocationManager.setLocationManager((LocationManager) this.getSystemService(Context.LOCATION_SERVICE));
+        
+        //mBeyondarGLSurfaceView.setWorld(world);
         
         ((android.widget.SeekBar)findViewById(R.id.distanceSlider)).setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
         	@Override       
@@ -89,14 +87,14 @@ public class MainScreenActivity extends Activity /*implements*/ {
    protected void onResume() {
         super.onResume();
         BeyondarLocationManager.enable();
-        mBeyondarGLSurfaceView.onResume();
+        //mBeyondarGLSurfaceView.onResume();
    }
 
    @Override
    protected void onPause() {
         super.onPause();
         BeyondarLocationManager.disable();
-        mBeyondarGLSurfaceView.onPause();
+        //mBeyondarGLSurfaceView.onPause();
    }
 
    @Override
