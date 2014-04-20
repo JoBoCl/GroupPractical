@@ -16,8 +16,12 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
 import android.text.TextUtils;
+import android.widget.Toast;
 
+import java.util.EmptyStackException;
 import java.util.List;
+
+import uk.ac.ox.cs.GPT9.augox.FilterPanelActivity.FilterFragment;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On
@@ -40,8 +44,8 @@ public class SettingsPanelActivity extends PreferenceActivity {
 	private static final boolean ALWAYS_SIMPLE_PREFS = false;
 
 	@Override
-	protected void onPostCreate(Bundle savedInstanceState) {
-		super.onPostCreate(savedInstanceState);
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 
 		setupSimplePreferencesScreen();
 	}
@@ -54,11 +58,17 @@ public class SettingsPanelActivity extends PreferenceActivity {
 	private void setupSimplePreferencesScreen() {
 		if (!isSimplePreferences(this)) {
 			return;
-		}
-
+		} 
+		Toast.makeText(this, "testing", Toast.LENGTH_LONG).show();
+		getFragmentManager().beginTransaction().replace(android.R.id.content, 
+				new GeneralPreferenceFragment()).commit();
+		getFragmentManager().beginTransaction().replace(android.R.id.content, 
+				new NotificationPreferenceFragment()).commit();
+		getFragmentManager().beginTransaction().replace(android.R.id.content, 
+				new DataSyncPreferenceFragment()).commit();
 		// In the simplified UI, fragments are not used at all and we instead
 		// use the older PreferenceActivity APIs.
-
+		
 		// Add 'general' preferences.
 		addPreferencesFromResource(R.xml.pref_general);
 
@@ -81,6 +91,7 @@ public class SettingsPanelActivity extends PreferenceActivity {
 		bindPreferenceSummaryToValue(findPreference("example_list"));
 		bindPreferenceSummaryToValue(findPreference("notifications_new_message_ringtone"));
 		bindPreferenceSummaryToValue(findPreference("sync_frequency"));
+		
 	}
 
 	/** {@inheritDoc} */
@@ -204,13 +215,6 @@ public class SettingsPanelActivity extends PreferenceActivity {
 		public void onCreate(Bundle savedInstanceState) {
 			super.onCreate(savedInstanceState);
 			addPreferencesFromResource(R.xml.pref_general);
-
-			// Bind the summaries of EditText/List/Dialog/Ringtone preferences
-			// to their values. When their values change, their summaries are
-			// updated to reflect the new value, per the Android Design
-			// guidelines.
-			bindPreferenceSummaryToValue(findPreference("example_text"));
-			bindPreferenceSummaryToValue(findPreference("example_list"));
 		}
 	}
 

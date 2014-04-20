@@ -9,10 +9,8 @@ package uk.ac.ox.cs.GPT9.augox;
 
 public final class R {
     public static final class array {
-        public static final int pref_example_list_titles=0x7f0a0000;
-        public static final int pref_example_list_values=0x7f0a0001;
-        public static final int pref_sync_frequency_titles=0x7f0a0002;
-        public static final int pref_sync_frequency_values=0x7f0a0003;
+        public static final int pref_sync_frequency_titles=0x7f0a0000;
+        public static final int pref_sync_frequency_values=0x7f0a0001;
     }
     public static final class attr {
         /** 
@@ -238,46 +236,78 @@ containing a value of this type.
         public static final int radar_north_small=0x7f02001e;
     }
     public static final class id {
-        public static final int action_dbg_autoplanner=0x7f06000d;
-        public static final int action_dbg_filterpanel=0x7f06000b;
-        public static final int action_dbg_listplaces=0x7f060009;
-        public static final int action_dbg_placefullinfo=0x7f060008;
-        public static final int action_dbg_routeplanner=0x7f06000c;
-        public static final int action_dbg_settingspanel=0x7f06000a;
-        public static final int beyondarFragment=0x7f060005;
-        public static final int distanceSlider=0x7f060007;
+        public static final int action_dbg_autoplanner=0x7f060026;
+        public static final int action_dbg_databasedebugger=0x7f060027;
+        public static final int action_dbg_filterpanel=0x7f060024;
+        public static final int action_dbg_listplaces=0x7f060022;
+        public static final int action_dbg_placefullinfo=0x7f060021;
+        public static final int action_dbg_routeplanner=0x7f060025;
+        public static final int action_dbg_settingspanel=0x7f060023;
+        public static final int beyondarFragment=0x7f060008;
+        public static final int btn_loaddatabase=0x7f060005;
+        public static final int btn_testFullInfo=0x7f060007;
+        public static final int btn_writedatabasetoexternal=0x7f060006;
+        public static final int button1=0x7f060018;
+        public static final int button2=0x7f060019;
+        public static final int button3=0x7f06001a;
+        public static final int button4=0x7f06001b;
+        public static final int distanceSlider=0x7f06000a;
         public static final int hybrid=0x7f060004;
+        public static final int imageViewBackground=0x7f06000b;
+        public static final int imageViewForeground=0x7f06000c;
+        public static final int imageViewImage=0x7f060014;
+        public static final int imageViewStar1=0x7f06000f;
+        public static final int imageViewStar2=0x7f060010;
+        public static final int imageViewStar3=0x7f060011;
+        public static final int imageViewStar4=0x7f060012;
+        public static final int imageViewStar5=0x7f060013;
+        public static final int listViewFeed=0x7f060017;
+        public static final int list_places_item_distance=0x7f06001f;
+        public static final int list_places_item_name=0x7f06001d;
+        public static final int list_places_item_type=0x7f06001e;
+        public static final int list_places_single_view=0x7f060020;
         public static final int none=0x7f060000;
         public static final int normal=0x7f060001;
-        public static final int radarView=0x7f060006;
+        public static final int radarView=0x7f060009;
         public static final int satellite=0x7f060002;
         public static final int terrain=0x7f060003;
+        public static final int textViewAcknowledgements=0x7f06001c;
+        public static final int textViewDescription=0x7f060015;
+        public static final int textViewDistance=0x7f06000e;
+        public static final int textViewFeedTitle=0x7f060016;
+        public static final int textViewName=0x7f06000d;
     }
     public static final class integer {
         public static final int google_play_services_version=0x7f080000;
     }
     public static final class layout {
         public static final int activity_auto_planner=0x7f030000;
-        public static final int activity_list_places=0x7f030001;
-        public static final int activity_main_screen=0x7f030002;
-        public static final int activity_place_full_info=0x7f030003;
-        public static final int activity_route_planner=0x7f030004;
+        public static final int activity_database_debugger=0x7f030001;
+        public static final int activity_list_places=0x7f030002;
+        public static final int activity_main_screen=0x7f030003;
+        public static final int activity_place_full_info=0x7f030004;
+        public static final int activity_route_planner=0x7f030005;
+        public static final int listview_item_list_places=0x7f030006;
+        public static final int listview_standard_layout=0x7f030007;
+        public static final int news_feed_item_1=0x7f030008;
     }
     public static final class menu {
         public static final int auto_planner=0x7f0c0000;
-        public static final int list_places=0x7f0c0001;
-        public static final int main_screen=0x7f0c0002;
-        public static final int place_full_info=0x7f0c0003;
-        public static final int route_planner=0x7f0c0004;
+        public static final int database_debugger=0x7f0c0001;
+        public static final int list_places=0x7f0c0002;
+        public static final int main_screen=0x7f0c0003;
+        public static final int place_full_info=0x7f0c0004;
+        public static final int route_planner=0x7f0c0005;
     }
     public static final class string {
-        public static final int action_dbg_autoplanner=0x7f070024;
-        public static final int action_dbg_filterpanel=0x7f070025;
-        public static final int action_dbg_listplaces=0x7f070026;
-        public static final int action_dbg_placefullinfo=0x7f070027;
-        public static final int action_dbg_routeplanner=0x7f070028;
-        public static final int action_dbg_settingspanel=0x7f070029;
-        public static final int action_settings=0x7f07001f;
+        public static final int action_dbg_autoplanner=0x7f070027;
+        public static final int action_dbg_databasedebugger=0x7f07002d;
+        public static final int action_dbg_filterpanel=0x7f070028;
+        public static final int action_dbg_listplaces=0x7f070029;
+        public static final int action_dbg_placefullinfo=0x7f07002a;
+        public static final int action_dbg_routeplanner=0x7f07002b;
+        public static final int action_dbg_settingspanel=0x7f07002c;
+        public static final int action_settings=0x7f07001e;
         public static final int app_name=0x7f07001b;
         /**   Title for notification shown when GooglePlayServices needs to be
         enabled for a application to work. [CHAR LIMIT=70] 
@@ -375,37 +405,42 @@ containing a value of this type.
         public static final int common_signin_button_text_long=0x7f070013;
         public static final int dummy_button=0x7f07001c;
         public static final int dummy_content=0x7f07001d;
-        public static final int hello_world=0x7f070020;
+        public static final int fullinfo_attribution=0x7f070033;
+        public static final int fullinfo_descriptiongoeshere=0x7f070032;
+        public static final int fullinfo_distanceaway=0x7f07002e;
+        public static final int fullinfo_distancegoeshere=0x7f070031;
+        public static final int fullinfo_feedtitle=0x7f07002f;
+        public static final int fullinfo_namegoeshere=0x7f070030;
+        public static final int hello_world=0x7f07001f;
         /**  Location client code resources (prefix with location_client) 
          */
         public static final int location_client_powered_by_google=0x7f07001a;
-        public static final int pref_default_display_name=0x7f07002f;
-        public static final int pref_description_social_recommendations=0x7f07002d;
+        public static final int pref_description_tweets_english=0x7f070038;
         /**  Example settings for Data & Sync 
          */
-        public static final int pref_header_data_sync=0x7f070031;
-        /**  Strings related to Settings 
- Example General settings 
+        public static final int pref_header_data_sync=0x7f070039;
+        /**  Example General settings 
          */
-        public static final int pref_header_general=0x7f07002b;
+        public static final int pref_header_general=0x7f070036;
         /**  Example settings for Notifications 
          */
-        public static final int pref_header_notifications=0x7f070034;
-        public static final int pref_ringtone_silent=0x7f070037;
-        public static final int pref_title_add_friends_to_messages=0x7f070030;
-        public static final int pref_title_display_name=0x7f07002e;
-        public static final int pref_title_new_message_notifications=0x7f070035;
-        public static final int pref_title_ringtone=0x7f070036;
-        public static final int pref_title_social_recommendations=0x7f07002c;
-        public static final int pref_title_sync_frequency=0x7f070032;
-        public static final int pref_title_system_sync_settings=0x7f070033;
-        public static final int pref_title_vibrate=0x7f070038;
-        public static final int title_activity_auto_planner=0x7f070023;
-        public static final int title_activity_filter_panel=0x7f07002a;
+        public static final int pref_header_notifications=0x7f07003c;
+        public static final int pref_ringtone_silent=0x7f07003f;
+        public static final int pref_title_new_message_notifications=0x7f07003d;
+        public static final int pref_title_ringtone=0x7f07003e;
+        public static final int pref_title_sync_frequency=0x7f07003a;
+        public static final int pref_title_system_sync_settings=0x7f07003b;
+        public static final int pref_title_tweets_english=0x7f070037;
+        public static final int pref_title_vibrate=0x7f070040;
+        public static final int title_activity_auto_planner=0x7f070025;
+        public static final int title_activity_database_debugger=0x7f070026;
+        public static final int title_activity_filter_panel=0x7f070034;
         public static final int title_activity_list_places=0x7f070021;
-        public static final int title_activity_place_full_info=0x7f07001e;
-        public static final int title_activity_route_planner=0x7f070022;
-        public static final int title_activity_settings_panel=0x7f070039;
+        public static final int title_activity_list_places_by_sub_type=0x7f070022;
+        public static final int title_activity_list_places_items=0x7f070023;
+        public static final int title_activity_place_full_info=0x7f070020;
+        public static final int title_activity_route_planner=0x7f070024;
+        public static final int title_activity_settings_panel=0x7f070035;
     }
     public static final class style {
         /** 
@@ -444,9 +479,10 @@ containing a value of this type.
     }
     public static final class xml {
         public static final int pref_data_sync=0x7f040000;
-        public static final int pref_general=0x7f040001;
-        public static final int pref_headers=0x7f040002;
-        public static final int pref_notification=0x7f040003;
+        public static final int pref_filters=0x7f040001;
+        public static final int pref_general=0x7f040002;
+        public static final int pref_headers=0x7f040003;
+        public static final int pref_notification=0x7f040004;
     }
     public static final class styleable {
         /** Attributes that can be used with a AdsAttrs.

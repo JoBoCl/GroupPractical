@@ -1,5 +1,6 @@
 package uk.ac.ox.cs.GPT9.augox;
 
+import com.beyondar.android.fragment.BeyondarFragmentSupport;
 import com.beyondar.android.plugin.googlemap.GoogleMapWorldPlugin;
 import com.beyondar.android.plugin.radar.RadarView;
 import com.beyondar.android.plugin.radar.RadarWorldPlugin;
@@ -9,17 +10,22 @@ import com.beyondar.android.world.World;
 import com.google.android.gms.maps.GoogleMap;
 
 import android.content.Context;
+import android.content.Intent;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.Window;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 
-
 public class MainScreenActivity extends FragmentActivity /*implements OnClickListener*/ {
    
+	private static PlacesDatabase placesdatabase = new PlacesDatabase();
+	public static PlacesDatabase getPlacesDatabase() { return placesdatabase; }
+	
+	private BeyondarFragmentSupport mBeyondarFragment;
 	private RadarView mRadarView;
 	private RadarWorldPlugin mRadarPlugin;
 	private World mWorld;
@@ -35,7 +41,10 @@ public class MainScreenActivity extends FragmentActivity /*implements OnClickLis
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main_screen);
         
+		mBeyondarFragment = (BeyondarFragmentSupport) getSupportFragmentManager().findFragmentById(R.id.beyondarFragment);
+        
         mWorld = new World(this);
+		mBeyondarFragment.setWorld(mWorld);
         mWorld.setArViewDistance(100);
 		
 		GeoObject user = new GeoObject(1000l);
@@ -92,36 +101,30 @@ public class MainScreenActivity extends FragmentActivity /*implements OnClickLis
         BeyondarLocationManager.enable();
    }
 
+
    @Override
    protected void onPause() {
         super.onPause();
         BeyondarLocationManager.disable();
    }
-
-   @Override
-   public boolean onCreateOptionsMenu(Menu menu) {
-       // Inflate the menu; this adds items to the action bar if it is present.
-       getMenuInflater().inflate(R.menu.main_screen, menu);
-       return true;
-   }   
     
-    /*
-	 * Single objects and accessors
-	 */
-	private static PlacesDatabase placesdatabase = new PlacesDatabase();
-	public static PlacesDatabase getPlacesDatabase() { return placesdatabase; }
-	private static PlaceCategoryService placecategoryservice = new PlaceCategoryService();
-	public static PlaceCategoryService getPlaceCategoryService() { return placecategoryservice; }
+    @Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main_screen, menu);
+		return true;
+	}
     
-    /*@Override
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle presses on the action bar items
     	// DEBUG VERSION
         switch (item.getItemId()) {
             case R.id.action_dbg_placefullinfo:
             	Intent intent1 = new Intent(this, PlaceFullInfoActivity.class);
-                intent1.putExtra(PlaceFullInfoActivity.EXTRA_PLACE, "");
-                intent1.putExtra(PlaceFullInfoActivity.EXTRA_BACKGROUND, "");
+            	intent1.putExtra(PlaceFullInfoActivity.EXTRA_PLACE, 0);
+        		intent1.putExtra(PlaceFullInfoActivity.EXTRA_BACKGROUND, "");
+        		intent1.putExtra(PlaceFullInfoActivity.EXTRA_DISTANCE, 13.37);
                 startActivity(intent1);
                 return true;
             case R.id.action_dbg_listplaces:
@@ -148,9 +151,12 @@ public class MainScreenActivity extends FragmentActivity /*implements OnClickLis
             	Intent intent6 = new Intent(this, AutoPlannerActivity.class);
                 startActivity(intent6);
                 return true;
+            case R.id.action_dbg_databasedebugger:
+            	Intent intent7 = new Intent(this, DatabaseDebuggerActivity.class);
+                startActivity(intent7);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }*/
-    
+    }
 }

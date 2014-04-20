@@ -1,0 +1,34 @@
+/*
+ * Database Sorting Classes
+ */
+
+/*
+ * DatabaseSorter Interface
+ * All sorter classes must implement this
+ */
+public interface DatabaseSorter {
+	/*
+	 * Return a Comparator for Integers that compares the objects represented
+	 * by the given database primary keys in a particular way.
+	 */
+	public Comparator<Integer> getComparator();
+}
+
+/*
+ * Standard Sorters
+ */
+public class NameSorter implements DatabaseSorter {
+	public NameSorter(SortOrder order);
+	public Comparator<Integer> getComparator();
+}
+
+public class DistanceFromSorter implements DatabaseSorter {
+	public DistanceFromSorter(double latitude, double longitude,
+			SortOrder order);
+	public Comparator<Integer> getComparator();
+}
+
+public class RatingSorter implements DatabaseSorter {
+	public RatingSorter(SortOrder order);
+	public Comparator<Integer> getComparator();
+}
