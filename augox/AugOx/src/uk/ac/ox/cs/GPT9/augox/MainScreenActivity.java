@@ -1,26 +1,42 @@
 package uk.ac.ox.cs.GPT9.augox;
 
+import java.util.ArrayList;
+
 import com.beyondar.android.fragment.BeyondarFragmentSupport;
 import com.beyondar.android.plugin.googlemap.GoogleMapWorldPlugin;
 import com.beyondar.android.plugin.radar.RadarView;
 import com.beyondar.android.plugin.radar.RadarWorldPlugin;
+import com.beyondar.android.screenshot.OnScreenshotListener;
 import com.beyondar.android.util.location.BeyondarLocationManager;
+import com.beyondar.android.view.OnClickBeyondarObjectListener;
+import com.beyondar.android.world.BeyondarObject;
 import com.beyondar.android.world.GeoObject;
 import com.beyondar.android.world.World;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.OnMapLongClickListener;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
+import android.graphics.Bitmap;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnLongClickListener;
 import android.view.Window;
 import android.widget.SeekBar;
+import android.widget.Toast;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 
-public class MainScreenActivity extends FragmentActivity /*implements OnClickListener*/ {
+public class MainScreenActivity extends FragmentActivity implements OnClickBeyondarObjectListener, OnSharedPreferenceChangeListener {
    
 	private static PlacesDatabase placesdatabase = new PlacesDatabase();
 	public static PlacesDatabase getPlacesDatabase() { return placesdatabase; }
@@ -33,6 +49,9 @@ public class MainScreenActivity extends FragmentActivity /*implements OnClickLis
 	private GoogleMapWorldPlugin mGoogleMapPlugin;
 
 	private SeekBar mSeekBarMaxDistance;
+	private View mMapFrame;
+	
+	private SharedPreferences sharedPref;
 	
    @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,13 +105,54 @@ public class MainScreenActivity extends FragmentActivity /*implements OnClickLis
         });
         mWorld.setArViewDistance(mSeekBarMaxDistance.getProgress());
         mRadarPlugin.setMaxDistance(mSeekBarMaxDistance.getProgress());
+        
+        mRadarView.setOnLongClickListener(new OnLongClickListener() {
+        	public boolean onLongClick(View rv) {
+        		if (mGoogleMapPlugin == null) initializeGMaps();
+        		centreCamera();
+        		mMapFrame.setVisibility(View.VISIBLE);
+				return true; }
+        });
 
+        mBeyondarFragment.setOnClickBeyondarObjectListener(this);
+        
+        sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        sharedPref.registerOnSharedPreferenceChangeListener(this);
     }
    
+   private void startFullInfoActivity() {
+	   mBeyondarFragment.takeScreenshot(new OnScreenshotListener() {
+		   @Override
+		   public void onScreenshot (Bitmap screenshot) {
+			   Intent intent = new Intent(getApplicationContext(), PlaceFullInfoActivity.class);
+			   intent.putExtra(PlaceFullInfoActivity.EXTRA_BACKGROUND, screenshot);
+			   //intent.putExtra(PlaceFullInfoActivity.EXTRA_DISTANCE, );
+			   //intent.putExtra(PlaceFullInfoActivity.EXTRA_PLACE, );
+		   }
+	   });
+   }
+   
    private void initializeGMaps() {
+		mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
+		if (mMap == null){
+			return;
+		}
+		
+		mMapFrame = (View)findViewById(R.id.map_frame);
+		mMap.setOnMapLongClickListener(new OnMapLongClickListener() {
+			public void onMapLongClick(LatLng l) {
+				mMapFrame.setVisibility(View.GONE);
+			}
+		});
+	   
 		mGoogleMapPlugin = new GoogleMapWorldPlugin(this);
 		mGoogleMapPlugin.setGoogleMap(mMap);
         mWorld.addPlugin(mGoogleMapPlugin);
+   }
+   
+   private void centreCamera() {
+		mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(mWorld.getLatitude(), mWorld.getLongitude()), 15));
+		mMap.animateCamera(CameraUpdateFactory.zoomTo(19), 2000, null);
    }
    
    @Override
@@ -159,4 +219,19 @@ public class MainScreenActivity extends FragmentActivity /*implements OnClickLis
                 return super.onOptionsItemSelected(item);
         }
     }
+    
+	@Override
+	public void onClickBeyondarObject(ArrayList<BeyondarObject> beyondarObjects) {
+		if (beyondarObjects.size() > 0) {
+			Toast.makeText(this, "Clicked on: " + beyondarObjects.get(0).getName(),
+					Toast.LENGTH_LONG).show();
+		}
+		// TODO
+	}
+
+	@Override
+	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+		// TODO 
+		
+	}
 }
