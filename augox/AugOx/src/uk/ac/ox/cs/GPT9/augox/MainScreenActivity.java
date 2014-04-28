@@ -1,6 +1,15 @@
 package uk.ac.ox.cs.GPT9.augox;
 
+import java.io.OutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
+
+import uk.ac.ox.cs.GPT9.augox.dbquery.AllQuery;
+import uk.ac.ox.cs.GPT9.augox.dbquery.DatabaseQuery;
+import uk.ac.ox.cs.GPT9.augox.dbsort.DatabaseSorter;
+import uk.ac.ox.cs.GPT9.augox.dbsort.DistanceFromSorter;
+import uk.ac.ox.cs.GPT9.augox.dbsort.SortOrder;
 
 import com.beyondar.android.fragment.BeyondarFragmentSupport;
 import com.beyondar.android.plugin.googlemap.GoogleMapWorldPlugin;
@@ -23,23 +32,25 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.graphics.Bitmap;
+import android.graphics.Bitmap.CompressFormat;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
+import android.util.Base64OutputStream;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnLongClickListener;
-import android.view.Window;
 import android.widget.SeekBar;
 import android.widget.Toast;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 
 public class MainScreenActivity extends FragmentActivity implements OnClickBeyondarObjectListener, OnSharedPreferenceChangeListener {
    
-	private static PlacesDatabase placesdatabase = new PlacesDatabase();
-	public static PlacesDatabase getPlacesDatabase() { return placesdatabase; }
+	private static PlacesDatabase placesDatabase = new PlacesDatabase();
+	public static PlacesDatabase getPlacesDatabase() { return placesDatabase; }
 	
 	private BeyondarFragmentSupport mBeyondarFragment;
 	private RadarView mRadarView;
@@ -47,6 +58,7 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 	private World mWorld;
 	private GoogleMap mMap;
 	private GoogleMapWorldPlugin mGoogleMapPlugin;
+	private List<GeoObject> GeoPlaces = new ArrayList<GeoObject>();
 
 	private SeekBar mSeekBarMaxDistance;
 	private View mMapFrame;
@@ -57,7 +69,7 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        //requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main_screen);
         
 		mBeyondarFragment = (BeyondarFragmentSupport) getSupportFragmentManager().findFragmentById(R.id.beyondarFragment);
@@ -118,16 +130,25 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
         
         sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         sharedPref.registerOnSharedPreferenceChangeListener(this);
+        
+        fillWorld();
+        
+        //mWorld.setArViewDistance(10000);
+        //mRadarPlugin.setMaxDistance(10000);
     }
    
-   private void startFullInfoActivity() {
+   private void startFullInfoActivity(final BeyondarObject GeoPlace) {
 	   mBeyondarFragment.takeScreenshot(new OnScreenshotListener() {
 		   @Override
 		   public void onScreenshot (Bitmap screenshot) {
+			   Bundle bundle = new Bundle();
+			   Bitmap ss2 = Bitmap.createScaledBitmap(screenshot, screenshot.getWidth()/4, screenshot.getHeight()/4, true);
+			   bundle.putParcelable("background", (Parcelable)ss2);
 			   Intent intent = new Intent(getApplicationContext(), PlaceFullInfoActivity.class);
-			   intent.putExtra(PlaceFullInfoActivity.EXTRA_BACKGROUND, screenshot);
-			   //intent.putExtra(PlaceFullInfoActivity.EXTRA_DISTANCE, );
-			   //intent.putExtra(PlaceFullInfoActivity.EXTRA_PLACE, );
+			   intent.putExtra(PlaceFullInfoActivity.EXTRA_BACKGROUND, bundle);
+			   intent.putExtra(PlaceFullInfoActivity.EXTRA_DISTANCE, GeoPlace.getDistanceFromUser()/1000);
+			   intent.putExtra(PlaceFullInfoActivity.EXTRA_PLACE, GeoPlace.getId());
+			   startActivity(intent);
 		   }
 	   });
    }
@@ -222,16 +243,49 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
     
 	@Override
 	public void onClickBeyondarObject(ArrayList<BeyondarObject> beyondarObjects) {
-		if (beyondarObjects.size() > 0) {
+		/*if (beyondarObjects.size() > 0) {
 			Toast.makeText(this, "Clicked on: " + beyondarObjects.get(0).getName(),
 					Toast.LENGTH_LONG).show();
-		}
+		}*/
 		// TODO
+		
+		startFullInfoActivity(beyondarObjects.get(0));
 	}
 
 	@Override
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-		// TODO 
+		refreshGeoVisibility();
+	}
+	
+	private List<PlaceCategory> currentCategories() {
+		List<PlaceCategory> pcs = new ArrayList<PlaceCategory>();
+		if (sharedPref.getBoolean("filter_bars", true)) pcs.add(PlaceCategory.BAR);
+		if (sharedPref.getBoolean("filter_colleges", true)) pcs.add(PlaceCategory.COLLEGE);
+		if (sharedPref.getBoolean("filter_museums", true)) pcs.add(PlaceCategory.MUSEUM);
+		if (sharedPref.getBoolean("filter_restaurants", true)) pcs.add(PlaceCategory.RESTAURANT);
+		return pcs;
+	}
+	
+	private void fillWorld() {
+		DatabaseQuery dq = new AllQuery();
+		DatabaseSorter ds = new DistanceFromSorter(mWorld.getLongitude(), mWorld.getLatitude(), SortOrder.ASC);
+		List<Integer> placeIDs = placesDatabase.query(dq, ds);
+		for (Integer placeID: placeIDs) {
+			PlaceData currPlace = placesDatabase.getPlaceByID(placeID);
+			GeoObject currPlaceGeo = new GeoObject(placeID);
+			currPlaceGeo.setGeoPosition(currPlace.getLatitude(), currPlace.getLongitude());
+			currPlaceGeo.setName(currPlace.getName());
+			currPlaceGeo.setImageResource(R.drawable.ic_launcher); // TODO
+			GeoPlaces.add(currPlaceGeo);
+			mWorld.addBeyondarObject(currPlaceGeo);
+		}
+		refreshGeoVisibility();
 		
+		
+	}
+	
+	private void refreshGeoVisibility() { 
+		for (GeoObject currPlaceGeo: GeoPlaces) 
+			currPlaceGeo.setVisible(currentCategories().contains(placesDatabase.getPlaceByID((int)currPlaceGeo.getId()).getCategory())); 
 	}
 }
