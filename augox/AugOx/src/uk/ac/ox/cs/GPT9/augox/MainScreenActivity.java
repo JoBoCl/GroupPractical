@@ -1,7 +1,6 @@
 package uk.ac.ox.cs.GPT9.augox;
 
 import uk.ac.ox.cs.GPT9.augox.route.*;
-import uk.ac.ox.cs.GPT9.augox.util.SystemUiHider;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import java.util.ArrayList;
