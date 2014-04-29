@@ -1,0 +1,21 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="?android:attr/listPreferredItemHeight"
+    android:padding="6dip" >
+
+    <TextView
+        android:id="@+id/add_places_name"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:singleLine = "true" />
+    <Button
+        android:id="@+id/buttonAddPlaces"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:text="Add to Route"  
+        android:layout_alignParentRight="true"
+        android:gravity="right"
+        android:focusable="false"
+		android:focusableInTouchMode="false"/>
+
+</RelativeLayout>

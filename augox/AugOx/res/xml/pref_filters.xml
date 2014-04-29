@@ -11,7 +11,7 @@
 	        android:key="filter_bars"
 	        android:title="Bars" />
 	    <CheckBoxPreference
-	        android:defaultValue="true"
+	        android:defaultValue="false"
 	        android:key="filter_colleges"
 	        android:title="Colleges" /> 
 	    <CheckBoxPreference

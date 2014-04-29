@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import uk.ac.ox.cs.GPT9.augox.newsfeed.NewsFeed;
 
 
@@ -40,6 +41,8 @@ public class PlaceFullInfoActivity extends Activity {
 		Intent intent = getIntent();
 		int placeid = intent.getIntExtra(EXTRA_PLACE, 0); 
 		_place = MainScreenActivity.getPlacesDatabase().getPlaceByID(placeid);
+		Toast.makeText(getApplicationContext(), _place.getCategory().getName(), Toast.LENGTH_LONG).show();
+        
 		
 		// ensure we have valid place data before continuing.  All internal so this error SHOULD NEVER EXIST
 		// if it does it's NOT MY FAULT
