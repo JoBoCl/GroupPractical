@@ -1,12 +1,16 @@
 package uk.ac.ox.cs.GPT9.augox;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import uk.ac.ox.cs.*;
 import java.util.List;
 
 import uk.ac.ox.cs.GPT9.augox.dbquery.AndQuery;
 import uk.ac.ox.cs.GPT9.augox.dbquery.CategoryQuery;
 import uk.ac.ox.cs.GPT9.augox.dbquery.DatabaseQuery;
 import uk.ac.ox.cs.GPT9.augox.dbquery.OpenAtQuery;
+import uk.ac.ox.cs.GPT9.augox.dbsort.NameSorter;
+import uk.ac.ox.cs.GPT9.augox.dbsort.SortOrder;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -33,34 +37,5 @@ public class SessionPlanner extends Fragment {
 		return inflater.inflate(R.layout.session_planner, container, false);
 	}
 
-	private PlaceData[] choosePlaces(Session session) {
-		PlaceCategory[] placecat = SessionHelper
-				.getCategoriesForSession(session);
-		DatabaseQuery plcat = new CategoryQuery(Arrays.asList(placecat));
-		DatabaseQuery open = new OpenAtQuery(
-				SessionHelper.getStartTimeForSession(session));
-		DatabaseQuery and = new AndQuery(plcat, open);
-		List<PlaceData> places = MainScreenActivity.getPlacesDatabase()
-				.queryFetchPlaces(and);
-		PlaceData[] chosenPlaces = choosePlaces(places);
-		return chosenPlaces;
-	}
 
-	private PlaceData[] choosePlaces(List<PlaceData> places) {
-		PlaceData dummy = new PlaceData();
-		switch (places.size()) {
-		case 0:
-			return new PlaceData[] { dummy, dummy, dummy };
-		case 1:
-			return new PlaceData[] { places.get(0), dummy, dummy };
-		case 2:
-			return new PlaceData[] { places.get(0), places.get(1), dummy };
-		case 3:
-			return new PlaceData[] { places.get(0), places.get(1),
-					places.get(2) };
-		default:
-			return new PlaceData[] { places.get(0), places.get(1),
-					places.get(2) };
-		}
-	}
 }
