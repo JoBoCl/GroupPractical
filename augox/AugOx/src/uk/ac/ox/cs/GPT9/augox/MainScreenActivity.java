@@ -113,9 +113,18 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
         
         mRadarView.setOnLongClickListener(new OnLongClickListener() {
         	public boolean onLongClick(View rv) {
-        		if (mGoogleMapPlugin == null) initializeGMaps();
+        		
+        		/*if (mGoogleMapPlugin == null) initializeGMaps();
         		centreCamera();
-        		mMapFrame.setVisibility(View.VISIBLE);
+        		mMapFrame.setVisibility(View.VISIBLE); */
+//        		Intent intent1 = new Intent(getApplicationContext(), PlaceFullInfoActivity.class);
+//            	intent1.putExtra(PlaceFullInfoActivity.EXTRA_PLACE, 0);
+//        		intent1.putExtra(PlaceFullInfoActivity.EXTRA_BACKGROUND, "");
+//        		intent1.putExtra(PlaceFullInfoActivity.EXTRA_DISTANCE, 13.37);
+//                startActivity(intent1);
+        		Intent intent5 = new Intent(getApplicationContext(), RoutePlannerActivity.class);
+            	intent5.putExtra(RoutePlannerActivity.EXTRA_PLACELIST, "");
+                startActivity(intent5);
 				return true; }
         });
 
