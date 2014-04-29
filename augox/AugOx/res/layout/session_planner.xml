@@ -9,7 +9,7 @@
     <View
         android:layout_width="fill_parent"
         android:layout_height="2dp"
-        android:background="@android:color/holo_blue_dark" />
+        android:background="@android:color/background_dark" />
 
     <TextView
         android:id="@+id/activityText"
@@ -22,7 +22,7 @@
         android:id="@+id/activityCount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:max="4" />
+        android:max="@integer/ActivityLimit" />
 
     <ScrollView 
         android:layout_width="match_parent"
@@ -30,6 +30,7 @@
         
         <LinearLayout 
             android:id="@+id/galleryHolders"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </ScrollView>

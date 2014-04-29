@@ -12,6 +12,12 @@
         android:background="@android:color/holo_blue_dark" />
 
     <RadioGroup
+        android:id="@+id/categoryChoice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+    </RadioGroup>
+
+    <RadioGroup
         android:id="@+id/placesGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
