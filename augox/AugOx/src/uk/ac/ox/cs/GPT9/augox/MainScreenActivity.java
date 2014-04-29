@@ -4,133 +4,175 @@ import uk.ac.ox.cs.GPT9.augox.route.*;
 import uk.ac.ox.cs.GPT9.augox.util.SystemUiHider;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import java.util.ArrayList;
+
+import com.beyondar.android.fragment.BeyondarFragmentSupport;
+import com.beyondar.android.plugin.googlemap.GoogleMapWorldPlugin;
+import com.beyondar.android.plugin.radar.RadarView;
+import com.beyondar.android.plugin.radar.RadarWorldPlugin;
+import com.beyondar.android.screenshot.OnScreenshotListener;
+import com.beyondar.android.util.location.BeyondarLocationManager;
+import com.beyondar.android.view.OnClickBeyondarObjectListener;
+import com.beyondar.android.world.BeyondarObject;
+import com.beyondar.android.world.GeoObject;
+import com.beyondar.android.world.World;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.OnMapLongClickListener;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+
+import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
+import android.graphics.Bitmap;
+import android.location.LocationManager;
 import android.os.Bundle;
-import android.os.Handler;
+import android.preference.PreferenceManager;
+import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnLongClickListener;
+import android.view.Window;
+import android.widget.SeekBar;
+import android.widget.Toast;
+import android.widget.SeekBar.OnSeekBarChangeListener;
 
-/**
- * An example full-screen activity that shows and hides the system UI (i.e.
- * status bar and navigation/system bar) with user interaction.
- *
- * @see SystemUiHider
- */
-public class MainScreenActivity extends Activity {
-    /**
-     * Whether or not the system UI should be auto-hidden after
-     * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
-     */
-    private static final boolean AUTO_HIDE = true;
-
-    /**
-     * If {@link #AUTO_HIDE} is set, the number of milliseconds to wait after
-     * user interaction before hiding the system UI.
-     */
-    private static final int AUTO_HIDE_DELAY_MILLIS = 3000;
-
-    /**
-     * If set, will toggle the system UI visibility upon interaction. Otherwise,
-     * will show the system UI visibility upon interaction.
-     */
-    private static final boolean TOGGLE_ON_CLICK = true;
-
-    /**
-     * The flags to pass to {@link SystemUiHider#getInstance}.
-     */
-    private static final int HIDER_FLAGS = SystemUiHider.FLAG_HIDE_NAVIGATION;
-
-    /**
-     * The instance of the {@link SystemUiHider} for this activity.
-     */
-    private SystemUiHider mSystemUiHider;
-    
-    /*
-	 * Single objects and accessors
-	 */
+public class MainScreenActivity extends FragmentActivity implements OnClickBeyondarObjectListener, OnSharedPreferenceChangeListener {
+   
 	private static PlacesDatabase placesdatabase = new PlacesDatabase();
 	public static PlacesDatabase getPlacesDatabase() { return placesdatabase; }
 	private static IRoute route = new Route();
 	public static IRoute getCurrentRoute() { return route; }
-    
-    /*
-	 * Screen components the activity owns
-	 */
-	private RadarComponent radar;
-	private RangeSliderComponent distanceslider;
-	// Also BeyondAR stuff
+	
+	private BeyondarFragmentSupport mBeyondarFragment;
+	private RadarView mRadarView;
+	private RadarWorldPlugin mRadarPlugin;
+	private World mWorld;
+	private GoogleMap mMap;
+	private GoogleMapWorldPlugin mGoogleMapPlugin;
 
-    @Override
+	private SeekBar mSeekBarMaxDistance;
+	private View mMapFrame;
+	
+	private SharedPreferences sharedPref;
+	
+   @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main_screen);
+        
+		mBeyondarFragment = (BeyondarFragmentSupport) getSupportFragmentManager().findFragmentById(R.id.beyondarFragment);
+        
+        mWorld = new World(this);
+		mBeyondarFragment.setWorld(mWorld);
+        mWorld.setArViewDistance(100);
+		
+		GeoObject user = new GeoObject(1000l);
+		user.setGeoPosition(mWorld.getLatitude(), mWorld.getLongitude());
+		user.setImageResource(R.drawable.radar_north_small);
+		user.setName("User position");
+		mWorld.addBeyondarObject(user);
+        
+        BeyondarLocationManager.addWorldLocationUpdate(mWorld);
+		BeyondarLocationManager.addGeoObjectLocationUpdate(user);
 
-        final View controlsView = findViewById(R.id.fullscreen_content_controls);
-        final View contentView = findViewById(R.id.fullscreen_content);
+		// We need to set the LocationManager to the BeyondarLocationManager.
+		BeyondarLocationManager
+				.setLocationManager((LocationManager) getSystemService(Context.LOCATION_SERVICE));
+		
+        mRadarView = (RadarView) findViewById(R.id.radarView);
+        // Create the Radar module
+        mRadarPlugin = new RadarWorldPlugin(this);
+        // set the radar view in to our radar module
+        mRadarPlugin.setRadarView(mRadarView);
+        // Set how far (in meters) we want to display in the view
+        mRadarPlugin.setMaxDistance(mWorld.getArViewDistance());
+        // and finally let's add the module
+        mWorld.addPlugin(mRadarPlugin);
+        
+        mSeekBarMaxDistance = ((android.widget.SeekBar)findViewById(R.id.distanceSlider));
+        mSeekBarMaxDistance.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+        	@Override       
+            public void onStopTrackingTouch(SeekBar seekBar) { }       
 
-        // Set up an instance of SystemUiHider to control the system UI for
-        // this activity.
-        mSystemUiHider = SystemUiHider.getInstance(this, contentView, HIDER_FLAGS);
-        mSystemUiHider.setup();
-        mSystemUiHider
-                .setOnVisibilityChangeListener(new SystemUiHider.OnVisibilityChangeListener() {
-                    // Cached values.
-                    int mControlsHeight;
-                    int mShortAnimTime;
+            @Override       
+            public void onStartTrackingTouch(SeekBar seekBar) { }       
 
-                    @Override
-                    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
-                    public void onVisibilityChange(boolean visible) {
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-                            // If the ViewPropertyAnimator API is available
-                            // (Honeycomb MR2 and later), use it to animate the
-                            // in-layout UI controls at the bottom of the
-                            // screen.
-                            if (mControlsHeight == 0) {
-                                mControlsHeight = controlsView.getHeight();
-                            }
-                            if (mShortAnimTime == 0) {
-                                mShortAnimTime = getResources().getInteger(
-                                        android.R.integer.config_shortAnimTime);
-                            }
-                            controlsView.animate()
-                                    .translationY(visible ? 0 : mControlsHeight)
-                                    .setDuration(mShortAnimTime);
-                        } else {
-                            // If the ViewPropertyAnimator APIs aren't
-                            // available, simply show or hide the in-layout UI
-                            // controls.
-                            controlsView.setVisibility(visible ? View.VISIBLE : View.GONE);
-                        }
-
-                        if (visible && AUTO_HIDE) {
-                            // Schedule a hide().
-                            delayedHide(AUTO_HIDE_DELAY_MILLIS);
-                        }
-                    }
-                });
-
-        // Set up the user interaction to manually show or hide the system UI.
-        contentView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (TOGGLE_ON_CLICK) {
-                    mSystemUiHider.toggle();
-                } else {
-                    mSystemUiHider.show();
-                }
-            }
+            @Override       
+            public void onProgressChanged(SeekBar seekBar, int progress,boolean fromUser) {
+            	mWorld.setArViewDistance(seekBar.getProgress());
+            	mRadarPlugin.setMaxDistance(mWorld.getArViewDistance());
+            }       
+        });
+        mWorld.setArViewDistance(mSeekBarMaxDistance.getProgress());
+        mRadarPlugin.setMaxDistance(mSeekBarMaxDistance.getProgress());
+        
+        mRadarView.setOnLongClickListener(new OnLongClickListener() {
+        	public boolean onLongClick(View rv) {
+        		if (mGoogleMapPlugin == null) initializeGMaps();
+        		centreCamera();
+        		mMapFrame.setVisibility(View.VISIBLE);
+				return true; }
         });
 
-        // Upon interacting with UI controls, delay any scheduled hide()
-        // operations to prevent the jarring behavior of controls going away
-        // while interacting with the UI.
-        findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
+        mBeyondarFragment.setOnClickBeyondarObjectListener(this);
+        
+        sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        sharedPref.registerOnSharedPreferenceChangeListener(this);
     }
+   
+   private void startFullInfoActivity() {
+	   mBeyondarFragment.takeScreenshot(new OnScreenshotListener() {
+		   @Override
+		   public void onScreenshot (Bitmap screenshot) {
+			   Intent intent = new Intent(getApplicationContext(), PlaceFullInfoActivity.class);
+			   intent.putExtra(PlaceFullInfoActivity.EXTRA_BACKGROUND, screenshot);
+			   //intent.putExtra(PlaceFullInfoActivity.EXTRA_DISTANCE, );
+			   //intent.putExtra(PlaceFullInfoActivity.EXTRA_PLACE, );
+		   }
+	   });
+   }
+   
+   private void initializeGMaps() {
+		mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
+		if (mMap == null){
+			return;
+		}
+		
+		mMapFrame = (View)findViewById(R.id.map_frame);
+		mMap.setOnMapLongClickListener(new OnMapLongClickListener() {
+			public void onMapLongClick(LatLng l) {
+				mMapFrame.setVisibility(View.GONE);
+			}
+		});
+	   
+		mGoogleMapPlugin = new GoogleMapWorldPlugin(this);
+		mGoogleMapPlugin.setGoogleMap(mMap);
+        mWorld.addPlugin(mGoogleMapPlugin);
+   }
+   
+   private void centreCamera() {
+		mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(mWorld.getLatitude(), mWorld.getLongitude()), 15));
+		mMap.animateCamera(CameraUpdateFactory.zoomTo(19), 2000, null);
+   }
+   
+   @Override
+   protected void onResume() {
+        super.onResume();
+        BeyondarLocationManager.enable();
+   }
+
+
+   @Override
+   protected void onPause() {
+        super.onPause();
+        BeyondarLocationManager.disable();
+   }
     
     @Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -183,53 +225,19 @@ public class MainScreenActivity extends Activity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-
-        // Trigger the initial hide() shortly after the activity has been
-        // created, to briefly hint to the user that UI controls
-        // are available.
-        delayedHide(100);
-    }
-
-
-    /**
-     * Touch listener to use for in-layout UI controls to delay hiding the
-     * system UI. This is to prevent the jarring behavior of controls going away
-     * while interacting with activity UI.
-     */
-    View.OnTouchListener mDelayHideTouchListener = new View.OnTouchListener() {
-        @Override
-        public boolean onTouch(View view, MotionEvent motionEvent) {
-            if (AUTO_HIDE) {
-                delayedHide(AUTO_HIDE_DELAY_MILLIS);
-            }
-            return false;
-        }
-    };
-
-    Handler mHideHandler = new Handler();
-    Runnable mHideRunnable = new Runnable() {
-        @Override
-        public void run() {
-            mSystemUiHider.hide();
-        }
-    };
-
-    /**
-     * Schedules a call to hide() in [delay] milliseconds, canceling any
-     * previously scheduled calls.
-     */
-    private void delayedHide(int delayMillis) {
-        mHideHandler.removeCallbacks(mHideRunnable);
-        mHideHandler.postDelayed(mHideRunnable, delayMillis);
-    }
     
-    /*
-	 * Update viewing range (called back from the RangeSliderComponent)
-	 */
-	public void updateViewRange(double viewRange) {
+	@Override
+	public void onClickBeyondarObject(ArrayList<BeyondarObject> beyondarObjects) {
+		if (beyondarObjects.size() > 0) {
+			Toast.makeText(this, "Clicked on: " + beyondarObjects.get(0).getName(),
+					Toast.LENGTH_LONG).show();
+		}
+		// TODO
+	}
+
+	@Override
+	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+		// TODO 
+		
 	}
 }
