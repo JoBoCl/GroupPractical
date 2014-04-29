@@ -22,7 +22,7 @@ public class NewsModuleTwitter implements INewsModule
 	private PlaceData _place;
 	
 	private String getTwitterHandle() {
-		return "WhiteRabbitOx";
+		return _place.getTwitterHandle();
 	}
 	
 	// for asynchronous calls
@@ -44,7 +44,7 @@ public class NewsModuleTwitter implements INewsModule
 	    		connection.setUseCaches(false);
 
 	    		// Parse the JSON response into a JSON object
-	    		org.json.simple.JSONArray obj = (org.json.simple.JSONArray)JSONValue.parse(NewsFeed.readResponse(connection));
+	    		org.json.simple.JSONArray obj = (org.json.simple.JSONArray)JSONValue.parse(NewsFeed.ReadResponse(connection));
 	    		
 	    		// make sure we get something
 	    		if (obj != null) {
@@ -100,7 +100,7 @@ public class NewsModuleTwitter implements INewsModule
 		    	}
 	    			
 	    		// Parse the JSON response into a JSON object
-	    		Object parse = JSONValue.parse(NewsFeed.readResponse(connection));
+	    		Object parse = JSONValue.parse(NewsFeed.ReadResponse(connection));
 				org.json.simple.JSONObject obj = (org.json.simple.JSONObject)parse;
 	    			
 				// get token from result

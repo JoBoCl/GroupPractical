@@ -1,5 +1,6 @@
 package uk.ac.ox.cs.GPT9.augox;
 
+import uk.ac.ox.cs.GPT9.augox.route.*;
 import uk.ac.ox.cs.GPT9.augox.util.SystemUiHider;
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -52,6 +53,8 @@ public class MainScreenActivity extends Activity {
 	 */
 	private static PlacesDatabase placesdatabase = new PlacesDatabase();
 	public static PlacesDatabase getPlacesDatabase() { return placesdatabase; }
+	private static IRoute route = new Route();
+	public static IRoute getCurrentRoute() { return route; }
     
     /*
 	 * Screen components the activity owns
