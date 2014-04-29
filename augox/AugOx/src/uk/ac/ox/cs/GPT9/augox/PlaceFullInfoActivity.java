@@ -5,6 +5,7 @@ import java.text.DecimalFormat;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -67,6 +68,10 @@ public class PlaceFullInfoActivity extends Activity {
 			descriptionView.setText(description());
 			
 			// display correct background image
+			Bundle bundle = intent.getExtras();
+			Bitmap background = (Bitmap) bundle.getParcelable("background");
+			ImageView imgV = (ImageView)findViewById(R.id.imageViewBackground);
+			//imgV.setImageBitmap(background);
 			// TODO
 			
 			// display place image

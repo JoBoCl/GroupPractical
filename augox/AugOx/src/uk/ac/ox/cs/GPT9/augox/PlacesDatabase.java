@@ -41,8 +41,12 @@ public class PlacesDatabase {
 		int[] closeMinute = {0, 0, 0, 0, 0, 0, 0};
 		periods.add(new OpeningHours.Period(true, 3, 1, 8, 31, false, isOpen, openHour, openMinute, closeHour, closeMinute));
 		OpeningHours test = new OpeningHours(periods);
-		PlaceData p1 = new PlaceData("Matthew's Awesome Pub", 0.0, 0.0, 5, false, PlaceCategory.BAR, "This isn't the greatest pub in the world.  This is a tribute.  I'm also going to try to make this description long so I can make sure it doesn't go too far to the right and wraps around properly, kind of ruining the preceding one-liner.  Which is a great shame, really.  At some point I'm going to have to make a way of sourcing the description from the Internet, which is going to be annoying and hard and stuff but at least for now I can get this prototype working.  And hey, getting the pretty layout is what really matters.  Having the most up-to-date data is not as important, as xkcd 937 tells us (there's an xkcd for everything)", test, "SjoHo", "4b647488f964a52087b42ae3");
+		// Anne's bar
+		PlaceData p1 = new PlaceData("Anne's Bar", 51.762735, -1.261013, 5, false, PlaceCategory.BAR, "This isn't the greatest pub in the world.  This is a tribute.  I'm also going to try to make this description long so I can make sure it doesn't go too far to the right and wraps around properly, kind of ruining the preceding one-liner.  Which is a great shame, really.  At some point I'm going to have to make a way of sourcing the description from the Internet, which is going to be annoying and hard and stuff but at least for now I can get this prototype working.  And hey, getting the pretty layout is what really matters.  Having the most up-to-date data is not as important, as xkcd 937 tells us (there's an xkcd for everything)", test, "SjoHo", "4b647488f964a52087b42ae3");
+		// Comp sci dept
+		PlaceData p2 = new PlaceData("Comp Sci Dept", 51.759832, -1.258459, 5, false, PlaceCategory.BAR, "This isn't the greatest pub in the world.  This is a tribute.  I'm also going to try to make this description long so I can make sure it doesn't go too far to the right and wraps around properly, kind of ruining the preceding one-liner.  Which is a great shame, really.  At some point I'm going to have to make a way of sourcing the description from the Internet, which is going to be annoying and hard and stuff but at least for now I can get this prototype working.  And hey, getting the pretty layout is what really matters.  Having the most up-to-date data is not as important, as xkcd 937 tells us (there's an xkcd for everything)", test, "SjoHo", "4b647488f964a52087b42ae3");
 		addEntry(p1);
+		addEntry(p2);
 	}
 	
 	/*
