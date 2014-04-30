@@ -1,7 +1,5 @@
 package uk.ac.ox.cs.GPT9.augox;
 
-import java.io.OutputStream;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,19 +24,19 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnMapLongClickListener;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.graphics.Bitmap;
-import android.graphics.Bitmap.CompressFormat;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
-import android.util.Base64OutputStream;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -58,12 +56,23 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 	private World mWorld;
 	private GoogleMap mMap;
 	private GoogleMapWorldPlugin mGoogleMapPlugin;
-	private List<GeoObject> GeoPlaces = new ArrayList<GeoObject>();
+	private List<Place> Places = new ArrayList<Place>();
 
 	private SeekBar mSeekBarMaxDistance;
 	private View mMapFrame;
 	
 	private SharedPreferences sharedPref;
+	
+	private class Place {
+		public Place(Integer placeID, GeoObject geoPlace, Marker marker) {
+			this.placeID = placeID;
+			this.geoPlace = geoPlace;
+			//this.marker = marker;
+		}
+		public int placeID;
+		public GeoObject geoPlace;
+		//public Marker marker;
+	}
 	
    @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,9 +87,9 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 		mBeyondarFragment.setWorld(mWorld);
         mWorld.setArViewDistance(100);
 		
-		GeoObject user = new GeoObject(1000l);
+		GeoObject user = new GeoObject(200000);
 		user.setGeoPosition(mWorld.getLatitude(), mWorld.getLongitude());
-		user.setImageResource(R.drawable.radar_north_small);
+		user.setImageResource(R.drawable.ic_launcher); // TODO
 		user.setName("User position");
 		mWorld.addBeyondarObject(user);
         
@@ -169,6 +178,15 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 		mGoogleMapPlugin = new GoogleMapWorldPlugin(this);
 		mGoogleMapPlugin.setGoogleMap(mMap);
         mWorld.addPlugin(mGoogleMapPlugin);
+        
+        /*for (Place place: Places) {
+        	mMap.addMarker(new MarkerOptions()
+        		.position(new LatLng(place.geoPlace.getLatitude(), place.geoPlace.getLongitude()))
+        		.title(place.geoPlace.getName())
+        		.snippet(placesDatabase.getPlaceByID(place.placeID).getDescription()));
+        }*/
+        refreshVisibility();
+        // mMap.addMarker(); TODO for user
    }
    
    private void centreCamera() {
@@ -254,7 +272,7 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 
 	@Override
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-		refreshGeoVisibility();
+		refreshVisibility();
 	}
 	
 	private List<PlaceCategory> currentCategories() {
@@ -276,16 +294,17 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 			currPlaceGeo.setGeoPosition(currPlace.getLatitude(), currPlace.getLongitude());
 			currPlaceGeo.setName(currPlace.getName());
 			currPlaceGeo.setImageResource(R.drawable.ic_launcher); // TODO
-			GeoPlaces.add(currPlaceGeo);
+			Places.add(new Place(placeID, currPlaceGeo, null));
 			mWorld.addBeyondarObject(currPlaceGeo);
 		}
-		refreshGeoVisibility();
-		
-		
+		refreshVisibility();
 	}
 	
-	private void refreshGeoVisibility() { 
-		for (GeoObject currPlaceGeo: GeoPlaces) 
-			currPlaceGeo.setVisible(currentCategories().contains(placesDatabase.getPlaceByID((int)currPlaceGeo.getId()).getCategory())); 
+	private void refreshVisibility() { 
+		for (Place place: Places) {
+			boolean vis = (currentCategories().contains(placesDatabase.getPlaceByID(place.placeID).getCategory()));
+			place.geoPlace.setVisible(vis);
+		    //if (place.marker != null) place.marker.setVisible(vis);
+		}
 	}
 }
