@@ -5,6 +5,10 @@
         android:defaultValue="true"
         android:key="filter_visited"
         android:title="Visited" />
+     <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="filter_unvisited"
+        android:title="Unvisited" />
      <PreferenceCategory>
 	    <CheckBoxPreference
 	        android:defaultValue="true"

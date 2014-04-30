@@ -3,8 +3,12 @@ package uk.ac.ox.cs.GPT9.augox;
 import java.util.ArrayList;
 import java.util.List;
 
+import uk.ac.ox.cs.GPT9.augox.dbquery.AndQuery;
 import uk.ac.ox.cs.GPT9.augox.dbquery.CategoryQuery;
 import uk.ac.ox.cs.GPT9.augox.dbquery.DatabaseQuery;
+import uk.ac.ox.cs.GPT9.augox.dbquery.NotQuery;
+import uk.ac.ox.cs.GPT9.augox.dbquery.OrQuery;
+import uk.ac.ox.cs.GPT9.augox.dbquery.VisitedQuery;
 import uk.ac.ox.cs.GPT9.augox.dbsort.DatabaseSorter;
 import uk.ac.ox.cs.GPT9.augox.dbsort.NameSorter;
 import uk.ac.ox.cs.GPT9.augox.dbsort.SortOrder;
@@ -14,17 +18,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Toast;
 
 public class RoutePlannerActivity extends Activity {
 	/*
@@ -32,28 +37,93 @@ public class RoutePlannerActivity extends Activity {
 	 */
 	public final static String EXTRA_PLACELIST = "uk.ac.ox.cs.GPT9.augox.PLACELIST";
 	private IRoute curRoute;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_route_planner);
 		curRoute = MainScreenActivity.getCurrentRoute();
 		
-	    Button buttonFilters = (Button) findViewById(R.id.buttonRoutePlannerFilters);
-		buttonFilters.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				Intent intent = new Intent(getApplicationContext(), FilterPanelActivity.class);
-                startActivity(intent);		
-                reloadLists();
-			}
-		});
-		
 		Button buttonContinue = (Button) findViewById(R.id.buttonRoutePlannerStart);
 		buttonContinue.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				finish();			
+				Intent intent4 = new Intent(getApplicationContext(), FilterPanelActivity.class);
+                startActivity(intent4);
+				//finish();			
 			}
 		});
+		
 		reloadLists();
+		reloadCheckboxes();
+	}
+	
+	
+	private void reloadCheckboxes(){
+		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+		final CheckBox filterVisited = (CheckBox) findViewById(R.id.checkBoxRouteFilterVisited);
+		final CheckBox filterUnvisited = (CheckBox) findViewById(R.id.checkBoxRouteFilterUnvisited);
+		final CheckBox filterBars = (CheckBox) findViewById(R.id.checkBoxRouteFilterBars);
+		final CheckBox filterColleges = (CheckBox) findViewById(R.id.checkBoxRouteFilterColleges);
+		final CheckBox filterMuseums = (CheckBox) findViewById(R.id.checkBoxRouteFilterMuseums);
+		final CheckBox filterRestaurants = (CheckBox) findViewById(R.id.checkBoxRouteFilterRestaurants);
+		filterVisited.setChecked(pref.getBoolean("filter_visited", true));
+		filterUnvisited.setChecked(pref.getBoolean("filter_unvisited", true));
+		filterBars.setChecked(pref.getBoolean("filter_bars", true));
+		filterColleges.setChecked(pref.getBoolean("filter_colleges", true));
+		filterMuseums.setChecked(pref.getBoolean("filter_museums", true));
+		filterRestaurants.setChecked(pref.getBoolean("filter_restaurants",true));
+		
+		final SharedPreferences.Editor editor = pref.edit();
+		
+		filterVisited.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				editor.putBoolean("filter_visited",filterVisited.isChecked());
+				editor.commit();
+				reloadLists();
+			}
+		});
+		filterUnvisited.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				editor.putBoolean("filter_unvisited",filterUnvisited.isChecked());
+				editor.commit();
+				reloadLists();
+			}
+		});
+		filterBars.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				editor.putBoolean("filter_bars",filterBars.isChecked());
+				editor.commit();
+				reloadLists();
+			}
+		});
+		filterColleges.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				editor.putBoolean("filter_colleges",filterColleges.isChecked());
+				editor.commit();
+				reloadLists();
+			}
+		});
+		filterMuseums.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				editor.putBoolean("filter_museums",filterMuseums.isChecked());
+				editor.commit();
+				reloadLists();
+			}
+		});
+		filterRestaurants.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				editor.putBoolean("filter_restaurants",filterRestaurants.isChecked());
+				editor.commit();
+				reloadLists();
+			}
+		});
+		
 	}
 
 	private void reloadLists(){
@@ -64,27 +134,30 @@ public class RoutePlannerActivity extends Activity {
 		currentRouteListView.setAdapter(adapter);
 		
 		//Add Places List
-		SharedPreferences pref = getSharedPreferences("pref_filters", Context.MODE_PRIVATE);
+		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 		List<PlaceCategory> ls = new ArrayList<PlaceCategory>();
-		//pref.getBoolean("filter_visited",true);
-		if(pref.getBoolean("filter_bars",true)) {
-			ls.add(PlaceCategory.BAR);
-			Toast.makeText(getApplicationContext(), "BAR", Toast.LENGTH_LONG).show();
-	        //FIX FILTERS
-		}
+		if(pref.getBoolean("filter_bars",true)) ls.add(PlaceCategory.BAR);
 		if(pref.getBoolean("filter_colleges",true)) ls.add(PlaceCategory.COLLEGE);
 		if(pref.getBoolean("filter_museums",true)) ls.add(PlaceCategory.MUSEUM);
 		if(pref.getBoolean("filter_restaurants",true)) ls.add(PlaceCategory.RESTAURANT);
 		DatabaseQuery q = new CategoryQuery(ls);
 		DatabaseSorter s = new NameSorter(SortOrder.ASC);
 		final PlacesDatabase d = MainScreenActivity.getPlacesDatabase();
-		final List<Integer> filterPlaces = d.query(q, s);
+		final List<Integer> filterPlaces;
+		
+		if(!pref.getBoolean("filter_visited",true) && pref.getBoolean("filter_unvisited",true)) q = new AndQuery(q, new NotQuery(new VisitedQuery()));
+		if(pref.getBoolean("filter_visited",true) && !pref.getBoolean("filter_unvisited",true)) q = new AndQuery(q, new VisitedQuery());
+		if(!pref.getBoolean("filter_visited",true) && !pref.getBoolean("filter_unvisited",true)) {
+			filterPlaces = new ArrayList<Integer>();
+		} else filterPlaces = d.query(q, s);
+		
+		/*
 		for(Integer i : filterPlaces){
 			PlaceData place = d.getPlaceByID(i);
 			if(curRoute.contains(place)){
 				filterPlaces.remove(i);
 			}
-		}
+		} */
 		AddPlaceAdapter adapter2 = new AddPlaceAdapter(this,filterPlaces);
 		ListView addPlacesListView = ((ListView) findViewById(R.id.listRoutePlannerAddPlaces));
 		addPlacesListView.setAdapter(adapter2);
