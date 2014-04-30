@@ -11,6 +11,8 @@ import javax.net.ssl.HttpsURLConnection;
 
 import org.apache.http.HttpStatus;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import uk.ac.ox.cs.GPT9.augox.PlaceData;
@@ -25,7 +27,7 @@ public class NewsFeed {
 	private PlaceFullInfoActivity _activity; // parent activity for displaying results
 	
 	//function common to News Modules for reading a stream of information from the Internet
-	public static String readResponse(HttpsURLConnection connection) {
+	public static String ReadResponse(HttpsURLConnection connection) {
     	try {
     		StringBuilder str = new StringBuilder();
     		
@@ -59,6 +61,11 @@ public class NewsFeed {
     		throw new IllegalArgumentException(e); 
     	}
     }
+	
+	// just a helper method getting the resources associated with the activity so downloading pictures can work
+	public BitmapDrawable GetDrawable(Bitmap image) {
+		return new BitmapDrawable(_activity.getResources(), image);
+	}
 	
 	// was considering storing as tuple, but extensionability for appearance details, links etc. important
 	class NewsFeedItem {
@@ -103,6 +110,7 @@ public class NewsFeed {
 				ArrayAdapter<String> adapter = new ArrayAdapter<String>(_activity, R.layout.news_feed_item_1, results);
 				feedView.setAdapter(adapter);
 				_activity.DisplayStars(); // redisplay how many stars there are; might have changed in download
+				_activity.DisplayImage(); // same for place image
 	        }
 	    });
 	}

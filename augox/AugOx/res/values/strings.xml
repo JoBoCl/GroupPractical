@@ -30,4 +30,8 @@
     <string name="fullinfo_descriptiongoeshere">Description goes here</string>
     <string name="fullinfo_attribution">Image, rating and tips provided by Foursquare.  Tweets provided by Twitter</string>
 
+    <string name="routePlannerCurrentRoute">Current Route</string>
+    <string name="routePlannerAddPlaces">Add Places</string>
+    <string name="routePlannerButtonFilters">Change Filters</string>
+    <string name="routePlannerButtonContinue">Continue</string>
 </resources>

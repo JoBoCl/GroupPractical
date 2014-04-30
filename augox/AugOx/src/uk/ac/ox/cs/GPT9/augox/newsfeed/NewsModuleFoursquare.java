@@ -1,5 +1,6 @@
 package uk.ac.ox.cs.GPT9.augox.newsfeed;
 
+import java.io.InputStream;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -9,8 +10,13 @@ import javax.net.ssl.HttpsURLConnection;
 import org.json.simple.JSONValue;
 
 import uk.ac.ox.cs.GPT9.augox.PlaceData;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+
+// sample request to examine data:  https://api.foursquare.com/v2/venues/4b647488f964a52087b42ae3?client_id=K2SIZJG51WGYFS0MHMG2P2RPNBZQPNDRTQ0QHJ2AYCLHWQ03&client_secret=CI025OMN0VXDXAX0YVJEP4QVCI00AX30H3V3Z2GDFS23JQS3&v=20140419
 
 // News Module getting "tips" from "Foursquare", as well as other data to add to PlaceData
 public class NewsModuleFoursquare implements INewsModule
@@ -19,7 +25,7 @@ public class NewsModuleFoursquare implements INewsModule
 	private PlaceData _place;
 	
 	private String getFoursquareID() {
-		return "4b647488f964a52087b42ae3";
+		return _place.getFourSquareID();//"4b647488f964a52087b42ae3";
 	}
 	
 	// for the versioning required in all requests
@@ -43,7 +49,7 @@ public class NewsModuleFoursquare implements INewsModule
 	        	// construct connection for getting venue data
 	        	URL url = new URL("https://api.foursquare.com/v2/venues/" + getFoursquareID() + "?client_id=" + apiKey + "&client_secret=" + apiSecret + "&v=" + getDate());
 	        	HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
-	        	org.json.simple.JSONObject obj = (org.json.simple.JSONObject)JSONValue.parse(NewsFeed.readResponse(connection));
+	        	org.json.simple.JSONObject obj = (org.json.simple.JSONObject)JSONValue.parse(NewsFeed.ReadResponse(connection));
     			
 	        	// if we have data can continue
 	        	if (obj != null) {
@@ -60,9 +66,14 @@ public class NewsModuleFoursquare implements INewsModule
 		    			org.json.simple.JSONObject photo = (org.json.simple.JSONObject)((org.json.simple.JSONArray)photoGroup.get("items")).get(0);
 		    			String prefix = (String)photo.get("prefix");
 		    			String suffix = (String)photo.get("suffix");
-		    			URL photourl = new URL(prefix + "200x200" + suffix + "?client_id=" + apiKey + "&client_secret=" + apiSecret + "&v=" + getDate());
-		    			HttpsURLConnection photoconnection = (HttpsURLConnection) photourl.openConnection();
-		    			Drawable image = (Drawable)photoconnection.getContent();
+		    			URL photourl = new URL(prefix + "800x200" + suffix + "?client_id=" + apiKey + "&client_secret=" + apiSecret + "&v=" + getDate());
+		    			
+		    			HttpsURLConnection photoconnection = (HttpsURLConnection)photourl.openConnection();
+		    			photoconnection.setDoInput(true);
+		    			photoconnection.connect();
+		    	        InputStream input = photoconnection.getInputStream();
+		    	        Bitmap image = BitmapFactory.decodeStream(input);
+		    	        _place.updateImage(_newsFeed.GetDrawable(image));
 	    			}
 	    			catch (Exception e) {/*no photos available*/}
 	    			

@@ -1,0 +1,43 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="?android:attr/listPreferredItemHeight"
+    android:padding="6dip" >
+
+    <TextView
+        android:id="@+id/current_route_number"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:singleLine = "true" />
+    <TextView
+        android:id="@+id/current_route_name"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:singleLine = "true" 
+        android:layout_toRightOf="@+id/current_route_number"/>
+     <Button
+        android:id="@+id/buttonRouteUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Up" 
+        android:focusable="false"
+		android:focusableInTouchMode="false"	
+        android:layout_toLeftOf="@+id/buttonRouteDown"/>
+     <Button
+        android:id="@+id/buttonRouteDown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Down" 
+        android:focusable="false"
+		android:focusableInTouchMode="false"
+        android:layout_toLeftOf="@+id/buttonRouteRemove"/>
+     <Button
+        android:id="@+id/buttonRouteRemove"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Remove" 
+        android:focusable="false"
+		android:focusableInTouchMode="false"
+        android:layout_alignParentRight="true"
+        android:gravity="right"/>
+
+</RelativeLayout>

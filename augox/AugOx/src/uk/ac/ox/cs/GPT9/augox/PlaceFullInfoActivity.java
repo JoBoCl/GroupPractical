@@ -1,14 +1,19 @@
 package uk.ac.ox.cs.GPT9.augox;
 
+import uk.ac.ox.cs.GPT9.augox.route.*;
+
 import java.text.DecimalFormat;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import uk.ac.ox.cs.GPT9.augox.newsfeed.NewsFeed;
@@ -26,7 +31,6 @@ public class PlaceFullInfoActivity extends Activity {
 	private double _distance;
 	private NewsFeed _newsFeed;
 
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// standard boilerplate
@@ -37,14 +41,11 @@ public class PlaceFullInfoActivity extends Activity {
 		Intent intent = getIntent();
 		int placeid = intent.getIntExtra(EXTRA_PLACE, 0); 
 		_place = MainScreenActivity.getPlacesDatabase().getPlaceByID(placeid);
+        
 		
 		// ensure we have valid place data before continuing.  All internal so this error SHOULD NEVER EXIST
 		// if it does it's NOT MY FAULT
-		if (_place == null) new AlertDialog.Builder(this)
-	    	.setTitle("Error")
-	    	.setMessage("Invalid place data have been passed to this screen.")
-	    	.setIcon(android.R.drawable.ic_dialog_alert)
-	    	.show();
+		if (_place == null) fullInfoPopup("Error", "Invalid place data have been passed to this screen.");
 		else {
 			// set up news feed (first so asynchronous calls can begin)
 			_newsFeed = new NewsFeed(_place, this);
@@ -66,6 +67,7 @@ public class PlaceFullInfoActivity extends Activity {
 			// display description
 			TextView descriptionView = (TextView)findViewById(R.id.textViewDescription);
 			descriptionView.setText(description());
+			descriptionView.setMovementMethod(new ScrollingMovementMethod()); // so it scrolls properly
 			
 			// display correct background image
 			Bundle bundle = intent.getExtras();
@@ -75,7 +77,38 @@ public class PlaceFullInfoActivity extends Activity {
 			// TODO
 			
 			// display place image
-			// TODO
+			DisplayImage();
+			
+			// set up add next button
+			final IRoute route = MainScreenActivity.getCurrentRoute();
+			Button buttonAddNext = (Button) findViewById(R.id.buttonAddNext);
+			buttonAddNext.setOnClickListener(new View.OnClickListener() {
+	            public void onClick(View v) {
+	            	route.addNext(_place);
+	            	fullInfoPopup("Route", "Location is now next on route.");
+	            }
+	         });
+			
+			// set up add at end button
+			Button buttonAddEnd = (Button) findViewById(R.id.buttonAddEnd);
+			buttonAddEnd.setOnClickListener(new View.OnClickListener() {
+	            public void onClick(View v) {
+	            	route.addEnd(_place);
+	            	fullInfoPopup("Route", "Location has been added to route.");
+	            }
+	         });
+			
+			// display correct visited
+			Button buttonVisited = (Button) findViewById(R.id.buttonVisited);
+			if (visited()) buttonVisited.setText("Have visited");
+			else buttonVisited.setText("Have not visited");
+			buttonVisited.setOnClickListener(new View.OnClickListener() {
+	            public void onClick(View v) {
+	            	_place.updateVisited(!visited());
+	            	if (visited()) ((Button)v).setText("Have visited");
+	     			else ((Button)v).setText("Have not visited");
+	            }
+	         });
 		}
 	}
 
@@ -93,6 +126,14 @@ public class PlaceFullInfoActivity extends Activity {
 	private PlaceCategory category() {return _place.getCategory();}
 	private int rating() {return _place.getRating();}
 	private boolean visited() {return _place.getVisited();}
+	
+	// for all those nasty popups that may appear
+	private void fullInfoPopup(String title, String message) {
+		new AlertDialog.Builder(this)
+	    	.setTitle(title)
+	    	.setMessage(message)
+	    	.show();
+	}
 	
 	// displays stars for the ratings of places
 	// public so can be recalculated on download success
@@ -114,7 +155,17 @@ public class PlaceFullInfoActivity extends Activity {
 	// displays an image taken from Foursquare of the place
 	// public so can be recalculated on download success
 	public void DisplayImage() {
-		// TODO
+		Drawable image = _place.getImage();
+		ImageView imagePlace = (ImageView)findViewById(R.id.imageViewImage);
+		if (image == null)
+		{
+			imagePlace.setVisibility(View.INVISIBLE);
+		}
+		else
+		{
+			imagePlace.setImageDrawable(image);
+			imagePlace.setVisibility(View.VISIBLE);
+		}
 	}
 	
 

@@ -1,5 +1,6 @@
 package uk.ac.ox.cs.GPT9.augox;
 
+import uk.ac.ox.cs.GPT9.augox.route.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +26,6 @@ import com.google.android.gms.maps.GoogleMap.OnMapLongClickListener;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 import android.content.Context;
 import android.content.Intent;
@@ -49,6 +49,9 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
    
 	private static PlacesDatabase placesDatabase = new PlacesDatabase();
 	public static PlacesDatabase getPlacesDatabase() { return placesDatabase; }
+	private static IRoute route = new Route();
+	public static IRoute getCurrentRoute() { return route; }
+
 	
 	private BeyondarFragmentSupport mBeyondarFragment;
 	private RadarView mRadarView;
@@ -87,9 +90,9 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 		mBeyondarFragment.setWorld(mWorld);
         mWorld.setArViewDistance(100);
 		
-		GeoObject user = new GeoObject(200000);
+		GeoObject user = new GeoObject(200000); // TODO: Give user id guaranteed unique
 		user.setGeoPosition(mWorld.getLatitude(), mWorld.getLongitude());
-		user.setImageResource(R.drawable.ic_launcher); // TODO
+		user.setImageResource(R.drawable.ic_launcher); // TODO give user an oriented custom icon
 		user.setName("User position");
 		mWorld.addBeyondarObject(user);
         
@@ -129,6 +132,7 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
         
         mRadarView.setOnLongClickListener(new OnLongClickListener() {
         	public boolean onLongClick(View rv) {
+        		
         		if (mGoogleMapPlugin == null) initializeGMaps();
         		centreCamera();
         		mMapFrame.setVisibility(View.VISIBLE);
@@ -141,9 +145,6 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
         sharedPref.registerOnSharedPreferenceChangeListener(this);
         
         fillWorld();
-        
-        //mWorld.setArViewDistance(10000);
-        //mRadarPlugin.setMaxDistance(10000);
     }
    
    private void startFullInfoActivity(final BeyondarObject GeoPlace) {
@@ -186,7 +187,6 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
         		.snippet(placesDatabase.getPlaceByID(place.placeID).getDescription()));
         }*/
         refreshVisibility();
-        // mMap.addMarker(); TODO for user
    }
    
    private void centreCamera() {
@@ -293,7 +293,7 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 			GeoObject currPlaceGeo = new GeoObject(placeID);
 			currPlaceGeo.setGeoPosition(currPlace.getLatitude(), currPlace.getLongitude());
 			currPlaceGeo.setName(currPlace.getName());
-			currPlaceGeo.setImageResource(R.drawable.ic_launcher); // TODO
+			currPlaceGeo.setImageResource(R.drawable.ic_launcher); // TODO custom icons per category
 			Places.add(new Place(placeID, currPlaceGeo, null));
 			mWorld.addBeyondarObject(currPlaceGeo);
 		}

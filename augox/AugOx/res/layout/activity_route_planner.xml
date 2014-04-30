@@ -1,7 +1,8 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -9,8 +10,77 @@
     tools:context=".RoutePlannerActivity" >
 
     <TextView
+        android:id="@+id/textRoutePlannerCurrentRoute"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:text="@string/routePlannerCurrentRoute" />
+    <ListView
+        android:id="@+id/listRoutePlannerCurrentRoute"
+        android:layout_width="wrap_content"
+        android:layout_height="0px"
+        android:background="@drawable/blackborder"
+        android:layout_weight="2">   
+    </ListView>
 
-</RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingTop="10dp"
+        android:orientation="horizontal" >
+        <LinearLayout
+	        android:layout_width="wrap_content"
+	        android:paddingRight="10dp"
+	        android:layout_height="match_parent"
+	        android:orientation="vertical">
+            <CheckBox
+		        android:id="@+id/checkBoxRouteFilterVisited"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:text="Visited"/>
+            <CheckBox
+		        android:id="@+id/checkBoxRouteFilterUnvisited"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:text="Unvisited"/>
+            <View
+			    android:layout_width="fill_parent"
+			    android:layout_height="1dip"
+			    android:background="#000000"
+			/>
+            <CheckBox
+		        android:id="@+id/checkBoxRouteFilterBars"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:text="Bars"/>
+            <CheckBox
+		        android:id="@+id/checkBoxRouteFilterColleges"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:text="Colleges"/>
+            <CheckBox
+		        android:id="@+id/checkBoxRouteFilterMuseums"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:text="Museums"/>
+            <CheckBox
+		        android:id="@+id/checkBoxRouteFilterRestaurants"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:text="Restaurants"/>
+        </LinearLayout>
+	    <ListView
+	        android:id="@+id/listRoutePlannerAddPlaces"
+	        android:layout_width="match_parent"
+	        android:gravity="right"
+	        android:background="@drawable/blackborder"
+	        android:layout_height="match_parent">   
+	    </ListView> 
+    </LinearLayout>
+    <Button
+        android:id="@+id/buttonRoutePlannerStart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/routePlannerButtonContinue" />
+
+</LinearLayout>

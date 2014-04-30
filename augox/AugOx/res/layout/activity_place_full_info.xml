@@ -110,22 +110,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/textViewName"
+            android:layout_alignRight="@+id/textViewDescription"
             android:layout_below="@+id/imageViewStar1"
             android:layout_marginTop="25dp"
             android:visibility="invisible"
             android:src="@android:drawable/ic_delete" />
-
-        <TextView
-            android:id="@+id/textViewDescription"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/textViewName"
-            android:layout_alignRight="@+id/imageViewStar1"
-            android:layout_marginRight="220dp"
-            android:layout_below="@+id/imageViewImage"
-            android:layout_marginTop="23dp"
-            android:text="@string/fullinfo_descriptiongoeshere"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
             android:id="@+id/textViewFeedTitle"
@@ -143,7 +132,7 @@
             android:layout_height="wrap_content"
             android:layout_alignRight="@+id/imageViewStar5"
             android:layout_alignLeft="@+id/imageViewStar1"
-            android:layout_marginLeft="-100dp"
+            android:layout_marginLeft="-135dp"
             android:layout_alignTop="@+id/imageViewStar5"
             android:layout_marginTop="70dp"
             android:layout_alignParentBottom="true"
@@ -155,33 +144,27 @@
 		  android:layout_height="50dp"
 		  android:orientation="horizontal"
           android:layout_alignParentBottom="true">
-        <Button
-            android:layout_weight="1"
-            android:id="@+id/button1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Button" />
 
         <Button
             android:layout_weight="1"
-            android:id="@+id/button2"
+            android:id="@+id/buttonAddNext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Button" />
+            android:text="Set as next on route" />
 
         <Button
             android:layout_weight="1"
-            android:id="@+id/button3"
+            android:id="@+id/buttonAddEnd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Button" />
+            android:text="Add to end of route" />
 
         <Button
             android:layout_weight="1"
-            android:id="@+id/button4"
+            android:id="@+id/buttonVisited"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Button" />
+            android:text="Whether visited or not" />
 		</LinearLayout>
 
         <TextView
@@ -195,6 +178,22 @@
             android:layout_marginRight="120dp"
             android:text="@string/fullinfo_attribution"
             android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/textViewDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/textViewName"
+            android:layout_alignRight="@+id/imageViewStar1"
+            android:layout_marginRight="220dp"
+            android:layout_below="@+id/imageViewImage"
+            android:layout_marginTop="30dp"
+            android:layout_alignBottom="@+id/textViewAcknowledgements"
+            android:maxLines = "100"
+            android:scrollbars = "vertical"
+            android:layout_marginBottom="24dp"
+            android:text="@string/fullinfo_descriptiongoeshere"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
     </RelativeLayout>
 
