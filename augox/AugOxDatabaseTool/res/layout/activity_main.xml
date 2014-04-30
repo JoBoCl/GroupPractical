@@ -8,13 +8,13 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
     tools:context=".MainActivity" >
-    
+
     <Button
-        android:id="@+id/fetchdata"
+        android:id="@+id/parsedata"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/fetch_data"
-        android:onClick="fetchData" />
+        android:text="@string/parse_data"
+        android:onClick="parseData" />
     
     <TextView
         android:id="@+id/outputpane"

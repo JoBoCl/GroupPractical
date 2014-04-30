@@ -1,18 +1,18 @@
 package uk.ac.ox.cs.GPT9.augox.databasetool;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.Authenticator;
-import java.net.PasswordAuthentication;
-import java.net.URL;
+import java.io.IOException;
+import java.io.InputStream;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlPullParserFactory;
 
 import android.app.Activity;
-import android.os.AsyncTask;
+import android.content.res.AssetManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
@@ -29,45 +29,51 @@ public class MainActivity extends Activity {
 		return true;
 	}
 	
-	public void fetchData(View view) {
-		String apihost = "http://api.openstreetmap.org/api/0.6/";
-		String apicommand = "map?bbox=-1.2605,51.76,-1.26,51.7605";
-		new FetchInternetTask().execute(apihost + apicommand);
+	public void parseData(View view) {
+		AssetManager ast = getAssets();
+		XmlPullParserFactory parserFactory;
+		XmlPullParser parser;
+		try {
+			InputStream in = ast.open("map.osm");
+			
+			parserFactory = XmlPullParserFactory.newInstance();
+			parser = parserFactory.newPullParser();
+	        parser.setInput(in, null);
+	        createDatabaseFromOSM(parser);
+	        
+			in.close();
+			Toast toast = Toast.makeText(getApplicationContext(), "File Loaded", Toast.LENGTH_SHORT);
+			toast.show();
+		} catch (XmlPullParserException e) {
+			Toast toast = Toast.makeText(getApplicationContext(), e.getLocalizedMessage(), Toast.LENGTH_SHORT);
+			toast.show();
+		} catch (IOException e) {
+			Toast toast = Toast.makeText(getApplicationContext(), e.getLocalizedMessage(), Toast.LENGTH_SHORT);
+			toast.show();
+		}
 	}
 	
-	private class FetchInternetTask extends AsyncTask<String, Void, String> {
-		protected String doInBackground(String... urls) {
-			String input, result = "";
+	private void createDatabaseFromOSM(XmlPullParser parser)
+			throws XmlPullParserException, IOException {
+		int eventType = parser.getEventType();
+		while(eventType != XmlPullParser.END_DOCUMENT) {
+			String tagname = parser.getName();
 			
-			try {
-				//Authenticator.setDefault(new OSMAuthenticator());
-				URL url = new URL(urls[0]);
-				BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-				while((input = in.readLine()) != null) {
-					Log.d("James_DBG", input);
-					result += input + "\n";
-				}
-				in.close();
-			} catch (Exception e) {
-				String foo = e.toString();
-				if(foo == null) foo = "null";
-				Log.e("James_DBG", foo);
+			switch(eventType) {
+			case XmlPullParser.START_TAG:
+				break;
+				
+			case XmlPullParser.TEXT:
+				break;
+				
+			case XmlPullParser.END_TAG:
+				break;
+				
+			default:
+				break;
 			}
 			
-			return result;
-		}
-		
-		protected void onPostExecute(String result) {
-			TextView outputpane = (TextView) findViewById(R.id.outputpane);
-			outputpane.setText(result);
-		}
-		
-		private class OSMAuthenticator extends Authenticator {
-			protected PasswordAuthentication getPasswordAuthentication() {
-				String username = "oxfordgrouppracticalteam9@gmail.com";
-				String password = "IDon'tCare";
-				return new PasswordAuthentication(username, password.toCharArray());				
-			}
+			eventType = parser.next();
 		}
 	}
 
