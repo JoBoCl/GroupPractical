@@ -7,7 +7,6 @@ import uk.ac.ox.cs.GPT9.augox.dbquery.AndQuery;
 import uk.ac.ox.cs.GPT9.augox.dbquery.CategoryQuery;
 import uk.ac.ox.cs.GPT9.augox.dbquery.DatabaseQuery;
 import uk.ac.ox.cs.GPT9.augox.dbquery.NotQuery;
-import uk.ac.ox.cs.GPT9.augox.dbquery.OrQuery;
 import uk.ac.ox.cs.GPT9.augox.dbquery.VisitedQuery;
 import uk.ac.ox.cs.GPT9.augox.dbsort.DatabaseSorter;
 import uk.ac.ox.cs.GPT9.augox.dbsort.NameSorter;
@@ -47,9 +46,7 @@ public class RoutePlannerActivity extends Activity {
 		Button buttonContinue = (Button) findViewById(R.id.buttonRoutePlannerStart);
 		buttonContinue.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				Intent intent4 = new Intent(getApplicationContext(), FilterPanelActivity.class);
-                startActivity(intent4);
-				//finish();			
+				finish();			
 			}
 		});
 		
@@ -151,13 +148,13 @@ public class RoutePlannerActivity extends Activity {
 			filterPlaces = new ArrayList<Integer>();
 		} else filterPlaces = d.query(q, s);
 		
-		/*
+		
 		for(Integer i : filterPlaces){
 			PlaceData place = d.getPlaceByID(i);
 			if(curRoute.contains(place)){
 				filterPlaces.remove(i);
 			}
-		} */
+		}
 		AddPlaceAdapter adapter2 = new AddPlaceAdapter(this,filterPlaces);
 		ListView addPlacesListView = ((ListView) findViewById(R.id.listRoutePlannerAddPlaces));
 		addPlacesListView.setAdapter(adapter2);
