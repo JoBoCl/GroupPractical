@@ -1,6 +1,7 @@
 package uk.ac.ox.cs.GPT9.augox;
 
 import uk.ac.ox.cs.GPT9.augox.route.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +43,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnLongClickListener;
 import android.widget.SeekBar;
-import android.widget.Toast;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 
 public class MainScreenActivity extends FragmentActivity implements OnClickBeyondarObjectListener, OnSharedPreferenceChangeListener {
@@ -51,7 +51,8 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 	public static PlacesDatabase getPlacesDatabase() { return placesDatabase; }
 	private static IRoute route = new Route();
 	public static IRoute getCurrentRoute() { return route; }
-
+	private final int USERID = 20000; // TODO guarantee uniqueness
+	private final int MAXICONDIST = 50;
 	
 	private BeyondarFragmentSupport mBeyondarFragment;
 	private RadarView mRadarView;
@@ -59,6 +60,7 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 	private World mWorld;
 	private GoogleMap mMap;
 	private GoogleMapWorldPlugin mGoogleMapPlugin;
+	//private BeyondarViewAdapter mViewAdapter;
 	private List<Place> Places = new ArrayList<Place>();
 
 	private SeekBar mSeekBarMaxDistance;
@@ -90,7 +92,7 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 		mBeyondarFragment.setWorld(mWorld);
         mWorld.setArViewDistance(100);
 		
-		GeoObject user = new GeoObject(200000); // TODO: Give user id guaranteed unique
+		GeoObject user = new GeoObject(USERID);
 		user.setGeoPosition(mWorld.getLatitude(), mWorld.getLongitude());
 		user.setImageResource(R.drawable.ic_launcher); // TODO give user an oriented custom icon
 		user.setName("User position");
@@ -144,10 +146,14 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
         sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         sharedPref.registerOnSharedPreferenceChangeListener(this);
         
+		/*mViewAdapter = new CustomBeyondarViewAdapter(this);
+		mBeyondarFragment.setBeyondarViewAdapter(mViewAdapter);*/
+    	mBeyondarFragment.setMaxFarDistance(MAXICONDIST);
+        
         fillWorld();
     }
    
-   private void startFullInfoActivity(final BeyondarObject GeoPlace) {
+   private void startFullInfoActivity(final BeyondarObject geoPlace) {
 	   mBeyondarFragment.takeScreenshot(new OnScreenshotListener() {
 		   @Override
 		   public void onScreenshot (Bitmap screenshot) {
@@ -156,8 +162,8 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 			   bundle.putParcelable("background", (Parcelable)ss2);
 			   Intent intent = new Intent(getApplicationContext(), PlaceFullInfoActivity.class);
 			   intent.putExtra(PlaceFullInfoActivity.EXTRA_BACKGROUND, bundle);
-			   intent.putExtra(PlaceFullInfoActivity.EXTRA_DISTANCE, GeoPlace.getDistanceFromUser()/1000);
-			   intent.putExtra(PlaceFullInfoActivity.EXTRA_PLACE, GeoPlace.getId());
+			   intent.putExtra(PlaceFullInfoActivity.EXTRA_DISTANCE, geoPlace.getDistanceFromUser()/1000);
+			   intent.putExtra(PlaceFullInfoActivity.EXTRA_PLACE, (int)geoPlace.getId());
 			   startActivity(intent);
 		   }
 	   });
@@ -266,8 +272,14 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 					Toast.LENGTH_LONG).show();
 		}*/
 		// TODO
-		
-		startFullInfoActivity(beyondarObjects.get(0));
+		BeyondarObject clicked = null;
+		for (BeyondarObject beyondarObject: beyondarObjects) {
+			if (beyondarObject.isVisible()) {
+				clicked = beyondarObject;
+				break;
+			}
+		}
+		if (clicked != null) startFullInfoActivity(clicked);
 	}
 
 	@Override
@@ -277,6 +289,9 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 	
 	private List<PlaceCategory> currentCategories() {
 		List<PlaceCategory> pcs = new ArrayList<PlaceCategory>();
+		/*for (PlaceCategory pc: PlaceCategory.values()) {
+			if (sharedPref.getBoolean(pc.getFilter(), true)) pcs.add(pc);
+		}*/
 		if (sharedPref.getBoolean("filter_bars", true)) pcs.add(PlaceCategory.BAR);
 		if (sharedPref.getBoolean("filter_colleges", true)) pcs.add(PlaceCategory.COLLEGE);
 		if (sharedPref.getBoolean("filter_museums", true)) pcs.add(PlaceCategory.MUSEUM);
@@ -307,4 +322,45 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 		    //if (place.marker != null) place.marker.setVisible(vis);
 		}
 	}
+	
+	/*private int sizeIcon (double dist) {
+		return (int)((1-(dist/mSeekBarMaxDistance.getMax())) * (MAXICONSIZE-MINICONSIZE) + MINICONSIZE);
+	}
+	
+	private class CustomBeyondarViewAdapter extends BeyondarViewAdapter {
+
+		LayoutInflater inflater;
+
+		public CustomBeyondarViewAdapter(Context context) {
+			super(context);
+			inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		}
+
+		@Override
+		public View getView(BeyondarObject beyondarObject, View recycledView, ViewGroup parent) {
+			if (beyondarObject.getId() == USERID) return null;
+			if (!currentCategories().contains(placesDatabase.getPlaceByID((int)beyondarObject.getId()).getCategory())) {
+				return null;
+			}
+			if (recycledView == null) {
+				recycledView = inflater.inflate(R.layout.beyondar_object_view, null);
+			}
+
+			ImageView imageView = (ImageView) recycledView.findViewById(R.id.iconView);
+			imageView.setBackgroundResource(R.drawable.ic_launcher);
+			
+			int iconSize = sizeIcon((int)beyondarObject.getDistanceFromUser());
+			RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(iconSize, iconSize);
+			imageView.setLayoutParams(layoutParams);
+
+			// Once the view is ready we specify the position
+			Point2 poss = beyondarObject.getScreenPositionCenter();
+			pos.x = pos.x - iconSize/2;
+			pos.y = pos.y - iconSize/2;
+			setPosition(pos);
+			
+			return recycledView;
+		}
+
+	}*/
 }

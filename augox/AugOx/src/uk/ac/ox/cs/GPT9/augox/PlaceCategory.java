@@ -18,6 +18,7 @@ public enum PlaceCategory {
 	 */
 	private final int id;
 	private final String name;
+	private final String filterName;
 
 	/*
 	 * Constructor
@@ -25,6 +26,7 @@ public enum PlaceCategory {
 	PlaceCategory(int id, String name) {
 		this.id = id;
 		this.name = name;
+		this.filterName = "filter_".concat(name.toLowerCase()).concat("s");
 	}
 	
 	/*
@@ -32,6 +34,7 @@ public enum PlaceCategory {
 	 */
 	public int getID() { return id; }
 	public String getName() { return name; }
+	public String getFilter() { return filterName; }
 	
 	/*
 	 * Return the category with the given ID
