@@ -12,12 +12,15 @@ import uk.ac.ox.cs.GPT9.augox.dbsort.DatabaseSorter;
 import uk.ac.ox.cs.GPT9.augox.dbsort.NameSorter;
 import uk.ac.ox.cs.GPT9.augox.dbsort.SortOrder;
 import uk.ac.ox.cs.GPT9.augox.route.IRoute;
+import uk.ac.ox.cs.GPT9.augox.route.Route;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -35,14 +38,13 @@ public class RoutePlannerActivity extends Activity {
 	 * Intent Constants
 	 */
 	public final static String EXTRA_PLACELIST = "uk.ac.ox.cs.GPT9.augox.PLACELIST";
-	private IRoute curRoute;
+	private IRoute curRoute = new Route();
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_route_planner);
 		curRoute = MainScreenActivity.getCurrentRoute();
-		
 		Button buttonContinue = (Button) findViewById(R.id.buttonRoutePlannerStart);
 		buttonContinue.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
@@ -56,6 +58,7 @@ public class RoutePlannerActivity extends Activity {
 	
 	
 	private void reloadCheckboxes(){
+		Log.d("TESTING","Checkboxes Start");
 		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 		final CheckBox filterVisited = (CheckBox) findViewById(R.id.checkBoxRouteFilterVisited);
 		final CheckBox filterUnvisited = (CheckBox) findViewById(R.id.checkBoxRouteFilterUnvisited);
@@ -123,12 +126,16 @@ public class RoutePlannerActivity extends Activity {
 		
 	}
 
+	
 	private void reloadLists(){
 		//Current Route List
 		final List<PlaceData> routePlaces = curRoute.getRouteAsList();
 		RouteAdapter adapter = new RouteAdapter(this,routePlaces);
 		ListView currentRouteListView = ((ListView) findViewById(R.id.listRoutePlannerCurrentRoute));
+		int lastScroll = currentRouteListView.getScrollY();
 		currentRouteListView.setAdapter(adapter);
+		currentRouteListView.scrollTo(currentRouteListView.getScrollX(), lastScroll);
+		//currentRouteListView.setScrollY(scrollCurrentRoute);
 		
 		//Add Places List
 		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -148,13 +155,13 @@ public class RoutePlannerActivity extends Activity {
 			filterPlaces = new ArrayList<Integer>();
 		} else filterPlaces = d.query(q, s);
 		
-		
+		/*
 		for(Integer i : filterPlaces){
 			PlaceData place = d.getPlaceByID(i);
 			if(curRoute.contains(place)){
 				filterPlaces.remove(i);
 			}
-		}
+		} */
 		AddPlaceAdapter adapter2 = new AddPlaceAdapter(this,filterPlaces);
 		ListView addPlacesListView = ((ListView) findViewById(R.id.listRoutePlannerAddPlaces));
 		addPlacesListView.setAdapter(adapter2);
@@ -171,8 +178,8 @@ public class RoutePlannerActivity extends Activity {
                 intent.putExtra(PlaceFullInfoActivity.EXTRA_BACKGROUND, "");
                 startActivity(intent);
 			}
-		});	
-		*/
+		});	*/
+		
 		
 		addPlacesListView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
@@ -187,8 +194,9 @@ public class RoutePlannerActivity extends Activity {
                 startActivity(intent);
 			}
 		});	
-		
+		Log.d("TESTING","Reload Lists End");
 	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -200,7 +208,7 @@ public class RoutePlannerActivity extends Activity {
 		private Context context;
 		private List<PlaceData> values;
 		public RouteAdapter(Context context,List<PlaceData> values){
-			super(context,R.layout.listview_item_list_places,values);
+			super(context,R.layout.listview_item_current_route,values);
 			this.context = context;
 			this.values = values;
 		}
@@ -220,7 +228,7 @@ public class RoutePlannerActivity extends Activity {
 			upButton.setOnClickListener(new View.OnClickListener() {
 				public void onClick(View v) {
 					if(position > 0){
-						curRoute.changePosition(item, position-1);
+						curRoute.changePosition(position, position-1);
 		                reloadLists();
 					}
 				}
@@ -228,7 +236,7 @@ public class RoutePlannerActivity extends Activity {
 			downButton.setOnClickListener(new View.OnClickListener() {
 				public void onClick(View v) {
 					if(position < values.size()-1){
-						curRoute.changePosition(item, position+1);
+						curRoute.changePosition(position,position+1);
 		                reloadLists();
 					}
 				}
@@ -247,7 +255,7 @@ public class RoutePlannerActivity extends Activity {
 		private Context context;
 		private List<Integer> values;
 		public AddPlaceAdapter(Context context,List<Integer> values){
-			super(context,R.layout.listview_item_list_places,values);
+			super(context,R.layout.listview_item_add_places,values);
 			this.context = context;
 			this.values = values;
 		}
@@ -263,7 +271,10 @@ public class RoutePlannerActivity extends Activity {
 			nameView.setText(item.getName());
 			addRouteView.setOnClickListener(new View.OnClickListener() {
 				public void onClick(View v) {
+					Log.d("TESTING","ADDTOROUTE");
 					curRoute.addEnd(item);
+					curRoute.setList(curRoute.getRouteAsArray());
+					Log.d("TESTING","ADDEDTOROUTE");
 	                reloadLists();
 				}
 			});
