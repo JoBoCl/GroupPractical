@@ -135,7 +135,23 @@ public class ListPlacesItemsActivity extends ListActivity {
 			TextView distView = (TextView) rowView.findViewById(R.id.list_places_item_distance);
 			nameView.setText(item.getName());
 			//after we have icons for each type of place, set it here
-			typeView.setImageResource(R.drawable.ic_launcher);
+			switch(item.getCategory()){
+				case MUSEUM:
+					typeView.setImageResource(R.drawable.museumicon);
+					break;
+				case BAR:
+					typeView.setImageResource(R.drawable.baricon);
+					break;
+				case COLLEGE:
+					typeView.setImageResource(R.drawable.collegeicon);
+					break;
+				case RESTAURANT:
+					typeView.setImageResource(R.drawable.restauranticon);
+					break;
+				default:
+					typeView.setImageResource(R.drawable.ic_launcher);
+					break;
+			}
 			distView.setText(String.format("%.1f", PlaceData.getDistanceBetween(
 					latitude,longitude,item.getLatitude(),item.getLongitude()))+"km"); 
 			return rowView;
