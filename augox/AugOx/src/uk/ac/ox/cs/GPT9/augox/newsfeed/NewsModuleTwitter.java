@@ -29,7 +29,7 @@ public class NewsModuleTwitter implements INewsModule
 	class TwitterTask extends AsyncTask<Void, Void, Void> {
 		
 		// Tries to fetch "tweets" from the url given
-		private String[] fetchTweets(String endPointUrl, String bearerToken) {
+		private void fetchTweets(String endPointUrl, String bearerToken) {
 		    	
 			HttpsURLConnection connection = null;
 		    				
@@ -49,17 +49,18 @@ public class NewsModuleTwitter implements INewsModule
 	    		// make sure we get something
 	    		if (obj != null) {
 	    			String[] tweets = new String[obj.size()];
+	    			int[] favourites = new int[obj.size()];
 	    			for (int i = 0; i < obj.size(); i++) {
 	    				// return date and contents
 	    				tweets[i] = ((org.json.simple.JSONObject)obj.get(i)).get("created_at").toString().substring(0, 10) + " - " + ((org.json.simple.JSONObject)obj.get(i)).get("text").toString();
+	    				favourites[i] = Integer.parseInt(((org.json.simple.JSONObject)obj.get(i)).get("favorite_count").toString());
 	    			}
-	    			return tweets;
+	    			for (int i = 0; i < tweets.length; i++)
+						_newsFeed.GiveResult(tweets[i], (int)((10*tweets.length)/(i+1)) + favourites[i]);
 	    		}
-	    		return new String[0];
 	    	}
 	    	catch (Exception e) {
 	    		// ignore failure; remember, we just want any data we can get, ignore what we can't
-	    		return new String[0];
 	    	}
 		    finally { // clean up
 	    		if (connection != null) {
@@ -153,10 +154,9 @@ public class NewsModuleTwitter implements INewsModule
     		}
 	    	
 	    	// step 2:  get tweets
+	    	
 			try {
-				String[] tweets = fetchTweets("https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=" + getTwitterHandle() + "&count=10", bearerToken);
-				for (int i = 0; i < tweets.length; i++)
-					_newsFeed.GiveResult(tweets[i], (int)((10*tweets.length)/(i+1)));
+				fetchTweets("https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=" + getTwitterHandle() + "&count=10", bearerToken);
             }
 			catch (Exception ex) {
             	// ignore failure; remember, we just want any data we can get, ignore what we can't
