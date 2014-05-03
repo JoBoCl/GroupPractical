@@ -3,7 +3,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import uk.ac.ox.cs.GPT9.augox.dbquery.CategoryQuery;
-import uk.ac.ox.cs.GPT9.augox.dbquery.ClickedQuery;
 import uk.ac.ox.cs.GPT9.augox.dbquery.DatabaseQuery;
 import uk.ac.ox.cs.GPT9.augox.dbquery.InLocusQuery;
 import uk.ac.ox.cs.GPT9.augox.dbquery.NameStartsWithQuery;

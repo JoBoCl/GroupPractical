@@ -1,5 +1,7 @@
 package uk.ac.ox.cs.GPT9.augox;
 
+import java.util.List;
+
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.Configuration;
@@ -8,6 +10,7 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
@@ -15,13 +18,9 @@ import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.widget.Toast;
-
-import java.util.EmptyStackException;
-import java.util.List;
-
-import uk.ac.ox.cs.GPT9.augox.FilterPanelActivity.FilterFragment;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On
@@ -215,6 +214,7 @@ public class SettingsPanelActivity extends PreferenceActivity {
 		public void onCreate(Bundle savedInstanceState) {
 			super.onCreate(savedInstanceState);
 			addPreferencesFromResource(R.xml.pref_general);
+			bindPreferenceSummaryToValue(findPreference("setting_autoroute_max_length"));
 		}
 	}
 

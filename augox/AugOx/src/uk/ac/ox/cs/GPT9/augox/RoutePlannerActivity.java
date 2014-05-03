@@ -13,7 +13,6 @@ import uk.ac.ox.cs.GPT9.augox.dbsort.NameSorter;
 import uk.ac.ox.cs.GPT9.augox.dbsort.SortOrder;
 import uk.ac.ox.cs.GPT9.augox.route.IRoute;
 import uk.ac.ox.cs.GPT9.augox.route.Route;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -32,7 +31,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class RoutePlannerActivity extends Activity {
 	/*
@@ -136,15 +134,13 @@ public class RoutePlannerActivity extends Activity {
 	private void reloadLists(boolean route, boolean filtered){
 		if(route){
 			//Current Route List
-			final List<PlaceData> routePlaces = curRoute.getRouteAsList();
+			final List<Integer> routePlaces = curRoute.getRouteAsIDList();
 			ListView currentRouteListView = ((ListView) findViewById(R.id.listRoutePlannerCurrentRoute));
 			int lastScroll = currentRouteListView.getScrollY();
 			RouteAdapter adapter = new RouteAdapter(this,routePlaces);
 			currentRouteListView.setAdapter(adapter);
 			currentRouteListView.scrollTo(currentRouteListView.getScrollX(), lastScroll);
-			//currentRouteListView.setScrollY(scrollCurrentRoute);
-			
-			 /* NEED TO RECIEVE THE ID OF PLACES FROM ROUTE TO IMPLEMENT THIS
+
 			currentRouteListView.setOnItemClickListener(new OnItemClickListener() {
 				@Override
 				public void onItemClick(AdapterView<?> arg0, View arg1, int itemNoClicked,
@@ -157,7 +153,7 @@ public class RoutePlannerActivity extends Activity {
 	                intent.putExtra(PlaceFullInfoActivity.EXTRA_BACKGROUND, "");
 	                startActivity(intent);
 				}
-			});	*/
+			});
 		}
 		
 		if(filtered){
@@ -213,10 +209,10 @@ public class RoutePlannerActivity extends Activity {
 		return true;
 	}
 	
-	public class RouteAdapter extends ArrayAdapter<PlaceData> {
+	public class RouteAdapter extends ArrayAdapter<Integer> {
 		private Context context;
-		private List<PlaceData> values;
-		public RouteAdapter(Context context,List<PlaceData> values){
+		private List<Integer> values;
+		public RouteAdapter(Context context,List<Integer> values){
 			super(context,R.layout.listview_item_current_route,values);
 			this.context = context;
 			this.values = values;
@@ -224,9 +220,10 @@ public class RoutePlannerActivity extends Activity {
 		
 		@Override
 		public View getView(final int position, View convertView, ViewGroup parent) {
+			PlacesDatabase db = MainScreenActivity.getPlacesDatabase();
 			LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			View rowView = inflater.inflate(R.layout.listview_item_current_route, parent,false);
-			final PlaceData item = values.get(position);
+			final PlaceData item = db.getPlaceByID(values.get(position));
 			TextView numView = (TextView) rowView.findViewById(R.id.current_route_number);
 			TextView nameView = (TextView) rowView.findViewById(R.id.current_route_name);
 			Button upButton = (Button) rowView.findViewById(R.id.buttonRouteUp);
