@@ -10,6 +10,7 @@ import uk.ac.ox.cs.GPT9.augox.dbquery.NameStartsWithQuery;
 import uk.ac.ox.cs.GPT9.augox.dbquery.NotQuery;
 import uk.ac.ox.cs.GPT9.augox.dbquery.VisitedQuery;
 import uk.ac.ox.cs.GPT9.augox.dbsort.DatabaseSorter;
+import uk.ac.ox.cs.GPT9.augox.dbsort.DistanceFromSorter;
 import uk.ac.ox.cs.GPT9.augox.dbsort.NameSorter;
 import uk.ac.ox.cs.GPT9.augox.dbsort.SortOrder;
 import android.app.ListActivity;
@@ -39,8 +40,16 @@ public class ListPlacesItemsActivity extends ListActivity {
 	private double longitude = 0;
 	private int queryType = 0;
 
+	protected void onResume(){
+		super.onResume();
+		setup();
+	}
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
+		setup();
+	}
+	
+	private void setup(){
 		Intent intent = getIntent();
 		latitude = intent.getDoubleExtra(EXTRA_LATITUDE,Double.valueOf(0));
 		longitude = intent.getDoubleExtra(EXTRA_LONGITUDE,Double.valueOf(0));
@@ -53,6 +62,7 @@ public class ListPlacesItemsActivity extends ListActivity {
 		switch(queryType){
 		case 0: //local places
 			q = new InLocusQuery(latitude,longitude,radius);
+			s = new DistanceFromSorter(latitude, longitude, SortOrder.ASC);
 			setTitle("Local Places");
 			break;
 		case 1: //visited places
@@ -105,7 +115,6 @@ public class ListPlacesItemsActivity extends ListActivity {
 			setListAdapter(adapter);
 		}
 	}
-	
 	public class MyPlaceAdapter extends ArrayAdapter<Integer> {
 		private Context context;
 		private List<Integer> values;
@@ -126,7 +135,23 @@ public class ListPlacesItemsActivity extends ListActivity {
 			TextView distView = (TextView) rowView.findViewById(R.id.list_places_item_distance);
 			nameView.setText(item.getName());
 			//after we have icons for each type of place, set it here
-			typeView.setImageResource(R.drawable.ic_launcher);
+			switch(item.getCategory()){
+				case MUSEUM:
+					typeView.setImageResource(R.drawable.museumicon);
+					break;
+				case BAR:
+					typeView.setImageResource(R.drawable.baricon);
+					break;
+				case COLLEGE:
+					typeView.setImageResource(R.drawable.collegeicon);
+					break;
+				case RESTAURANT:
+					typeView.setImageResource(R.drawable.restauranticon);
+					break;
+				default:
+					typeView.setImageResource(R.drawable.ic_launcher);
+					break;
+			}
 			distView.setText(String.format("%.1f", PlaceData.getDistanceBetween(
 					latitude,longitude,item.getLatitude(),item.getLongitude()))+"km"); 
 			return rowView;

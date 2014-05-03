@@ -74,7 +74,7 @@ public class ListPlacesBySubTypeActivity extends ListActivity {
                 	intent1.putExtra(ListPlacesItemsActivity.EXTRA_LATITUDE, latitude);
                 	intent1.putExtra(ListPlacesItemsActivity.EXTRA_LONGITUDE, longitude);
                 	intent1.putExtra(ListPlacesItemsActivity.EXTRA_QUERYTYPE, 4);
-                    intent1.putExtra(ListPlacesItemsActivity.EXTRA_QUERYDATA, itemNoClicked); //id of PlaceCategory
+                    intent1.putExtra(ListPlacesItemsActivity.EXTRA_QUERYDATA, itemNoClicked+1); //id of PlaceCategory
                     startActivity(intent1);
             		break;
             	}

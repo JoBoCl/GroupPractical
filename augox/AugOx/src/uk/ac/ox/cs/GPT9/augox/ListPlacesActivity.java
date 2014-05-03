@@ -23,11 +23,20 @@ public class ListPlacesActivity extends ListActivity {
 	private double latitude = 0;
 	private double longitude = 0;
 
+	protected void onResume(){
+		super.onResume();
+		//setup();
+	}
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		Intent intent = getIntent();
 		latitude = intent.getDoubleExtra(EXTRA_LATITUDE,Double.valueOf(0));
 		longitude = intent.getDoubleExtra(EXTRA_LONGITUDE,Double.valueOf(0));
+		setup();
+	}
+	
+	private void setup(){
+		setTitle("Place List");
 		final List<String> places = new ArrayList<String>();
 		places.add("Local Places"); 
 		places.add("Visited Places");
