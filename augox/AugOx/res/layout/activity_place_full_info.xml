@@ -132,7 +132,7 @@
             android:layout_height="wrap_content"
             android:layout_alignRight="@+id/imageViewStar5"
             android:layout_alignLeft="@+id/imageViewStar1"
-            android:layout_marginLeft="-135dp"
+            android:layout_marginLeft="-170dp"
             android:layout_alignTop="@+id/imageViewStar5"
             android:layout_marginTop="70dp"
             android:layout_alignParentBottom="true"

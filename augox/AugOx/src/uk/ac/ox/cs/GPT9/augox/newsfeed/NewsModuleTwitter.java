@@ -56,7 +56,7 @@ public class NewsModuleTwitter implements INewsModule
 	    				favourites[i] = Integer.parseInt(((org.json.simple.JSONObject)obj.get(i)).get("favorite_count").toString());
 	    			}
 	    			for (int i = 0; i < tweets.length; i++)
-						_newsFeed.GiveResult(tweets[i], (int)((10*tweets.length)/(i+1)) + favourites[i]);
+						_newsFeed.GiveResult(tweets[i], (int)((10*tweets.length)/(i+1)) + favourites[i], NewsFeedSource.Twitter);
 	    		}
 	    	}
 	    	catch (Exception e) {

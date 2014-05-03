@@ -90,7 +90,7 @@ public class NewsModuleFoursquare implements INewsModule
 	    				Object likeCountObject = ((org.json.simple.JSONObject)tipObject.get("likes")).get("count");
 	    				tipLikes[i] = Integer.parseInt(likeCountObject.toString());
 	    				
-	    				_newsFeed.GiveResult(tips[i], (int)((10*tips.length)/(i+1)) + tipLikes[i]);
+	    				_newsFeed.GiveResult(tips[i], (int)((10*tips.length)/(i+1)) + tipLikes[i], NewsFeedSource.Foursquare);
 	    			}
 	    		}
 	        }

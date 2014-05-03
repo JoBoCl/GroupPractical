@@ -24,7 +24,7 @@
     <string name="action_dbg_databasedebugger">Database Debugger</string>
     
     <string name="fullinfo_distanceaway">km away</string>
-    <string name="fullinfo_feedtitle">Social Feed</string>
+    <string name="fullinfo_feedtitle">Live Social Feed</string>
     <string name="fullinfo_namegoeshere">Name goes here</string>
     <string name="fullinfo_distancegoeshere">Distance goes here</string>
     <string name="fullinfo_descriptiongoeshere">Description goes here</string>

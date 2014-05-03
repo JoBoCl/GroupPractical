@@ -71,13 +71,16 @@ public class NewsFeed {
 	class NewsFeedItem {
 		private String _text;
 		private int _priority;
+		private NewsFeedSource _source;
 		
 		public String Text() {return _text;}
 		public int Priority() {return _priority;}
+		public NewsFeedSource Source() {return _source;}
 		
-		public NewsFeedItem(String text, int priority) {
+		public NewsFeedItem(String text, int priority, NewsFeedSource source) {
 			_text = text;
 			_priority = priority;
+			_source = source;
 		}
 	}
 	
@@ -97,6 +100,14 @@ public class NewsFeed {
 		String[] items = new String[_newsItems.size()];
 		for (int i = 0; i < _newsItems.size(); i++) {
 			items[i] =  _newsItems.get(i).Text();
+			switch (_newsItems.get(i).Source()) {
+			case Twitter:
+				items[i] = "T" + items[i];
+				break;
+			case Foursquare:
+				items[i] = "F" + items[i];
+				break;
+			}
 		}
 		return items;
 	}
@@ -107,7 +118,8 @@ public class NewsFeed {
 		_activity.runOnUiThread(new Runnable(){
 	        public void run() {
 	        	ListView feedView = (ListView)_activity.findViewById(R.id.listViewFeed);
-				ArrayAdapter<String> adapter = new ArrayAdapter<String>(_activity, R.layout.news_feed_item_1, results);
+				//ArrayAdapter<String> adapter = new ArrayAdapter<String>(_activity, R.layout.news_feed_item_1, results);
+	        	ArrayAdapter<String> adapter = new NewsFeedArrayAdapter(_activity, results);
 				feedView.setAdapter(adapter);
 				_activity.DisplayStars(); // redisplay how many stars there are; might have changed in download
 				_activity.DisplayImage(); // same for place image
@@ -140,8 +152,8 @@ public class NewsFeed {
 	}
 	
 	// For modules to return results
-	public void GiveResult(final String output, int priority) {
-		addNewItem(new NewsFeedItem(output, priority));
+	public void GiveResult(final String output, int priority, NewsFeedSource source) {
+		addNewItem(new NewsFeedItem(output, priority, source));
 		updateNewsFeed(getItems());
 	}
 }
