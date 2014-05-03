@@ -13,9 +13,12 @@ public interface IRoute {
 	
 	// Functions used probably exclusively by manual route planner
 	
+	// Get id of place at index
+	int idAtIndex(int index);
+	
 	// Is this place included in the current route?
 	boolean contains(PlaceData place);
-	// no version with id included as easier to get from activity than some poor wittle cwass in a different package
+	boolean contains(int id);
 	
 	// Changes position in list of places - either for place to be found or place in position
 	void changePosition(PlaceData place, int index);
@@ -28,18 +31,18 @@ public interface IRoute {
 	// Used by manual and auto route planners
 	
 	// Refreshes the list of places in the route, either through a list or an array (because I'm nice)
-	void setList(List<PlaceData> places);
-	void setList(PlaceData[] places);
+	void setList(List<Integer> places);
+	void setList(Integer[] places);
 	
 	// Used by manual route planner and fullscreeninfo (and possibly mainscreen activity)
 	
 	// Adds a place to the end of the route
-	void addEnd(PlaceData place);
+	void addEnd(Integer id);
 	
 	// Used by fullscreeninfo (and possibly mainscreen activity)
 	
 	// Adds a place at the front of the route (next to be visited)
-	void addNext(PlaceData place);
+	void addNext(Integer id);
 	
 	// Used by MainScreenActivity
 	
@@ -58,6 +61,12 @@ public interface IRoute {
 	// Gets the entire route as a list
 	List<PlaceData> getRouteAsList();
 	
+	// Gets the entire route as a list of ids
+	List<Integer> getRouteAsIDList();
+	
 	// Gets the entire route as an array
 	PlaceData[] getRouteAsArray();
+	
+	// Gets the entire route as an array of ids
+	Integer[] getRouteAsIDArray();
 }

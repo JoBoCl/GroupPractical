@@ -26,6 +26,7 @@ public class PlaceFullInfoActivity extends Activity {
 	public final static String EXTRA_DISTANCE = "uk.ac.ox.cs.GPT9.augox.DISTANCE";
 	
 	private PlaceData _place; // = new PlaceData("Matthew's Awesome Pub", 0.0, 0.0, 5, false, PlaceCategory.BAR, "This isn't the greatest pub in the world.  This is a tribute.  I'm also going to try to make this description long so I can make sure it doesn't go too far to the right and wraps around properly, kind of ruining the preceding one-liner.  Which is a great shame, really.  At some point I'm going to have to make a way of sourcing the description from the Internet, which is going to be annoying and hard and stuff but at least for now I can get this prototype working.  And hey, getting the pretty layout is what really matters.  Having the most up-to-date data is not as important, as xkcd 937 tells us (there's an xkcd for everything)", new OpeningHours(new ArrayList<OpeningHours.Period>()));
+	private int _placeId;
 	private double _distance;
 	private NewsFeed _newsFeed;
 
@@ -37,8 +38,8 @@ public class PlaceFullInfoActivity extends Activity {
 		
 		// load place from intent
 		Intent intent = getIntent();
-		int placeid = intent.getIntExtra(EXTRA_PLACE, 0); 
-		_place = MainScreenActivity.getPlacesDatabase().getPlaceByID(placeid);
+		_placeId = intent.getIntExtra(EXTRA_PLACE, 0); 
+		_place = MainScreenActivity.getPlacesDatabase().getPlaceByID(_placeId);
         
 		
 		// ensure we have valid place data before continuing.  All internal so this error SHOULD NEVER EXIST
@@ -78,7 +79,7 @@ public class PlaceFullInfoActivity extends Activity {
 			Button buttonAddNext = (Button) findViewById(R.id.buttonAddNext);
 			buttonAddNext.setOnClickListener(new View.OnClickListener() {
 	            public void onClick(View v) {
-	            	route.addNext(_place);
+	            	route.addNext(_placeId);
 	            	fullInfoPopup("Route", "Location is now next on route.");
 	            }
 	         });
@@ -87,7 +88,7 @@ public class PlaceFullInfoActivity extends Activity {
 			Button buttonAddEnd = (Button) findViewById(R.id.buttonAddEnd);
 			buttonAddEnd.setOnClickListener(new View.OnClickListener() {
 	            public void onClick(View v) {
-	            	route.addEnd(_place);
+	            	route.addEnd(_placeId);
 	            	fullInfoPopup("Route", "Location has been added to route.");
 	            }
 	         });

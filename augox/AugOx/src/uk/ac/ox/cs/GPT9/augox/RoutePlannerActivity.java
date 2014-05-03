@@ -265,15 +265,16 @@ public class RoutePlannerActivity extends Activity {
 			PlacesDatabase db = MainScreenActivity.getPlacesDatabase();
 			LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			View rowView = inflater.inflate(R.layout.listview_item_add_places, parent,false);
-			final PlaceData item = db.getPlaceByID(values.get(position));
+			final int placeId = values.get(position);
+			final PlaceData item = db.getPlaceByID(placeId);
 			TextView nameView = (TextView) rowView.findViewById(R.id.add_places_name);
 			Button addRouteView = (Button) rowView.findViewById(R.id.buttonAddPlaces);
 			nameView.setText(item.getName());
 			addRouteView.setOnClickListener(new View.OnClickListener() {
 				public void onClick(View v) {
 					Log.d("TESTING","ADDTOROUTE");
-					curRoute.addEnd(item);
-					curRoute.setList(curRoute.getRouteAsArray());
+					curRoute.addEnd(placeId);
+					curRoute.setList(curRoute.getRouteAsIDArray());
 					Log.d("TESTING","ADDEDTOROUTE");
 	                reloadLists();
 				}
