@@ -19,7 +19,6 @@ public class Route implements IRoute {
 	// Changes position in list of places - either for place to be found or place in position
 	private void trueChangePosition(PlaceData place, int start, int end) {
 		_route.remove(start);
-		if (end >= start) end -= 1;
 		_route.add(end, place);
 	}
 	
@@ -95,7 +94,7 @@ public class Route implements IRoute {
 	
 	// Gets the entire route as an array
 	public PlaceData[] getRouteAsArray() {
-		return (PlaceData[])_route.toArray();
+		return _route.toArray(new PlaceData[_route.size()]);
 	}
 	
 	public Route() {
