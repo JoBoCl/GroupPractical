@@ -10,6 +10,7 @@ import uk.ac.ox.cs.GPT9.augox.dbquery.NameStartsWithQuery;
 import uk.ac.ox.cs.GPT9.augox.dbquery.NotQuery;
 import uk.ac.ox.cs.GPT9.augox.dbquery.VisitedQuery;
 import uk.ac.ox.cs.GPT9.augox.dbsort.DatabaseSorter;
+import uk.ac.ox.cs.GPT9.augox.dbsort.DistanceFromSorter;
 import uk.ac.ox.cs.GPT9.augox.dbsort.NameSorter;
 import uk.ac.ox.cs.GPT9.augox.dbsort.SortOrder;
 import android.app.ListActivity;
@@ -39,8 +40,16 @@ public class ListPlacesItemsActivity extends ListActivity {
 	private double longitude = 0;
 	private int queryType = 0;
 
+	protected void onResume(){
+		super.onResume();
+		setup();
+	}
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
+		setup();
+	}
+	
+	private void setup(){
 		Intent intent = getIntent();
 		latitude = intent.getDoubleExtra(EXTRA_LATITUDE,Double.valueOf(0));
 		longitude = intent.getDoubleExtra(EXTRA_LONGITUDE,Double.valueOf(0));
@@ -53,6 +62,7 @@ public class ListPlacesItemsActivity extends ListActivity {
 		switch(queryType){
 		case 0: //local places
 			q = new InLocusQuery(latitude,longitude,radius);
+			s = new DistanceFromSorter(latitude, longitude, SortOrder.ASC);
 			setTitle("Local Places");
 			break;
 		case 1: //visited places
@@ -105,7 +115,6 @@ public class ListPlacesItemsActivity extends ListActivity {
 			setListAdapter(adapter);
 		}
 	}
-	
 	public class MyPlaceAdapter extends ArrayAdapter<Integer> {
 		private Context context;
 		private List<Integer> values;
