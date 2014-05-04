@@ -1,11 +1,13 @@
 package uk.ac.ox.cs.GPT9.augox;
 
 import uk.ac.ox.cs.GPT9.augox.route.*;
+
 import java.text.DecimalFormat;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
@@ -69,6 +71,10 @@ public class PlaceFullInfoActivity extends Activity {
 			descriptionView.setMovementMethod(new ScrollingMovementMethod()); // so it scrolls properly
 			
 			// display correct background image
+			Bundle bundle = intent.getExtras();
+			Bitmap background = (Bitmap) bundle.getParcelable("background");
+			ImageView imgV = (ImageView)findViewById(R.id.imageViewBackground);
+			//imgV.setImageBitmap(background);
 			// TODO
 			
 			// display place image

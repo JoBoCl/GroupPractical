@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.beyondar.example"
+    android:versionCode="000901"
+    android:versionName="0.9.1" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="19" />
+
+    <!-- Google maps stuff -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+
+    <!-- Minimum permissions for BeyondAR -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <!-- For BeyondAR this is not mandatory unless you want to load something from the network -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!--  BeyondAR needs the following features-->
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.sensor.accelerometer" />
+    <uses-feature android:name="android.hardware.sensor.compass" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.beyondar.example.BeyondarExamples"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.beyondar.example.SimpleCameraActivity" />
+        <activity android:name="com.beyondar.example.GoogleMapActivity" />
+        <activity android:name="com.beyondar.example.CameraWithTouchEventsActivity" />
+        <activity android:name="com.beyondar.example.CameraWithGoogleMapsActivity" />
+        <activity android:name="com.beyondar.example.SimpleCameraWithMaxFarMinAwayActivity" />
+        <activity android:name="com.beyondar.example.CameraWithScreenShotActivity" />
+        <activity android:name="com.beyondar.example.ChangeGeoObjectImagesOnTouchActivity" />
+        <activity android:name="com.beyondar.example.AttachViewToGeoObjectActivity" />
+        <activity android:name="com.beyondar.example.StaticViewGeoObjectActivity" />
+        <activity android:name="com.beyondar.example.SimpleCameraWithCustomFilterActivity" />
+        <activity android:name="com.beyondar.example.SimpleCameraWithRadarActivity" />
+        <activity android:name="com.beyondar.example.BeyondarLocationManagerMapActivity" />
+        
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyBN2fi7bdokXVQXmMTGfqWG2oNHjopus-A" />
+        <!--<meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyDw3blSITjdZh7qmz020IkDK-V2MA0a6c4" />--> 
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+    </application>
+
+</manifest>

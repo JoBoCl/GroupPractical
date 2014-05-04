@@ -27,7 +27,8 @@
         android:id="@+id/distanceSlider"
         android:layout_width="240dp"
         android:layout_height="wrap_content" 
-        android:layout_gravity="bottom|right" />
+        android:layout_gravity="bottom|right"
+        android:max="5000" />
     
     <FrameLayout
         android:layout_width="match_parent"
