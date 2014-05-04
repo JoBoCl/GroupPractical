@@ -19,11 +19,11 @@ import uk.ac.ox.cs.GPT9.augox.PlaceCategory;
 import uk.ac.ox.cs.GPT9.augox.PlaceData;
 import uk.ac.ox.cs.GPT9.augox.PlacesDatabase;
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.text.method.ScrollingMovementMethod;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
@@ -33,15 +33,37 @@ public class MainActivity extends Activity {
 	/*
 	 * Variables
 	 */
-	PlacesDatabase db = new PlacesDatabase();	// The current database
+	private RetainedFragment retaineddata;
+	private PlacesDatabase db = new PlacesDatabase();
+	private String outputpanecontent = "";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		Log.d("DBGJames", "onCreate");
+		// Initialise
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		// Set up retained data fragment
+		FragmentManager fm = getFragmentManager();
+		retaineddata = (RetainedFragment) fm.findFragmentByTag("data");
+		if(retaineddata == null) {
+			retaineddata = new RetainedFragment();
+			fm.beginTransaction().add(retaineddata, "data").commit();
+			retaineddata.setData(db, outputpanecontent);
+		}
+		db = retaineddata.getDB();
+		outputpanecontent = retaineddata.getOutputPaneContent();
+		
+		// Set up output pane
 		TextView outputpane = (TextView) findViewById(R.id.outputpane);
 		outputpane.setMovementMethod(new ScrollingMovementMethod());
+		outputpane.setText(outputpanecontent);
+	}
+	
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		retaineddata.setData(db, outputpanecontent);
 	}
 
 	@Override
@@ -251,6 +273,7 @@ public class MainActivity extends Activity {
 					place.getCategory().getName());
 		}
 		outputpane.setText(result);
+		outputpanecontent = result;
 		
 		// Return built list of places
 		return places;
