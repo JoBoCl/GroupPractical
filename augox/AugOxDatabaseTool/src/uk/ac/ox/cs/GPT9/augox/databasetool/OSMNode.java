@@ -6,7 +6,7 @@ import java.util.Map;
 /**
  * Represents a parsed OSM Node
  */
-public class OSMNode {
+public class OSMNode implements OSMItem {
 	/*
 	 * Variables
 	 */
@@ -22,7 +22,7 @@ public class OSMNode {
 	}
 	
 	/*
-	 * Getters
+	 * Get latitude and longitude
 	 */
 	public double getLatitude() { return latitude; }
 	public double getLongitude() { return longitude; }
@@ -35,9 +35,21 @@ public class OSMNode {
 	}
 	
 	/*
-	 * Fetch the value of the given tag, or null if the gag does not exist
+	 * Fetch the value of the given tag - the string "null" (rather than a null
+	 * object) is returned if the tag does not exist
 	 */
 	public String getTagValue(String key) {
-		return tags.get(key);
+		String v = tags.get(key);
+		if(v == null) return "null";
+		return v;
+	}
+	
+	/*
+	 * Does a tag with the given key-value pair exist?
+	 */
+	public boolean hasTag(String key, String value) {
+		String v = tags.get(key);
+		if(v == null) return false;
+		return value.equalsIgnoreCase(v);
 	}
 }

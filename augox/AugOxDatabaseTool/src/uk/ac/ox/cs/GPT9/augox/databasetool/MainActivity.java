@@ -2,17 +2,23 @@ package uk.ac.ox.cs.GPT9.augox.databasetool;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
+import uk.ac.ox.cs.GPT9.augox.OpeningHours;
+import uk.ac.ox.cs.GPT9.augox.PlaceCategory;
+import uk.ac.ox.cs.GPT9.augox.PlaceData;
 import android.app.Activity;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
@@ -47,7 +53,7 @@ public class MainActivity extends Activity {
 			parserFactory.setNamespaceAware(true);
 			parser = parserFactory.newPullParser();
 	        parser.setInput(in, null);
-	        createDatabaseFromOSM(parser);
+	        createPlaceListFromOSM(parser);
 	        
 			in.close();
 			Toast toast = Toast.makeText(getApplicationContext(), "File Loaded", Toast.LENGTH_SHORT);
@@ -61,12 +67,13 @@ public class MainActivity extends Activity {
 		}
 	}
 	
-	private void createDatabaseFromOSM(XmlPullParser parser)
+	private List<PlaceData> createPlaceListFromOSM(XmlPullParser parser)
 			throws XmlPullParserException, IOException {
 		// Variables
 		int eventType = parser.getEventType();
 		Map<Long, OSMNode> nodes = new HashMap<Long, OSMNode>();
 		Map<Long, OSMWay> ways = new HashMap<Long, OSMWay>();
+		List<OSMItem> allitems = new ArrayList<OSMItem>();
 		OSMNode currentNode = null;
 		OSMWay currentWay = null;
 		
@@ -93,6 +100,7 @@ public class MainActivity extends Activity {
 							XmlPullParser.NO_NAMESPACE, "lon"));
 					OSMNode newnode = new OSMNode(lat, lon); 
 					nodes.put(id, newnode);
+					allitems.add(newnode);
 					
 					// Will we be continuing to parse this node in later steps?
 					if(!isDegenerate) currentNode = newnode;
@@ -105,6 +113,7 @@ public class MainActivity extends Activity {
 							XmlPullParser.NO_NAMESPACE, "id"));
 					OSMWay newway = new OSMWay();
 					ways.put(id, newway);
+					allitems.add(newway);
 					
 					// Will we be continuing to parse this way in later steps?
 					if(!isDegenerate) currentWay = newway;
@@ -151,29 +160,61 @@ public class MainActivity extends Activity {
 			eventType = parser.next();
 		}
 		
-		// Loop through all parsed nodes and ways, adding entries to database
-		TextView outputpane = (TextView) findViewById(R.id.outputpane);
-		result += "\n**Nodes**\n";
-		//for(OSMNode node : nodes.values()) {
-		for(Map.Entry<Long, OSMNode> entry : nodes.entrySet()) {
-			long key = entry.getKey();
-			OSMNode node = entry.getValue();
-			if(node.getTagValue("shop") != null) {
-				result += String.format("%s %s is a %s shop.\n", key,
-						node.getTagValue("name"), node.getTagValue("shop"));
+		// Loop through all parsed nodes and ways, building a list of places
+		List<PlaceData> places = new ArrayList<PlaceData>();
+		for(OSMItem item : allitems) {
+			// PlaceData being made
+			PlaceData n = null;
+			// Bar
+			if(item.hasTag("amenity", "bar")) {
+				Log.d("DBGJames", "Adding bar");
+				n = new PlaceData(item.getTagValue("name"),
+						item.getLatitude(), item.getLongitude(), 0, false,
+						PlaceCategory.BAR, "", new OpeningHours(), "");
+				Log.d("DBGJames", "Done");
+			}
+			// Restaurant
+			if(item.hasTag("amenity", "restaurant")) {
+				Log.d("DBGJames", "Adding restaurant");
+				n = new PlaceData(item.getTagValue("name"),
+						item.getLatitude(), item.getLongitude(), 0, false,
+						PlaceCategory.RESTAURANT, "", new OpeningHours(), "");
+				Log.d("DBGJames", "Done");
+			}
+			// College
+			if(item.hasTag("amenity", "college")
+					|| item.hasTag("amenity", "university")) {
+				Log.d("DBGJames", "Adding college");
+				n = new PlaceData(item.getTagValue("name"),
+						item.getLatitude(), item.getLongitude(), 0, false,
+						PlaceCategory.COLLEGE, "", new OpeningHours(), "");
+				Log.d("DBGJames", "Done");
+			}
+			// Museum
+			if(item.hasTag("tourism", "museum")) {
+				Log.d("DBGJames", "Adding museum");
+				n = new PlaceData(item.getTagValue("name"),
+						item.getLatitude(), item.getLongitude(), 0, false,
+						PlaceCategory.MUSEUM, "", new OpeningHours(), "");
+				Log.d("DBGJames", "Done");
+			}
+			// Add PlaceData to list if one was made
+			if(n != null) {
+				places.add(n);
+				Log.d("DBGJames", "Complete");
 			}
 		}
-		result += "\n**Ways**\n";
-		//for(OSMWay way : ways.values()) {
-		for(Map.Entry<Long, OSMWay> entry : ways.entrySet()) {
-			long key = entry.getKey();
-			OSMWay way = entry.getValue();
-			if(way.getTagValue("shop") != null) {
-				result += String.format("%s %s is a %s shop.\n", key,
-						way.getTagValue("name"), way.getTagValue("shop"));
-			}
+		
+		// Update output pane
+		TextView outputpane = (TextView) findViewById(R.id.outputpane);
+		for(PlaceData place : places) {
+			result += String.format("%s (%s)\n", place.getName(),
+					place.getCategory().toString());
 		}
 		outputpane.setText(result);
+		
+		// Return built list of places
+		return places;
 	}
 
 }

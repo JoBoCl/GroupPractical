@@ -35,6 +35,13 @@ public class OpeningHours {
 	}
 	
 	/*
+	 * Empty constructor
+	 */
+	public OpeningHours() {
+		this.periods = new ArrayList<Period>();
+	}
+	
+	/*
 	 * Return if the thing is open at give time and date.
 	 */
 	public boolean isOpenAt(LocalTime date) {
