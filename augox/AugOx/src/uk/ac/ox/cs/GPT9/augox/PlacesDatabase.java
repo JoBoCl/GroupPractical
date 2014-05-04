@@ -75,8 +75,6 @@ public class PlacesDatabase {
 	}
 	
 	/*
-<<<<<<< HEAD
-=======
 	 * Reset the database
 	 */
 	private void resetDatabase() {
@@ -85,7 +83,6 @@ public class PlacesDatabase {
 	}
 	
 	/*
->>>>>>> origin/master
 	 * Populate the database from the given stream.
 	 * Note that the database is cleared first, and opening/closing the stream
 	 * should be handled by the calling method.
