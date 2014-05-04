@@ -240,26 +240,30 @@ public class MainActivity extends Activity {
 			if(item.hasTag("amenity", "bar")) {
 				n = new PlaceData(item.getTagValue("name"),
 						item.getLatitude(), item.getLongitude(), 0, false,
-						PlaceCategory.BAR, "", new OpeningHours(), "");
+						PlaceCategory.BAR, "", new OpeningHours(), "",
+						"");
 			}
 			// Restaurant
 			if(item.hasTag("amenity", "restaurant")) {
 				n = new PlaceData(item.getTagValue("name"),
 						item.getLatitude(), item.getLongitude(), 0, false,
-						PlaceCategory.RESTAURANT, "", new OpeningHours(), "");
+						PlaceCategory.RESTAURANT, "", new OpeningHours(), "",
+						"");
 			}
 			// College
 			if(item.hasTag("amenity", "college")
 					|| item.hasTag("amenity", "university")) {
 				n = new PlaceData(item.getTagValue("name"),
 						item.getLatitude(), item.getLongitude(), 0, false,
-						PlaceCategory.COLLEGE, "", new OpeningHours(), "");
+						PlaceCategory.COLLEGE, "", new OpeningHours(), "",
+						"");
 			}
 			// Museum
 			if(item.hasTag("tourism", "museum")) {
 				n = new PlaceData(item.getTagValue("name"),
 						item.getLatitude(), item.getLongitude(), 0, false,
-						PlaceCategory.MUSEUM, "", new OpeningHours(), "");
+						PlaceCategory.MUSEUM, "", new OpeningHours(), "",
+						"");
 			}
 			// Add PlaceData to list if one was made
 			if(n != null) places.add(n);
