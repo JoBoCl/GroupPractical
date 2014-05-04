@@ -1,6 +1,7 @@
 package uk.ac.ox.cs.GPT9.augox;
 import java.util.ArrayList;
 import java.util.List;
+
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
@@ -14,35 +15,40 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-public class ListPlacesActivity extends ListActivity {
+public class ListPlacesBySubTypeActivity extends ListActivity {
 	/*
 	 * Intent Constants
 	 */
 	public final static String EXTRA_LATITUDE = "uk.ac.ox.cs.GPT9.augox.LATITUDE";
 	public final static String EXTRA_LONGITUDE = "uk.ac.ox.cs.GPT9.augox.LONGITUDE";
+	public final static String EXTRA_QUERYTYPE = "uk.ac.ox.cs.GPT9.augox.QUERYTYPE";
 	private double latitude = 0;
 	private double longitude = 0;
+	private int queryType = 0;
 
-	protected void onResume(){
-		super.onResume();
-		//setup();
-	}
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		Intent intent = getIntent();
 		latitude = intent.getDoubleExtra(EXTRA_LATITUDE,Double.valueOf(0));
 		longitude = intent.getDoubleExtra(EXTRA_LONGITUDE,Double.valueOf(0));
-		setup();
-	}
-	
-	private void setup(){
-		setTitle("Place List");
-		final List<String> places = new ArrayList<String>();
-		places.add("Local Places"); 
-		places.add("Visited Places");
-		places.add("Unvisited Places");
-		places.add("All Places by Name"); 
-		places.add("All Places by Type");
+		queryType = intent.getIntExtra(EXTRA_QUERYTYPE, 0);
+		final List<String> items = new ArrayList<String>();
+		switch(queryType){
+			case 3:
+				for(char ch = '0' ; ch <= '9' ; ch++ )
+			        items.add(String.valueOf(ch));
+				for(char ch = 'A' ; ch <= 'Z' ; ch++ )
+			        items.add(String.valueOf(ch));
+				setTitle("Places by Name");
+				break;
+			case 4:
+				for(PlaceCategory cat : PlaceCategory.values()){
+					if(cat.getID() != 0)
+						items.add(cat.getName());
+				}
+				setTitle("Places by Type");
+				break;
+		}
 		
 		//set click listener for clicking on a list element
 		getListView().setOnItemClickListener(new OnItemClickListener() {
@@ -50,47 +56,32 @@ public class ListPlacesActivity extends ListActivity {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int itemNoClicked,
 					long arg3) {
 				//Starts activity PlaceFullInfoActivity for the clicked place
-            	switch(itemNoClicked){
-            	case 0: //local places
-                	Intent intent0 = new Intent(getApplicationContext(), ListPlacesItemsActivity.class);
+            	switch(queryType){
+            	case 3:
+            		Intent intent0 = new Intent(getApplicationContext(), ListPlacesItemsActivity.class);
                 	intent0.putExtra(ListPlacesItemsActivity.EXTRA_LATITUDE, latitude);
                 	intent0.putExtra(ListPlacesItemsActivity.EXTRA_LONGITUDE, longitude);
-                	intent0.putExtra(ListPlacesItemsActivity.EXTRA_QUERYTYPE, 0);
+                	intent0.putExtra(ListPlacesItemsActivity.EXTRA_QUERYTYPE, 3);
+                	if(itemNoClicked <= 9){
+                    	intent0.putExtra(ListPlacesItemsActivity.EXTRA_QUERYDATA,(int) '0' +itemNoClicked);
+                    	} else {
+                    	intent0.putExtra(ListPlacesItemsActivity.EXTRA_QUERYDATA, (int) 'A' - 10 + itemNoClicked);
+                    }
                 	startActivity(intent0);
             		break;
-            	case 1: //visited places
+            	case 4:
             		Intent intent1 = new Intent(getApplicationContext(), ListPlacesItemsActivity.class);
                 	intent1.putExtra(ListPlacesItemsActivity.EXTRA_LATITUDE, latitude);
                 	intent1.putExtra(ListPlacesItemsActivity.EXTRA_LONGITUDE, longitude);
-                	intent1.putExtra(ListPlacesItemsActivity.EXTRA_QUERYTYPE, 1);
-                	startActivity(intent1);
-            		break;
-            	case 2: //places to visit
-            		Intent intent2 = new Intent(getApplicationContext(), ListPlacesItemsActivity.class);
-                	intent2.putExtra(ListPlacesItemsActivity.EXTRA_LATITUDE, latitude);
-                	intent2.putExtra(ListPlacesItemsActivity.EXTRA_LONGITUDE, longitude);
-                	intent2.putExtra(ListPlacesItemsActivity.EXTRA_QUERYTYPE, 2);
-                	startActivity(intent2);
-            		break;
-            	case 3: //places by name
-            		Intent intent3 = new Intent(getApplicationContext(), ListPlacesBySubTypeActivity.class);
-                	intent3.putExtra(ListPlacesBySubTypeActivity.EXTRA_LATITUDE, latitude);
-                	intent3.putExtra(ListPlacesBySubTypeActivity.EXTRA_LONGITUDE, longitude);
-                	intent3.putExtra(ListPlacesBySubTypeActivity.EXTRA_QUERYTYPE, 3);
-                	startActivity(intent3);
-            		break;
-            	case 4: //place by type
-            		Intent intent4 = new Intent(getApplicationContext(), ListPlacesBySubTypeActivity.class);
-                	intent4.putExtra(ListPlacesBySubTypeActivity.EXTRA_LATITUDE, latitude);
-                	intent4.putExtra(ListPlacesBySubTypeActivity.EXTRA_LONGITUDE, longitude);
-                	intent4.putExtra(ListPlacesBySubTypeActivity.EXTRA_QUERYTYPE, 4);
-                	startActivity(intent4);
+                	intent1.putExtra(ListPlacesItemsActivity.EXTRA_QUERYTYPE, 4);
+                    intent1.putExtra(ListPlacesItemsActivity.EXTRA_QUERYDATA, itemNoClicked+1); //id of PlaceCategory
+                    startActivity(intent1);
             		break;
             	}
 			}
 		});	
 		//set up the ArrayAdapter
-		MyStringAdapter adapter = new MyStringAdapter(this,places);
+		MyStringAdapter adapter = new MyStringAdapter(this,items);
 		setListAdapter(adapter);
 	}
 	

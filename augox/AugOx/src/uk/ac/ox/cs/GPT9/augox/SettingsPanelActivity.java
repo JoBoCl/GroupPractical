@@ -1,5 +1,7 @@
 package uk.ac.ox.cs.GPT9.augox;
 
+import java.util.List;
+
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.Configuration;
@@ -8,6 +10,7 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
@@ -15,12 +18,9 @@ import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
+import android.text.InputType;
 import android.text.TextUtils;
-
-import java.util.EmptyStackException;
-import java.util.List;
-
-import uk.ac.ox.cs.GPT9.augox.FilterPanelActivity.FilterFragment;
+import android.widget.Toast;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On
@@ -58,6 +58,7 @@ public class SettingsPanelActivity extends PreferenceActivity {
 		if (!isSimplePreferences(this)) {
 			return;
 		} 
+		Toast.makeText(this, "testing", Toast.LENGTH_LONG).show();
 		getFragmentManager().beginTransaction().replace(android.R.id.content, 
 				new GeneralPreferenceFragment()).commit();
 		getFragmentManager().beginTransaction().replace(android.R.id.content, 
@@ -213,13 +214,7 @@ public class SettingsPanelActivity extends PreferenceActivity {
 		public void onCreate(Bundle savedInstanceState) {
 			super.onCreate(savedInstanceState);
 			addPreferencesFromResource(R.xml.pref_general);
-
-			// Bind the summaries of EditText/List/Dialog/Ringtone preferences
-			// to their values. When their values change, their summaries are
-			// updated to reflect the new value, per the Android Design
-			// guidelines.
-			bindPreferenceSummaryToValue(findPreference("example_text"));
-			bindPreferenceSummaryToValue(findPreference("example_list"));
+			bindPreferenceSummaryToValue(findPreference("setting_autoroute_max_length"));
 		}
 	}
 

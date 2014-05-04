@@ -63,12 +63,13 @@ public class PlaceData {
 	private String description;
 	private OpeningHours openinghours;
 	private String twitterhandle;
+	private String foursquareid;
 
 	/*
 	 * Semi-Persistent Data - initially null, can be set, but may be wiped at
 	 * any time in the future to conserve space
 	 */
-	private SOMEIMAGETYPE image;
+	private Drawable image;
 
 	/*
 	 * Session Data - initially takes a default / null value, which can be
@@ -88,8 +89,9 @@ public class PlaceData {
 	public PlaceCategory getCategory();
 	public String getDescription();
 	public OpeningHours getOpeningHours();
-	// social address getters
-	public SOMEIMAGETYPE getImage();
+	public String getTwitterHandle();
+	public String getFourSquareID();
+	public Drawable getImage();
 	public boolean getClicked();
 	// social caching getters
 
@@ -98,6 +100,7 @@ public class PlaceData {
 	 */
 	public void updateRating(int rating);
 	public void updateVisited(boolean visited);
+	public void updateImage(Drawable image);
 	public void updateClicked(boolean clicked);
 }
 
