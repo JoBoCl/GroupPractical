@@ -3,5 +3,6 @@
 
     <string name="app_name">AugOx Database Tool</string>
     <string name="parse_data">Parse Data</string>
+    <string name="write_database">Write Database</string>
 
 </resources>

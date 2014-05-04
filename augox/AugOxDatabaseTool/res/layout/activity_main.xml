@@ -16,6 +16,13 @@
         android:text="@string/parse_data"
         android:onClick="parseData" />
     
+    <Button
+        android:id="@+id/writedatabase"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/write_database"
+        android:onClick="writeDatabase" />
+    
     <TextView
         android:id="@+id/outputpane"
         android:layout_width="wrap_content"

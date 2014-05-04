@@ -1,5 +1,8 @@
 package uk.ac.ox.cs.GPT9.augox.databasetool;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -14,9 +17,11 @@ import org.xmlpull.v1.XmlPullParserFactory;
 import uk.ac.ox.cs.GPT9.augox.OpeningHours;
 import uk.ac.ox.cs.GPT9.augox.PlaceCategory;
 import uk.ac.ox.cs.GPT9.augox.PlaceData;
+import uk.ac.ox.cs.GPT9.augox.PlacesDatabase;
 import android.app.Activity;
 import android.content.res.AssetManager;
 import android.os.Bundle;
+import android.os.Environment;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Menu;
@@ -25,9 +30,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
+	/*
+	 * Variables
+	 */
+	PlacesDatabase db = new PlacesDatabase();	// The current database
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		Log.d("DBGJames", "onCreate");
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		TextView outputpane = (TextView) findViewById(R.id.outputpane);
@@ -41,22 +51,32 @@ public class MainActivity extends Activity {
 		return true;
 	}
 	
+	/*
+	 * Handle press of 'Parse Data' button
+	 */
 	public void parseData(View view) {
+		// Prepare asset manager and XML parser
 		AssetManager ast = getAssets();
 		XmlPullParserFactory parserFactory;
 		XmlPullParser parser;
+		
+		// Parse data
 		try {
+			// Load data file
 			// http://api.openstreetmap.org/api/0.6/map?bbox=minlong,minlat,maxlong,maxlat
 			InputStream in = ast.open("map.osm");
 			
+			// Create database from data file
 			parserFactory = XmlPullParserFactory.newInstance();
 			parserFactory.setNamespaceAware(true);
 			parser = parserFactory.newPullParser();
 	        parser.setInput(in, null);
-	        createPlaceListFromOSM(parser);
+	        List<PlaceData> places = createPlaceListFromOSM(parser);
+	        db = new PlacesDatabase(places);
 	        
+	        // Clean up
 			in.close();
-			Toast toast = Toast.makeText(getApplicationContext(), "File Loaded", Toast.LENGTH_SHORT);
+			Toast toast = Toast.makeText(getApplicationContext(), "Data Parsed", Toast.LENGTH_SHORT);
 			toast.show();
 		} catch (XmlPullParserException e) {
 			Toast toast = Toast.makeText(getApplicationContext(), e.getLocalizedMessage(), Toast.LENGTH_SHORT);
@@ -67,6 +87,35 @@ public class MainActivity extends Activity {
 		}
 	}
 	
+	/*
+	 * Handle press of 'Write Database' button
+	 */
+	public void writeDatabase(View view) {
+		if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
+	    	File dir = getExternalFilesDir(null);
+	    	File file = new File(dir, "db.dat");
+	    	try {
+	    		FileOutputStream f = new FileOutputStream(file);
+	    		db.writeToStream(f);
+	    		f.close();
+	    		Toast toast = Toast.makeText(getApplicationContext(), "Database Written", Toast.LENGTH_SHORT);
+				toast.show();
+	    	} catch (FileNotFoundException e) {
+	    		Toast toast = Toast.makeText(getApplicationContext(), e.getLocalizedMessage(), Toast.LENGTH_SHORT);
+				toast.show();
+	    	} catch (IOException e) {
+	    		Toast toast = Toast.makeText(getApplicationContext(), e.getLocalizedMessage(), Toast.LENGTH_SHORT);
+				toast.show();
+	    	}
+	    } else {
+	    	Toast toast = Toast.makeText(getApplicationContext(), "External Storage Unwritable", Toast.LENGTH_SHORT);
+			toast.show();
+	    }
+	}
+	
+	/*
+	 * Create a list of PlaceData from the given XML parser
+	 */
 	private List<PlaceData> createPlaceListFromOSM(XmlPullParser parser)
 			throws XmlPullParserException, IOException {
 		// Variables
@@ -167,49 +216,39 @@ public class MainActivity extends Activity {
 			PlaceData n = null;
 			// Bar
 			if(item.hasTag("amenity", "bar")) {
-				Log.d("DBGJames", "Adding bar");
 				n = new PlaceData(item.getTagValue("name"),
 						item.getLatitude(), item.getLongitude(), 0, false,
 						PlaceCategory.BAR, "", new OpeningHours(), "");
-				Log.d("DBGJames", "Done");
 			}
 			// Restaurant
 			if(item.hasTag("amenity", "restaurant")) {
-				Log.d("DBGJames", "Adding restaurant");
 				n = new PlaceData(item.getTagValue("name"),
 						item.getLatitude(), item.getLongitude(), 0, false,
 						PlaceCategory.RESTAURANT, "", new OpeningHours(), "");
-				Log.d("DBGJames", "Done");
 			}
 			// College
 			if(item.hasTag("amenity", "college")
 					|| item.hasTag("amenity", "university")) {
-				Log.d("DBGJames", "Adding college");
 				n = new PlaceData(item.getTagValue("name"),
 						item.getLatitude(), item.getLongitude(), 0, false,
 						PlaceCategory.COLLEGE, "", new OpeningHours(), "");
-				Log.d("DBGJames", "Done");
 			}
 			// Museum
 			if(item.hasTag("tourism", "museum")) {
-				Log.d("DBGJames", "Adding museum");
 				n = new PlaceData(item.getTagValue("name"),
 						item.getLatitude(), item.getLongitude(), 0, false,
 						PlaceCategory.MUSEUM, "", new OpeningHours(), "");
-				Log.d("DBGJames", "Done");
 			}
 			// Add PlaceData to list if one was made
-			if(n != null) {
-				places.add(n);
-				Log.d("DBGJames", "Complete");
-			}
+			if(n != null) places.add(n);
 		}
 		
 		// Update output pane
 		TextView outputpane = (TextView) findViewById(R.id.outputpane);
+		result += String.format("%s entries generated\n", places.size());
 		for(PlaceData place : places) {
 			result += String.format("%s (%s)\n", place.getName(),
-					place.getCategory().toString());
+					place.getCategory().getName());
 		}
 		outputpane.setText(result);
 		
