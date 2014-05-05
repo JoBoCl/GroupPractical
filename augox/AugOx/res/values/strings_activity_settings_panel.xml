@@ -2,11 +2,33 @@
     
     <string name="title_activity_settings_panel">Settings</string>
     
-     <!-- Example General settings -->
+     <!-- General settings -->
     <string name="pref_header_general">General</string>
     <string name="pref_title_tweets_english">Only show Tweets written in English</string>
     <string name="pref_description_tweets_english">Hides Tweets in any other language</string>
-   
+
+    <string name="pref_title_autoroute_max_length">Maximum Auto Route Length</string>
+    <string-array name="pref_autoroute_max_length_array">
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+    </string-array>
+    
     <!-- Example settings for Data & Sync -->
     <string name="pref_header_data_sync">Data &amp; sync</string>
     <string name="pref_title_sync_frequency">Sync frequency</string>
