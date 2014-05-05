@@ -32,8 +32,6 @@ public class NewsFeedArrayAdapter extends ArrayAdapter<String> {
 		// Change icon based on name
 		String s = values[position].substring(0,1);
  
-		System.out.println(s);
- 
 		if (s.equals("T")) {
 			imageView.setImageResource(R.drawable.twittericon);
 		} else if (s.equals("F")) {
