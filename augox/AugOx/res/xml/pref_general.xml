@@ -1,11 +1,5 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <CheckBoxPreference
-        android:defaultValue="true"
-        android:key="setting_tweets_english"
-        android:summary="@string/pref_description_tweets_english"
-        android:title="@string/pref_title_tweets_english" />
-
     <ListPreference
         android:defaultValue="10"
         android:entries="@array/pref_autoroute_max_length_array"
@@ -14,4 +8,19 @@
         android:negativeButtonText="@null"
         android:positiveButtonText="@null"
         android:title="@string/pref_title_autoroute_max_length"  />
+    
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="setting_tweets_english"
+        android:summary="@string/pref_description_tweets_english"
+        android:title="@string/pref_title_tweets_english" />
+    
+     <ListPreference
+        android:defaultValue="1"
+        android:entries="@array/pref_arview_max_distance_names"
+        android:entryValues="@array/pref_arview_max_distance_values"
+        android:key="setting_arview_max_distance"
+        android:negativeButtonText="@null"
+        android:positiveButtonText="@null"
+        android:title="@string/pref_title_arview_max_distance"  />
 </PreferenceScreen>
