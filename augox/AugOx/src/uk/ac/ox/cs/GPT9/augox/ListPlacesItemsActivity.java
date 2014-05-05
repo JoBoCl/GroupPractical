@@ -97,10 +97,13 @@ public class ListPlacesItemsActivity extends ListActivity {
 				public void onItemClick(AdapterView<?> arg0, View arg1, int itemNoClicked,
 						long arg3) {
 					//Starts activity PlaceFullInfoActivity for the clicked place
+					PlaceData place = db.getPlaceByID(places.get(itemNoClicked));
 	            	Intent intent = new Intent(getApplicationContext(), PlaceFullInfoActivity.class);
 	            	//put the place in the intent
 	                intent.putExtra(PlaceFullInfoActivity.EXTRA_PLACE, places.get(itemNoClicked));
 	                //put the background to include in the intent
+	                double dist = PlaceData.getDistanceBetween(place.getLatitude(), place.getLongitude(), latitude, longitude);
+	                intent.putExtra(PlaceFullInfoActivity.EXTRA_DISTANCE, dist);
 	                intent.putExtra(PlaceFullInfoActivity.EXTRA_BACKGROUND, "");
 	                startActivity(intent);
 				}
