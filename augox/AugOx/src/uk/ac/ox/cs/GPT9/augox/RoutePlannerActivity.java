@@ -44,6 +44,8 @@ public class RoutePlannerActivity extends Activity {
 		reloadLists();
 		reloadCheckboxes();
 	}
+	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -62,7 +64,6 @@ public class RoutePlannerActivity extends Activity {
 	
 	
 	private void reloadCheckboxes(){
-		Log.d("TESTING","Checkboxes Start");
 		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 		final CheckBox filterVisited = (CheckBox) findViewById(R.id.checkBoxRouteFilterVisited);
 		final CheckBox filterUnvisited = (CheckBox) findViewById(R.id.checkBoxRouteFilterUnvisited);
