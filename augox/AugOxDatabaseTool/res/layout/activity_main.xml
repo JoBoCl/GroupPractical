@@ -10,18 +10,29 @@
     tools:context=".MainActivity" >
 
     <Button
-        android:id="@+id/parsedata"
+        android:id="@+id/parsedataosm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/parse_data"
-        android:onClick="parseData" />
-    
+        android:text="@string/parse_data_osm"
+        android:onClick="parseDataOSM" />
     <Button
-        android:id="@+id/writedatabase"
+        android:id="@+id/parsedataxml"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/write_database"
-        android:onClick="writeDatabase" />
+        android:text="@string/parse_data_xml"
+        android:onClick="parseDataXML" />
+    <Button
+        android:id="@+id/writedatabasebinary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/write_database_binary"
+        android:onClick="writeDatabaseBinary" />
+    <Button
+        android:id="@+id/writedatabasexml"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/write_database_xml"
+        android:onClick="writeDatabaseXML" />
     
     <TextView
         android:id="@+id/outputpane"

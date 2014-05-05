@@ -107,6 +107,26 @@ public class PlaceData {
 	}
 	
 	/*
+	 * Write the place into the given data stream as human-readable XML
+	 */
+	public void writeToStreamAsXML(DataOutputStream dstream, int id)
+			throws IOException {
+		String s_name = name.replaceAll("&", "&amp;");
+		String s_description = description.replaceAll("&", "&amp;");
+		String xml = " <node id=\"%s\" lat=\"%s\" lon=\"%s\">\n";
+		xml += "  <tag k=\"name\" v=\"%s\"/>\n";
+		xml += "  <tag k=\"augox_category\" v=\"%s\"/>\n";
+		xml += "  <tag k=\"augox_rating\" v=\"%s\"/>\n";
+		xml += "  <tag k=\"description\" v=\"%s\"/>\n";
+		xml += "  <tag k=\"augox_twitterhandle\" v=\"%s\"/>\n";
+		xml += "  <tag k=\"augox_foursquareid\" v=\"%s\"/>\n";
+		xml += " </node>\n";
+		dstream.writeChars(String.format(xml, id, latitude, longitude, s_name,
+				category.getID(), rating, s_description, twitterhandle,
+				foursquareid));
+	}
+	
+	/*
 	 * Create and return a PlaceData object from the given data stream
 	 */
 	public static PlaceData buildPlaceDataFromStream(DataInputStream dstream)
