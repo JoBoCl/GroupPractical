@@ -22,7 +22,7 @@
         android:id="@+id/activityCount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:max="@integer/ActivityLimit" />
+        android:max="@integer/activity_limit" />
 
     <ScrollView 
         android:layout_width="match_parent"
