@@ -22,13 +22,13 @@ public class AutoPlannerActivity extends FragmentActivity {
 
 	public static void getPlaces() {
 		List<Integer> routeList = new ArrayList<Integer>();
-		for (int j = 0;j < activities.length; j++) {
-		GalleryPickerFragment localGalleryPickerFragment = activities[j];
+		for (int j = 0; j < activities.length; j++) {
+			GalleryPickerFragment localGalleryPickerFragment = activities[j];
 			if (localGalleryPickerFragment.getSelectedPlace() != null) {
 				routeList.add(localGalleryPickerFragment.getSelectedPlace());
 			}
 		}
-				MainScreenActivity.getCurrentRoute().setList(routeList);
+		MainScreenActivity.getCurrentRoute().setList(routeList);
 	}
 
 	private void updateViewableActivities(int visibleActivities) {
@@ -83,7 +83,9 @@ public class AutoPlannerActivity extends FragmentActivity {
 				});
 		this.finished = ((Button) findViewById(R.id.routeFinished));
 		this.finished.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View paramAnonymousView) {
+			public void onClick(View view) {
+				getPlaces();
+				finish();
 			}
 		});
 		Log.d("Joshua", "Finished onCreate");
