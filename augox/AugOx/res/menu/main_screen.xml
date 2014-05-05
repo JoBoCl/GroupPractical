@@ -1,32 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
     
-    <item android:id="@+id/action_dbg_placefullinfo"
-          android:title="@string/action_dbg_placefullinfo"
-          android:showAsAction="never" />
+    <item android:id="@+id/action_launch_filterpanel"
+          android:title="@string/action_launch_filterpanel"
+          android:icon="@drawable/baricon"
+          android:showAsAction="ifRoom" />
     
-    <item android:id="@+id/action_dbg_listplaces"
-          android:title="@string/action_dbg_listplaces"
-          android:showAsAction="never" />
+    <item android:id="@+id/action_launch_listplaces"
+          android:title="@string/action_launch_listplaces"
+          android:icon="@drawable/baricon"
+          android:showAsAction="ifRoom" />
     
-    <item android:id="@+id/action_dbg_settingspanel"
-          android:title="@string/action_dbg_settingspanel"
-          android:showAsAction="never" />
+    <item android:id="@+id/action_launch_routeplanner"
+          android:title="@string/action_launch_routeplanner"
+          android:icon="@drawable/baricon"
+          android:showAsAction="ifRoom" />
     
-    <item android:id="@+id/action_dbg_filterpanel"
-          android:title="@string/action_dbg_filterpanel"
-          android:showAsAction="never" />
+    <item android:id="@+id/action_launch_autoplanner"
+          android:title="@string/action_launch_autoplanner"
+          android:icon="@drawable/baricon"
+          android:showAsAction="ifRoom" />
     
-    <item android:id="@+id/action_dbg_routeplanner"
-          android:title="@string/action_dbg_routeplanner"
-          android:showAsAction="never" />
+    <item android:id="@+id/action_launch_settingspanel"
+          android:title="@string/action_launch_settingspanel"
+          android:icon="@drawable/baricon"
+          android:showAsAction="ifRoom" />
     
-    <item android:id="@+id/action_dbg_autoplanner"
-          android:title="@string/action_dbg_autoplanner"
-          android:showAsAction="never" />
-    
-    <item android:id="@+id/action_dbg_databasedebugger"
-          android:title="@string/action_dbg_databasedebugger"
+    <item android:id="@+id/action_launch_databasedebugger"
+          android:title="@string/action_launch_databasedebugger"
           android:showAsAction="never" />
 
 </menu>

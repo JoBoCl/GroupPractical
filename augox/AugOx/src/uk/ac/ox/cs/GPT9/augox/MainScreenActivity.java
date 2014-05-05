@@ -225,38 +225,31 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
         // Handle presses on the action bar items
     	// DEBUG VERSION
         switch (item.getItemId()) {
-            case R.id.action_dbg_placefullinfo:
-            	Intent intent1 = new Intent(this, PlaceFullInfoActivity.class);
-            	intent1.putExtra(PlaceFullInfoActivity.EXTRA_PLACE, 0);
-        		intent1.putExtra(PlaceFullInfoActivity.EXTRA_BACKGROUND, "");
-        		intent1.putExtra(PlaceFullInfoActivity.EXTRA_DISTANCE, 13.37);
-                startActivity(intent1);
-                return true;
-            case R.id.action_dbg_listplaces:
+            case R.id.action_launch_listplaces:
             	Intent intent2 = new Intent(this, ListPlacesActivity.class);
             	// debug values: CS dept entrance!
             	intent2.putExtra(ListPlacesActivity.EXTRA_LATITUDE, 51.760039);
             	intent2.putExtra(ListPlacesActivity.EXTRA_LONGITUDE, -1.258464);
                 startActivity(intent2);
                 return true;
-            case R.id.action_dbg_settingspanel:
+            case R.id.action_launch_settingspanel:
             	Intent intent3 = new Intent(this, SettingsPanelActivity.class);
                 startActivity(intent3);
                 return true;
-            case R.id.action_dbg_filterpanel:
+            case R.id.action_launch_filterpanel:
             	Intent intent4 = new Intent(this, FilterPanelActivity.class);
                 startActivity(intent4);
                 return true;
-            case R.id.action_dbg_routeplanner:
+            case R.id.action_launch_routeplanner:
             	Intent intent5 = new Intent(this, RoutePlannerActivity.class);
             	intent5.putExtra(RoutePlannerActivity.EXTRA_PLACELIST, "");
                 startActivity(intent5);
                 return true;
-            case R.id.action_dbg_autoplanner:
+            case R.id.action_launch_autoplanner:
             	Intent intent6 = new Intent(this, AutoPlannerActivity.class);
                 startActivity(intent6);
                 return true;
-            case R.id.action_dbg_databasedebugger:
+            case R.id.action_launch_databasedebugger:
             	Intent intent7 = new Intent(this, DatabaseDebuggerActivity.class);
                 startActivity(intent7);
                 return true;
