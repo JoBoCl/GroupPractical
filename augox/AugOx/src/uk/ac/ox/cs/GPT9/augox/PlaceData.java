@@ -135,6 +135,7 @@ public class PlaceData {
 		xml += "  <tag k=\"augox_category\" v=\"%s\"/>\n";
 		xml += "  <tag k=\"augox_rating\" v=\"%s\"/>\n";
 		xml += "  <tag k=\"description\" v=\"%s\"/>\n";
+		xml += "  <tag k=\"opening_hours\" v=\"\"/>\n";
 		xml += "  <tag k=\"augox_twitterhandle\" v=\"%s\"/>\n";
 		xml += "  <tag k=\"augox_foursquareid\" v=\"%s\"/>\n";
 		xml += " </node>\n";

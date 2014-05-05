@@ -323,7 +323,7 @@ public class MainActivity extends Activity {
 						item.getLatitude(), item.getLongitude(),
 						Integer.parseInt(item.getTagValue("augox_rating")),
 						false, icategory, item.getTagValue("description"),
-						new OpeningHours(),
+						new OpeningHours(item.getTagValue("openinghours")),
 						item.getTagValue("augox_twitterhandle"),
 						item.getTagValue("augox_foursquareid"));
 			}
