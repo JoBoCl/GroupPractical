@@ -23,7 +23,7 @@
     <string name="action_launch_settingspanel">Settings</string>
     <string name="action_launch_databasedebugger">Database Debugger</string>
     
-    <string name="fullinfo_distanceaway">km away</string>
+    <string name="fullinfo_distanceaway">away</string>
     <string name="fullinfo_feedtitle">Live Social Feed</string>
     <string name="fullinfo_namegoeshere">Name goes here</string>
     <string name="fullinfo_distancegoeshere">Distance goes here</string>

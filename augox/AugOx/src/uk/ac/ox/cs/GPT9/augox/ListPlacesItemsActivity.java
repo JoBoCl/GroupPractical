@@ -97,10 +97,13 @@ public class ListPlacesItemsActivity extends ListActivity {
 				public void onItemClick(AdapterView<?> arg0, View arg1, int itemNoClicked,
 						long arg3) {
 					//Starts activity PlaceFullInfoActivity for the clicked place
+					PlaceData place = db.getPlaceByID(places.get(itemNoClicked));
 	            	Intent intent = new Intent(getApplicationContext(), PlaceFullInfoActivity.class);
 	            	//put the place in the intent
 	                intent.putExtra(PlaceFullInfoActivity.EXTRA_PLACE, places.get(itemNoClicked));
 	                //put the background to include in the intent
+	                double dist = PlaceData.getDistanceBetween(place.getLatitude(), place.getLongitude(), latitude, longitude);
+	                intent.putExtra(PlaceFullInfoActivity.EXTRA_DISTANCE, dist);
 	                intent.putExtra(PlaceFullInfoActivity.EXTRA_BACKGROUND, "");
 	                startActivity(intent);
 				}
@@ -130,27 +133,10 @@ public class ListPlacesItemsActivity extends ListActivity {
 			LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			View rowView = inflater.inflate(R.layout.listview_item_list_places, parent,false);
 			TextView nameView = (TextView) rowView.findViewById(R.id.list_places_item_name);
-			ImageView typeView = (ImageView) rowView.findViewById(R.id.list_places_item_type);
+			ImageView pictureView = (ImageView) rowView.findViewById(R.id.list_places_item_type);
 			TextView distView = (TextView) rowView.findViewById(R.id.list_places_item_distance);
 			nameView.setText(item.getName());
-			//after we have icons for each type of place, set it here
-			switch(item.getCategory()){
-				case MUSEUM:
-					typeView.setImageResource(R.drawable.museumicon);
-					break;
-				case BAR:
-					typeView.setImageResource(R.drawable.baricon);
-					break;
-				case COLLEGE:
-					typeView.setImageResource(R.drawable.collegeicon);
-					break;
-				case RESTAURANT:
-					typeView.setImageResource(R.drawable.restauranticon);
-					break;
-				default:
-					typeView.setImageResource(R.drawable.ic_launcher);
-					break;
-			}
+			pictureView.setImageResource(item.getCategory().getImageRef());
 			distView.setText(String.format("%.1f", PlaceData.getDistanceBetween(
 					latitude,longitude,item.getLatitude(),item.getLongitude()))+"km"); 
 			return rowView;

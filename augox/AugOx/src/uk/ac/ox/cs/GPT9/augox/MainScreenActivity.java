@@ -146,8 +146,9 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
         sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         sharedPref.registerOnSharedPreferenceChangeListener(this);
         
-		/*mViewAdapter = new CustomBeyondarViewAdapter(this);
-		mBeyondarFragment.setBeyondarViewAdapter(mViewAdapter);*/
+        /*
+		mViewAdapter = new CustomBeyondarViewAdapter(this);
+		mBeyondarFragment.setBeyondarViewAdapter(mViewAdapter); */
     	mBeyondarFragment.setMaxFarDistance(MAXICONDIST);
         
         fillWorld();
@@ -228,8 +229,8 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
             case R.id.action_launch_listplaces:
             	Intent intent2 = new Intent(this, ListPlacesActivity.class);
             	// debug values: CS dept entrance!
-            	intent2.putExtra(ListPlacesActivity.EXTRA_LATITUDE, 51.760039);
-            	intent2.putExtra(ListPlacesActivity.EXTRA_LONGITUDE, -1.258464);
+            	intent2.putExtra(ListPlacesActivity.EXTRA_LATITUDE, mWorld.getLatitude());
+            	intent2.putExtra(ListPlacesActivity.EXTRA_LONGITUDE, mWorld.getLongitude());
                 startActivity(intent2);
                 return true;
             case R.id.action_launch_settingspanel:
