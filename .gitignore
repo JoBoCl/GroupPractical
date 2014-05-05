@@ -213,5 +213,5 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
-
-augox/AugOx/gen/
+augox/AugOx/gen/uk/ac/ox/cs/GPT9/augox/R.java
+augox/AugOx/gen/uk/ac/ox/cs/GPT9/augox/BuildConfig.java

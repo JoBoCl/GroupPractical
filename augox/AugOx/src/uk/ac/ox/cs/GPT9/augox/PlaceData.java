@@ -65,6 +65,23 @@ public class PlaceData {
 		clicked = false;
 	}
 
+	
+	// Dummy place
+	public PlaceData() {
+		this.name = "Not Available";
+		this.latitude = 0.0;
+		this.longitude = 0.0;
+		this.rating = 1;
+		this.visited = false;
+		this.category = PlaceCategory.UNKNOWN;
+		this.description = "Dummy Place";
+		this.openinghours = null;
+		
+		// image = null;
+		clicked = false;
+		
+	}
+	
 	/*
 	 * Getters
 	 */

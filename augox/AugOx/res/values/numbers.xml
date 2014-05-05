@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+   <integer name="activity_limit">14</integer> 
+   <integer name="google_play_services_version">19</integer>
+</resources>
