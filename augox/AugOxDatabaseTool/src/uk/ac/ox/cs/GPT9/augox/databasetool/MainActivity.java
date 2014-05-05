@@ -318,14 +318,18 @@ public class MainActivity extends Activity {
 						|| itemHasAugOxCategory(item, PlaceCategory.MUSEUM)) {
 					icategory = PlaceCategory.MUSEUM;
 				}
-				// Create place
-				n = new PlaceData(item.getTagValue("name"),
-						item.getLatitude(), item.getLongitude(),
-						Integer.parseInt(item.getTagValue("augox_rating")),
-						false, icategory, item.getTagValue("description"),
-						new OpeningHours(item.getTagValue("opening_hours")),
-						item.getTagValue("augox_twitterhandle"),
-						item.getTagValue("augox_foursquareid"));
+				
+				if(icategory != PlaceCategory.UNKNOWN) {
+					// Create place
+					String irating = item.getTagValue("augox_rating");
+					n = new PlaceData(item.getTagValue("name"),
+							item.getLatitude(), item.getLongitude(),
+							Integer.parseInt((irating == "") ? "0" : irating),
+							false, icategory, item.getTagValue("description"),
+							new OpeningHours(/*item.getTagValue("opening_hours")*/),
+							item.getTagValue("augox_twitterhandle"),
+							item.getTagValue("augox_foursquareid"));
+				}
 			}
 			// Add PlaceData to list if one was made
 			if(n != null) places.add(n);
