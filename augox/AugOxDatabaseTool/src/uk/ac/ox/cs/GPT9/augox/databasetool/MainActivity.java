@@ -74,9 +74,9 @@ public class MainActivity extends Activity {
 	}
 	
 	/*
-	 * Handle press of 'Parse Data' button
+	 * Handle press of 'Parse Data from OSM' button
 	 */
-	public void parseData(View view) {
+	public void parseDataOSM(View view) {
 		// Prepare asset manager and XML parser
 		AssetManager ast = getAssets();
 		XmlPullParserFactory parserFactory;
@@ -93,7 +93,7 @@ public class MainActivity extends Activity {
 			parserFactory.setNamespaceAware(true);
 			parser = parserFactory.newPullParser();
 	        parser.setInput(in, null);
-	        List<PlaceData> places = createPlaceListFromOSM(parser);
+	        List<PlaceData> places = createPlaceListFromXML(parser);
 	        db = new PlacesDatabase(places);
 	        
 	        // Clean up
@@ -110,9 +110,44 @@ public class MainActivity extends Activity {
 	}
 	
 	/*
-	 * Handle press of 'Write Database' button
+	 * Handle press of 'Parse Data from Custom XML' button
 	 */
-	public void writeDatabase(View view) {
+	public void parseDataXML(View view) {
+		// Prepare asset manager and XML parser
+		AssetManager ast = getAssets();
+		XmlPullParserFactory parserFactory;
+		XmlPullParser parser;
+		
+		// Parse data
+		try {
+			// Load data file
+			InputStream in = ast.open("db.xml");
+			
+			// Create database from data file
+			parserFactory = XmlPullParserFactory.newInstance();
+			parserFactory.setNamespaceAware(true);
+			parser = parserFactory.newPullParser();
+	        parser.setInput(in, null);
+	        List<PlaceData> places = createPlaceListFromXML(parser);
+	        db = new PlacesDatabase(places);
+	        
+	        // Clean up
+			in.close();
+			Toast toast = Toast.makeText(getApplicationContext(), "Data Parsed", Toast.LENGTH_SHORT);
+			toast.show();
+		} catch (XmlPullParserException e) {
+			Toast toast = Toast.makeText(getApplicationContext(), e.getLocalizedMessage(), Toast.LENGTH_SHORT);
+			toast.show();
+		} catch (IOException e) {
+			Toast toast = Toast.makeText(getApplicationContext(), e.getLocalizedMessage(), Toast.LENGTH_SHORT);
+			toast.show();
+		}
+	}
+	
+	/*
+	 * Handle press of 'Write Database to Binary File' button
+	 */
+	public void writeDatabaseBinary(View view) {
 		if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
 	    	File dir = getExternalFilesDir(null);
 	    	File file = new File(dir, "db.dat");
@@ -136,9 +171,36 @@ public class MainActivity extends Activity {
 	}
 	
 	/*
-	 * Create a list of PlaceData from the given XML parser
+	 * Handle press of 'Write Database to Custom XML' button
 	 */
-	private List<PlaceData> createPlaceListFromOSM(XmlPullParser parser)
+	public void writeDatabaseXML(View view) {
+		if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
+	    	File dir = getExternalFilesDir(null);
+	    	File file = new File(dir, "db.xml");
+	    	try {
+	    		FileOutputStream f = new FileOutputStream(file);
+	    		db.writeToStreamAsXML(f);
+	    		f.close();
+	    		Toast toast = Toast.makeText(getApplicationContext(), "Database Written", Toast.LENGTH_SHORT);
+				toast.show();
+	    	} catch (FileNotFoundException e) {
+	    		Toast toast = Toast.makeText(getApplicationContext(), e.getLocalizedMessage(), Toast.LENGTH_SHORT);
+				toast.show();
+	    	} catch (IOException e) {
+	    		Toast toast = Toast.makeText(getApplicationContext(), e.getLocalizedMessage(), Toast.LENGTH_SHORT);
+				toast.show();
+	    	}
+	    } else {
+	    	Toast toast = Toast.makeText(getApplicationContext(), "External Storage Unwritable", Toast.LENGTH_SHORT);
+			toast.show();
+	    }
+	}
+	
+	/*
+	 * Create a list of PlaceData from the given XML parser
+	 * - note that XML format is the same for OSM and custom XML format!
+	 */
+	private List<PlaceData> createPlaceListFromXML(XmlPullParser parser)
 			throws XmlPullParserException, IOException {
 		// Variables
 		int eventType = parser.getEventType();
@@ -237,35 +299,33 @@ public class MainActivity extends Activity {
 			// PlaceData being made
 			PlaceData n = null;
 			if(item.hasTag("name")) {
-				// Bar
-				if(item.hasTag("amenity", "bar")) {
-					n = new PlaceData(item.getTagValue("name"),
-							item.getLatitude(), item.getLongitude(), 0, false,
-							PlaceCategory.BAR, "", new OpeningHours(), "",
-							"");
+				// Load category
+				PlaceCategory icategory = PlaceCategory.UNKNOWN;
+				if(item.hasTag("amenity", "bar")
+						|| itemHasAugOxCategory(item, PlaceCategory.BAR)) {
+					icategory = PlaceCategory.BAR;
 				}
-				// Restaurant
-				if(item.hasTag("amenity", "restaurant")) {
-					n = new PlaceData(item.getTagValue("name"),
-							item.getLatitude(), item.getLongitude(), 0, false,
-							PlaceCategory.RESTAURANT, "", new OpeningHours(), "",
-							"");
+				if(item.hasTag("amenity", "restaurant")
+						|| itemHasAugOxCategory(item, PlaceCategory.RESTAURANT)) {
+					icategory = PlaceCategory.RESTAURANT;
 				}
-				// College
 				if(item.hasTag("amenity", "college")
-						|| item.hasTag("amenity", "university")) {
-					n = new PlaceData(item.getTagValue("name"),
-							item.getLatitude(), item.getLongitude(), 0, false,
-							PlaceCategory.COLLEGE, "", new OpeningHours(), "",
-							"");
+						|| item.hasTag("amenity", "university")
+						|| itemHasAugOxCategory(item, PlaceCategory.COLLEGE)) {
+					icategory = PlaceCategory.COLLEGE;
 				}
-				// Museum
-				if(item.hasTag("tourism", "museum")) {
-					n = new PlaceData(item.getTagValue("name"),
-							item.getLatitude(), item.getLongitude(), 0, false,
-							PlaceCategory.MUSEUM, "", new OpeningHours(), "",
-							"");
+				if(item.hasTag("tourism", "museum")
+						|| itemHasAugOxCategory(item, PlaceCategory.MUSEUM)) {
+					icategory = PlaceCategory.MUSEUM;
 				}
+				// Create place
+				n = new PlaceData(item.getTagValue("name"),
+						item.getLatitude(), item.getLongitude(),
+						Integer.parseInt(item.getTagValue("augox_rating")),
+						false, icategory, item.getTagValue("description"),
+						new OpeningHours(),
+						item.getTagValue("augox_twitterhandle"),
+						item.getTagValue("augox_foursquareid"));
 			}
 			// Add PlaceData to list if one was made
 			if(n != null) places.add(n);
@@ -283,6 +343,14 @@ public class MainActivity extends Activity {
 		
 		// Return built list of places
 		return places;
+	}
+	
+	/*
+	 * Helper function for createPlaceListFromXML
+	 */
+	private boolean itemHasAugOxCategory(OSMItem item, PlaceCategory cat) {
+		String catstr = ((Integer)(cat.getID())).toString();
+		return item.hasTag("augox_category", catstr);
 	}
 
 }
