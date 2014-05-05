@@ -6,11 +6,5 @@
     <header
         android:fragment="uk.ac.ox.cs.GPT9.augox.SettingsPanelActivity$GeneralPreferenceFragment"
         android:title="@string/pref_header_general" />
-    <header
-        android:fragment="uk.ac.ox.cs.GPT9.augox.SettingsPanelActivity$NotificationPreferenceFragment"
-        android:title="@string/pref_header_notifications" />
-    <header
-        android:fragment="uk.ac.ox.cs.GPT9.augox.SettingsPanelActivity$DataSyncPreferenceFragment"
-        android:title="@string/pref_header_data_sync" />
 
 </preference-headers>
