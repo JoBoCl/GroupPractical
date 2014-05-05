@@ -167,7 +167,6 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 			   startActivity(intent);
 		   }
 	   });
-	   */
    }
    
    private void initializeGMaps() {
