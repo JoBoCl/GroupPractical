@@ -25,6 +25,14 @@
 
     </ScrollView>
 
+    <TextView
+        android:id="@+id/startTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="3dp"
+        android:text="Medium Text"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
     <RadioGroup
         android:id="@+id/placesGroup"
         android:layout_width="match_parent"
