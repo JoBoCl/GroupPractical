@@ -3,28 +3,28 @@
     
     <item android:id="@+id/action_launch_filterpanel"
           android:title="@string/action_launch_filterpanel"
-          android:icon="@drawable/baricon"
-          android:showAsAction="ifRoom" />
+          android:icon="@drawable/ic_action_refresh"
+          android:showAsAction="always" />
     
     <item android:id="@+id/action_launch_listplaces"
           android:title="@string/action_launch_listplaces"
-          android:icon="@drawable/baricon"
-          android:showAsAction="ifRoom" />
+          android:icon="@drawable/ic_action_view_as_list"
+          android:showAsAction="always" />
     
     <item android:id="@+id/action_launch_routeplanner"
           android:title="@string/action_launch_routeplanner"
-          android:icon="@drawable/baricon"
-          android:showAsAction="ifRoom" />
+          android:icon="@drawable/ic_action_directions"
+          android:showAsAction="always" />
     
     <item android:id="@+id/action_launch_autoplanner"
           android:title="@string/action_launch_autoplanner"
-          android:icon="@drawable/baricon"
-          android:showAsAction="ifRoom" />
+          android:icon="@drawable/ic_action_split"
+          android:showAsAction="always" />
     
     <item android:id="@+id/action_launch_settingspanel"
           android:title="@string/action_launch_settingspanel"
-          android:icon="@drawable/baricon"
-          android:showAsAction="ifRoom" />
+          android:icon="@drawable/ic_action_settings"
+          android:showAsAction="always" />
     
     <item android:id="@+id/action_launch_databasedebugger"
           android:title="@string/action_launch_databasedebugger"
