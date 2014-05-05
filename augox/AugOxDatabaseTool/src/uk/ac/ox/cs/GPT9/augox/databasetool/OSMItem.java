@@ -22,6 +22,11 @@ interface OSMItem {
 	public String getTagValue(String key);
 	
 	/*
+	 * Does a tag with the given key exist at all?
+	 */
+	public boolean hasTag(String key);
+	
+	/*
 	 * Does a tag with the given key-value pair exist?
 	 */
 	public boolean hasTag(String key, String value);

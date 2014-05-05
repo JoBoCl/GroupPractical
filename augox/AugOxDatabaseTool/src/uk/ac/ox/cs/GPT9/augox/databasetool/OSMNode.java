@@ -45,6 +45,13 @@ public class OSMNode implements OSMItem {
 	}
 	
 	/*
+	 * Does a tag with the given key exist at all?
+	 */
+	public boolean hasTag(String key) {
+		return tags.get(key) != null;
+	}
+	
+	/*
 	 * Does a tag with the given key-value pair exist?
 	 */
 	public boolean hasTag(String key, String value) {
