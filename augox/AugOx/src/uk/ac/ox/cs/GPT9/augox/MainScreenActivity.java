@@ -82,7 +82,7 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        /*
+        
         //requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main_screen);
         
@@ -146,8 +146,9 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
         sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         sharedPref.registerOnSharedPreferenceChangeListener(this);
         
-		/*mViewAdapter = new CustomBeyondarViewAdapter(this);
-		mBeyondarFragment.setBeyondarViewAdapter(mViewAdapter);*/
+        /*
+		mViewAdapter = new CustomBeyondarViewAdapter(this);
+		mBeyondarFragment.setBeyondarViewAdapter(mViewAdapter); */
     	mBeyondarFragment.setMaxFarDistance(MAXICONDIST);
         
         fillWorld();
@@ -167,7 +168,7 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 			   startActivity(intent);
 		   }
 	   });
-	   */
+	   
    }
    
    private void initializeGMaps() {
