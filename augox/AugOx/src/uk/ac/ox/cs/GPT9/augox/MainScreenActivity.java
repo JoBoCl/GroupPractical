@@ -61,7 +61,7 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
+        /*
         //requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main_screen);
         
@@ -141,6 +141,7 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 			   //intent.putExtra(PlaceFullInfoActivity.EXTRA_PLACE, );
 		   }
 	   });
+	   */
    }
    
    private void initializeGMaps() {

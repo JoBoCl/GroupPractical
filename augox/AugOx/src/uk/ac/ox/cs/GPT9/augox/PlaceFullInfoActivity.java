@@ -29,6 +29,18 @@ public class PlaceFullInfoActivity extends Activity {
 	private int _placeId;
 	private double _distance;
 	private NewsFeed _newsFeed;
+	
+	// returns a string representing the distance in metres or kilometres
+	public static String distanceAsString(double distanceAsKm) {
+        if (distanceAsKm < 1) {
+        	String result = new DecimalFormat(".#").format(distanceAsKm).substring(1) + "00 m";
+        	if (result.contains("000 m")) return "0 m";
+        	else return result;
+        }
+        else {
+        	return new DecimalFormat("#.#").format(distanceAsKm) + " km";
+        }
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +51,7 @@ public class PlaceFullInfoActivity extends Activity {
 		// load place from intent
 		Intent intent = getIntent();
 		_placeId = intent.getIntExtra(EXTRA_PLACE, 0); 
-		_place = MainScreenActivity.getPlacesDatabase().getPlaceByID(_placeId);
-        
+		_place = MainScreenActivity.getPlacesDatabase().getPlaceByID(_placeId);        
 		
 		// ensure we have valid place data before continuing.  All internal so this error SHOULD NEVER EXIST
 		// if it does it's NOT MY FAULT
@@ -56,7 +67,7 @@ public class PlaceFullInfoActivity extends Activity {
 			
 			// get and display distance
 			_distance = intent.getDoubleExtra(EXTRA_DISTANCE, 0.0d);
-			String distanceString = new DecimalFormat("#.#").format(distance());
+			String distanceString = distanceAsString(_distance);
 			TextView distanceView = (TextView)findViewById(R.id.textViewDistance);
 			distanceView.setText(distanceString + " " + getResources().getText(R.string.fullinfo_distanceaway));
 			
