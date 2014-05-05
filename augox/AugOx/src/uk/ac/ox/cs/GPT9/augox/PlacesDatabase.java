@@ -58,6 +58,15 @@ public class PlacesDatabase {
 	}
 	
 	/*
+	 * Construct database from list of PlaceData
+	 */
+	public PlacesDatabase(List<PlaceData> places) {
+		for(PlaceData place : places) {
+			addEntry(place);
+		}
+	}
+	
+	/*
 	 * Add a new entry to the database
 	 */
 	private void addEntry(PlaceData place) {
@@ -66,8 +75,6 @@ public class PlacesDatabase {
 	}
 	
 	/*
-<<<<<<< HEAD
-=======
 	 * Reset the database
 	 */
 	private void resetDatabase() {
@@ -76,7 +83,6 @@ public class PlacesDatabase {
 	}
 	
 	/*
->>>>>>> origin/master
 	 * Populate the database from the given stream.
 	 * Note that the database is cleared first, and opening/closing the stream
 	 * should be handled by the calling method.
