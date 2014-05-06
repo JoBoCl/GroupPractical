@@ -89,6 +89,11 @@ public class Route implements IRoute {
 		else return null; // better than an error message, I guess		
 	}
 	
+	public int getNextId() {
+		if (_route.size() > 0) return _route.get(0);
+		else return 0; // TODO
+	}
+	
 	// Removes the first element of the list (move along to next point on route)
 	// If we've reached the end returns true, else return false
 	public boolean moveOn() {
