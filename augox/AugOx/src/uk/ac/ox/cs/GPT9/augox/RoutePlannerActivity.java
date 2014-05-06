@@ -29,6 +29,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -44,6 +45,8 @@ public class RoutePlannerActivity extends Activity {
 		reloadLists();
 		reloadCheckboxes();
 	}
+	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -62,7 +65,6 @@ public class RoutePlannerActivity extends Activity {
 	
 	
 	private void reloadCheckboxes(){
-		Log.d("TESTING","Checkboxes Start");
 		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 		final CheckBox filterVisited = (CheckBox) findViewById(R.id.checkBoxRouteFilterVisited);
 		final CheckBox filterUnvisited = (CheckBox) findViewById(R.id.checkBoxRouteFilterUnvisited);
@@ -209,7 +211,7 @@ public class RoutePlannerActivity extends Activity {
 		return true;
 	}
 	
-	public class RouteAdapter extends ArrayAdapter<Integer> {
+	public class RouteAdapter extends ArrayAdapter<Integer> { //adapter for the current route records
 		private Context context;
 		private List<Integer> values;
 		public RouteAdapter(Context context,List<Integer> values){
@@ -226,11 +228,13 @@ public class RoutePlannerActivity extends Activity {
 			final PlaceData item = db.getPlaceByID(values.get(position));
 			TextView numView = (TextView) rowView.findViewById(R.id.current_route_number);
 			TextView nameView = (TextView) rowView.findViewById(R.id.current_route_name);
+			ImageView typeView = (ImageView) rowView.findViewById(R.id.current_route_type);
 			Button upButton = (Button) rowView.findViewById(R.id.buttonRouteUp);
 			Button downButton = (Button) rowView.findViewById(R.id.buttonRouteDown);
 			Button removeButton = (Button) rowView.findViewById(R.id.buttonRouteRemove);
 			numView.setText(String.valueOf(position+1));
 			nameView.setText(item.getName());
+			typeView.setImageResource(item.getCategory().getImageRef());
 			upButton.setOnClickListener(new View.OnClickListener() {
 				public void onClick(View v) {
 					if(position > 0){
@@ -274,8 +278,10 @@ public class RoutePlannerActivity extends Activity {
 			final int placeId = values.get(position);
 			final PlaceData item = db.getPlaceByID(placeId);
 			TextView nameView = (TextView) rowView.findViewById(R.id.add_places_name);
+			ImageView typeView = (ImageView) rowView.findViewById(R.id.add_places_type);
 			Button addRouteView = (Button) rowView.findViewById(R.id.buttonAddPlaces);
 			nameView.setText(item.getName());
+			typeView.setImageResource(item.getCategory().getImageRef());
 			addRouteView.setOnClickListener(new View.OnClickListener() {
 				public void onClick(View v) {
 					Log.d("TESTING","ADDTOROUTE");

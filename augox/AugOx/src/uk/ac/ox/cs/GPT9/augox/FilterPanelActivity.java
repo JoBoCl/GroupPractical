@@ -17,7 +17,7 @@ import android.preference.PreferenceFragment;
  * API Guide</a> for more information on developing a Settings UI.
  */
 public class FilterPanelActivity extends Activity {
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -31,4 +31,55 @@ public class FilterPanelActivity extends Activity {
 			addPreferencesFromResource(R.xml.pref_filters);
 		}
 	}
+	
+	
+	/*
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_filters);
+		LinearLayout l = (LinearLayout) findViewById(R.id.filtersLayout);
+		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        final SharedPreferences.Editor editor = pref.edit();
+        //final CheckBox checkAllCB = new CheckBox(getApplicationContext());
+        final CheckBox visitedCB = new CheckBox(getApplicationContext());
+        final CheckBox unvisitedCB = new CheckBox(getApplicationContext());
+        //checkAllCB.setText("Enable All"); 
+        visitedCB.setText("Visited"); 
+        visitedCB.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				editor.putBoolean("filter_visited",visitedCB.isChecked());
+				editor.commit();
+			}
+		});
+        unvisitedCB.setText("Unvisited");
+        unvisitedCB.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				editor.putBoolean("filter_unvisited",unvisitedCB.isChecked());
+				editor.commit();
+			}
+		});
+        visitedCB.setChecked(pref.getBoolean("filter_visited", true));
+        unvisitedCB.setChecked(pref.getBoolean("filter_unvisited", true));
+        l.addView(visitedCB); l.addView(unvisitedCB);
+		for(final PlaceCategory cat : PlaceCategory.values()){
+			if(cat.getID() != 0){
+				final CheckBox cb = new CheckBox(getApplicationContext());
+	            cb.setText(cat.getName());
+	            cb.setChecked(pref.getBoolean(cat.getFilter(), true));
+	    		
+	    		cb.setOnClickListener(new View.OnClickListener() {
+	    			@Override
+	    			public void onClick(View v) {
+	    				editor.putBoolean(cat.getFilter(),cb.isChecked());
+	    				editor.commit();
+	    			}
+	    		});
+	            l.addView(cb);
+			}
+		}
+	} 
+	*/
 }

@@ -52,7 +52,7 @@ public class ListPlacesItemsActivity extends ListActivity {
 		Intent intent = getIntent();
 		latitude = intent.getDoubleExtra(EXTRA_LATITUDE,Double.valueOf(0));
 		longitude = intent.getDoubleExtra(EXTRA_LONGITUDE,Double.valueOf(0));
-		radius = 100;
+		radius = 2;
 		queryType = intent.getIntExtra(EXTRA_QUERYTYPE, 0);
 		DatabaseQuery q;
 		DatabaseSorter s = new NameSorter(SortOrder.ASC);
@@ -137,8 +137,10 @@ public class ListPlacesItemsActivity extends ListActivity {
 			TextView distView = (TextView) rowView.findViewById(R.id.list_places_item_distance);
 			nameView.setText(item.getName());
 			pictureView.setImageResource(item.getCategory().getImageRef());
-			distView.setText(String.format("%.1f", PlaceData.getDistanceBetween(
-					latitude,longitude,item.getLatitude(),item.getLongitude()))+"km"); 
+			distView.setText(PlaceFullInfoActivity.distanceAsString(PlaceData.getDistanceBetween(
+					latitude,longitude,item.getLatitude(),item.getLongitude())));
+			//distView.setText(String.format("%.1f", PlaceData.getDistanceBetween(
+			//		latitude,longitude,item.getLatitude(),item.getLongitude()))+"km"); 
 			return rowView;
 		}
 	}
