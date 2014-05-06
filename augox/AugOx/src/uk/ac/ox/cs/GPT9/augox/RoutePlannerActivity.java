@@ -37,11 +37,17 @@ public class RoutePlannerActivity extends Activity {
 	/*
 	 * Intent Constants
 	 */
-	public final static String EXTRA_PLACELIST = "uk.ac.ox.cs.GPT9.augox.PLACELIST";
+	public final static String EXTRA_LATITUDE = "uk.ac.ox.cs.GPT9.augox.LATITUDE";
+	public final static String EXTRA_LONGITUDE = "uk.ac.ox.cs.GPT9.augox.LONGITUDE";
 	private IRoute curRoute = new Route();
+	private double latitude = 0;
+	private double longitude = 0;
 	
 	protected void onResume(){
 		super.onResume();
+		Intent intent = getIntent();
+		latitude = intent.getDoubleExtra(EXTRA_LATITUDE,Double.valueOf(0));
+		longitude = intent.getDoubleExtra(EXTRA_LONGITUDE,Double.valueOf(0));
 		reloadLists();
 		reloadCheckboxes();
 	}
@@ -56,6 +62,13 @@ public class RoutePlannerActivity extends Activity {
 		buttonContinue.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				finish();			
+			}
+		});
+		Button buttonClear = (Button) findViewById(R.id.buttonRoutePlannerClear);
+		buttonClear.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				curRoute.clear();
+				reloadLists(true, false);
 			}
 		});
 		
@@ -147,8 +160,12 @@ public class RoutePlannerActivity extends Activity {
 				@Override
 				public void onItemClick(AdapterView<?> arg0, View arg1, int itemNoClicked,
 						long arg3) {
+					PlacesDatabase db = MainScreenActivity.getPlacesDatabase();
 					//Starts activity PlaceFullInfoActivity for the clicked place
+					PlaceData place = db.getPlaceByID(routePlaces.get(itemNoClicked));
 	            	Intent intent = new Intent(getApplicationContext(), PlaceFullInfoActivity.class);
+	            	double dist = PlaceData.getDistanceBetween(place.getLatitude(), place.getLongitude(), latitude, longitude);
+	                intent.putExtra(PlaceFullInfoActivity.EXTRA_DISTANCE, dist);
 	            	//put the place in the intent
 	                intent.putExtra(PlaceFullInfoActivity.EXTRA_PLACE, routePlaces.get(itemNoClicked));
 	                //put the background to include in the intent
@@ -192,8 +209,12 @@ public class RoutePlannerActivity extends Activity {
 				@Override
 				public void onItemClick(AdapterView<?> arg0, View arg1, int itemNoClicked,
 						long arg3) {
+	                PlacesDatabase db = MainScreenActivity.getPlacesDatabase();
 					//Starts activity PlaceFullInfoActivity for the clicked place
+					PlaceData place = db.getPlaceByID(filterPlaces.get(itemNoClicked));
 	            	Intent intent = new Intent(getApplicationContext(), PlaceFullInfoActivity.class);
+	            	double dist = PlaceData.getDistanceBetween(place.getLatitude(), place.getLongitude(), latitude, longitude);
+	                intent.putExtra(PlaceFullInfoActivity.EXTRA_DISTANCE, dist);
 	            	//put the place in the intent
 	                intent.putExtra(PlaceFullInfoActivity.EXTRA_PLACE, filterPlaces.get(itemNoClicked));
 	                //put the background to include in the intent

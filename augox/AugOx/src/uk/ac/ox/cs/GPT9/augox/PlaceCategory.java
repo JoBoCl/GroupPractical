@@ -7,6 +7,7 @@ public enum PlaceCategory {
 	/*
 	 * Enumerations
 	 */
+	//(ID,Name,FilterPreferenceString,Icon,IconForVisited)
 	UNKNOWN (0, "*UNKNOWN*","",0,0),
 	MUSEUM (1, "Museum","filter_museums",R.drawable.museumicon,R.drawable.museumicontick),
 	COLLEGE (2, "College","filter_colleges",R.drawable.collegeicon,R.drawable.collegeicontick),

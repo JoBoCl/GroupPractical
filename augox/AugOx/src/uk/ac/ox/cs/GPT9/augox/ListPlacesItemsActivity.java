@@ -7,6 +7,7 @@ import uk.ac.ox.cs.GPT9.augox.dbquery.DatabaseQuery;
 import uk.ac.ox.cs.GPT9.augox.dbquery.InLocusQuery;
 import uk.ac.ox.cs.GPT9.augox.dbquery.NameStartsWithQuery;
 import uk.ac.ox.cs.GPT9.augox.dbquery.NotQuery;
+import uk.ac.ox.cs.GPT9.augox.dbquery.OrQuery;
 import uk.ac.ox.cs.GPT9.augox.dbquery.VisitedQuery;
 import uk.ac.ox.cs.GPT9.augox.dbsort.DatabaseSorter;
 import uk.ac.ox.cs.GPT9.augox.dbsort.DistanceFromSorter;
@@ -62,27 +63,32 @@ public class ListPlacesItemsActivity extends ListActivity {
 		case 0: //local places
 			q = new InLocusQuery(latitude,longitude,radius);
 			s = new DistanceFromSorter(latitude, longitude, SortOrder.ASC);
-			setTitle("Local Places");
+			setTitle("Places: Local");
 			break;
 		case 1: //visited places
 			q = new VisitedQuery();
-			setTitle("Visited Places");
+			setTitle("Places: Visited");
 			break;
 		case 2: //unvisited places
 			q = new NotQuery(new VisitedQuery());
-			setTitle("Unvisited Places");
+			setTitle("Places: Unvisited");
 			break;
 		case 3: //places by name
 			char queryDataChar = (char)intent.getIntExtra(EXTRA_QUERYDATA, 0);
-			q = new NameStartsWithQuery(String.valueOf(queryDataChar));
-			setTitle(queryDataChar + ".." + " Places");
+			if(queryDataChar == '0'){
+				q = createNumQuery();
+				setTitle("Places: 0..9");
+			} else {
+				q = new NameStartsWithQuery(String.valueOf(queryDataChar));
+				setTitle("Places: " + queryDataChar);
+			}
 			break;
 		case 4: //places by type
 			int queryData = intent.getIntExtra(EXTRA_QUERYDATA, 0);
 			List<PlaceCategory> cats = new ArrayList<PlaceCategory>();
 			cats.add(PlaceCategory.getCategoryByID(queryData));
 			q = new CategoryQuery(cats);
-			setTitle(PlaceCategory.getCategoryByID(queryData) + " Places");
+			setTitle("Places: " + PlaceCategory.getCategoryByID(queryData).getName() + "s");
 			break;
 		default:
 			q = null;
@@ -116,6 +122,12 @@ public class ListPlacesItemsActivity extends ListActivity {
 			MyStringAdapter adapter = new MyStringAdapter(this,noneFoundList);
 			setListAdapter(adapter);
 		}
+	}
+	
+	private DatabaseQuery createNumQuery(){
+		DatabaseQuery q = new NameStartsWithQuery("0");
+		for(int i = 1;i<=9;i++) q = new OrQuery(q,new NameStartsWithQuery(String.valueOf(i)));
+		return q;
 	}
 	public class MyPlaceAdapter extends ArrayAdapter<Integer> {
 		private Context context;

@@ -34,5 +34,6 @@
     <string name="routePlannerAddPlaces">Add Places</string>
     <string name="routePlannerButtonFilters">Change Filters</string>
     <string name="routePlannerButtonContinue">Continue</string>
+    <string name="routePlannerButtonClear">Clear Route</string>
    
 </resources>

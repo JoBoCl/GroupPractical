@@ -81,10 +81,21 @@
 	        android:layout_height="match_parent">   
 	    </ListView> 
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+    <Button
+        android:id="@+id/buttonRoutePlannerClear"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/routePlannerButtonClear" />
     <Button
         android:id="@+id/buttonRoutePlannerStart"
+        android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/routePlannerButtonContinue" />
-
+	</LinearLayout>
 </LinearLayout>
