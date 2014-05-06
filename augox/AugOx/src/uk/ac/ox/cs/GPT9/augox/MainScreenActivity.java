@@ -181,7 +181,7 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 	   });
    }
    
-   private void initializeGMaps() {
+   private void initializeGMaps() {   
 		mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
 		if (mMap == null){
 			return;
@@ -297,18 +297,19 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 
 	@Override
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+		mSeekBarMaxDistance.setMax((int) (Float.parseFloat(sharedPref.getString("setting_arview_max_distance", "1"))*1000));
 		refreshVisibility();
 	}
 	
 	private List<PlaceCategory> currentCategories() {
 		List<PlaceCategory> pcs = new ArrayList<PlaceCategory>();
-		/*for (PlaceCategory pc: PlaceCategory.values()) {
+		for (PlaceCategory pc: PlaceCategory.values()) {
 			if (sharedPref.getBoolean(pc.getFilter(), true)) pcs.add(pc);
-		}*/
-		if (sharedPref.getBoolean("filter_bars", true)) pcs.add(PlaceCategory.BAR);
+		}
+		/*if (sharedPref.getBoolean("filter_bars", true)) pcs.add(PlaceCategory.BAR);
 		if (sharedPref.getBoolean("filter_colleges", true)) pcs.add(PlaceCategory.COLLEGE);
 		if (sharedPref.getBoolean("filter_museums", true)) pcs.add(PlaceCategory.MUSEUM);
-		if (sharedPref.getBoolean("filter_restaurants", true)) pcs.add(PlaceCategory.RESTAURANT);
+		if (sharedPref.getBoolean("filter_restaurants", true)) pcs.add(PlaceCategory.RESTAURANT);*/
 		return pcs;
 	}
 	

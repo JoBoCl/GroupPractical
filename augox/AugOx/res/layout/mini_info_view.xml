@@ -50,6 +50,5 @@
             android:layout_toRightOf="@+id/imageViewStar4"
             android:layout_below="@+id/placeName"
             android:src="@android:drawable/star_off" />
-    
 
 </RelativeLayout>
