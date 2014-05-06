@@ -136,7 +136,7 @@ public class ListPlacesItemsActivity extends ListActivity {
 			ImageView pictureView = (ImageView) rowView.findViewById(R.id.list_places_item_type);
 			TextView distView = (TextView) rowView.findViewById(R.id.list_places_item_distance);
 			nameView.setText(item.getName());
-			pictureView.setImageResource(item.getCategory().getImageRef());
+			pictureView.setImageResource(item.getCategory().getImageRef(item.getVisited()));
 			distView.setText(PlaceFullInfoActivity.distanceAsString(PlaceData.getDistanceBetween(
 					latitude,longitude,item.getLatitude(),item.getLongitude())));
 			//distView.setText(String.format("%.1f", PlaceData.getDistanceBetween(

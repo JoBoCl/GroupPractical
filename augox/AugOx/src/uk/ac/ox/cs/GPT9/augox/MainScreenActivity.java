@@ -302,7 +302,7 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 			GeoObject currPlaceGeo = new GeoObject(placeID);
 			currPlaceGeo.setGeoPosition(currPlace.getLatitude(), currPlace.getLongitude());
 			currPlaceGeo.setName(currPlace.getName());
-			currPlaceGeo.setImageResource(currPlace.getCategory().getImageRef());
+			currPlaceGeo.setImageResource(currPlace.getCategory().getImageRef(currPlace.getVisited()));
 			Places.add(new Place(placeID, currPlaceGeo, null));
 			mWorld.addBeyondarObject(currPlaceGeo);
 		}

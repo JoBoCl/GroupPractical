@@ -7,11 +7,11 @@ public enum PlaceCategory {
 	/*
 	 * Enumerations
 	 */
-	UNKNOWN (0, "*UNKNOWN*","",0),
-	MUSEUM (1, "Museum","filter_museums",R.drawable.museumicon),
-	COLLEGE (2, "College","filter_colleges",R.drawable.collegeicon),
-	RESTAURANT (3, "Restaurant","filter_restaurants",R.drawable.restauranticon),
-	BAR (4, "Bar","filter_bars",R.drawable.baricon);
+	UNKNOWN (0, "*UNKNOWN*","",0,0),
+	MUSEUM (1, "Museum","filter_museums",R.drawable.museumicon,R.drawable.museumicontick),
+	COLLEGE (2, "College","filter_colleges",R.drawable.collegeicon,R.drawable.collegeicontick),
+	RESTAURANT (3, "Restaurant","filter_restaurants",R.drawable.restauranticon,R.drawable.restauranticontick),
+	BAR (4, "Bar","filter_bars",R.drawable.baricon,R.drawable.baricontick);
 	
 	/*
 	 * Member Data
@@ -20,15 +20,17 @@ public enum PlaceCategory {
 	private final String name;
 	private final String filterName;
 	private final int imageRef;
+	private final int imageRefTick;
 
 	/*
 	 * Constructor
 	 */
-	PlaceCategory(int id, String name, String filterName, int imageRef) {
+	PlaceCategory(int id, String name, String filterName, int imageRef, int imageRefTick) {
 		this.id = id;
 		this.name = name;
 		this.filterName = filterName;
 		this.imageRef = imageRef;
+		this.imageRefTick = imageRefTick;
 	}
 	
 	/*
@@ -37,7 +39,8 @@ public enum PlaceCategory {
 	public int getID() { return id; }
 	public String getName() { return name; }
 	public String getFilter() {return filterName;}
-	public int getImageRef() {return imageRef;}
+	public int getImageRef(boolean visited) {
+		if(visited) return imageRefTick; else return imageRef;}
 	
 	/*
 	 * Return the category with the given ID
