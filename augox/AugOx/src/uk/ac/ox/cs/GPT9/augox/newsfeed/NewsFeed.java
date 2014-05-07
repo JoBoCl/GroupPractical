@@ -25,6 +25,7 @@ public class NewsFeed {
 	private List<NewsFeedItem> _newsItems = new ArrayList<NewsFeedItem>(); // each represents an item on the list
 	private PlaceData _place; // place we want news about
 	private PlaceFullInfoActivity _activity; // parent activity for displaying results
+	private boolean _dirty = true; // represents whether next call to start should be respected
 	
 	//function common to News Modules for reading a stream of information from the Internet
 	public static String ReadResponse(HttpsURLConnection connection) {
@@ -129,26 +130,40 @@ public class NewsFeed {
 	}
 	
 	// Public constructor
-	public NewsFeed(PlaceData place, PlaceFullInfoActivity activity) {
+	public NewsFeed() {
 		// basic initialisation (extra news sources can be added here)
-		_place = place;
 		_newsModules.add(new NewsModuleTwitter());
 		_newsModules.add(new NewsModuleFoursquare());
+	}
+	
+	public void SetTarget(PlaceData place, PlaceFullInfoActivity activity) {
 		_activity = activity;
-		
-		// initially empty newsfeed appearance
-		String[] startingValue = new String[] {"No news to show yet"};
-		ListView feedView = (ListView)activity.findViewById(R.id.listViewFeed);
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity, R.layout.news_feed_item_1, startingValue);
-		feedView.setAdapter(adapter);
+		if (place != _place) {
+			_dirty = true; // we will need to recalculate when StartCalls() used
+			
+			_place = place;
+			_newsItems.clear(); // we will recalculate and don't want old data
+			
+			// initially empty newsfeed appearance
+			String[] startingValue = new String[] {"No news to show yet"};
+			ListView feedView = (ListView)_activity.findViewById(R.id.listViewFeed);
+			ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity, R.layout.news_feed_item_1, startingValue);
+			feedView.setAdapter(adapter);
+		}
+		else {
+			updateNewsFeed(getItems());
+		}
 	}
 	
 	// Tell modules to start their asynchronous calls
 	public void StartCalls() {
-		// Iterate through, telling them to start
-		for (INewsModule newsModule : _newsModules) {
-			newsModule.GiveData(this, _place);
-			newsModule.StartCall();
+		if (_dirty) {
+			_dirty = false;
+			// Iterate through, telling them to start
+			for (INewsModule newsModule : _newsModules) {
+				newsModule.GiveData(this, _place);
+				newsModule.StartCall();
+			}
 		}
 	}
 	

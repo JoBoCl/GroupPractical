@@ -175,7 +175,7 @@
             android:layout_alignLeft="@+id/textViewDescription"
             android:layout_marginBottom="2dp"
             android:layout_alignRight="@+id/imageViewStar1"
-            android:layout_marginRight="120dp"
+            android:layout_marginRight="150dp"
             android:text="@string/fullinfo_attribution"
             android:textAppearance="?android:attr/textAppearanceSmall" />
 

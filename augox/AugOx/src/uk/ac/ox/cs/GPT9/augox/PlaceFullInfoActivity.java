@@ -30,7 +30,7 @@ public class PlaceFullInfoActivity extends Activity {
 	private PlaceData _place; // = new PlaceData("Matthew's Awesome Pub", 0.0, 0.0, 5, false, PlaceCategory.BAR, "This isn't the greatest pub in the world.  This is a tribute.  I'm also going to try to make this description long so I can make sure it doesn't go too far to the right and wraps around properly, kind of ruining the preceding one-liner.  Which is a great shame, really.  At some point I'm going to have to make a way of sourcing the description from the Internet, which is going to be annoying and hard and stuff but at least for now I can get this prototype working.  And hey, getting the pretty layout is what really matters.  Having the most up-to-date data is not as important, as xkcd 937 tells us (there's an xkcd for everything)", new OpeningHours(new ArrayList<OpeningHours.Period>()));
 	private int _placeId;
 	private double _distance;
-	private NewsFeed _newsFeed;
+	private static NewsFeed _newsFeed = new NewsFeed(); // static for purposes of saving data between screen reorientations
 	
 	// returns a string representing the distance in metres or kilometres
 	public static String distanceAsString(double distanceAsKm) {
@@ -59,8 +59,8 @@ public class PlaceFullInfoActivity extends Activity {
 		// if it does it's NOT MY FAULT
 		if (_place == null) fullInfoPopup("Error", "Invalid place data have been passed to this screen.");
 		else {
-			// set up news feed (first so asynchronous calls can begin)
-			_newsFeed = new NewsFeed(_place, this);
+			// set up news feed (first so asynchronous calls can begin if necessary)
+			_newsFeed.SetTarget(_place, this);
 			_newsFeed.StartCalls();
 			
 			// display name
@@ -138,6 +138,7 @@ public class PlaceFullInfoActivity extends Activity {
 	private PlaceCategory category() {return _place.getCategory();}
 	private int rating() {return _place.getRating();}
 	private boolean visited() {return _place.getVisited();}
+	private String foursquareLink() {return "";}
 	
 	// for all those nasty popups that may appear
 	private void fullInfoPopup(String title, String message) {
@@ -182,7 +183,7 @@ public class PlaceFullInfoActivity extends Activity {
 	
 	// Displays the url for the link to the foursquare page, as required in the liscence agreement
 	public void DisplayFoursquareLink() {
-		String link = ""; // waiting for it to be added to the database
+		String link = foursquareLink();
 		TextView acknowledgementsView = (TextView)findViewById(R.id.textViewAcknowledgements);
 		if (link == "") {
 			acknowledgementsView.setText(getResources().getText(R.string.fullinfo_attribution));
