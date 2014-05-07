@@ -59,6 +59,13 @@ public class NewsModuleFoursquare implements INewsModule
 	    			if (venue.get("rating") instanceof Double) theirRating = (Double)venue.get("rating");
 	    			int starRating = (int)(theirRating/2);
 	    			_place.updateRating(starRating);
+
+	    			// get link
+	    			try {
+		    			String shortUrl = venue.get("shortUrl").toString();
+		    			// TODO:  Actually use when database updated
+	    			}
+	    			catch (Exception e) {/*no photos available*/}
 	    			
 	    			// get image
 	    			try {

@@ -180,11 +180,15 @@ public class PlaceFullInfoActivity extends Activity {
 		}
 	}
 	
-
-	
-	
-	
-	
-	
-
+	// Displays the url for the link to the foursquare page, as required in the liscence agreement
+	public void DisplayFoursquareLink() {
+		String link = ""; // waiting for it to be added to the database
+		TextView acknowledgementsView = (TextView)findViewById(R.id.textViewAcknowledgements);
+		if (link == "") {
+			acknowledgementsView.setText(getResources().getText(R.string.fullinfo_attribution));
+		}
+		else {
+			acknowledgementsView.setText(getResources().getText(R.string.fullinfo_attributionWithLink) + " " + link);
+		}
+	}
 }

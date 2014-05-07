@@ -123,6 +123,7 @@ public class NewsFeed {
 				feedView.setAdapter(adapter);
 				_activity.DisplayStars(); // redisplay how many stars there are; might have changed in download
 				_activity.DisplayImage(); // same for place image
+				_activity.DisplayFoursquareLink(); // and foursquare link
 	        }
 	    });
 	}

@@ -28,8 +28,9 @@
     <string name="fullinfo_namegoeshere">Name goes here</string>
     <string name="fullinfo_distancegoeshere">Distance goes here</string>
     <string name="fullinfo_descriptiongoeshere">Description goes here</string>
-    <string name="fullinfo_attribution">Image, rating and tips provided by Foursquare.  Tweets provided by Twitter</string>
-
+    <string name="fullinfo_attribution">Tweets provided by Twitter.  Image, rating and tips provided by Foursquare</string>
+    <string name="fullinfo_attributionWithLink">Tweets provided by Twitter.  Image, rating and tips provided by Foursquare at</string>
+    
     <string name="routePlannerCurrentRoute">Current Route</string>
     <string name="routePlannerAddPlaces">Add Places</string>
     <string name="routePlannerButtonFilters">Change Filters</string>
