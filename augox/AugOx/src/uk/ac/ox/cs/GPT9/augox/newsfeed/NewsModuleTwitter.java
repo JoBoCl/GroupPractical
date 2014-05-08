@@ -18,11 +18,12 @@ import uk.ac.ox.cs.GPT9.augox.PlaceData;
 // News Module getting "tweets" from popular social media site "Twitter"
 public class NewsModuleTwitter implements INewsModule
 {
-	private NewsFeed _newsFeed;
-	private PlaceData _place;
+	private NewsFeed newsFeed;
+	private PlaceData place;
 	
+	// get associated twitter handle, e.g. "whiterabbitox"
 	private String getTwitterHandle() {
-		return _place.getTwitterHandle();
+		return place.getTwitterHandle();
 	}
 	
 	// for asynchronous calls
@@ -44,7 +45,7 @@ public class NewsModuleTwitter implements INewsModule
 	    		connection.setUseCaches(false);
 
 	    		// Parse the JSON response into a JSON object
-	    		org.json.simple.JSONArray obj = (org.json.simple.JSONArray)JSONValue.parse(NewsFeed.ReadResponse(connection));
+	    		org.json.simple.JSONArray obj = (org.json.simple.JSONArray)JSONValue.parse(NewsFeed.readResponse(connection));
 	    		
 	    		// make sure we get something
 	    		if (obj != null) {
@@ -56,7 +57,7 @@ public class NewsModuleTwitter implements INewsModule
 	    				favourites[i] = Integer.parseInt(((org.json.simple.JSONObject)obj.get(i)).get("favorite_count").toString());
 	    			}
 	    			for (int i = 0; i < tweets.length; i++)
-						_newsFeed.GiveResult(tweets[i], (int)((10*tweets.length)/(i+1)) + favourites[i], NewsFeedSource.Twitter);
+						newsFeed.giveResult(tweets[i], (int)((10*tweets.length)/(i+1)) + favourites[i], NewsFeedSource.Twitter);
 	    		}
 	    	}
 	    	catch (Exception e) {
@@ -95,13 +96,12 @@ public class NewsModuleTwitter implements INewsModule
 		    		writer.write("grant_type=client_credentials");
 		    		writer.flush();
 		    		writer.close();
-		    	}
-		    	catch (IOException e) {
+		    	} catch (IOException e) {
 		    		// ignore failure; remember, we just want any data we can get, ignore what we can't
 		    	}
 	    			
 	    		// Parse the JSON response into a JSON object
-	    		Object parse = JSONValue.parse(NewsFeed.ReadResponse(connection));
+	    		Object parse = JSONValue.parse(NewsFeed.readResponse(connection));
 				org.json.simple.JSONObject obj = (org.json.simple.JSONObject)parse;
 	    			
 				// get token from result
@@ -113,12 +113,10 @@ public class NewsModuleTwitter implements INewsModule
 	    		}
 	    		return "";
 	    		
-	    	}
-	    	catch (Exception e) {
+	    	} catch (Exception e) {
 	    		// ignore failure; remember, we just want any data we can get, ignore what we can't
 	    		return "";
-	    	}
-	    	finally { // tidy up
+	    	} finally { // tidy up
 	    		if (connection != null) {
 	    			connection.disconnect();
 	    		}
@@ -148,8 +146,7 @@ public class NewsModuleTwitter implements INewsModule
 			String bearerToken = "";
 	    	try {
     			bearerToken = requestBearerToken("https://api.twitter.com/oauth2/token");
-    		}
-	    	catch (Exception ex) {
+    		} catch (Exception ex) {
     			// ignore failure; remember, we just want any data we can get, ignore what we can't
     		}
 	    	
@@ -157,25 +154,22 @@ public class NewsModuleTwitter implements INewsModule
 	    	
 			try {
 				fetchTweets("https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=" + getTwitterHandle() + "&count=10", bearerToken);
-            }
-			catch (Exception ex) {
+            } catch (Exception ex) {
             	// ignore failure; remember, we just want any data we can get, ignore what we can't
             }
 	    	
 			return null;
 	    }
 	}
-	
+
 	// Place to get news about and NewsFeed to give it to
-	public void GiveData(NewsFeed newsFeed, PlaceData place)
-	{
-		_newsFeed = newsFeed;
-		_place = place;
+	public void giveData(NewsFeed targetNewsFeed, PlaceData targetPlace) {
+		newsFeed = targetNewsFeed;
+		place = targetPlace;
 	}
 	
 	// Tell the module to start trying to get data from the Internet
-	public void StartCall()
-	{
+	public void startCall() {
 		new TwitterTask().execute();
 	}
 }

@@ -228,7 +228,6 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
         switch (item.getItemId()) {
             case R.id.action_launch_listplaces:
             	Intent intent2 = new Intent(this, ListPlacesActivity.class);
-            	// debug values: CS dept entrance!
             	intent2.putExtra(ListPlacesActivity.EXTRA_LATITUDE, mWorld.getLatitude());
             	intent2.putExtra(ListPlacesActivity.EXTRA_LONGITUDE, mWorld.getLongitude());
                 startActivity(intent2);
@@ -243,7 +242,8 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
                 return true;
             case R.id.action_launch_routeplanner:
             	Intent intent5 = new Intent(this, RoutePlannerActivity.class);
-            	intent5.putExtra(RoutePlannerActivity.EXTRA_PLACELIST, "");
+            	intent5.putExtra(ListPlacesActivity.EXTRA_LATITUDE, mWorld.getLatitude());
+            	intent5.putExtra(ListPlacesActivity.EXTRA_LONGITUDE, mWorld.getLongitude());
                 startActivity(intent5);
                 return true;
             case R.id.action_launch_autoplanner:
@@ -302,7 +302,7 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 			GeoObject currPlaceGeo = new GeoObject(placeID);
 			currPlaceGeo.setGeoPosition(currPlace.getLatitude(), currPlace.getLongitude());
 			currPlaceGeo.setName(currPlace.getName());
-			currPlaceGeo.setImageResource(currPlace.getCategory().getImageRef());
+			currPlaceGeo.setImageResource(currPlace.getCategory().getImageRef(currPlace.getVisited()));
 			Places.add(new Place(placeID, currPlaceGeo, null));
 			mWorld.addBeyondarObject(currPlaceGeo);
 		}

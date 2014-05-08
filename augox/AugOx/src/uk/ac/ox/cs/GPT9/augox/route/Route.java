@@ -85,8 +85,7 @@ public class Route implements IRoute {
 	
 	// Simply returns the next place to go to
 	public PlaceData getNext() {
-		if (_route.size() > 0) return _database.getPlaceByID(_route.get(0));
-		else return null; // better than an error message, I guess		
+		return _database.getPlaceByID(_route.get(0));
 	}
 	
 	// Removes the first element of the list (move along to next point on route)
