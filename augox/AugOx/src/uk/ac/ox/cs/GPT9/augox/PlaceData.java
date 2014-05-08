@@ -25,6 +25,7 @@ public class PlaceData {
 	private OpeningHours openinghours;
 	private String twitterhandle;
 	private String foursquareid;
+	private String foursquareurl;
 
 	/*
 	 * Semi-Persistent Data - initially null, can be set, but may be wiped at
@@ -45,7 +46,8 @@ public class PlaceData {
 	public PlaceData(	String name, double latitude, double longitude,
 						int rating, boolean visited, PlaceCategory category,
 						String description, OpeningHours openinghours,
-						String twitterhandle, String foursquareid) {
+						String twitterhandle, String foursquareid,
+						String foursquareurl) {
 		// Initialise permanent data
 		this.name = name;
 		this.latitude = latitude;
@@ -57,6 +59,7 @@ public class PlaceData {
 		this.openinghours = openinghours;
 		this.twitterhandle = twitterhandle;
 		this.foursquareid = foursquareid;
+		this.foursquareurl = foursquareurl;
 		
 		// Initialise semi-persistent data
 		image = null;
@@ -95,6 +98,7 @@ public class PlaceData {
 	public OpeningHours getOpeningHours() { return openinghours; }
 	public String getTwitterHandle() { return twitterhandle; }
 	public String getFourSquareID() { return foursquareid; }
+	public String getFourSquareURL() { return foursquareurl; }
 	public Drawable getImage() { return image; }
 	public boolean getClicked() { return clicked; }
 	// social caching getters
@@ -121,6 +125,7 @@ public class PlaceData {
 		openinghours.writeToStream(dstream);
 		PlacesDatabase.writeStringToStream(dstream, twitterhandle);
 		PlacesDatabase.writeStringToStream(dstream, foursquareid);
+		PlacesDatabase.writeStringToStream(dstream, foursquareurl);
 	}
 	
 	/*
@@ -138,10 +143,11 @@ public class PlaceData {
 		//xml += "  <tag k=\"opening_hours\" v=\"\"/>\n";
 		xml += "  <tag k=\"augox_twitterhandle\" v=\"%s\"/>\n";
 		xml += "  <tag k=\"augox_foursquareid\" v=\"%s\"/>\n";
+		xml += "  <tag k=\"augox_foursquareurl\" v=\"%s\"/>\n";
 		xml += " </node>\n";
 		dstream.writeChars(String.format(xml, id, latitude, longitude, s_name,
 				category.getID(), rating, s_description, twitterhandle,
-				foursquareid));
+				foursquareid, foursquareurl));
 	}
 	
 	/*
@@ -162,6 +168,7 @@ public class PlaceData {
 				dstream);
 		String twitterhandle = PlacesDatabase.loadStringFromStream(dstream);
 		String foursquareid = PlacesDatabase.loadStringFromStream(dstream);
+		String foursquareurl = PlacesDatabase.loadStringFromStream(dstream);
 		
 		// Check for invalid data
 		if(openinghours == null) return null;
@@ -169,7 +176,7 @@ public class PlaceData {
 		// Build and return object
 		PlaceData place = new PlaceData(name, latitude, longitude, rating,
 				visited, category, description, openinghours, twitterhandle,
-				foursquareid);
+				foursquareid, foursquareurl);
 		return place;
 	}
 	

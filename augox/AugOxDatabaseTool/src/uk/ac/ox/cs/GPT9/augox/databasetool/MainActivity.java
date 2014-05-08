@@ -328,7 +328,8 @@ public class MainActivity extends Activity {
 							false, icategory, item.getTagValue("description"),
 							new OpeningHours(/*item.getTagValue("opening_hours")*/),
 							item.getTagValue("augox_twitterhandle"),
-							item.getTagValue("augox_foursquareid"));
+							item.getTagValue("augox_foursquareid"),
+							item.getTagValue("augox_foursquareurl"));
 				}
 			}
 			// Add PlaceData to list if one was made
