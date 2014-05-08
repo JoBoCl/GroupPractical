@@ -327,6 +327,7 @@ public class MainActivity extends Activity {
 							Integer.parseInt((irating == "") ? "0" : irating),
 							false, icategory, item.getTagValue("description"),
 							new OpeningHours(/*item.getTagValue("opening_hours")*/),
+							item.getTagValue("augox_phonenumber"),
 							item.getTagValue("augox_twitterhandle"),
 							item.getTagValue("augox_foursquareid"),
 							item.getTagValue("augox_foursquareurl"));

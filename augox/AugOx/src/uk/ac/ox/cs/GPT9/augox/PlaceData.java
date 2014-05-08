@@ -23,6 +23,7 @@ public class PlaceData {
 	private PlaceCategory category;
 	private String description;
 	private OpeningHours openinghours;
+	private String phonenumber;
 	private String twitterhandle;
 	private String foursquareid;
 	private String foursquareurl;
@@ -46,8 +47,8 @@ public class PlaceData {
 	public PlaceData(	String name, double latitude, double longitude,
 						int rating, boolean visited, PlaceCategory category,
 						String description, OpeningHours openinghours,
-						String twitterhandle, String foursquareid,
-						String foursquareurl) {
+						String phonenumber, String twitterhandle,
+						String foursquareid, String foursquareurl) {
 		// Initialise permanent data
 		this.name = name;
 		this.latitude = latitude;
@@ -57,6 +58,7 @@ public class PlaceData {
 		this.category = category;
 		this.description = description;
 		this.openinghours = openinghours;
+		this.phonenumber = phonenumber;
 		this.twitterhandle = twitterhandle;
 		this.foursquareid = foursquareid;
 		this.foursquareurl = foursquareurl;
@@ -96,6 +98,7 @@ public class PlaceData {
 	public PlaceCategory getCategory() { return category; }
 	public String getDescription() { return description; }
 	public OpeningHours getOpeningHours() { return openinghours; }
+	public String getPhoneNumber() { return phonenumber; }
 	public String getTwitterHandle() { return twitterhandle; }
 	public String getFourSquareID() { return foursquareid; }
 	public String getFourSquareURL() { return foursquareurl; }
@@ -123,6 +126,7 @@ public class PlaceData {
 		dstream.writeInt(category.getID());
 		PlacesDatabase.writeStringToStream(dstream, description);
 		openinghours.writeToStream(dstream);
+		PlacesDatabase.writeStringToStream(dstream, phonenumber);
 		PlacesDatabase.writeStringToStream(dstream, twitterhandle);
 		PlacesDatabase.writeStringToStream(dstream, foursquareid);
 		PlacesDatabase.writeStringToStream(dstream, foursquareurl);
@@ -141,13 +145,14 @@ public class PlaceData {
 		xml += "  <tag k=\"augox_rating\" v=\"%s\"/>\n";
 		xml += "  <tag k=\"description\" v=\"%s\"/>\n";
 		//xml += "  <tag k=\"opening_hours\" v=\"\"/>\n";
+		xml += "  <tag k=\"augox_phonenumber\" v=\"%s\"/>\n";
 		xml += "  <tag k=\"augox_twitterhandle\" v=\"%s\"/>\n";
 		xml += "  <tag k=\"augox_foursquareid\" v=\"%s\"/>\n";
 		xml += "  <tag k=\"augox_foursquareurl\" v=\"%s\"/>\n";
 		xml += " </node>\n";
 		dstream.writeChars(String.format(xml, id, latitude, longitude, s_name,
-				category.getID(), rating, s_description, twitterhandle,
-				foursquareid, foursquareurl));
+				category.getID(), rating, s_description, phonenumber,
+				twitterhandle, foursquareid, foursquareurl));
 	}
 	
 	/*
@@ -166,6 +171,7 @@ public class PlaceData {
 		String description = PlacesDatabase.loadStringFromStream(dstream);
 		OpeningHours openinghours = OpeningHours.buildOpeningHoursFromStream(
 				dstream);
+		String phonenumber = PlacesDatabase.loadStringFromStream(dstream);
 		String twitterhandle = PlacesDatabase.loadStringFromStream(dstream);
 		String foursquareid = PlacesDatabase.loadStringFromStream(dstream);
 		String foursquareurl = PlacesDatabase.loadStringFromStream(dstream);
@@ -175,8 +181,8 @@ public class PlaceData {
 		
 		// Build and return object
 		PlaceData place = new PlaceData(name, latitude, longitude, rating,
-				visited, category, description, openinghours, twitterhandle,
-				foursquareid, foursquareurl);
+				visited, category, description, openinghours, phonenumber,
+				twitterhandle, foursquareid, foursquareurl);
 		return place;
 	}
 	
