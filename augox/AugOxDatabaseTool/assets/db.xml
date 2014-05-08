@@ -5,7 +5,7 @@
 <tag k="augox_category" v="1"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="mao_gallery"/>
 <tag k="augox_foursquareid" v="4b6985ccf964a520cba52be3"/>
 </node>
 <node id="1" lat="51.8115495" lon="-1.2794088">
@@ -29,23 +29,15 @@
 <tag k="augox_category" v="3"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="gbkburgers"/>
 <tag k="augox_foursquareid" v="4b531026f964a520d38d27e3"/>
-</node>
-<node id="4" lat="51.7537252" lon="-1.2607563">
-<tag k="name" v="Fire and Stone Pizza"/>
-<tag k="augox_category" v="3"/>
-<tag k="augox_rating" v="0"/>
-<tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
-<tag k="augox_foursquareid" v=""/>
 </node>
 <node id="5" lat="51.7543041" lon="-1.2613408">
 <tag k="name" v="Noodle Nation"/>
 <tag k="augox_category" v="3"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="noodle_nation"/>
 <tag k="augox_foursquareid" v="4b531388f964a520368e27e3"/>
 </node>
 <node id="6" lat="51.7545076" lon="-1.2624617">
@@ -77,7 +69,7 @@
 <tag k="augox_category" v="3"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="NandosUK"/>
 <tag k="augox_foursquareid" v="4c0262a2cbd876b02c30f143"/>
 </node>
 <node id="10" lat="51.7695062" lon="-1.2535624">
@@ -85,7 +77,7 @@
 <tag k="augox_category" v="3"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="CherwellBoath"/>
 <tag k="augox_foursquareid" v="4bd18cbca8b3a59379dc655f"/>
 </node>
 <node id="11" lat="51.722591" lon="-1.221147">
@@ -101,7 +93,7 @@
 <tag k="augox_category" v="3"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="temple_lounge"/>
 <tag k="augox_foursquareid" v=""/>
 </node>
 <node id="13" lat="51.7153587" lon="-1.2914559">
@@ -109,7 +101,7 @@
 <tag k="augox_category" v="2"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="OpenUniversity"/>
 <tag k="augox_foursquareid" v=""/>
 </node>
 <node id="14" lat="51.7514837" lon="-1.2561956">
@@ -117,7 +109,7 @@
 <tag k="augox_category" v="4"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="dukebars"/>
 <tag k="augox_foursquareid" v="4bc0bfd6b492d13acbcba460"/>
 </node>
 <node id="15" lat="51.7513771" lon="-1.2570415">
@@ -125,7 +117,7 @@
 <tag k="augox_category" v="1"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="MuseumofOxford"/>
 <tag k="augox_foursquareid" v="4bdd821e4ffaa593d98e6ff7"/>
 </node>
 <node id="17" lat="51.7462279" lon="-1.2329931">
@@ -133,7 +125,7 @@
 <tag k="augox_category" v="3"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="AzizOxford"/>
 <tag k="augox_foursquareid" v="4b22a87df964a520434b24e3"/>
 </node>
 <node id="16" lat="51.7522761" lon="-1.2491495">
@@ -149,7 +141,7 @@
 <tag k="augox_category" v="3"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="PizzaExpress"/>
 <tag k="augox_foursquareid" v="4b69d21bf964a52042b62be3"/>
 </node>
 <node id="18" lat="51.7512842" lon="-1.2620475">
@@ -157,7 +149,7 @@
 <tag k="augox_category" v="3"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="LaTasca"/>
 <tag k="augox_foursquareid" v="4b53141cf964a520528e27e3"/>
 </node>
 <node id="21" lat="51.7516581" lon="-1.2634625">
@@ -165,7 +157,7 @@
 <tag k="augox_category" v="1"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="OxfordCastle"/>
 <tag k="augox_foursquareid" v="4b8e8badf964a520f32733e3"/>
 </node>
 <node id="20" lat="51.7519387" lon="-1.2622709">
@@ -173,7 +165,7 @@
 <tag k="augox_category" v="3"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="love_prezzo"/>
 <tag k="augox_foursquareid" v="4b5313a7f964a5203d8e27e3"/>
 </node>
 <node id="23" lat="51.7521347" lon="-1.262214">
@@ -181,7 +173,7 @@
 <tag k="augox_category" v="3"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="livingroom_ox1"/>
 <tag k="augox_foursquareid" v="4b8a5d38f964a5200f6a32e3"/>
 </node>
 <node id="22" lat="51.7550003" lon="-1.2510659">
@@ -189,7 +181,7 @@
 <tag k="augox_category" v="3"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="edamameoxford"/>
 <tag k="augox_foursquareid" v="4bd1a9c8b221c9b61ee2d5d0"/>
 </node>
 <node id="25" lat="51.7471734" lon="-1.2346056">
@@ -213,7 +205,7 @@
 <tag k="augox_category" v="3"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="OxfordsGrill"/>
 <tag k="augox_foursquareid" v="4f47eba9e4b06a774166fb36"/>
 </node>
 <node id="26" lat="51.7486672" lon="-1.2403631">
@@ -221,7 +213,7 @@
 <tag k="augox_category" v="3"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="NandosUK"/>
 <tag k="augox_foursquareid" v="4b8a7682f964a520ca6d32e3"/>
 </node>
 <node id="29" lat="51.7529657" lon="-1.2672836">
@@ -237,7 +229,7 @@
 <tag k="augox_category" v="3"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="Iguanasoxford"/>
 <tag k="augox_foursquareid" v="4bdc60dbfed22d7f3ee257c9"/>
 </node>
 <node id="31" lat="51.7523327" lon="-1.2560422">
@@ -253,7 +245,7 @@
 <tag k="augox_category" v="1"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="O3Gallery"/>
 <tag k="augox_foursquareid" v="4b5c608ef964a5202d2d29e3"/>
 </node>
 <node id="34" lat="51.753356" lon="-1.2623797">
@@ -261,7 +253,7 @@
 <tag k="augox_category" v="3"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="WeAreZizzi"/>
 <tag k="augox_foursquareid" v="4b531323f964a5202d8e27e3"/>
 </node>
 <node id="35" lat="51.7534282" lon="-1.2631468">
@@ -269,7 +261,7 @@
 <tag k="augox_category" v="3"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="YOSushi"/>
 <tag k="augox_foursquareid" v="4b5efb1ff964a520dfa029e3"/>
 </node>
 <node id="32" lat="51.7537627" lon="-1.2605203">
@@ -277,7 +269,7 @@
 <tag k="augox_category" v="3"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="JamiesItalianUK"/>
 <tag k="augox_foursquareid" v="4b4e2735f964a5202de326e3"/>
 </node>
 <node id="33" lat="51.7474237" lon="-1.2362004">
@@ -285,7 +277,7 @@
 <tag k="augox_category" v="3"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="TheFirstFloor"/>
 <tag k="augox_foursquareid" v="4bc0c03db492d13abacca460"/>
 </node>
 <node id="38" lat="51.7161396" lon="-1.0917203">
@@ -293,7 +285,7 @@
 <tag k="augox_category" v="3"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="lemanoir"/>
 <tag k="augox_foursquareid" v=""/>
 </node>
 <node id="39" lat="51.7471058" lon="-1.2351244">
@@ -309,7 +301,7 @@
 <tag k="augox_category" v="3"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="giraffetweet"/>
 <tag k="augox_foursquareid" v="4b48ce15f964a520cf5726e3"/>
 </node>
 <node id="37" lat="51.7532183" lon="-1.2605985">
@@ -325,7 +317,7 @@
 <tag k="augox_category" v="3"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="stradatweet"/>
 <tag k="augox_foursquareid" v="4b891fe7f964a520141e32e3"/>
 </node>
 <node id="43" lat="51.7587014" lon="-1.2615525">
@@ -333,7 +325,7 @@
 <tag k="augox_category" v="4"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="dukebars"/>
 <tag k="augox_foursquareid" v="4b86c481f964a520d49b31e3"/>
 </node>
 <node id="40" lat="51.7502002" lon="-1.2413849">
@@ -341,7 +333,7 @@
 <tag k="augox_category" v="3"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="QuminsOxford"/>
 <tag k="augox_foursquareid" v="4bbe493a6a93b7137309ebd2"/>
 </node>
 <node id="41" lat="51.7351844" lon="-1.2097043">
@@ -357,7 +349,7 @@
 <tag k="augox_category" v="3"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="CafeRougeTweet"/>
 <tag k="augox_foursquareid" v="4b844f7bf964a520f62d31e3"/>
 </node>
 <node id="47" lat="51.7586197" lon="-1.2615518">
@@ -413,7 +405,7 @@
 <tag k="augox_category" v="2"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="SAEOxford"/>
 <tag k="augox_foursquareid" v="4bf286a49319a5937604cb51"/>
 </node>
 <node id="55" lat="51.7472581" lon="-1.2348712">
@@ -437,7 +429,7 @@
 <tag k="augox_category" v="3"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="VerdeOxford"/>
 <tag k="augox_foursquareid" v="4c56b494b7a31b8d187a4eda"/>
 </node>
 <node id="52" lat="51.7461907" lon="-1.2328473">
@@ -445,7 +437,7 @@
 <tag k="augox_category" v="4"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="BAR_AROMA"/>
 <tag k="augox_foursquareid" v="4ba961abf964a5205e233ae3"/>
 </node>
 <node id="59" lat="51.7503524" lon="-1.2418242">
@@ -477,7 +469,7 @@
 <tag k="augox_category" v="3"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="mirchmasalaOXF"/>
 <tag k="augox_foursquareid" v="4b5f48f1f964a520f4b129e3"/>
 </node>
 <node id="63" lat="51.764549" lon="-1.2618701">
@@ -501,7 +493,7 @@
 <tag k="augox_category" v="3"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="pizzahut"/>
 <tag k="augox_foursquareid" v="4d0a168c64716ea86d22de10"/>
 </node>
 <node id="60" lat="51.7469523" lon="-1.1371567">
@@ -525,7 +517,7 @@
 <tag k="augox_category" v="3"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="pizzahut"/>
 <tag k="augox_foursquareid" v="4b603d98f964a52078db29e3"/>
 </node>
 <node id="70" lat="51.7538069" lon="-1.2612334">
@@ -557,7 +549,7 @@
 <tag k="augox_category" v="3"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="door74oxford"/>
 <tag k="augox_foursquareid" v="4bf811265efe2d7fac076a34"/>
 </node>
 <node id="66" lat="51.7503035" lon="-1.2435634">
@@ -565,7 +557,7 @@
 <tag k="augox_category" v="4"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="clemsBar"/>
 <tag k="augox_foursquareid" v="4f403c3ee4b062d5cb6f2406"/>
 </node>
 <node id="67" lat="51.7464715" lon="-1.2334025">
@@ -613,7 +605,7 @@
 <tag k="augox_category" v="3"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="ASKItalian"/>
 <tag k="augox_foursquareid" v="4be6faf0d4f7c9b646492720"/>
 </node>
 <node id="73" lat="51.7538971" lon="-1.2596433">
@@ -621,7 +613,7 @@
 <tag k="augox_category" v="3"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="Big_Bella"/>
 <tag k="augox_foursquareid" v="4b53108ff964a520df8d27e3"/>
 </node>
 <node id="74" lat="51.7579867" lon="-1.2637336">
@@ -637,7 +629,7 @@
 <tag k="augox_category" v="4"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="RaoulsBarOxford"/>
 <tag k="augox_foursquareid" v="4b6c70dcf964a5205a3a2ce3"/>
 </node>
 <node id="85" lat="51.7781886" lon="-1.2672867">
@@ -645,7 +637,7 @@
 <tag k="augox_category" v="4"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="OxfordWineCafe"/>
 <tag k="augox_foursquareid" v="5108d3e0067da2d018ba7040"/>
 </node>
 <node id="84" lat="51.7784649" lon="-1.2667269">
@@ -677,7 +669,7 @@
 <tag k="augox_category" v="3"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="SpiceLoungeOx"/>
 <tag k="augox_foursquareid" v="4b748378f964a52028e12de3"/>
 </node>
 <node id="80" lat="51.7760508" lon="-1.2645982">
@@ -749,7 +741,7 @@
 <tag k="augox_category" v="4"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="cafe_tarifa"/>
 <tag k="augox_foursquareid" v="4b5deca6f964a520157429e3"/>
 </node>
 <node id="91" lat="51.7483875" lon="-1.2353717">
@@ -757,7 +749,7 @@
 <tag k="augox_category" v="2"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="OxfordUnion"/>
 <tag k="augox_foursquareid" v="4b732a7ff964a5205e9f2de3"/>
 </node>
 <node id="90" lat="51.7535234" lon="-1.2590876">
@@ -781,7 +773,7 @@
 <tag k="augox_category" v="3"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="byronhamburgers"/>
 <tag k="augox_foursquareid" v="4f4c73ec771640e0662b7094"/>
 </node>
 <node id="100" lat="51.7425113" lon="-1.2349154">
@@ -789,7 +781,7 @@
 <tag k="augox_category" v="3"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="olisthai"/>
 <tag k="augox_foursquareid" v="5235bc8211d26b39eb845d51"/>
 </node>
 <node id="101" lat="51.7518985" lon="-1.254731">
@@ -877,7 +869,7 @@
 <tag k="augox_category" v="3"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="Readysteadyspic"/>
 <tag k="augox_foursquareid" v=""/>
 </node>
 <node id="104" lat="51.7651766" lon="-1.2535616">
@@ -933,7 +925,7 @@
 <tag k="augox_category" v="3"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="MaxwellsOxford"/>
 <tag k="augox_foursquareid" v="4b5310fcf964a520ed8d27e3"/>
 </node>
 <node id="114" lat="51.7462171" lon="-1.2564256">
@@ -941,7 +933,7 @@
 <tag k="augox_category" v="3"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="No1FollyBridge"/>
 <tag k="augox_foursquareid" v="4e01b68b1495692a4bb9aaa3"/>
 </node>
 <node id="113" lat="51.7556372" lon="-1.2599083">
@@ -957,7 +949,7 @@
 <tag k="augox_category" v="3"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="bigbangox"/>
 <tag k="augox_foursquareid" v="4b7da726f964a52070cc2fe3"/>
 </node>
 <node id="127" lat="51.755611808695654" lon="-1.252415747826087">
@@ -973,7 +965,7 @@
 <tag k="augox_category" v="2"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="StCrossCollege"/>
 <tag k="augox_foursquareid" v="4c7e6ca3b33a224be7d7da81"/>
 </node>
 <node id="125" lat="51.755982729166675" lon="-1.2448053166666664">
@@ -981,7 +973,7 @@
 <tag k="augox_category" v="2"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="St_Catz"/>
 <tag k="augox_foursquareid" v="4b52efa4f964a520f18a27e3"/>
 </node>
 <node id="124" lat="51.75247556551722" lon="-1.2154729620689655">
@@ -997,7 +989,7 @@
 <tag k="augox_category" v="2"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="oxford_brookes"/>
 <tag k="augox_foursquareid" v="4c20d5ba4889a593eaf92620"/>
 </node>
 <node id="122" lat="51.75439590833334" lon="-1.2243405541666665">
@@ -1005,7 +997,7 @@
 <tag k="augox_category" v="2"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="oxford_brookes"/>
 <tag k="augox_foursquareid" v=""/>
 </node>
 <node id="121" lat="51.749570299999995" lon="-1.1295397562499998">
@@ -1013,7 +1005,7 @@
 <tag k="augox_category" v="2"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="oxford_brookes"/>
 <tag k="augox_foursquareid" v=""/>
 </node>
 <node id="120" lat="51.7609589" lon="-1.2672241">
@@ -1029,7 +1021,7 @@
 <tag k="augox_category" v="2"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="StHughsCollege"/>
 <tag k="augox_foursquareid" v="4c22c39d34faef3ba0b6586d"/>
 </node>
 <node id="136" lat="51.751818318181805" lon="-1.2538203757575757">
@@ -1037,7 +1029,7 @@
 <tag k="augox_category" v="2"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="OrielOxford"/>
 <tag k="augox_foursquareid" v="4b72cddaf964a52076892de3"/>
 </node>
 <node id="139" lat="51.755588146428565" lon="-1.2666529571428573">
@@ -1053,7 +1045,7 @@
 <tag k="augox_category" v="2"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="LinacreCollege"/>
 <tag k="augox_foursquareid" v="4b4a3fc2f964a520b18026e3"/>
 </node>
 <node id="141" lat="51.748668432" lon="-1.2457039600000002">
@@ -1061,7 +1053,7 @@
 <tag k="augox_category" v="2"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="StHildasCollege"/>
 <tag k="augox_foursquareid" v="4c48acbc19fde21ed0780c76"/>
 </node>
 <node id="140" lat="51.750837628571425" lon="-1.243169942857143">
@@ -1077,7 +1069,7 @@
 <tag k="augox_category" v="2"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="StAntsCollege"/>
 <tag k="augox_foursquareid" v="4b6cb3c8f964a520804d2ce3"/>
 </node>
 <node id="142" lat="51.761895689999996" lon="-1.2615221699999999">
@@ -1085,7 +1077,7 @@
 <tag k="augox_category" v="2"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="StAnnesCollege"/>
 <tag k="augox_foursquareid" v="4b6c7dc2f964a520693e2ce3"/>
 </node>
 <node id="129" lat="51.75437345294116" lon="-1.2535473745098038">
@@ -1093,7 +1085,7 @@
 <tag k="augox_category" v="2"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="HertfordCollege"/>
 <tag k="augox_foursquareid" v="4c2c9a0b721695210d617f8f"/>
 </node>
 <node id="128" lat="51.75276841333333" lon="-1.2623671066666668">
@@ -1101,7 +1093,7 @@
 <tag k="augox_category" v="2"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="NuffieldCollege"/>
 <tag k="augox_foursquareid" v="4bd590fa7b1876b018e68a86"/>
 </node>
 <node id="131" lat="51.758640069230786" lon="-1.2580029307692309">
@@ -1109,7 +1101,7 @@
 <tag k="augox_category" v="2"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="Keble_JCR"/>
 <tag k="augox_foursquareid" v="4b6703e6f964a52031352be3"/>
 </node>
 <node id="130" lat="51.753311312000015" lon="-1.251433112">
@@ -1117,7 +1109,7 @@
 <tag k="augox_category" v="2"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="QCJCR"/>
 <tag k="augox_foursquareid" v="4b1ed14cf964a520ff1f24e3"/>
 </node>
 <node id="133" lat="51.75288619347826" lon="-1.2550153543478257">
@@ -1125,7 +1117,7 @@
 <tag k="augox_category" v="2"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="BNC_Members"/>
 <tag k="augox_foursquareid" v="4b9b9c94f964a5207c1336e3"/>
 </node>
 <node id="132" lat="51.75282913469389" lon="-1.2553691836734693">
@@ -1133,7 +1125,7 @@
 <tag k="augox_category" v="2"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="LincolnAlumni"/>
 <tag k="augox_foursquareid" v="4b228a82f964a520ae4824e3"/>
 </node>
 <node id="135" lat="51.7533983909091" lon="-1.2571888909090907">
@@ -1141,7 +1133,7 @@
 <tag k="augox_category" v="2"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="JesusAlumni"/>
 <tag k="augox_foursquareid" v="4b572888f964a520b32828e3"/>
 </node>
 <node id="134" lat="51.753889949999994" lon="-1.2555249714285712">
@@ -1149,7 +1141,7 @@
 <tag k="augox_category" v="2"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="ExeterCollegeOx"/>
 <tag k="augox_foursquareid" v="4b87423af964a52001b931e3"/>
 </node>
 <node id="152" lat="51.75881723571429" lon="-1.2544679285714284">
@@ -1173,7 +1165,7 @@
 <tag k="augox_category" v="2"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="KelloggOx"/>
 <tag k="augox_foursquareid" v="4bf198f0324cc9b6043acc92"/>
 </node>
 <node id="155" lat="51.74059390000001" lon="-1.2931507733333334">
@@ -1181,7 +1173,7 @@
 <tag k="augox_category" v="2"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="oxford_brookes"/>
 <tag k="augox_foursquareid" v=""/>
 </node>
 <node id="156" lat="51.754249144444444" lon="-1.255441022222222">
@@ -1189,7 +1181,7 @@
 <tag k="augox_category" v="1"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="MHSOxford"/>
 <tag k="augox_foursquareid" v="4b1e6130f964a520631924e3"/>
 </node>
 <node id="157" lat="51.756001516666664" lon="-1.2604060333333333">
@@ -1197,7 +1189,7 @@
 <tag k="augox_category" v="2"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="BlackfriarsHall"/>
 <tag k="augox_foursquareid" v="4c76c952a5676dcb5f9a1621"/>
 </node>
 <node id="158" lat="51.7610467" lon="-1.2633300125">
@@ -1229,7 +1221,7 @@
 <tag k="augox_category" v="2"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="SPC_Alumni"/>
 <tag k="augox_foursquareid" v="4cc070d0611abfb70387a605"/>
 </node>
 <node id="146" lat="51.7438812" lon="-1.2403680400000001">
@@ -1245,7 +1237,7 @@
 <tag k="augox_category" v="2"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="MansfieldOxford"/>
 <tag k="augox_foursquareid" v="4be468ce2468c928eabbfe42"/>
 </node>
 <node id="148" lat="51.75863633214285" lon="-1.2557061571428572">
@@ -1253,7 +1245,7 @@
 <tag k="augox_category" v="1"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="morethanadodo"/>
 <tag k="augox_foursquareid" v="4bdd821e4ffaa593d98e6ff7"/>
 </node>
 <node id="149" lat="51.75615775714285" lon="-1.2640903428571428">
@@ -1261,7 +1253,7 @@
 <tag k="augox_category" v="2"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="ExeterCollegeOx"/>
 <tag k="augox_foursquareid" v=""/>
 </node>
 <node id="150" lat="51.7500732375" lon="-1.2652111999999998">
@@ -1277,7 +1269,7 @@
 <tag k="augox_category" v="2"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="bellerbys"/>
 <tag k="augox_foursquareid" v="4d590c00c88da1cdc8733568"/>
 </node>
 <node id="171" lat="51.760910207692305" lon="-1.2611785384615384">
@@ -1285,7 +1277,7 @@
 <tag k="augox_category" v="2"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="KebleAlumni"/>
 <tag k="augox_foursquareid" v="4b6703e6f964a52031352be3"/>
 </node>
 <node id="170" lat="51.75951265333333" lon="-1.2647773666666668">
@@ -1301,7 +1293,7 @@
 <tag k="augox_category" v="3"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="brancaoxford"/>
 <tag k="augox_foursquareid" v="4bad08e9f964a520d3263be3"/>
 </node>
 <node id="168" lat="51.76090715714286" lon="-1.2676397">
@@ -1317,7 +1309,7 @@
 <tag k="augox_category" v="2"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="UnivOxford"/>
 <tag k="augox_foursquareid" v="4c8b36e752a98cfa153234e9"/>
 </node>
 <node id="174" lat="51.75302867941176" lon="-1.2498953617647057">
@@ -1325,7 +1317,7 @@
 <tag k="augox_category" v="2"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="StEdmundHall"/>
 <tag k="augox_foursquareid" v="4c8cb76ded3ab60cb1156a21"/>
 </node>
 <node id="173" lat="51.75051820714287" lon="-1.2549993809523805">
@@ -1333,7 +1325,7 @@
 <tag k="augox_category" v="2"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="ChCh_Oxford"/>
 <tag k="augox_foursquareid" v="4b7ac9d2f964a520d23c2fe3"/>
 </node>
 <node id="172" lat="51.75054704047621" lon="-1.2537236690476192">
@@ -1341,7 +1333,7 @@
 <tag k="augox_category" v="2"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="CCCOxfordAccess"/>
 <tag k="augox_foursquareid" v="4cf3d8478333224bedc6178e"/>
 </node>
 <node id="163" lat="51.74889625789475" lon="-1.2388445157894734">
@@ -1357,7 +1349,7 @@
 <tag k="augox_category" v="2"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="BalliolOxford"/>
 <tag k="augox_foursquareid" v="4c095007bbc676b068fc47d5"/>
 </node>
 <node id="161" lat="51.75867213" lon="-1.25506333">
@@ -1365,7 +1357,7 @@
 <tag k="augox_category" v="1"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="Pitt_Rivers"/>
 <tag k="augox_foursquareid" v="5101265b8302126a98a8d171"/>
 </node>
 <node id="160" lat="51.756954300000004" lon="-1.2606669399999997">
@@ -1373,7 +1365,7 @@
 <tag k="augox_category" v="2"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="regentsoxford"/>
 <tag k="augox_foursquareid" v="4dcbb29be4cde609a39dbea2"/>
 </node>
 <node id="167" lat="51.76009528000001" lon="-1.26638288">
@@ -1413,7 +1405,7 @@
 <tag k="augox_category" v="2"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="AllSoulsLibrary"/>
 <tag k="augox_foursquareid" v="4b92a622f964a520920d34e3"/>
 </node>
 <node id="187" lat="51.75555077500002" lon="-1.2481458416666666">
@@ -1421,7 +1413,7 @@
 <tag k="augox_category" v="2"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="StCrossCollege"/>
 <tag k="augox_foursquareid" v=""/>
 </node>
 <node id="184" lat="51.759066159999996" lon="-1.26127527">
@@ -1429,7 +1421,7 @@
 <tag k="augox_category" v="3"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="BrownsOxford"/>
 <tag k="augox_foursquareid" v="4b77255ff964a5200f822ee3"/>
 </node>
 <node id="185" lat="51.75570201739131" lon="-1.2537139826086958">
@@ -1437,7 +1429,7 @@
 <tag k="augox_category" v="2"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="wadhamoxford"/>
 <tag k="augox_foursquareid" v="4bc4c4d7920eb713933e1f2c"/>
 </node>
 <node id="190" lat="51.75287203846154" lon="-1.2573933076923076">
@@ -1445,7 +1437,7 @@
 <tag k="augox_category" v="3"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="wagamama_uk"/>
 <tag k="augox_foursquareid" v="4b4e8e10f964a52040f126e3"/>
 </node>
 <node id="191" lat="51.815668493333334" lon="-1.2820464666666667">
@@ -1461,7 +1453,7 @@
 <tag k="augox_category" v="2"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="BalliolOxford"/>
 <tag k="augox_foursquareid" v="4da0f4fd9935a093e629966f"/>
 </node>
 <node id="189" lat="51.76272904062498" lon="-1.2599777">
@@ -1469,7 +1461,7 @@
 <tag k="augox_category" v="2"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="WycliffeFriends"/>
 <tag k="augox_foursquareid" v="4beac5c0415e20a15667e5bb"/>
 </node>
 <node id="178" lat="51.75514845333334" lon="-1.2569695755555552">
@@ -1477,7 +1469,7 @@
 <tag k="augox_category" v="2"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="TrinityOxford"/>
 <tag k="augox_foursquareid" v="4b7aada9f964a520d9362fe3"/>
 </node>
 <node id="179" lat="51.75727420735294" lon="-1.2585610500000004">
@@ -1485,7 +1477,7 @@
 <tag k="augox_category" v="2"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="StJohnsOx"/>
 <tag k="augox_foursquareid" v="4bc6319651b376b000261b6f"/>
 </node>
 <node id="176" lat="51.7576695" lon="-1.2571593444444444">
@@ -1501,7 +1493,7 @@
 <tag k="augox_category" v="2"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="BalliolOxford"/>
 <tag k="augox_foursquareid" v="4c095007bbc676b068fc47d5"/>
 </node>
 <node id="182" lat="51.75793127000001" lon="-1.2609335900000003">
@@ -1509,7 +1501,7 @@
 <tag k="augox_category" v="2"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="StBenetsHallBC"/>
 <tag k="augox_foursquareid" v="4e393d8562e16ad099efe4ad"/>
 </node>
 <node id="183" lat="51.759153528571424" lon="-1.2608276428571428">
@@ -1541,7 +1533,7 @@
 <tag k="augox_category" v="2"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="MertonCollege"/>
 <tag k="augox_foursquareid" v="4ba8e83af964a520eaf839e3"/>
 </node>
 <node id="204" lat="51.76591566111111" lon="-1.2127018777777778">
@@ -1557,7 +1549,7 @@
 <tag k="augox_category" v="1"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="ChCh_Oxford"/>
 <tag k="augox_foursquareid" v="4b8d1a93f964a52027e832e3"/>
 </node>
 <node id="206" lat="51.74839721666667" lon="-1.2383058333333334">
@@ -1613,7 +1605,7 @@
 <tag k="augox_category" v="2"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="NewCollegeOx"/>
 <tag k="augox_foursquareid" v="4beae24a4f5576b04435b396"/>
 </node>
 <node id="199" lat="51.7641814375" lon="-1.2106736500000002">
@@ -1637,7 +1629,7 @@
 <tag k="augox_category" v="2"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="magdalenoxford"/>
 <tag k="augox_foursquareid" v="4b82e902f964a52093ec30e3"/>
 </node>
 <node id="192" lat="51.75287831999999" lon="-1.2710342000000001">
@@ -1653,7 +1645,7 @@
 <tag k="augox_category" v="2"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="magdalenoxford"/>
 <tag k="augox_foursquareid" v=""/>
 </node>
 <node id="194" lat="51.75484041627906" lon="-1.245290681395349">
@@ -1693,7 +1685,7 @@
 <tag k="augox_category" v="3"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="GeesRestaurant"/>
 <tag k="augox_foursquareid" v="4bafa569f964a52068133ce3"/>
 </node>
 <node id="216" lat="51.7243098117647" lon="-1.1339944117647056">
@@ -1709,7 +1701,7 @@
 <tag k="augox_category" v="2"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="sshoxford"/>
 <tag k="augox_foursquareid" v="4e07bc58b0fbba5eee1e3f03"/>
 </node>
 <node id="218" lat="51.75236545" lon="-1.2677480687500002">
@@ -1717,7 +1709,7 @@
 <tag k="augox_category" v="3"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="TheJamFactory"/>
 <tag k="augox_foursquareid" v="4b5986ecf964a520368b28e3"/>
 </node>
 <node id="219" lat="51.74879660526316" lon="-1.2560447315789474">
@@ -1733,7 +1725,7 @@
 <tag k="augox_category" v="4"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="LodgeOxford"/>
 <tag k="augox_foursquareid" v="51492040e4b0187c907112b8"/>
 </node>
 <node id="213" lat="51.760370038461545" lon="-1.2624765307692307">
@@ -1741,7 +1733,7 @@
 <tag k="augox_category" v="2"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="radcliffescilib"/>
 <tag k="augox_foursquareid" v="4d83644450913704aa78675b"/>
 </node>
 <node id="214" lat="51.755113786206884" lon="-1.2579668862068967">
@@ -1749,7 +1741,7 @@
 <tag k="augox_category" v="2"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="BalliolOxford"/>
 <tag k="augox_foursquareid" v="4c095007bbc676b068fc47d5"/>
 </node>
 <node id="215" lat="51.74609724999999" lon="-1.2404335312500003">
@@ -1765,7 +1757,7 @@
 <tag k="augox_category" v="2"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="oxford_brookes"/>
 <tag k="augox_foursquareid" v="4b6c6caef964a5200b392ce3"/>
 </node>
 <node id="209" lat="51.74652073636364" lon="-1.2273709909090906">
@@ -1805,7 +1797,7 @@
 <tag k="augox_category" v="3"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="turlstkitchen"/>
 <tag k="augox_foursquareid" v="4e808bc8775be483e6f7bcbb"/>
 </node>
 <node id="233" lat="51.75269822999999" lon="-1.2714339266666665">
@@ -1821,7 +1813,7 @@
 <tag k="augox_category" v="4"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="1855oxford"/>
 <tag k="augox_foursquareid" v="52ada671498e1390fcc97e9e"/>
 </node>
 <node id="231" lat="51.76656498999999" lon="-1.21526524">
@@ -1853,7 +1845,7 @@
 <tag k="augox_category" v="3"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="Atomicburgers"/>
 <tag k="augox_foursquareid" v="4b509db3f964a5209b2927e3"/>
 </node>
 <node id="227" lat="51.745346559999994" lon="-1.2301013">
@@ -1861,7 +1853,7 @@
 <tag k="augox_category" v="3"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="Atomicpizzas"/>
 <tag k="augox_foursquareid" v="4ee25cf95c5cfd2133be98f9"/>
 </node>
 <node id="226" lat="51.74548746000001" lon="-1.23046034">
@@ -1877,7 +1869,7 @@
 <tag k="augox_category" v="2"/>
 <tag k="augox_rating" v="0"/>
 <tag k="description" v=""/>
-<tag k="augox_twitterhandle" v=""/>
+<tag k="augox_twitterhandle" v="SomervilleOx"/>
 <tag k="augox_foursquareid" v="4b631396f964a5204c612ae3"/>
 </node>
 <node id="224" lat="51.74960435714286" lon="-1.258418557142857">
