@@ -60,6 +60,7 @@ public class RoutePlannerActivity extends Activity {
 	}
 	
 	protected void onPause(){
+		super.onPause();
 		curRoute.setList(routePlaces);
 	}
 	@Override
