@@ -302,7 +302,6 @@ public class MainActivity extends Activity {
 				// Load category
 				PlaceCategory icategory = PlaceCategory.UNKNOWN;
 				if(item.hasTag("amenity", "bar")
-						|| item.hasTag("amenity", "pub")
 						|| itemHasAugOxCategory(item, PlaceCategory.BAR)) {
 					icategory = PlaceCategory.BAR;
 				}
