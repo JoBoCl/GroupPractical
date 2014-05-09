@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" >
+
+    <TextView
+        android:id="@+id/placeName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" >"
+    </TextView>
+    
+        <ImageView
+            android:id="@+id/imageViewStar1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/placeName"
+            android:layout_below="@+id/placeName"
+            android:src="@android:drawable/star_off" />
+
+        <ImageView
+            android:id="@+id/imageViewStar2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/imageViewStar1"
+            android:layout_below="@+id/placeName"
+            android:src="@android:drawable/star_off" />
+
+        <ImageView
+            android:id="@+id/imageViewStar3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/imageViewStar2"
+            android:layout_below="@+id/placeName"
+            android:src="@android:drawable/star_off" />
+
+        <ImageView
+            android:id="@+id/imageViewStar4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/imageViewStar3"
+            android:layout_below="@+id/placeName"
+            android:src="@android:drawable/star_off" />
+
+        <ImageView
+            android:id="@+id/imageViewStar5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/imageViewStar4"
+            android:layout_below="@+id/placeName"
+            android:src="@android:drawable/star_off" />
+
+</RelativeLayout>
