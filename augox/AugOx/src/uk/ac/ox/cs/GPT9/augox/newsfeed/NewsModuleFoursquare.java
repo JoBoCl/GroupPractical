@@ -63,9 +63,17 @@ public class NewsModuleFoursquare implements INewsModule
 	    			// get link
 	    			try {
 		    			String shortUrl = venue.get("shortUrl").toString();
-		    			// TODO:  Actually use when database updated
+		    			place.updateFourSquareURL(shortUrl);
 	    			}
-	    			catch (Exception e) {/*no photos available*/}
+	    			catch (Exception e) {/*no link available*/}
+	    			
+	    			// get phonenumber
+	    			try {
+	    				org.json.simple.JSONObject contact = (org.json.simple.JSONObject)venue.get("contact");
+	    				String phonenumber = contact.get("phone").toString();
+		    			place.updatePhoneNumber(phonenumber);
+	    			}
+	    			catch (Exception e) {/*no number available*/}
 	    			
 	    			// get image
 	    			try {
