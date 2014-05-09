@@ -268,10 +268,12 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
             	Intent intent6 = new Intent(this, AutoPlannerActivity.class);
                 startActivity(intent6);
                 return true;
+            /*
             case R.id.action_launch_databasedebugger:
             	Intent intent7 = new Intent(this, DatabaseDebuggerActivity.class);
                 startActivity(intent7);
                 return true;
+            */
             default:
                 return super.onOptionsItemSelected(item);
         }

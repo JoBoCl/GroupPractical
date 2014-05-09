@@ -256,7 +256,6 @@ containing a value of this type.
     public static final class id {
         public static final int LinearLayout1=0x7f060005;
         public static final int action_launch_autoplanner=0x7f06004d;
-        public static final int action_launch_databasedebugger=0x7f06004f;
         public static final int action_launch_filterpanel=0x7f06004a;
         public static final int action_launch_listplaces=0x7f06004b;
         public static final int action_launch_routeplanner=0x7f06004c;
