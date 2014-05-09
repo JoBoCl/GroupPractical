@@ -33,7 +33,7 @@ public class DatabaseDebuggerActivity extends Activity {
 	public void loadDatabase(View view) {
 		AssetManager ast = getAssets();
 		try {
-			InputStream inp = ast.open("testdb.dat");
+			InputStream inp = ast.open("db.dat");
 			MainScreenActivity.getPlacesDatabase().loadFromStream(inp);
 			inp.close();
 			Toast toast = Toast.makeText(getApplicationContext(), "File Loaded", Toast.LENGTH_SHORT);

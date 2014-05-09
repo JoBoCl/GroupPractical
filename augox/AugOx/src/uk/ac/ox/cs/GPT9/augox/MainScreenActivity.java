@@ -2,6 +2,8 @@ package uk.ac.ox.cs.GPT9.augox;
 
 import uk.ac.ox.cs.GPT9.augox.route.*;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +34,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
+import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -43,6 +46,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnLongClickListener;
 import android.widget.SeekBar;
+import android.widget.Toast;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 
 public class MainScreenActivity extends FragmentActivity implements OnClickBeyondarObjectListener, OnSharedPreferenceChangeListener {
@@ -85,6 +89,8 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
         
         //requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main_screen);
+        
+        loadDatabase("db.dat");
         
 		mBeyondarFragment = (BeyondarFragmentSupport) getSupportFragmentManager().findFragmentById(R.id.beyondarFragment);
         
@@ -153,6 +159,18 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
         
         fillWorld();
     }
+   
+   private void loadDatabase(String filename) {
+	   AssetManager ast = getAssets();
+		try {
+			InputStream inp = ast.open(filename);
+			getPlacesDatabase().loadFromStream(inp);
+			inp.close();
+		} catch (IOException e) {
+			Toast toast = Toast.makeText(getApplicationContext(), "Cricital Error! The database could not be loaded.", Toast.LENGTH_LONG);
+			toast.show();
+		}
+   }
    
    private void startFullInfoActivity(final BeyondarObject geoPlace) {
 	   mBeyondarFragment.takeScreenshot(new OnScreenshotListener() {
