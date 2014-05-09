@@ -42,22 +42,63 @@ public class RoutePlannerActivity extends Activity {
 	private IRoute curRoute = new Route();
 	private double latitude = 0;
 	private double longitude = 0;
+	private PlacesDatabase db;
+	//current route variables
+	private ListView currentRouteListView;
+	private List<Integer> routePlaces;
+	private RouteAdapter routeAdapter;
 	
 	protected void onResume(){
 		super.onResume();
-		Intent intent = getIntent();
-		latitude = intent.getDoubleExtra(EXTRA_LATITUDE,Double.valueOf(0));
-		longitude = intent.getDoubleExtra(EXTRA_LONGITUDE,Double.valueOf(0));
+		
+		routePlaces = curRoute.getRouteAsIDList();
+		routeAdapter = new RouteAdapter(this,routePlaces);
+		currentRouteListView.setAdapter(routeAdapter);
+		
 		reloadLists();
 		reloadCheckboxes();
 	}
 	
-	
+	protected void onPause(){
+		curRoute.setList(routePlaces);
+	}
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_route_planner);
+		initSetup();
+		reloadLists();
+		reloadCheckboxes();
+	}
+	
+	private void initSetup(){
+		Intent intent = getIntent();
+		latitude = intent.getDoubleExtra(EXTRA_LATITUDE,Double.valueOf(0));
+		longitude = intent.getDoubleExtra(EXTRA_LONGITUDE,Double.valueOf(0));
 		curRoute = MainScreenActivity.getCurrentRoute();
+		db = MainScreenActivity.getPlacesDatabase();
+		routePlaces = curRoute.getRouteAsIDList();
+		routeAdapter = new RouteAdapter(this,routePlaces);
+		currentRouteListView = ((ListView) findViewById(R.id.listRoutePlannerCurrentRoute));
+		currentRouteListView.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int itemNoClicked,
+					long arg3) {
+				//Starts activity PlaceFullInfoActivity for the clicked place
+				PlaceData place = db.getPlaceByID(routePlaces.get(itemNoClicked));
+            	Intent intent = new Intent(getApplicationContext(), PlaceFullInfoActivity.class);
+            	double dist = PlaceData.getDistanceBetween(place.getLatitude(), place.getLongitude(), latitude, longitude);
+                intent.putExtra(PlaceFullInfoActivity.EXTRA_DISTANCE, dist);
+            	//put the place in the intent
+                intent.putExtra(PlaceFullInfoActivity.EXTRA_PLACE, routePlaces.get(itemNoClicked));
+                //put the background to include in the intent
+                intent.putExtra(PlaceFullInfoActivity.EXTRA_BACKGROUND, "");
+                startActivity(intent);
+			}
+		});
+
+		currentRouteListView.setAdapter(routeAdapter);
+		
 		Button buttonContinue = (Button) findViewById(R.id.buttonRoutePlannerStart);
 		buttonContinue.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
@@ -67,15 +108,12 @@ public class RoutePlannerActivity extends Activity {
 		Button buttonClear = (Button) findViewById(R.id.buttonRoutePlannerClear);
 		buttonClear.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				curRoute.clear();
+				routePlaces.clear();
 				reloadLists(true, false);
 			}
 		});
 		
-		reloadLists();
-		reloadCheckboxes();
 	}
-	
 	
 	private void reloadCheckboxes(){
 		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -148,33 +186,9 @@ public class RoutePlannerActivity extends Activity {
 	private void reloadLists(){reloadLists(true,true);}
 	private void reloadLists(boolean route, boolean filtered){
 		if(route){
-			//Current Route List
-			final List<Integer> routePlaces = curRoute.getRouteAsIDList();
-			ListView currentRouteListView = ((ListView) findViewById(R.id.listRoutePlannerCurrentRoute));
-			int lastScroll = currentRouteListView.getFirstVisiblePosition();
-			RouteAdapter adapter = new RouteAdapter(this,routePlaces);
-			currentRouteListView.setAdapter(adapter);
-			currentRouteListView.setSelection(lastScroll);
+			routeAdapter.notifyDataSetChanged();
 
-			currentRouteListView.setOnItemClickListener(new OnItemClickListener() {
-				@Override
-				public void onItemClick(AdapterView<?> arg0, View arg1, int itemNoClicked,
-						long arg3) {
-					PlacesDatabase db = MainScreenActivity.getPlacesDatabase();
-					//Starts activity PlaceFullInfoActivity for the clicked place
-					PlaceData place = db.getPlaceByID(routePlaces.get(itemNoClicked));
-	            	Intent intent = new Intent(getApplicationContext(), PlaceFullInfoActivity.class);
-	            	double dist = PlaceData.getDistanceBetween(place.getLatitude(), place.getLongitude(), latitude, longitude);
-	                intent.putExtra(PlaceFullInfoActivity.EXTRA_DISTANCE, dist);
-	            	//put the place in the intent
-	                intent.putExtra(PlaceFullInfoActivity.EXTRA_PLACE, routePlaces.get(itemNoClicked));
-	                //put the background to include in the intent
-	                intent.putExtra(PlaceFullInfoActivity.EXTRA_BACKGROUND, "");
-	                startActivity(intent);
-				}
-			});
 		}
-		
 		if(filtered){
 			//Add Places List
 			SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -259,7 +273,10 @@ public class RoutePlannerActivity extends Activity {
 			upButton.setOnClickListener(new View.OnClickListener() {
 				public void onClick(View v) {
 					if(position > 0){
-						curRoute.changePosition(position, position-1);
+						int i = routePlaces.get(position);
+						routePlaces.remove(position);
+						routePlaces.add(position-1, i);
+						//curRoute.changePosition(position, position-1);
 		                reloadLists(true,false);
 					}
 				}
@@ -267,14 +284,17 @@ public class RoutePlannerActivity extends Activity {
 			downButton.setOnClickListener(new View.OnClickListener() {
 				public void onClick(View v) {
 					if(position < values.size()-1){
-						curRoute.changePosition(position,position+1);
+						int i = routePlaces.get(position);
+						routePlaces.remove(position);
+						routePlaces.add(position+1, i);
+						//curRoute.changePosition(position,position+1);
 						reloadLists(true,false);
 					}
 				}
 			});
 			removeButton.setOnClickListener(new View.OnClickListener() {
 				public void onClick(View v) {
-					curRoute.removePlace(item);	
+					routePlaces.remove(position);
 				    reloadLists(true,false);
 				}
 			});
@@ -305,11 +325,9 @@ public class RoutePlannerActivity extends Activity {
 			typeView.setImageResource(item.getCategory().getImageRef(item.getVisited()));
 			addRouteView.setOnClickListener(new View.OnClickListener() {
 				public void onClick(View v) {
-					Log.d("TESTING","ADDTOROUTE");
-					curRoute.addEnd(placeId);
-					curRoute.setList(curRoute.getRouteAsIDArray());
-					Log.d("TESTING","ADDEDTOROUTE");
+					routePlaces.add(placeId);
 	                reloadLists(true,false);
+	                currentRouteListView.setSelection(routeAdapter.getCount() - 1);
 				}
 			});
 			return rowView; 
