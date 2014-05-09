@@ -36,7 +36,7 @@ public class PlaceFullInfoActivity extends Activity {
 	
 	// returns a string representing the distance in metres or kilometres
 	public static String distanceAsString(double distanceAsKm) {
-		if (distanceAsKm > 10) {
+		if (distanceAsKm > 5) {
 			return "unknown";
 		} else if (distanceAsKm < 0.95) {
         	String result = new DecimalFormat(".#").format(distanceAsKm).substring(1) + "00m";

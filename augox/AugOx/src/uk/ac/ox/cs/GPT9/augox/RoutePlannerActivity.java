@@ -151,10 +151,10 @@ public class RoutePlannerActivity extends Activity {
 			//Current Route List
 			final List<Integer> routePlaces = curRoute.getRouteAsIDList();
 			ListView currentRouteListView = ((ListView) findViewById(R.id.listRoutePlannerCurrentRoute));
-			int lastScroll = currentRouteListView.getScrollY();
+			int lastScroll = currentRouteListView.getFirstVisiblePosition();
 			RouteAdapter adapter = new RouteAdapter(this,routePlaces);
 			currentRouteListView.setAdapter(adapter);
-			currentRouteListView.scrollTo(currentRouteListView.getScrollX(), lastScroll);
+			currentRouteListView.setSelection(lastScroll);
 
 			currentRouteListView.setOnItemClickListener(new OnItemClickListener() {
 				@Override
