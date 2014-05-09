@@ -6,11 +6,13 @@ import java.text.DecimalFormat;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -34,9 +36,11 @@ public class PlaceFullInfoActivity extends Activity {
 	
 	// returns a string representing the distance in metres or kilometres
 	public static String distanceAsString(double distanceAsKm) {
-        if (distanceAsKm < 0.95) {
-        	String result = new DecimalFormat(".#").format(distanceAsKm).substring(1) + "00 m";
-        	if (result.contains("000 m")) return "0 m";
+		if (distanceAsKm > 10) {
+			return "unknown";
+		} else if (distanceAsKm < 0.95) {
+        	String result = new DecimalFormat(".#").format(distanceAsKm).substring(1) + "00m";
+        	if (result.contains("000 m")) return "0m";
         	else return result;
         }
         else {
@@ -138,7 +142,7 @@ public class PlaceFullInfoActivity extends Activity {
 	private PlaceCategory category() {return place.getCategory();}
 	private int rating() {return place.getRating();}
 	private boolean visited() {return place.getVisited();}
-	private String foursquareLink() {return "";}
+	private String foursquareLink() {return place.getFourSquareID();}
 	
 	// for all those nasty popups that may appear
 	private void fullInfoPopup(String title, String message) {

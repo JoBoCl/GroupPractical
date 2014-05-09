@@ -190,8 +190,10 @@ containing a value of this type.
         public static final int common_signin_btn_light_text_disabled=0x7f050006;
         public static final int common_signin_btn_light_text_focused=0x7f050007;
         public static final int common_signin_btn_light_text_pressed=0x7f050005;
-        public static final int common_signin_btn_text_dark=0x7f05000b;
-        public static final int common_signin_btn_text_light=0x7f05000c;
+        public static final int common_signin_btn_text_dark=0x7f05000d;
+        public static final int common_signin_btn_text_light=0x7f05000e;
+        public static final int red=0x7f05000b;
+        public static final int white=0x7f05000c;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
@@ -264,6 +266,38 @@ containing a value of this type.
         public static final int activityText=0x7f060006;
         public static final int add_places_name=0x7f06003b;
         public static final int add_places_type=0x7f06003a;
+        public static final int heresign=0x7f02001f;
+        public static final int ic_action_directions=0x7f020020;
+        public static final int ic_action_refresh=0x7f020021;
+        public static final int ic_action_settings=0x7f020022;
+        public static final int ic_action_split=0x7f020023;
+        public static final int ic_action_view_as_list=0x7f020024;
+        public static final int ic_launcher=0x7f020025;
+        public static final int ic_plusone_medium_off_client=0x7f020026;
+        public static final int ic_plusone_small_off_client=0x7f020027;
+        public static final int ic_plusone_standard_off_client=0x7f020028;
+        public static final int ic_plusone_tall_off_client=0x7f020029;
+        public static final int museumicon=0x7f02002a;
+        public static final int museumicontick=0x7f02002b;
+        public static final int radar_bg_small=0x7f02002c;
+        public static final int radar_north_small=0x7f02002d;
+        public static final int restauranticon=0x7f02002e;
+        public static final int restauranticontick=0x7f02002f;
+        public static final int transparent=0x7f020030;
+        public static final int twittericon=0x7f020031;
+    }
+    public static final class id {
+        public static final int LinearLayout1=0x7f060005;
+        public static final int action_launch_autoplanner=0x7f06004f;
+        public static final int action_launch_databasedebugger=0x7f060051;
+        public static final int action_launch_filterpanel=0x7f06004c;
+        public static final int action_launch_listplaces=0x7f06004d;
+        public static final int action_launch_routeplanner=0x7f06004e;
+        public static final int action_launch_settingspanel=0x7f060050;
+        public static final int activityCount=0x7f060007;
+        public static final int activityText=0x7f060006;
+        public static final int add_places_name=0x7f06003c;
+        public static final int add_places_type=0x7f06003b;
         public static final int beyondarFragment=0x7f06000e;
         public static final int btn_loaddatabase=0x7f06000a;
         public static final int btn_testFullInfo=0x7f06000c;
@@ -278,6 +312,14 @@ containing a value of this type.
         public static final int buttonRouteUp=0x7f060040;
         public static final int buttonVisited=0x7f060022;
         public static final int categoryChoice=0x7f060030;
+        public static final int buttonAddPlaces=0x7f06003d;
+        public static final int buttonRouteDown=0x7f060042;
+        public static final int buttonRoutePlannerClear=0x7f06002d;
+        public static final int buttonRoutePlannerStart=0x7f06002e;
+        public static final int buttonRouteRemove=0x7f060043;
+        public static final int buttonRouteUp=0x7f060041;
+        public static final int buttonVisited=0x7f060022;
+        public static final int categoryChoice=0x7f060031;
         public static final int checkBoxRouteFilterBars=0x7f060028;
         public static final int checkBoxRouteFilterColleges=0x7f060029;
         public static final int checkBoxRouteFilterMuseums=0x7f06002a;
@@ -290,10 +332,17 @@ containing a value of this type.
         public static final int current_route_name=0x7f06003f;
         public static final int current_route_number=0x7f06003d;
         public static final int current_route_type=0x7f06003e;
+        public static final int chosenPlace0=0x7f060035;
+        public static final int chosenPlace1=0x7f060037;
+        public static final int chosenPlace2=0x7f060039;
+        public static final int current_route_name=0x7f060040;
+        public static final int current_route_number=0x7f06003e;
+        public static final int current_route_type=0x7f06003f;
         public static final int distanceSlider=0x7f060010;
         public static final int filtersLayout=0x7f06000d;
         public static final int galleryHolders=0x7f060008;
         public static final int hybrid=0x7f060004;
+        public static final int iconView=0x7f06002f;
         public static final int imageViewBackground=0x7f060013;
         public static final int imageViewForeground=0x7f060014;
         public static final int imageViewImage=0x7f06001c;
@@ -326,6 +375,31 @@ containing a value of this type.
         public static final int satellite=0x7f060002;
         public static final int scrollView1=0x7f06002f;
         public static final int startTime=0x7f060031;
+        public static final int label=0x7f060049;
+        public static final int listRoutePlannerAddPlaces=0x7f06002c;
+        public static final int listRoutePlannerCurrentRoute=0x7f060025;
+        public static final int listViewFeed=0x7f06001f;
+        public static final int list_places_item_distance=0x7f060046;
+        public static final int list_places_item_name=0x7f060044;
+        public static final int list_places_item_type=0x7f060045;
+        public static final int list_places_single_view=0x7f06004a;
+        public static final int map=0x7f060012;
+        public static final int map_frame=0x7f060011;
+        public static final int missSession=0x7f06003a;
+        public static final int newsFeedSource=0x7f060047;
+        public static final int newsFeedText=0x7f060048;
+        public static final int none=0x7f060000;
+        public static final int normal=0x7f060001;
+        public static final int placeImage0=0x7f060034;
+        public static final int placeImage1=0x7f060036;
+        public static final int placeImage2=0x7f060038;
+        public static final int placeName=0x7f06004b;
+        public static final int placesGroup=0x7f060033;
+        public static final int radarView=0x7f06000f;
+        public static final int routeFinished=0x7f060009;
+        public static final int satellite=0x7f060002;
+        public static final int scrollView1=0x7f060030;
+        public static final int startTime=0x7f060032;
         public static final int terrain=0x7f060003;
         public static final int textRoutePlannerCurrentRoute=0x7f060024;
         public static final int textViewAcknowledgements=0x7f060023;
@@ -355,6 +429,17 @@ containing a value of this type.
         public static final int listview_standard_layout=0x7f03000d;
         public static final int news_feed_item_1=0x7f03000e;
         public static final int session_planner=0x7f03000f;
+        public static final int beyondar_object_view=0x7f030007;
+        public static final int fragment_gallery_picker=0x7f030008;
+        public static final int gallery_picker=0x7f030009;
+        public static final int listview_item_add_places=0x7f03000a;
+        public static final int listview_item_current_route=0x7f03000b;
+        public static final int listview_item_list_places=0x7f03000c;
+        public static final int listview_item_news_feed=0x7f03000d;
+        public static final int listview_standard_layout=0x7f03000e;
+        public static final int mini_info_view=0x7f03000f;
+        public static final int news_feed_item_1=0x7f030010;
+        public static final int session_planner=0x7f030011;
     }
     public static final class menu {
         public static final int auto_planner=0x7f0c0000;

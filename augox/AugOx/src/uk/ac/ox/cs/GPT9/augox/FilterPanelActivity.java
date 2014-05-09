@@ -1,9 +1,22 @@
 package uk.ac.ox.cs.GPT9.augox;
 
-import android.app.Activity;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import android.app.ListActivity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
-import android.preference.PreferenceFragment;
+import android.preference.PreferenceManager;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On
@@ -16,19 +29,68 @@ import android.preference.PreferenceFragment;
  * href="http://developer.android.com/guide/topics/ui/settings.html">Settings
  * API Guide</a> for more information on developing a Settings UI.
  */
-public class FilterPanelActivity extends Activity {
+public class FilterPanelActivity extends ListActivity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		getFragmentManager().beginTransaction().replace(android.R.id.content, new FilterFragment()).commit();
+		List<FilterItem> items = new ArrayList<FilterItem>();
+		items.add(new FilterItem("Visited", R.drawable.visitedicon, "filter_visited"));
+		items.add(new FilterItem("Unvisited",R.drawable.unvisitedicon,"filter_unvisited"));
+		for(PlaceCategory cat : PlaceCategory.values()){
+			if(cat.getID() != 0)
+				items.add(new FilterItem(cat.getName(),cat.getImageRef(false),cat.getFilter()));
+		}
+		
+		FilterAdapter adapter = new FilterAdapter(this,items);
+		setListAdapter(adapter);
 	} 
-
-	public static class FilterFragment extends PreferenceFragment {
+	
+	public class FilterAdapter extends ArrayAdapter<FilterItem> {
+		private Context context;
+		private List<FilterItem> values;
+		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+		final SharedPreferences.Editor editor = pref.edit();
+		
+		public FilterAdapter(Context context, List<FilterItem> values){
+			super(context,R.layout.listview_item_list_places,values);
+			this.context = context;
+			this.values = values;
+		}
+		
 		@Override
-		public void onCreate(Bundle savedInstanceState){
-			super.onCreate(savedInstanceState);
-			addPreferencesFromResource(R.xml.pref_filters);
+		public View getView(int position, View convertView, ViewGroup parent) {
+			LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			View rowView = inflater.inflate(R.layout.listview_item_filters, parent,false);
+			final FilterItem item = values.get(position);
+			ImageView iconView = (ImageView) rowView.findViewById(R.id.filters_image);
+			TextView nameView = (TextView) rowView.findViewById(R.id.filters_name);
+			final CheckBox checkView = (CheckBox) rowView.findViewById(R.id.filters_checkbox);
+			iconView.setImageResource(item.imageRef);
+			nameView.setText(item.name);
+			checkView.setChecked(pref.getBoolean(item.filterString,true));
+			
+			checkView.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					editor.putBoolean(item.filterString,checkView.isChecked());
+					editor.commit();
+				}
+			});
+			
+			return rowView;
+		}
+	}
+	
+	private class FilterItem{
+		private String name;
+		private int imageRef;
+		private String filterString;
+		
+		public FilterItem(String name, int imageRef, String filterString){
+			this.name = name;
+			this.imageRef = imageRef;
+			this.filterString = filterString;
 		}
 	}
 	
