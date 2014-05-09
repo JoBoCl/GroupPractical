@@ -433,7 +433,7 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 			if (route != null && p.placeID == route.getNextId()) {
 				p.geoPlace.setImageResource(R.drawable.heresign);
 			}
-			else p.geoPlace.setImageResource(placesDatabase.getPlaceByID(p.placeID).getCategory().getImageRef());
+			else p.geoPlace.setImageResource(placesDatabase.getPlaceByID(p.placeID).getCategory().getImageRef(placesDatabase.getPlaceByID(p.placeID).getVisited()));
 		}
 	}
 	
