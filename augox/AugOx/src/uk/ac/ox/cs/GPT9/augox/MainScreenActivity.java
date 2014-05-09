@@ -186,7 +186,6 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 		if (mMap == null){
 			return;
 		}
-		
 		mMapFrame = (View)findViewById(R.id.map_frame);
 		mMap.setOnMapLongClickListener(new OnMapLongClickListener() {
 			public void onMapLongClick(LatLng l) {

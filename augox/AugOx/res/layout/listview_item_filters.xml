@@ -1,0 +1,27 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="?android:attr/listPreferredItemHeight"
+    android:padding="6dip" >
+
+    <CheckBox
+        android:id="@+id/filters_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""/>
+    
+    <ImageView
+        android:id="@+id/filters_image"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:contentDescription="Place Type"
+        android:layout_toRightOf="@+id/filters_checkbox"
+        android:src="@drawable/ic_launcher" 
+        	/>
+    <TextView
+        android:id="@+id/filters_name"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_toRightOf="@+id/filters_image"
+        android:singleLine = "true" />
+
+</RelativeLayout>
