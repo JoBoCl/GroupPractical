@@ -142,7 +142,7 @@ public class PlaceFullInfoActivity extends Activity {
 	private PlaceCategory category() {return place.getCategory();}
 	private int rating() {return place.getRating();}
 	private boolean visited() {return place.getVisited();}
-	private String foursquareLink() {return place.getFourSquareID();}
+	private String foursquareLink() {return place.getFourSquareURL();}
 	
 	// for all those nasty popups that may appear
 	private void fullInfoPopup(String title, String message) {
