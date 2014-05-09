@@ -48,12 +48,14 @@ public interface IRoute {
 	
 	// Simply returns the next place to go to
 	PlaceData getNext();
-	
-	int getNextId();
+	int getNextAsID();
 	
 	// Removes the first element of the list (move along to next point on route)
 	// If we've reached the end returns true, else return false
 	boolean moveOn();
+	
+	// tells us whether the route is empty or not
+	boolean empty();
 	
 	// Miscellaneous useful
 	

@@ -429,7 +429,7 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 	
 	private void routeChangedListener(IRoute oldRoute) {
 		for (Place p: Places) { 
-			if (route != null && p.placeID == route.getNextId()) {
+			if (!route.empty() && p.placeID == route.getNextAsID()) {
 				p.geoPlace.setImageResource(R.drawable.heresign);
 			}
 			else p.geoPlace.setImageResource(placesDatabase.getPlaceByID(p.placeID).getCategory().getImageRef(placesDatabase.getPlaceByID(p.placeID).getVisited()));
