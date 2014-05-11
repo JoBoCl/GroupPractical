@@ -3,6 +3,8 @@ package uk.ac.ox.cs.GPT9.augox;
 import java.util.ArrayList;
 import java.util.List;
 
+import uk.ac.ox.cs.GPT9.augox.route.IRoute;
+import uk.ac.ox.cs.GPT9.augox.route.Route;
 import android.annotation.TargetApi;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -16,33 +18,32 @@ import android.widget.SeekBar;
 
 @TargetApi(11)
 public class AutoPlannerActivity extends FragmentActivity {
-	private static GalleryPickerFragment[] activities;
-	private SeekBar activityCount;
-	private Button finished;
+	private static IRoute _route = new Route();
 
+	private static GalleryPickerFragment[] activities;
+
+	private SeekBar activityCount;
+
+	private boolean allowRepeats = false;
+
+	private boolean allowVisited = false;
+	private Button finished;
+	private float maxDistance = 0.0f;
+
+	private int minRating = 0;
 	public static void getPlaces() {
 		List<Integer> routeList = new ArrayList<Integer>();
-		for (int j = 0;j < activities.length; j++) {
-		GalleryPickerFragment localGalleryPickerFragment = activities[j];
+		for (int j = 0; j < activities.length; j++) {
+			GalleryPickerFragment localGalleryPickerFragment = activities[j];
 			if (localGalleryPickerFragment.getSelectedPlace() != null) {
 				routeList.add(localGalleryPickerFragment.getSelectedPlace());
 			}
 		}
-				MainScreenActivity.getCurrentRoute().setList(routeList);
+		MainScreenActivity.getCurrentRoute().setList(routeList);
 	}
 
-	private void updateViewableActivities(int visibleActivities) {
-		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-		for (int i = 0; i < getResources().getInteger(R.integer.activity_limit); i++) {
-			if (i < visibleActivities) {
-				ft.show(activities[i]);
-				Log.d("Joshua", "Showed gallery " + Integer.toString(i));
-			} else {
-				ft.hide(activities[i]);
-				Log.d("Joshua", "Hid gallery " + Integer.toString(i));
-			}
-		}
-		ft.commit();
+	public static IRoute getPlannedRoute() {
+		return _route;
 	}
 
 	public void onCreate(Bundle savedInstanceState) {
@@ -66,21 +67,21 @@ public class AutoPlannerActivity extends FragmentActivity {
 		updateViewableActivities(0);
 		this.activityCount = ((SeekBar) findViewById(R.id.activityCount));
 		this.activityCount
-				.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-					public void onProgressChanged(SeekBar seekBar,
-							int newValue, boolean userChange) {
-						AutoPlannerActivity.this
-								.updateViewableActivities(newValue);
-					}
+		.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+			public void onProgressChanged(SeekBar seekBar,
+					int newValue, boolean userChange) {
+				AutoPlannerActivity.this
+				.updateViewableActivities(newValue);
+			}
 
-					public void onStartTrackingTouch(
-							SeekBar paramAnonymousSeekBar) {
-					}
+			public void onStartTrackingTouch(
+					SeekBar paramAnonymousSeekBar) {
+			}
 
-					public void onStopTrackingTouch(
-							SeekBar paramAnonymousSeekBar) {
-					}
-				});
+			public void onStopTrackingTouch(
+					SeekBar paramAnonymousSeekBar) {
+			}
+		});
 		this.finished = ((Button) findViewById(R.id.routeFinished));
 		this.finished.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View paramAnonymousView) {
@@ -93,5 +94,19 @@ public class AutoPlannerActivity extends FragmentActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.auto_planner, menu);
 		return true;
+	}
+
+	private void updateViewableActivities(int visibleActivities) {
+		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+		for (int i = 0; i < getResources().getInteger(R.integer.activity_limit); i++) {
+			if (i < visibleActivities) {
+				ft.show(activities[i]);
+				Log.d("Joshua", "Showed gallery " + Integer.toString(i));
+			} else {
+				ft.hide(activities[i]);
+				Log.d("Joshua", "Hid gallery " + Integer.toString(i));
+			}
+		}
+		ft.commit();
 	}
 }
