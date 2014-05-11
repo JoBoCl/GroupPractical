@@ -195,6 +195,17 @@
             android:text="@string/fullinfo_descriptiongoeshere"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
+        <TextView
+            android:id="@+id/textViewPhoneNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/textViewName"
+            android:layout_alignRight="@+id/textViewFeedTitle"
+            android:layout_marginRight="30dp"
+            android:text="Phone number goes here"
+            android:textColor="#808080"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
     </RelativeLayout>
 
 </RelativeLayout>

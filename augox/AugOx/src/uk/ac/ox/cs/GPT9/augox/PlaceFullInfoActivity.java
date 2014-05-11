@@ -99,6 +99,9 @@ public class PlaceFullInfoActivity extends Activity {
 			// display phone number
 			DisplayPhoneNumber();
 			
+			// display foursquare link
+			DisplayFoursquareLink();
+			
 			// set up add next button
 			final IRoute route = MainScreenActivity.getCurrentRoute();
 			Button buttonAddNext = (Button) findViewById(R.id.buttonAddNext);
@@ -207,7 +210,7 @@ public class PlaceFullInfoActivity extends Activity {
 	public void DisplayPhoneNumber() {
 		String phoneNumber = phoneNumber();
 		newsFeed.giveResult("DEBUG:  phone number being obtained by fullInfoActivity is " + phoneNumber, 10, NewsFeedSource.Foursquare);
-		TextView phoneNumberView = (TextView)findViewById(R.id.textViewAcknowledgements);
+		TextView phoneNumberView = (TextView)findViewById(R.id.textViewPhoneNumber);
 		if (phoneNumber == "") {
 			phoneNumberView.setText("");
 		}
