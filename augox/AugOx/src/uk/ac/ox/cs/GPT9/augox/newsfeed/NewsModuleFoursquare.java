@@ -73,6 +73,7 @@ public class NewsModuleFoursquare implements INewsModule
 	    			try {
 	    				org.json.simple.JSONObject contact = (org.json.simple.JSONObject)venue.get("contact");
 	    				String phonenumber = contact.get("phone").toString();
+		    			newsFeed.giveResult("DEBUG:  phonenumber being returned by foursquare is " + phonenumber, 10, NewsFeedSource.Foursquare);
 		    			place.updatePhoneNumber(phonenumber);
 	    			}
 	    			catch (Exception e) {/*no number available*/}

@@ -123,6 +123,7 @@ public class NewsFeed {
 				activity.DisplayStars(); // redisplay how many stars there are; might have changed in download
 				activity.DisplayImage(); // same for place image
 				activity.DisplayFoursquareLink(); // and foursquare link
+				activity.DisplayPhoneNumber(); // and phone number off foursquare
 	        }
 	    });
 	}

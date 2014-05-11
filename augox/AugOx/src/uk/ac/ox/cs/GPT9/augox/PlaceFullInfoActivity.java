@@ -96,6 +96,9 @@ public class PlaceFullInfoActivity extends Activity {
 			// display place image
 			DisplayImage();
 			
+			// display phone number
+			DisplayPhoneNumber();
+			
 			// set up add next button
 			final IRoute route = MainScreenActivity.getCurrentRoute();
 			Button buttonAddNext = (Button) findViewById(R.id.buttonAddNext);
@@ -144,6 +147,7 @@ public class PlaceFullInfoActivity extends Activity {
 	private int rating() {return place.getRating();}
 	private boolean visited() {return place.getVisited();}
 	private String foursquareLink() {return place.getFourSquareURL();}
+	private String phoneNumber() {return place.getPhoneNumber();}
 	
 	// for all those nasty popups that may appear
 	private void fullInfoPopup(String title, String message) {
@@ -186,7 +190,7 @@ public class PlaceFullInfoActivity extends Activity {
 		}
 	}
 	
-	// Displays the url for the link to the foursquare page, as required in the liscence agreement
+	// Displays the url for the link to the foursquare page, as required in the license agreement
 	public void DisplayFoursquareLink() {
 		String link = foursquareLink();
 		newsFeed.giveResult("DEBUG:  link being obtained by fullInfoActivity is " + link, 10, NewsFeedSource.Foursquare);
@@ -196,6 +200,19 @@ public class PlaceFullInfoActivity extends Activity {
 		}
 		else {
 			acknowledgementsView.setText(getResources().getText(R.string.fullinfo_attributionWithLink) + " " + link);
+		}
+	}
+	
+	// Displays the phone number taken from the foursquare page if available
+	public void DisplayPhoneNumber() {
+		String phoneNumber = phoneNumber();
+		newsFeed.giveResult("DEBUG:  phone number being obtained by fullInfoActivity is " + phoneNumber, 10, NewsFeedSource.Foursquare);
+		TextView phoneNumberView = (TextView)findViewById(R.id.textViewAcknowledgements);
+		if (phoneNumber == "") {
+			phoneNumberView.setText("");
+		}
+		else {
+			phoneNumberView.setText("Phone number:  " + phoneNumber);
 		}
 	}
 }
