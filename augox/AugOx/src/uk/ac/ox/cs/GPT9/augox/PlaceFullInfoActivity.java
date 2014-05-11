@@ -196,7 +196,6 @@ public class PlaceFullInfoActivity extends Activity {
 	// Displays the url for the link to the foursquare page, as required in the license agreement
 	public void DisplayFoursquareLink() {
 		String link = foursquareLink();
-		newsFeed.giveResult("DEBUG:  link being obtained by fullInfoActivity is " + link, 10, NewsFeedSource.Foursquare);
 		TextView acknowledgementsView = (TextView)findViewById(R.id.textViewAcknowledgements);
 		if (link == "") {
 			acknowledgementsView.setText(getResources().getText(R.string.fullinfo_attribution));
@@ -209,7 +208,6 @@ public class PlaceFullInfoActivity extends Activity {
 	// Displays the phone number taken from the foursquare page if available
 	public void DisplayPhoneNumber() {
 		String phoneNumber = phoneNumber();
-		newsFeed.giveResult("DEBUG:  phone number being obtained by fullInfoActivity is " + phoneNumber, 10, NewsFeedSource.Foursquare);
 		TextView phoneNumberView = (TextView)findViewById(R.id.textViewPhoneNumber);
 		if (phoneNumber == "") {
 			phoneNumberView.setText("");

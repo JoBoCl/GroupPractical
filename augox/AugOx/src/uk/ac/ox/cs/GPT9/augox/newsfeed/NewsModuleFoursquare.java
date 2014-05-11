@@ -63,8 +63,6 @@ public class NewsModuleFoursquare implements INewsModule
 	    			// get link
 	    			try {
 		    			String shortUrl = venue.get("shortUrl").toString();
-		    			newsFeed.giveResult("DEBUG:  foursquareid being used is " + getFoursquareID(), 10,  NewsFeedSource.Foursquare);
-		    			newsFeed.giveResult("DEBUG:  foursquareurl being returned is " + shortUrl, 10, NewsFeedSource.Foursquare);
 		    			place.updateFourSquareURL(shortUrl);
 	    			}
 	    			catch (Exception e) {/*no link available*/}
@@ -73,7 +71,6 @@ public class NewsModuleFoursquare implements INewsModule
 	    			try {
 	    				org.json.simple.JSONObject contact = (org.json.simple.JSONObject)venue.get("contact");
 	    				String phonenumber = contact.get("phone").toString();
-		    			newsFeed.giveResult("DEBUG:  phonenumber being returned by foursquare is " + phonenumber, 10, NewsFeedSource.Foursquare);
 		    			place.updatePhoneNumber(phonenumber);
 	    			}
 	    			catch (Exception e) {/*no number available*/}
