@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.net.URL;
 
 import javax.net.ssl.HttpsURLConnection;
+
 import uk.ac.ox.cs.GPT9.augox.PlaceData;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -22,6 +23,7 @@ public class NewsFeedImageGatherer {
 			// get image
 			try {
     			URL photourl = new URL(imageUrl);
+    			newsFeed.giveResult("DEBUG:  continuing trying to get image", 10, NewsFeedSource.Foursquare);
     			
     			HttpsURLConnection photoconnection = (HttpsURLConnection)photourl.openConnection();
     			photoconnection.setDoInput(true);
