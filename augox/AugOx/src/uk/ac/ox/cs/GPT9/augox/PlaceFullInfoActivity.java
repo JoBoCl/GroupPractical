@@ -99,6 +99,9 @@ public class PlaceFullInfoActivity extends Activity {
 			// display phone number
 			DisplayPhoneNumber();
 			
+			// display foursquare link
+			DisplayFoursquareLink();
+			
 			// set up add next button
 			final IRoute route = MainScreenActivity.getCurrentRoute();
 			Button buttonAddNext = (Button) findViewById(R.id.buttonAddNext);
@@ -205,7 +208,7 @@ public class PlaceFullInfoActivity extends Activity {
 	// Displays the phone number taken from the foursquare page if available
 	public void DisplayPhoneNumber() {
 		String phoneNumber = phoneNumber();
-		TextView phoneNumberView = (TextView)findViewById(R.id.textViewAcknowledgements);
+		TextView phoneNumberView = (TextView)findViewById(R.id.textViewPhoneNumber);
 		if (phoneNumber == "") {
 			phoneNumberView.setText("");
 		}

@@ -63,8 +63,6 @@ public class NewsModuleFoursquare implements INewsModule
 	    			// get link
 	    			try {
 		    			String shortUrl = venue.get("shortUrl").toString();
-		    			newsFeed.giveResult("DEBUG:  foursquareid being used is " + getFoursquareID(), 10,  NewsFeedSource.Foursquare);
-		    			newsFeed.giveResult("DEBUG:  foursquareurl being returned is " + shortUrl, 10, NewsFeedSource.Foursquare);
 		    			place.updateFourSquareURL(shortUrl);
 	    			}
 	    			catch (Exception e) {/*no link available*/}
@@ -73,27 +71,19 @@ public class NewsModuleFoursquare implements INewsModule
 	    			try {
 	    				org.json.simple.JSONObject contact = (org.json.simple.JSONObject)venue.get("contact");
 	    				String phonenumber = contact.get("phone").toString();
-		    			newsFeed.giveResult("DEBUG:  phonenumber being returned by foursquare is " + phonenumber, 10, NewsFeedSource.Foursquare);
 		    			place.updatePhoneNumber(phonenumber);
 	    			}
 	    			catch (Exception e) {/*no number available*/}
 	    			
-	    			// get image
-	    			/*try {
+	    			// get image url
+	    			try {
 		    			org.json.simple.JSONObject photoGroup = (org.json.simple.JSONObject)((org.json.simple.JSONArray)((org.json.simple.JSONObject)venue.get("photos")).get("groups")).get(0);
 		    			org.json.simple.JSONObject photo = (org.json.simple.JSONObject)((org.json.simple.JSONArray)photoGroup.get("items")).get(0);
 		    			String prefix = (String)photo.get("prefix");
 		    			String suffix = (String)photo.get("suffix");
-		    			URL photourl = new URL(prefix + "800x200" + suffix + "?client_id=" + apiKey + "&client_secret=" + apiSecret + "&v=" + getDate());
-		    			
-		    			HttpsURLConnection photoconnection = (HttpsURLConnection)photourl.openConnection();
-		    			photoconnection.setDoInput(true);
-		    			photoconnection.connect();
-		    	        InputStream input = photoconnection.getInputStream();
-		    	        Bitmap image = BitmapFactory.decodeStream(input);
-		    	        place.updateImage(newsFeed.getDrawable(image));
+		    			newsFeed.giveImageUrl(prefix + "800x200" + suffix + "?client_id=" + apiKey + "&client_secret=" + apiSecret + "&v=" + getDate());
 	    			}
-	    			catch (Exception e) {/*no photos available*///}
+	    			catch (Exception e) {/*no photos available*/}
 	    			
 	    			// get tips
 	    			org.json.simple.JSONObject group = (org.json.simple.JSONObject)((org.json.simple.JSONArray)((org.json.simple.JSONObject)venue.get("tips")).get("groups")).get(0);
