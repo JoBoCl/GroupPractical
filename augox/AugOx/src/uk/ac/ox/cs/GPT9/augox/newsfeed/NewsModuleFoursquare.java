@@ -79,7 +79,7 @@ public class NewsModuleFoursquare implements INewsModule
 	    			catch (Exception e) {/*no number available*/}
 	    			
 	    			// get image
-	    			try {
+	    			/*try {
 		    			org.json.simple.JSONObject photoGroup = (org.json.simple.JSONObject)((org.json.simple.JSONArray)((org.json.simple.JSONObject)venue.get("photos")).get("groups")).get(0);
 		    			org.json.simple.JSONObject photo = (org.json.simple.JSONObject)((org.json.simple.JSONArray)photoGroup.get("items")).get(0);
 		    			String prefix = (String)photo.get("prefix");
@@ -93,7 +93,7 @@ public class NewsModuleFoursquare implements INewsModule
 		    	        Bitmap image = BitmapFactory.decodeStream(input);
 		    	        place.updateImage(newsFeed.getDrawable(image));
 	    			}
-	    			catch (Exception e) {/*no photos available*/}
+	    			catch (Exception e) {/*no photos available*///}
 	    			
 	    			// get tips
 	    			org.json.simple.JSONObject group = (org.json.simple.JSONObject)((org.json.simple.JSONArray)((org.json.simple.JSONObject)venue.get("tips")).get("groups")).get(0);
