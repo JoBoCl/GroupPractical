@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import uk.ac.ox.cs.GPT9.augox.newsfeed.NewsFeed;
+import uk.ac.ox.cs.GPT9.augox.newsfeed.NewsFeedSource;
 
 
 public class PlaceFullInfoActivity extends Activity {
@@ -188,6 +189,7 @@ public class PlaceFullInfoActivity extends Activity {
 	// Displays the url for the link to the foursquare page, as required in the liscence agreement
 	public void DisplayFoursquareLink() {
 		String link = foursquareLink();
+		newsFeed.giveResult("DEBUG:  link being obtained by fullInfoActivity is " + link, 10, NewsFeedSource.Foursquare);
 		TextView acknowledgementsView = (TextView)findViewById(R.id.textViewAcknowledgements);
 		if (link == "") {
 			acknowledgementsView.setText(getResources().getText(R.string.fullinfo_attribution));

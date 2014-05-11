@@ -63,6 +63,8 @@ public class NewsModuleFoursquare implements INewsModule
 	    			// get link
 	    			try {
 		    			String shortUrl = venue.get("shortUrl").toString();
+		    			newsFeed.giveResult("DEBUG:  foursquareid being used is " + getFoursquareID(), 10,  NewsFeedSource.Foursquare);
+		    			newsFeed.giveResult("DEBUG:  foursquareurl being returned is " + shortUrl, 10, NewsFeedSource.Foursquare);
 		    			place.updateFourSquareURL(shortUrl);
 	    			}
 	    			catch (Exception e) {/*no link available*/}
