@@ -276,7 +276,7 @@ public class RoutePlannerActivity extends Activity {
 			Button removeButton = (Button) rowView.findViewById(R.id.buttonRouteRemove);
 			numView.setText(String.valueOf(position+1));
 			nameView.setText(item.getName());
-			typeView.setImageResource(item.getCategory().getImageRef(item.getVisited()));
+			typeView.setImageResource(item.getCategory().getImageRefNoBorder(item.getVisited()));
 			upButton.setOnClickListener(new View.OnClickListener() {
 				public void onClick(View v) {
 					if(position > 0){
@@ -329,7 +329,7 @@ public class RoutePlannerActivity extends Activity {
 			ImageView typeView = (ImageView) rowView.findViewById(R.id.add_places_type);
 			Button addRouteView = (Button) rowView.findViewById(R.id.buttonAddPlaces);
 			nameView.setText(item.getName());
-			typeView.setImageResource(item.getCategory().getImageRef(item.getVisited()));
+			typeView.setImageResource(item.getCategory().getImageRefNoBorder(item.getVisited()));
 			addRouteView.setOnClickListener(new View.OnClickListener() {
 				public void onClick(View v) {
 					routePlaces.add(placeId);
