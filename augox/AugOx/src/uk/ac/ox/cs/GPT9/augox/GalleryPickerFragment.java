@@ -6,10 +6,19 @@ import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
 
+import uk.ac.ox.cs.GPT9.augox.dbquery.AndQuery;
 import uk.ac.ox.cs.GPT9.augox.dbquery.CategoryQuery;
+import uk.ac.ox.cs.GPT9.augox.dbquery.DatabaseQuery;
+import uk.ac.ox.cs.GPT9.augox.dbquery.InLocusQuery;
+import uk.ac.ox.cs.GPT9.augox.dbquery.NotQuery;
+import uk.ac.ox.cs.GPT9.augox.dbquery.RatingRangeQuery;
+import uk.ac.ox.cs.GPT9.augox.dbquery.VisitedQuery;
 import uk.ac.ox.cs.GPT9.augox.dbsort.NameSorter;
 import uk.ac.ox.cs.GPT9.augox.dbsort.SortOrder;
 import android.annotation.TargetApi;
+import android.content.Context;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -35,6 +44,7 @@ public class GalleryPickerFragment extends Fragment {
 	private int offset;
 	private CheckBox ownPlan;
 	private int[] placeIds = new int[3];
+	private PlaceCategory currentCat;
 	private ImageView[] placeImages = new ImageView[3];
 
 	private PlaceData[] places = new PlaceData[3];
@@ -46,6 +56,25 @@ public class GalleryPickerFragment extends Fragment {
 		localGalleryPickerFragment.setArguments(localBundle);
 		return localGalleryPickerFragment;
 	}
+
+	public void preferencesUpdated() {
+		allowRepeats = AutoPlannerActivity.areRepeatsAllowed();
+		allowVisited = AutoPlannerActivity.allowingVisited();
+		maxDistance = AutoPlannerActivity.getMaxDistance();
+		minRating = AutoPlannerActivity.getMinRating();
+
+		placeIds = choosePlaces(currentCat);
+		matchPlaceIds();
+		updateUiElements();
+	}
+
+	private boolean allowRepeats = false;
+
+	private boolean allowVisited = false;
+
+	private double maxDistance = 0.0f;
+
+	private float minRating = 0;
 
 	public Integer getSelectedPlace() {
 		if (ownPlan.isChecked()) {
@@ -84,6 +113,7 @@ public class GalleryPickerFragment extends Fragment {
 					} else
 						chosenPlace[i].setChecked(false);
 				}
+				updateAutoPlanner();
 			}
 		};
 
@@ -113,6 +143,8 @@ public class GalleryPickerFragment extends Fragment {
 			}
 		}
 
+		currentCat = PlaceCategory.UNKNOWN;
+
 		categoryChoice
 				.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
@@ -123,6 +155,7 @@ public class GalleryPickerFragment extends Fragment {
 									.findViewById(checkedId)) {
 								int i = categoryRadioButtons.indexOf(button);
 								PlaceCategory cat = categoryList.get(i);
+								currentCat = cat;
 								placeIds = choosePlaces(cat);
 								matchPlaceIds();
 								updateUiElements();
@@ -152,36 +185,63 @@ public class GalleryPickerFragment extends Fragment {
 		return view;
 	}
 
-	private int[] choosePlaces(List<Integer> idList) {
-		// TODO: Improve this and clarify
-		int[] arrayOfPlaceData3 = new int[3];
+	private void updateAutoPlanner() {
+		AutoPlannerActivity.updatePlace(offset);
+	}
 
-		switch (idList.size()) {
-		default:
-			arrayOfPlaceData3[0] = (idList.get(0));
-			arrayOfPlaceData3[1] = (idList.get(1));
-			arrayOfPlaceData3[2] = (idList.get(2));
-			break;
-		case 0:
-			return new int[] { -1, -1, -1 };
-		case 1:
-			arrayOfPlaceData3[0] = (idList.get(0));
-			arrayOfPlaceData3[1] = -1;
-			arrayOfPlaceData3[2] = -1;
-			break;
-		case 2:
-			arrayOfPlaceData3[0] = (idList.get(0));
-			arrayOfPlaceData3[1] = (idList.get(1));
-			arrayOfPlaceData3[2] = -1;
-			break;
+	private int[] choosePlaces(List<Integer> idList) {
+		int[] chosenPlaceIds = new int[3];
+		for (int i = 0; i < 3; i++) {
+			chosenPlaceIds[i] = -1;
 		}
-		return arrayOfPlaceData3;
+		int chosen = 0;
+		finished: if (allowRepeats) {
+			for (int id : idList) {
+				chosenPlaceIds[chosen] = id;
+				chosen++;
+				if (chosen == 3)
+					break finished;
+			}
+		} else {
+			for (int id : idList)
+				if (!plannedRouteContainsAfter(id)) {
+					chosenPlaceIds[chosen] = id;
+					chosen++;
+					if (chosen == 3)
+						break finished;
+				}
+		}
+
+		return chosenPlaceIds;
+	}
+
+	private boolean plannedRouteContainsAfter(int id) {
+		Integer[] places = AutoPlannerActivity.getPlannedRoute();
+		for(int i = offset+1; i < getResources().getInteger(R.integer.activity_limit); i++) {
+			if(places[i] == id) return true;
+		}
+
+		return false;
 	}
 
 	private int[] choosePlaces(PlaceCategory category) {
+		DatabaseQuery query = new CategoryQuery(
+				Collections.singletonList(category));
+
+		if (allowVisited)
+			query = new AndQuery(query, new VisitedQuery());
+		else
+			query = new AndQuery(query, new NotQuery(new VisitedQuery()));
+
+		query = new AndQuery(query, new RatingRangeQuery((int) minRating, 5));
+
+		// Lat at [0], long at [1]
+		query = new AndQuery(query, new InLocusQuery(
+				MainScreenActivity.getUserLocation()[0],
+				MainScreenActivity.getUserLocation()[1], maxDistance));
+
 		List<Integer> idList = MainScreenActivity.getPlacesDatabase().query(
-				new CategoryQuery(Collections.singletonList(category)),
-				new NameSorter(SortOrder.ASC));
+				query, new NameSorter(SortOrder.ASC));
 
 		return choosePlaces(idList);
 	}
@@ -201,6 +261,7 @@ public class GalleryPickerFragment extends Fragment {
 			} else {
 				chosenPlace[j].setText(places[j].getName());
 				placeImages[j].setImageDrawable(places[j].getImage());
+				placeImages[j].setVisibility(View.VISIBLE);
 			}
 			Log.d("Joshua", "Set text for place");
 		}
