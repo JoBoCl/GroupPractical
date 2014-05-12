@@ -55,7 +55,7 @@ public class ListPlacesItemsActivity extends ListActivity {
 		longitude = intent.getDoubleExtra(EXTRA_LONGITUDE,Double.valueOf(0));
 		radius = 2;
 		queryType = intent.getIntExtra(EXTRA_QUERYTYPE, 0);
-		DatabaseQuery q;
+		DatabaseQuery q = null;
 		DatabaseSorter s = new NameSorter(SortOrder.ASC);
 		final PlacesDatabase db = MainScreenActivity.getPlacesDatabase();
 	
@@ -74,13 +74,20 @@ public class ListPlacesItemsActivity extends ListActivity {
 			setTitle("Places: Unvisited");
 			break;
 		case 3: //places by name
-			char queryDataChar = (char)intent.getIntExtra(EXTRA_QUERYDATA, 0);
-			if(queryDataChar == '0'){
+			int queryDataChar = intent.getIntExtra(EXTRA_QUERYDATA,0);
+			if( (char) queryDataChar == '0'){
 				q = createNumQuery();
 				setTitle("Places: 0..9");
 			} else {
-				q = new NameStartsWithQuery(String.valueOf(queryDataChar));
-				setTitle("Places: " + queryDataChar);
+				q = new NameStartsWithQuery(String.valueOf( (char) queryDataChar));
+				q = new OrQuery(q, new NameStartsWithQuery(String.valueOf( (char) (queryDataChar+1))));
+				
+				if((char) queryDataChar == 'Y'){
+					setTitle("Places: " + (char) (queryDataChar) + (char) (queryDataChar+1));
+				} else {
+					q = new OrQuery(q, new NameStartsWithQuery(String.valueOf( (char) (queryDataChar+2))));
+					setTitle("Places: " + (char) (queryDataChar) + (char) (queryDataChar+1) + (char) (queryDataChar+2));
+				}
 			}
 			break;
 		case 4: //places by type
