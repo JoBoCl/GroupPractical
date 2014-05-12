@@ -162,8 +162,8 @@ public class GoogleRouteHelper {
  
                 // Adding all the points in the route to LineOptions
                 lineOptions.addAll(points);
-                lineOptions.width(2);
-                lineOptions.color(R.color.red);
+                lineOptions.width(8);
+                lineOptions.color(android.graphics.Color.RED);
             }
  
             // Drawing polyline in the Google Map for the i-th route
