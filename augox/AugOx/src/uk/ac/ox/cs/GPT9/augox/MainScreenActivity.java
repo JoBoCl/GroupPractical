@@ -2,8 +2,6 @@ package uk.ac.ox.cs.GPT9.augox;
 
 import uk.ac.ox.cs.GPT9.augox.route.*;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,8 +17,6 @@ import com.beyondar.android.plugin.radar.RadarView;
 import com.beyondar.android.plugin.radar.RadarWorldPlugin;
 import com.beyondar.android.screenshot.OnScreenshotListener;
 import com.beyondar.android.util.location.BeyondarLocationManager;
-import com.beyondar.android.util.math.geom.Point2;
-import com.beyondar.android.view.BeyondarViewAdapter;
 import com.beyondar.android.view.OnClickBeyondarObjectListener;
 import com.beyondar.android.world.BeyondarObject;
 import com.beyondar.android.world.GeoObject;
@@ -36,25 +32,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
-import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.view.View.OnLongClickListener;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.SeekBar;
-import android.widget.Toast;
-import android.widget.TextView;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 
 public class MainScreenActivity extends FragmentActivity implements OnClickBeyondarObjectListener, OnSharedPreferenceChangeListener {
@@ -62,13 +50,23 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 	private static PlacesDatabase placesDatabase = new PlacesDatabase();
 	public static PlacesDatabase getPlacesDatabase() { return placesDatabase; }
 	private static IRoute route = new Route();
+
 	public static IRoute getCurrentRoute() { return route; }
 	private final int USERID = 20000; // TODO guarantee uniqueness
 	private final int MAXICONDIST = 50;
 	
 	private final int MAXICONSIZE = 100;
 	private final int MINICONSIZE = 30;
-	
+	private static GeoObject user;
+
+	public static double[] getUserLocation() {
+		double[] latlong = new double[2];
+		latlong[0] = user.getLatitude();
+		latlong[1] = user.getLongitude();
+
+		return latlong;
+	}
+
 	private BeyondarFragmentSupport mBeyondarFragment;
 	private RadarView mRadarView;
 	private RadarWorldPlugin mRadarPlugin;
@@ -81,18 +79,19 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 
 	private SeekBar mSeekBarMaxDistance;
 	private View mMapFrame;
-	
+
 	private SharedPreferences sharedPref;
-	
+
 	private class Place {
 		public Place(Integer placeID, GeoObject geoPlace, Marker marker) {
 			this.placeID = placeID;
 			this.geoPlace = geoPlace;
-			//this.marker = marker;
+			// this.marker = marker;
 		}
+
 		public int placeID;
 		public GeoObject geoPlace;
-		//public Marker marker;
+		// public Marker marker;
 	}
 	
    @Override
@@ -218,22 +217,24 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 				mMapFrame.setVisibility(View.GONE);
 			}
 		});
-	   
+
 		mGoogleMapPlugin = new GoogleMapWorldPlugin(this);
 		mGoogleMapPlugin.setGoogleMap(mMap);
-        mWorld.addPlugin(mGoogleMapPlugin);
-        
-        /*for (Place place: Places) {
-        	mMap.addMarker(new MarkerOptions()
-        		.position(new LatLng(place.geoPlace.getLatitude(), place.geoPlace.getLongitude()))
-        		.title(place.geoPlace.getName())
-        		.snippet(placesDatabase.getPlaceByID(place.placeID).getDescription()));
-        }*/
-        refreshVisibility();
-   }
-   
-   private void centreCamera() {
-		mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(mWorld.getLatitude(), mWorld.getLongitude()), 15));
+		mWorld.addPlugin(mGoogleMapPlugin);
+
+		/*
+		 * for (Place place: Places) { mMap.addMarker(new MarkerOptions()
+		 * .position(new LatLng(place.geoPlace.getLatitude(),
+		 * place.geoPlace.getLongitude())) .title(place.geoPlace.getName())
+		 * .snippet
+		 * (placesDatabase.getPlaceByID(place.placeID).getDescription())); }
+		 */
+		refreshVisibility();
+	}
+
+	private void centreCamera() {
+		mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
+				new LatLng(mWorld.getLatitude(), mWorld.getLongitude()), 15));
 		mMap.animateCamera(CameraUpdateFactory.zoomTo(19), 2000, null);
    }
    
@@ -365,7 +366,7 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 		mSeekBarMaxDistance.setMax((int) (Float.parseFloat(sharedPref.getString("setting_arview_max_distance", "1"))*1000));
 		refreshVisibility();
 	}
-	
+
 	private List<PlaceCategory> currentCategories() {
 		List<PlaceCategory> pcs = new ArrayList<PlaceCategory>();
 		for (PlaceCategory pc: PlaceCategory.values()) {
@@ -377,12 +378,12 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 		if (sharedPref.getBoolean("filter_restaurants", true)) pcs.add(PlaceCategory.RESTAURANT);*/
 		return pcs;
 	}
-	
+
 	private void fillWorld() {
 		DatabaseQuery dq = new AllQuery();
 		DatabaseSorter ds = new DistanceFromSorter(mWorld.getLongitude(), mWorld.getLatitude(), SortOrder.ASC);
 		List<Integer> placeIDs = placesDatabase.query(dq, ds);
-		for (Integer placeID: placeIDs) {
+		for (Integer placeID : placeIDs) {
 			PlaceData currPlace = placesDatabase.getPlaceByID(placeID);
 			GeoObject currPlaceGeo = new GeoObject(placeID);
 			//currPlaceGeo.setGeoPosition(currPlace.getLatitude(), currPlace.getLongitude());
@@ -394,12 +395,12 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 		}
 		refreshVisibility();
 	}
-	
+
 	private void refreshVisibility() { 
 		for (Place place: Places) {
 			boolean vis = (currentCategories().contains(placesDatabase.getPlaceByID(place.placeID).getCategory()));
 			place.geoPlace.setVisible(vis);
-		    //if (place.marker != null) place.marker.setVisible(vis);
+			// if (place.marker != null) place.marker.setVisible(vis);
 		}
 	}
 	
