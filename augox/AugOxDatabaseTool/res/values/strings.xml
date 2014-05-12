@@ -2,7 +2,9 @@
 <resources>
 
     <string name="app_name">AugOx Database Tool</string>
-    <string name="parse_data">Parse Data</string>
-    <string name="write_database">Write Database</string>
+    <string name="parse_data_osm">Parse Data from OSM</string>
+    <string name="parse_data_xml">Parse Data from Custom XML</string>
+    <string name="write_database_binary">Write Database to Binary File</string>
+    <string name="write_database_xml">Write Database to Custom XML</string>
 
 </resources>

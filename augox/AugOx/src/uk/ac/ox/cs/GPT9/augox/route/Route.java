@@ -11,12 +11,12 @@ import uk.ac.ox.cs.GPT9.augox.PlacesDatabase;
 // Probably shouldn't need to change to other implementation
 public class Route implements IRoute {
 	
-	private List<Integer> _route;
-	private PlacesDatabase _database;
+	private List<Integer> route;
+	private PlacesDatabase database;
 	
 	// Get id of place at index
 	public int idAtIndex(int index) {
-		return _route.get(index); 
+		return route.get(index); 
 	}
 	
 	// Is this place included in the current route?
@@ -25,32 +25,32 @@ public class Route implements IRoute {
 	}
 	
 	public boolean contains(int id) {
-		return _route.contains(id);
+		return route.contains(id);
 	}
 	
 	// Changes position in list of places - either for place to be found or place in position
 	private void trueChangePosition(int id, int start, int end) {
-		_route.remove(start);
-		_route.add(end, id);
+		route.remove(start);
+		route.add(end, id);
 	}
 	
 	public void changePosition(PlaceData place, int index) {
-		for (int i = 0; i < _route.size(); i++) {
+		for (int i = 0; i < route.size(); i++) {
 			if (getRouteAsList().get(i) == place) {
-				trueChangePosition(_route.get(i), i, index);
+				trueChangePosition(route.get(i), i, index);
 				return;
 			}
 		}
 	}
 	
 	public void changePosition(int start, int end) {
-		trueChangePosition(_route.get(start), start, end);
+		trueChangePosition(route.get(start), start, end);
 	}
 	
 	// Removes a place from the list from scanning or by position
 	public void removePlace(PlaceData place) {
 		PlaceData[] places = getRouteAsArray();
-		for (int i = 0; i < _route.size(); i++) {
+		for (int i = 0; i < route.size(); i++) {
 			if (places[i] == place) {
 				removePlace(i);
 				return;
@@ -59,60 +59,64 @@ public class Route implements IRoute {
 	}
 	
 	public void removePlace(int index) {
-		_route.remove(index);
+		route.remove(index);
 	}
 	
 	// Refreshes the list of places in the route, either through a list or an array (because I'm nice)
 	public void setList(List<Integer> places) {
-		_route.clear();
-		for (int i = 0; i < places.size(); i++) _route.add(places.get(i));
+		route.clear();
+		for (int i = 0; i < places.size(); i++) route.add(places.get(i));
 	}
 	
 	public void setList(Integer[] places) {
-		_route.clear();
-		for (int i = 0; i < places.length; i++) _route.add(places[i]);
+		route.clear();
+		for (int i = 0; i < places.length; i++) route.add(places[i]);
 	}
 	
 	// Adds a place to the end of the route
 	public void addEnd(Integer id) {
-		_route.add(id);
+		route.add(id);
 	}
 	
 	// Adds a place at the front of the route (next to be visited)
 	public void addNext(Integer id) {
-		_route.add(0, id);
+		route.add(0, id);
 	}
 	
 	// Simply returns the next place to go to
+	// should return error if empty as their responsibility to check before demanding
 	public PlaceData getNext() {
-		if (_route.size() > 0) return _database.getPlaceByID(_route.get(0));
-		else return null; // better than an error message, I guess		
+		return database.getPlaceByID(route.get(0));
 	}
 	
-	public int getNextId() {
-		if (_route.size() > 0) return _route.get(0);
-		else return 0; // TODO
+	public int getNextAsID() {
+		return route.get(0);
 	}
 	
 	// Removes the first element of the list (move along to next point on route)
 	// If we've reached the end returns true, else return false
 	public boolean moveOn() {
-		if (_route.size() > 0) {_route.remove(0); return true;}
+		if (route.size() > 0) {route.remove(0); return true;}
 		return false;
+	}
+	
+	// tells us whether the route is empty or not
+	public boolean empty() {
+		return route.size() == 0;
 	}
 	
 	// Miscellaneous useful
 	
 	// Clears the list totally
 	public void clear() {
-		_route.clear();
+		route.clear();
 	}
 	
 	// Gets the entire route as a list
 	public List<PlaceData> getRouteAsList() {
 		// hmm, don't want their changes to affect this one.
 		ArrayList<PlaceData> newList = new ArrayList<PlaceData>();
-		for (int i = 0; i < _route.size(); i++) newList.add(_database.getPlaceByID(_route.get(i)));
+		for (int i = 0; i < route.size(); i++) newList.add(database.getPlaceByID(route.get(i)));
 		return newList;
 	}
 	
@@ -120,22 +124,22 @@ public class Route implements IRoute {
 	public List<Integer> getRouteAsIDList() {
 		// hmm, don't want their changes to affect this one.
 		ArrayList<Integer> newList = new ArrayList<Integer>();
-		for (int i = 0; i < _route.size(); i++) newList.add(_route.get(i));
+		for (int i = 0; i < route.size(); i++) newList.add(route.get(i));
 		return newList;
 	}
 	
 	// Gets the entire route as an array
 	public PlaceData[] getRouteAsArray() {
-		return getRouteAsList().toArray(new PlaceData[_route.size()]);
+		return getRouteAsList().toArray(new PlaceData[route.size()]);
 	}
 	
 	// Gets the entire route as an array of ids
 	public Integer[] getRouteAsIDArray() {
-		return _route.toArray(new Integer[_route.size()]);
+		return route.toArray(new Integer[route.size()]);
 	}
 	
 	public Route() {
-		_route = new ArrayList<Integer>();
-		_database = MainScreenActivity.getPlacesDatabase();
+		route = new ArrayList<Integer>();
+		database = MainScreenActivity.getPlacesDatabase();
 	}
 }

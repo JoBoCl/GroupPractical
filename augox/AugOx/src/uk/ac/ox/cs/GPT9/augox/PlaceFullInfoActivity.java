@@ -29,20 +29,22 @@ public class PlaceFullInfoActivity extends Activity {
 	public final static String EXTRA_BACKGROUND = "uk.ac.ox.cs.GPT9.augox.BACKGROUND";
 	public final static String EXTRA_DISTANCE = "uk.ac.ox.cs.GPT9.augox.DISTANCE";
 	
-	private PlaceData _place; // = new PlaceData("Matthew's Awesome Pub", 0.0, 0.0, 5, false, PlaceCategory.BAR, "This isn't the greatest pub in the world.  This is a tribute.  I'm also going to try to make this description long so I can make sure it doesn't go too far to the right and wraps around properly, kind of ruining the preceding one-liner.  Which is a great shame, really.  At some point I'm going to have to make a way of sourcing the description from the Internet, which is going to be annoying and hard and stuff but at least for now I can get this prototype working.  And hey, getting the pretty layout is what really matters.  Having the most up-to-date data is not as important, as xkcd 937 tells us (there's an xkcd for everything)", new OpeningHours(new ArrayList<OpeningHours.Period>()));
-	private int _placeId;
-	private double _distance;
-	private NewsFeed _newsFeed;
+	private PlaceData place; // = new PlaceData("Matthew's Awesome Pub", 0.0, 0.0, 5, false, PlaceCategory.BAR, "This isn't the greatest pub in the world.  This is a tribute.  I'm also going to try to make this description long so I can make sure it doesn't go too far to the right and wraps around properly, kind of ruining the preceding one-liner.  Which is a great shame, really.  At some point I'm going to have to make a way of sourcing the description from the Internet, which is going to be annoying and hard and stuff but at least for now I can get this prototype working.  And hey, getting the pretty layout is what really matters.  Having the most up-to-date data is not as important, as xkcd 937 tells us (there's an xkcd for everything)", new OpeningHours(new ArrayList<OpeningHours.Period>()));
+	private int placeId;
+	private double distance;
+	private static NewsFeed newsFeed = new NewsFeed(); // static for purposes of saving data between screen reorientations
 	
 	// returns a string representing the distance in metres or kilometres
 	public static String distanceAsString(double distanceAsKm) {
-        if (distanceAsKm < 1) {
+		if (distanceAsKm > 10) {
+			return "unknown";
+		} else if (distanceAsKm < 0.95) {
         	String result = new DecimalFormat(".#").format(distanceAsKm).substring(1) + "00m";
         	if (result.contains("000m")) return "0m";
         	else return result;
         }
         else {
-        	return new DecimalFormat("#.#").format(distanceAsKm) + "km";
+        	return new DecimalFormat("#.#").format(distanceAsKm) + " km";
         }
 	}
 
@@ -54,24 +56,24 @@ public class PlaceFullInfoActivity extends Activity {
 		
 		// load place from intent
 		Intent intent = getIntent();
-		_placeId = intent.getIntExtra(EXTRA_PLACE, 0); 
-		_place = MainScreenActivity.getPlacesDatabase().getPlaceByID(_placeId);        
+		placeId = intent.getIntExtra(EXTRA_PLACE, 0); 
+		place = MainScreenActivity.getPlacesDatabase().getPlaceByID(placeId);        
 		
 		// ensure we have valid place data before continuing.  All internal so this error SHOULD NEVER EXIST
 		// if it does it's NOT MY FAULT
-		if (_place == null) fullInfoPopup("Error", "Invalid place data have been passed to this screen.");
+		if (place == null) fullInfoPopup("Error", "Invalid place data have been passed to this screen.");
 		else {
-			// set up news feed (first so asynchronous calls can begin)
-			_newsFeed = new NewsFeed(_place, this);
-			_newsFeed.StartCalls();
+			// set up news feed (first so asynchronous calls can begin if necessary)
+			newsFeed.setTarget(place, this);
+			newsFeed.startCalls();
 			
 			// display name
 			TextView nameView = (TextView)findViewById(R.id.textViewName);
 			nameView.setText(name());
 			
 			// get and display distance
-			_distance = intent.getDoubleExtra(EXTRA_DISTANCE, 0.0d);
-			String distanceString = distanceAsString(_distance);
+			distance = intent.getDoubleExtra(EXTRA_DISTANCE, 0.0d);
+			String distanceString = distanceAsString(distance);
 			TextView distanceView = (TextView)findViewById(R.id.textViewDistance);
 			distanceView.setText(distanceString + " " + getResources().getText(R.string.fullinfo_distanceaway));
 			
@@ -86,8 +88,8 @@ public class PlaceFullInfoActivity extends Activity {
 			// display correct background image
 			Bundle bundle = intent.getExtras();
 			Bitmap background = (Bitmap) bundle.getParcelable("background");
-			ImageView imgV = (ImageView)findViewById(R.id.imageViewBackground);
-			//imgV.setImageBitmap(background);
+			ImageView backgroundImageView = (ImageView)findViewById(R.id.imageViewBackground);
+			//backgroundImageView.setImageBitmap(background);
 			// TODO
 			
 			// display place image
@@ -98,7 +100,7 @@ public class PlaceFullInfoActivity extends Activity {
 			Button buttonAddNext = (Button) findViewById(R.id.buttonAddNext);
 			buttonAddNext.setOnClickListener(new View.OnClickListener() {
 	            public void onClick(View v) {
-	            	route.addNext(_placeId);
+	            	route.addNext(placeId);
 	            	fullInfoPopup("Route", "Location is now next on route.");
 	            }
 	         });
@@ -107,7 +109,7 @@ public class PlaceFullInfoActivity extends Activity {
 			Button buttonAddEnd = (Button) findViewById(R.id.buttonAddEnd);
 			buttonAddEnd.setOnClickListener(new View.OnClickListener() {
 	            public void onClick(View v) {
-	            	route.addEnd(_placeId);
+	            	route.addEnd(placeId);
 	            	fullInfoPopup("Route", "Location has been added to route.");
 	            }
 	         });
@@ -118,7 +120,7 @@ public class PlaceFullInfoActivity extends Activity {
 			else buttonVisited.setText("Have not visited");
 			buttonVisited.setOnClickListener(new View.OnClickListener() {
 	            public void onClick(View v) {
-	            	_place.updateVisited(!visited());
+	            	place.updateVisited(!visited());
 	            	if (visited()) ((Button)v).setText("Have visited");
 	     			else ((Button)v).setText("Have not visited");
 	            }
@@ -134,12 +136,13 @@ public class PlaceFullInfoActivity extends Activity {
 	}
 	
 	// getters to abstract away from any changes in place representation/data gathering
-	private String name() {return _place.getName();}
-	private double distance() {return _distance;}
-	private String description() {return _place.getDescription();}
-	private PlaceCategory category() {return _place.getCategory();}
-	private int rating() {return _place.getRating();}
-	private boolean visited() {return _place.getVisited();}
+	private String name() {return place.getName();}
+	private double distance() {return distance;}
+	private String description() {return place.getDescription();}
+	private PlaceCategory category() {return place.getCategory();}
+	private int rating() {return place.getRating();}
+	private boolean visited() {return place.getVisited();}
+	private String foursquareLink() {return place.getFourSquareID();}
 	
 	// for all those nasty popups that may appear
 	private void fullInfoPopup(String title, String message) {
@@ -169,7 +172,7 @@ public class PlaceFullInfoActivity extends Activity {
 	// displays an image taken from Foursquare of the place
 	// public so can be recalculated on download success
 	public void DisplayImage() {
-		Drawable image = _place.getImage();
+		Drawable image = place.getImage();
 		ImageView imagePlace = (ImageView)findViewById(R.id.imageViewImage);
 		if (image == null)
 		{
@@ -182,11 +185,15 @@ public class PlaceFullInfoActivity extends Activity {
 		}
 	}
 	
-
-	
-	
-	
-	
-	
-
+	// Displays the url for the link to the foursquare page, as required in the liscence agreement
+	public void DisplayFoursquareLink() {
+		String link = foursquareLink();
+		TextView acknowledgementsView = (TextView)findViewById(R.id.textViewAcknowledgements);
+		if (link == "") {
+			acknowledgementsView.setText(getResources().getText(R.string.fullinfo_attribution));
+		}
+		else {
+			acknowledgementsView.setText(getResources().getText(R.string.fullinfo_attributionWithLink) + " " + link);
+		}
+	}
 }

@@ -13,12 +13,6 @@ public class NewsFeedArrayAdapter extends ArrayAdapter<String> {
 	private final Context context;
 	private final String[] values;
  
-	public NewsFeedArrayAdapter(Context context, String[] values) {
-		super(context, R.layout.listview_item_news_feed, values);
-		this.context = context;
-		this.values = values;
-	}
- 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		LayoutInflater inflater = (LayoutInflater) context
@@ -39,5 +33,11 @@ public class NewsFeedArrayAdapter extends ArrayAdapter<String> {
 		}
  
 		return rowView;
+	}
+	 
+	public NewsFeedArrayAdapter(Context context, String[] values) {
+		super(context, R.layout.listview_item_news_feed, values);
+		this.context = context;
+		this.values = values;
 	}
 }

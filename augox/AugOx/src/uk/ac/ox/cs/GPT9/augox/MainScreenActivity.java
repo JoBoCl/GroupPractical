@@ -19,6 +19,7 @@ import com.beyondar.android.plugin.radar.RadarView;
 import com.beyondar.android.plugin.radar.RadarWorldPlugin;
 import com.beyondar.android.screenshot.OnScreenshotListener;
 import com.beyondar.android.util.location.BeyondarLocationManager;
+import com.beyondar.android.util.math.geom.Point2;
 import com.beyondar.android.view.BeyondarViewAdapter;
 import com.beyondar.android.view.OnClickBeyondarObjectListener;
 import com.beyondar.android.world.BeyondarObject;
@@ -50,9 +51,10 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.View.OnLongClickListener;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.SeekBar;
-import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.TextView;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 
 public class MainScreenActivity extends FragmentActivity implements OnClickBeyondarObjectListener, OnSharedPreferenceChangeListener {
@@ -63,6 +65,9 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 	public static IRoute getCurrentRoute() { return route; }
 	private final int USERID = 20000; // TODO guarantee uniqueness
 	private final int MAXICONDIST = 50;
+	
+	private final int MAXICONSIZE = 100;
+	private final int MINICONSIZE = 30;
 	
 	private IRoute savedRoute = null;
 	
@@ -99,6 +104,8 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
         //requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main_screen);
         
+        loadDatabase("db.dat");
+        
 		mBeyondarFragment = (BeyondarFragmentSupport) getSupportFragmentManager().findFragmentById(R.id.beyondarFragment);
         
         mWorld = new World(this);
@@ -106,13 +113,14 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
         mWorld.setArViewDistance(100);
 		
 		GeoObject user = new GeoObject(USERID);
-		user.setGeoPosition(mWorld.getLatitude(), mWorld.getLongitude());
+		//user.setGeoPosition(mWorld.getLatitude(), mWorld.getLongitude());
+		user.setGeoPosition(51.757674, -1.257535); // 31 Museum Road
 		user.setImageResource(R.drawable.ic_launcher); // TODO give user an oriented custom icon
 		user.setName("User position");
 		mWorld.addBeyondarObject(user);
         
         BeyondarLocationManager.addWorldLocationUpdate(mWorld);
-		BeyondarLocationManager.addGeoObjectLocationUpdate(user);
+		//BeyondarLocationManager.addGeoObjectLocationUpdate(user);
 
 		// We need to set the LocationManager to the BeyondarLocationManager.
 		BeyondarLocationManager
@@ -160,26 +168,25 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
         
         sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         sharedPref.registerOnSharedPreferenceChangeListener(this);
-        
-        
+                
 		//mViewAdapter = new CustomBeyondarViewAdapter(this);
 		mBeyondarFragment.setBeyondarViewAdapter(new CustomBeyondarViewAdapter(this));
     	mBeyondarFragment.setMaxFarDistance(MAXICONDIST);
-    	
-		AssetManager ast = getAssets();
-		try {
-			InputStream inp = ast.open("testdb.dat");
-			MainScreenActivity.getPlacesDatabase().loadFromStream(inp);
-			inp.close();
-			Toast toast = Toast.makeText(getApplicationContext(), "File Loaded", Toast.LENGTH_SHORT);
-			toast.show();
-		} catch (IOException e) {
-			Toast toast = Toast.makeText(getApplicationContext(), e.getLocalizedMessage(), Toast.LENGTH_SHORT);
-			toast.show();
-		}
-        
+
         fillWorld();
     }
+   
+   private void loadDatabase(String filename) {
+	   AssetManager ast = getAssets();
+		try {
+			InputStream inp = ast.open(filename);
+			getPlacesDatabase().loadFromStream(inp);
+			inp.close();
+		} catch (IOException e) {
+			Toast toast = Toast.makeText(getApplicationContext(), "Cricital Error! The database could not be loaded.", Toast.LENGTH_LONG);
+			toast.show();
+		}
+   }
    
    private void startFullInfoActivity(final BeyondarObject geoPlace) {
 	   mBeyondarFragment.takeScreenshot(new OnScreenshotListener() {
@@ -202,7 +209,6 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 		if (mMap == null){
 			return;
 		}
-		
 		mMapFrame = (View)findViewById(R.id.map_frame);
 		mMap.setOnMapLongClickListener(new OnMapLongClickListener() {
 			public void onMapLongClick(LatLng l) {
@@ -228,18 +234,36 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 		mMap.animateCamera(CameraUpdateFactory.zoomTo(19), 2000, null);
    }
    
+   Place savedRouteHead = null;
+   
    @Override
    protected void onResume() {
         super.onResume();
         BeyondarLocationManager.enable();
         //if (route != null && savedRoute != null && !(savedRoute.hashCode() == (route.hashCode()))) routeChangedListener(savedRoute);
+        if (route != null) routeChanged();
+   }
+   
+   private void routeChanged() {
+	   for (Place p: Places) {
+		   if (!route.empty() && p.placeID == route.getNextAsID()) p.geoPlace.setImageResource(R.drawable.heresign);
+		   else p.geoPlace.setImageResource(placesDatabase.getPlaceByID(p.placeID).getCategory()
+				   .getImageRef(placesDatabase.getPlaceByID(p.placeID).getVisited()));
+	   }
    }
 
-
+   private Place findPlace(int placeID) {
+	   for (Place p: Places) {
+		   if (p.placeID == placeID) return p;
+	   }
+	   return null;
+   }
+   
    @Override
    protected void onPause() {
         super.onPause();
         BeyondarLocationManager.disable();
+        if (!route.empty()) savedRouteHead = findPlace(route.getNextAsID());
         //savedRoute = route;
    }
     
@@ -257,7 +281,6 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
         switch (item.getItemId()) {
             case R.id.action_launch_listplaces:
             	Intent intent2 = new Intent(this, ListPlacesActivity.class);
-            	// debug values: CS dept entrance!
             	intent2.putExtra(ListPlacesActivity.EXTRA_LATITUDE, mWorld.getLatitude());
             	intent2.putExtra(ListPlacesActivity.EXTRA_LONGITUDE, mWorld.getLongitude());
                 startActivity(intent2);
@@ -272,20 +295,45 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
                 return true;
             case R.id.action_launch_routeplanner:
             	Intent intent5 = new Intent(this, RoutePlannerActivity.class);
-            	intent5.putExtra(RoutePlannerActivity.EXTRA_PLACELIST, "");
+            	intent5.putExtra(ListPlacesActivity.EXTRA_LATITUDE, mWorld.getLatitude());
+            	intent5.putExtra(ListPlacesActivity.EXTRA_LONGITUDE, mWorld.getLongitude());
                 startActivity(intent5);
                 return true;
             case R.id.action_launch_autoplanner:
             	Intent intent6 = new Intent(this, AutoPlannerActivity.class);
                 startActivity(intent6);
                 return true;
+            case R.id.action_route_moveon:
+            	if (route != null) {
+            		if (!route.empty()) resetImage(route.getNextAsID());
+	            	if (route.moveOn()) { // route is ended
+	            		// TODO: remove icon from bar
+	            	}
+	            	else { // make the next one be HERE
+	            		
+	            	}
+            	}
+            	return true;
+            /*
             case R.id.action_launch_databasedebugger:
             	Intent intent7 = new Intent(this, DatabaseDebuggerActivity.class);
                 startActivity(intent7);
                 return true;
+            */
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+    
+    private void resetImage(int p) {
+    	resetImage(findPlace(p));
+    }   
+    private void resetImage(Place p) {
+    	p.geoPlace.setImageResource(getImage(p));
+    }
+    private int getImage(Place p) {
+    	PlaceData pd = placesDatabase.getPlaceByID(p.placeID);
+    	return pd.getCategory().getImageRef(pd.getVisited());
     }
     
 	@Override
@@ -338,7 +386,7 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 			GeoObject currPlaceGeo = new GeoObject(placeID);
 			currPlaceGeo.setGeoPosition(currPlace.getLatitude(), currPlace.getLongitude());
 			currPlaceGeo.setName(currPlace.getName());
-			currPlaceGeo.setImageResource(currPlace.getCategory().getImageRef());
+			currPlaceGeo.setImageResource(currPlace.getCategory().getImageRef(currPlace.getVisited()));
 			Places.add(new Place(placeID, currPlaceGeo, null));
 			mWorld.addBeyondarObject(currPlaceGeo);
 		}
@@ -353,7 +401,7 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 		}
 	}
 	
-	/*private int sizeIcon (double dist) {
+	private int sizeIcon (double dist) {
 		return (int)((1-(dist/mSeekBarMaxDistance.getMax())) * (MAXICONSIZE-MINICONSIZE) + MINICONSIZE);
 	}
 	
@@ -384,7 +432,7 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 			imageView.setLayoutParams(layoutParams);
 
 			// Once the view is ready we specify the position
-			Point2 poss = beyondarObject.getScreenPositionCenter();
+			Point2 pos = beyondarObject.getScreenPositionCenter();
 			pos.x = pos.x - iconSize/2;
 			pos.y = pos.y - iconSize/2;
 			setPosition(pos);
@@ -392,9 +440,9 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 			return recycledView;
 		}
 
-	}*/
+	}
 	
-	private class CustomBeyondarViewAdapter extends BeyondarViewAdapter {
+	/*private class CustomBeyondarViewAdapter extends BeyondarViewAdapter {
 
 		LayoutInflater inflater;
 
@@ -442,15 +490,5 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 			
 			return recycledView;
 		}
-	}
-	
-	private void routeChangedListener(IRoute oldRoute) {
-		for (Place p: Places) { 
-			if (route != null && p.placeID == route.getNextId()) {
-				p.geoPlace.setImageResource(R.drawable.heresign);
-			}
-			else p.geoPlace.setImageResource(placesDatabase.getPlaceByID(p.placeID).getCategory().getImageRef());
-		}
-	}
-	
+	}*/
 }

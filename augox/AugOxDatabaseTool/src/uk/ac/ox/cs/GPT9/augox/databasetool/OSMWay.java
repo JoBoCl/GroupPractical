@@ -57,12 +57,12 @@ public class OSMWay implements OSMItem {
 	}
 	
 	/*
-	 * Fetch the value of the given tag - the string "null" (rather than a null
+	 * Fetch the value of the given tag - the string "" (rather than a null
 	 * object) is returned if the tag does not exist
 	 */
 	public String getTagValue(String key) {
 		String v = tags.get(key);
-		if(v == null) return "null";
+		if(v == null) return "";
 		return v;
 	}
 	

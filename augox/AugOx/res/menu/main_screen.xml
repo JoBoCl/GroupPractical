@@ -26,8 +26,15 @@
           android:icon="@drawable/ic_action_settings"
           android:showAsAction="always" />
     
+    <item android:id="@+id/action_route_moveon"
+          android:title="@string/action_route_moveon"
+          android:icon="@drawable/heresign"
+          android:showAsAction="always" />
+    
+    <!--
     <item android:id="@+id/action_launch_databasedebugger"
           android:title="@string/action_launch_databasedebugger"
           android:showAsAction="never" />
+    -->
 
 </menu>

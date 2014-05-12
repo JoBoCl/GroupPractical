@@ -121,6 +121,22 @@ public class PlacesDatabase {
 	}
 	
 	/*
+	 * Dump the database into the given stream as human-readable XML.
+	 */
+	public void writeToStreamAsXML(OutputStream stream) throws IOException {
+		// Create data output stream
+		DataOutputStream dstream = new DataOutputStream(stream);
+		
+		// Write all places in the database to the stream
+		dstream.writeChars("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+		dstream.writeChars("<database>\n");
+		for(Map.Entry<Integer, PlaceData> entry : db.entrySet()) {
+			entry.getValue().writeToStreamAsXML(dstream, entry.getKey());
+		}
+		dstream.writeChars("</database>");
+	}
+	
+	/*
 	 * Load a null-terminated string from the given data stream
 	 */
 	public static String loadStringFromStream(DataInputStream dstream)

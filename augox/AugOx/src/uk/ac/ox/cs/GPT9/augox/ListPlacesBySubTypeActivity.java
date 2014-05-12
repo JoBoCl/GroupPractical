@@ -35,8 +35,7 @@ public class ListPlacesBySubTypeActivity extends ListActivity {
 		final List<String> items = new ArrayList<String>();
 		switch(queryType){
 			case 3:
-				for(char ch = '0' ; ch <= '9' ; ch++ )
-			        items.add(String.valueOf(ch));
+				items.add("0-9");
 				for(char ch = 'A' ; ch <= 'Z' ; ch++ )
 			        items.add(String.valueOf(ch));
 				setTitle("Places by Name");
@@ -62,10 +61,10 @@ public class ListPlacesBySubTypeActivity extends ListActivity {
                 	intent0.putExtra(ListPlacesItemsActivity.EXTRA_LATITUDE, latitude);
                 	intent0.putExtra(ListPlacesItemsActivity.EXTRA_LONGITUDE, longitude);
                 	intent0.putExtra(ListPlacesItemsActivity.EXTRA_QUERYTYPE, 3);
-                	if(itemNoClicked <= 9){
+                	if(itemNoClicked == 0){
                     	intent0.putExtra(ListPlacesItemsActivity.EXTRA_QUERYDATA,(int) '0' +itemNoClicked);
                     	} else {
-                    	intent0.putExtra(ListPlacesItemsActivity.EXTRA_QUERYDATA, (int) 'A' - 10 + itemNoClicked);
+                    	intent0.putExtra(ListPlacesItemsActivity.EXTRA_QUERYDATA, (int) 'A' - 1 + itemNoClicked);
                     }
                 	startActivity(intent0);
             		break;

@@ -21,11 +21,11 @@ import android.os.AsyncTask;
 // News Module getting "tips" from "Foursquare", as well as other data to add to PlaceData
 public class NewsModuleFoursquare implements INewsModule
 {
-	private NewsFeed _newsFeed;
-	private PlaceData _place;
+	private NewsFeed newsFeed;
+	private PlaceData place;
 	
 	private String getFoursquareID() {
-		return _place.getFourSquareID();//"4b647488f964a52087b42ae3";
+		return place.getFourSquareID();//"4b647488f964a52087b42ae3";
 	}
 	
 	// for the versioning required in all requests
@@ -49,7 +49,7 @@ public class NewsModuleFoursquare implements INewsModule
 	        	// construct connection for getting venue data
 	        	URL url = new URL("https://api.foursquare.com/v2/venues/" + getFoursquareID() + "?client_id=" + apiKey + "&client_secret=" + apiSecret + "&v=" + getDate());
 	        	HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
-	        	org.json.simple.JSONObject obj = (org.json.simple.JSONObject)JSONValue.parse(NewsFeed.ReadResponse(connection));
+	        	org.json.simple.JSONObject obj = (org.json.simple.JSONObject)JSONValue.parse(NewsFeed.readResponse(connection));
     			
 	        	// if we have data can continue
 	        	if (obj != null) {
@@ -58,7 +58,14 @@ public class NewsModuleFoursquare implements INewsModule
 	    			Double theirRating = null;
 	    			if (venue.get("rating") instanceof Double) theirRating = (Double)venue.get("rating");
 	    			int starRating = (int)(theirRating/2);
-	    			_place.updateRating(starRating);
+	    			place.updateRating(starRating);
+
+	    			// get link
+	    			try {
+		    			String shortUrl = venue.get("shortUrl").toString();
+		    			// TODO:  Actually use when database updated
+	    			}
+	    			catch (Exception e) {/*no photos available*/}
 	    			
 	    			// get image
 	    			try {
@@ -73,7 +80,7 @@ public class NewsModuleFoursquare implements INewsModule
 		    			photoconnection.connect();
 		    	        InputStream input = photoconnection.getInputStream();
 		    	        Bitmap image = BitmapFactory.decodeStream(input);
-		    	        _place.updateImage(_newsFeed.GetDrawable(image));
+		    	        place.updateImage(newsFeed.getDrawable(image));
 	    			}
 	    			catch (Exception e) {/*no photos available*/}
 	    			
@@ -90,11 +97,10 @@ public class NewsModuleFoursquare implements INewsModule
 	    				Object likeCountObject = ((org.json.simple.JSONObject)tipObject.get("likes")).get("count");
 	    				tipLikes[i] = Integer.parseInt(likeCountObject.toString());
 	    				
-	    				_newsFeed.GiveResult(tips[i], (int)((10*tips.length)/(i+1)) + tipLikes[i], NewsFeedSource.Foursquare);
+	    				newsFeed.giveResult(tips[i], (int)((10*tips.length)/(i+1)) + tipLikes[i], NewsFeedSource.Foursquare);
 	    			}
 	    		}
-	        }
-	        catch(Exception e) {
+	        } catch(Exception e) {
 	        	// ignore failure; remember, we just want any data we can get, ignore what we can't
 	        }
 	    	
@@ -103,13 +109,13 @@ public class NewsModuleFoursquare implements INewsModule
 	}
 	
 	// Place to get news about and NewsFeed to give it to
-	public void GiveData(NewsFeed newsFeed, PlaceData place) {
-		_newsFeed = newsFeed;
-		_place = place;
+	public void giveData(NewsFeed targetNewsFeed, PlaceData targetPlace) {
+		newsFeed = targetNewsFeed;
+		place = targetPlace;
 	}
 	
 	// Tell the module to start trying to get data from the Internet
-	public void StartCall() {
+	public void startCall() {
 		new FoursquareTask().execute();
 	}
 }

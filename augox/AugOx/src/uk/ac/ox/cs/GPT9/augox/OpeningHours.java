@@ -1,10 +1,14 @@
 package uk.ac.ox.cs.GPT9.augox;
 
-import java.io.*;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
+
+import android.util.Log;
 
 /**
  * Represents the times that some place is open. Given that there are complex
@@ -39,6 +43,84 @@ public class OpeningHours {
 	 */
 	public OpeningHours() {
 		this.periods = new ArrayList<Period>();
+	}
+	
+	/*
+	 * Construct from OSM-style string
+	 */
+	public OpeningHours(String oh) {
+		// Prepare periods list
+		this.periods = new ArrayList<Period>();
+		
+		// Loop through each section of the input, building period
+		String seg;
+		int sd1, sd2;
+		boolean[] isOpen = {false, false, false, false, false, false, false};
+		int[] openHour = {0, 0, 0, 0, 0, 0, 0};
+		int[] openMinute = {0, 0, 0, 0, 0, 0, 0};
+		int[] closeHour = {0, 0, 0, 0, 0, 0, 0};
+		int[] closeMinute = {0, 0, 0, 0, 0, 0, 0};
+		while(oh.length() > 0) {
+			Log.d("DGBJames", oh);
+			// Fetch next segment
+			int nextsemi = oh.indexOf(";");
+			if(nextsemi == -1) {
+				seg = oh;
+				oh = "";
+			} else {
+				seg = oh.substring(0, nextsemi);
+				oh = oh.substring(nextsemi + 2);
+			}
+			Log.d("DGBJames", seg);
+			
+			// Extract segment start and end days
+			sd1 = getShortDayNumber(seg.substring(0,2));
+			if(seg.substring(2,3).equals(" ")) {
+				sd2 = sd1;
+				seg = seg.substring(3);
+			} else {
+				sd2 = getShortDayNumber(seg.substring(3,5));
+				seg = seg.substring(6);
+			}
+			if(sd1 == -1 || sd2 == -1) return;
+			
+			Log.d("DGBJames", seg);
+			
+			// Apply opening times to each day in the segment range
+			int r = (sd1 < sd2) ? sd2 - sd1 : sd1 - sd2;
+			for(int i = 0; i <= r; i++) {
+				int d = (sd1 + i) % 7;
+				isOpen[d] = true;
+				try {
+					openHour[d] = Integer.parseInt(seg.substring(0,2));
+					openMinute[d] = Integer.parseInt(seg.substring(3,5));
+					closeHour[d] = Integer.parseInt(seg.substring(6,8));
+					closeMinute[d] = Integer.parseInt(seg.substring(9,11));
+				} catch(Exception e) {
+					return;
+				}
+			}
+		}
+		
+		// Add period to list
+		periods.add(new Period(false, 0, 0, 0, 0, false, isOpen, openHour,
+				openMinute, closeHour, closeMinute));
+		
+		Log.d("DBGJames", getOpeningSummary());
+	}
+	
+	/*
+	 * Helper function for string constructor
+	 */
+	private int getShortDayNumber(String sd) {
+		if(sd.equals("Su")) return 0;
+		if(sd.equals("Mo")) return 1;
+		if(sd.equals("Tu")) return 2;
+		if(sd.equals("We")) return 3;
+		if(sd.equals("Th")) return 4;
+		if(sd.equals("Fr")) return 5;
+		if(sd.equals("Sa")) return 6;
+		return -1;
 	}
 	
 	/*
