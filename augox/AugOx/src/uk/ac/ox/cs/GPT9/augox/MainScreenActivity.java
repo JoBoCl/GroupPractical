@@ -147,7 +147,7 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 		
 		GeoObject user = new GeoObject(USERID);
 		//user.setGeoPosition(mWorld.getLatitude(), mWorld.getLongitude());
-		user.setGeoPosition(51.757674, -1.257535); // 31 Museum Road
+		user.setGeoPosition(51.757674, -1.257535); // Comp Sci Dept.
 		user.setImageResource(R.drawable.arrowicon); // TODO give user an oriented custom icon
 		user.setName("User position");
 		mWorld.addBeyondarObject(user);

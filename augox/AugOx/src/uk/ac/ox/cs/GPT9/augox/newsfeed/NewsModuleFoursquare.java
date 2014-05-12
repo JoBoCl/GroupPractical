@@ -62,7 +62,7 @@ public class NewsModuleFoursquare implements INewsModule
 		    			int starRating = (int)(theirRating/2);
 		    			place.updateRating(starRating);
 	    			}
-	    			catch (Exception e) {/*no rating available*/ }
+	    			catch (Exception e) {/*no rating available*/}
 
 	    			// get link
 	    			try {
