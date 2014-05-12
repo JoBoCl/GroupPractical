@@ -19,7 +19,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -42,22 +41,97 @@ public class RoutePlannerActivity extends Activity {
 	private IRoute curRoute = new Route();
 	private double latitude = 0;
 	private double longitude = 0;
+	private PlacesDatabase db;
+	//current route variables
+	private ListView currentRouteListView;
+	private List<Integer> routePlaces;
+	private RouteAdapter routeAdapter;
+	//add places variables
+	private ListView addPlacesListView;
+	private PlacesDatabase placesDat;
+	private List<Integer> filterPlaces;
+	private AddPlaceAdapter placeAdapter;
 	
 	protected void onResume(){
 		super.onResume();
-		Intent intent = getIntent();
-		latitude = intent.getDoubleExtra(EXTRA_LATITUDE,Double.valueOf(0));
-		longitude = intent.getDoubleExtra(EXTRA_LONGITUDE,Double.valueOf(0));
+		
+		routePlaces = curRoute.getRouteAsIDList();
+		routeAdapter = new RouteAdapter(this,routePlaces);
+		currentRouteListView.setAdapter(routeAdapter);
+		
 		reloadLists();
 		reloadCheckboxes();
 	}
 	
-	
+	protected void onPause(){
+		super.onPause();
+		curRoute.setList(routePlaces);
+	}
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_route_planner);
+		initSetup();
+		reloadLists();
+		reloadCheckboxes();
+	}
+	
+	private void initSetup(){
+		Intent intent = getIntent();
+		latitude = intent.getDoubleExtra(EXTRA_LATITUDE,Double.valueOf(0));
+		longitude = intent.getDoubleExtra(EXTRA_LONGITUDE,Double.valueOf(0));
+		placesDat = MainScreenActivity.getPlacesDatabase();
+		//route places
 		curRoute = MainScreenActivity.getCurrentRoute();
+		db = MainScreenActivity.getPlacesDatabase();
+		routePlaces = curRoute.getRouteAsIDList();
+		routeAdapter = new RouteAdapter(this,routePlaces);
+		currentRouteListView = ((ListView) findViewById(R.id.listRoutePlannerCurrentRoute));
+		currentRouteListView.setAdapter(routeAdapter);
+		currentRouteListView.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int itemNoClicked,
+					long arg3) {
+				//Starts activity PlaceFullInfoActivity for the clicked place
+				PlaceData place = db.getPlaceByID(routePlaces.get(itemNoClicked));
+            	Intent intent = new Intent(getApplicationContext(), PlaceFullInfoActivity.class);
+            	double dist = PlaceData.getDistanceBetween(place.getLatitude(), place.getLongitude(), latitude, longitude);
+                intent.putExtra(PlaceFullInfoActivity.EXTRA_DISTANCE, dist);
+            	//put the place in the intent
+                intent.putExtra(PlaceFullInfoActivity.EXTRA_PLACE, routePlaces.get(itemNoClicked));
+                //put the background to include in the intent
+                intent.putExtra(PlaceFullInfoActivity.EXTRA_BACKGROUND, "");
+                startActivity(intent);
+			}
+		});
+		//add places
+		filterPlaces = new ArrayList<Integer>();
+		placeAdapter = new AddPlaceAdapter(this,filterPlaces);
+		
+		addPlacesListView = ((ListView) findViewById(R.id.listRoutePlannerAddPlaces));
+		addPlacesListView.setAdapter(placeAdapter);
+		
+		addPlacesListView.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int itemNoClicked,
+					long arg3) {
+                PlacesDatabase db = MainScreenActivity.getPlacesDatabase();
+				//Starts activity PlaceFullInfoActivity for the clicked place
+				PlaceData place = db.getPlaceByID(filterPlaces.get(itemNoClicked));
+            	Intent intent = new Intent(getApplicationContext(), PlaceFullInfoActivity.class);
+            	double dist = PlaceData.getDistanceBetween(place.getLatitude(), place.getLongitude(), latitude, longitude);
+                intent.putExtra(PlaceFullInfoActivity.EXTRA_DISTANCE, dist);
+            	//put the place in the intent
+                intent.putExtra(PlaceFullInfoActivity.EXTRA_PLACE, filterPlaces.get(itemNoClicked));
+                //put the background to include in the intent
+                intent.putExtra(PlaceFullInfoActivity.EXTRA_BACKGROUND, "");
+                startActivity(intent);
+			}
+		});	
+		//buttons
+		
+		
+		
 		Button buttonContinue = (Button) findViewById(R.id.buttonRoutePlannerStart);
 		buttonContinue.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
@@ -67,15 +141,12 @@ public class RoutePlannerActivity extends Activity {
 		Button buttonClear = (Button) findViewById(R.id.buttonRoutePlannerClear);
 		buttonClear.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				curRoute.clear();
+				routePlaces.clear();
 				reloadLists(true, false);
 			}
 		});
 		
-		reloadLists();
-		reloadCheckboxes();
 	}
-	
 	
 	private void reloadCheckboxes(){
 		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -148,33 +219,9 @@ public class RoutePlannerActivity extends Activity {
 	private void reloadLists(){reloadLists(true,true);}
 	private void reloadLists(boolean route, boolean filtered){
 		if(route){
-			//Current Route List
-			final List<Integer> routePlaces = curRoute.getRouteAsIDList();
-			ListView currentRouteListView = ((ListView) findViewById(R.id.listRoutePlannerCurrentRoute));
-			int lastScroll = currentRouteListView.getScrollY();
-			RouteAdapter adapter = new RouteAdapter(this,routePlaces);
-			currentRouteListView.setAdapter(adapter);
-			currentRouteListView.scrollTo(currentRouteListView.getScrollX(), lastScroll);
+			routeAdapter.notifyDataSetChanged();
 
-			currentRouteListView.setOnItemClickListener(new OnItemClickListener() {
-				@Override
-				public void onItemClick(AdapterView<?> arg0, View arg1, int itemNoClicked,
-						long arg3) {
-					PlacesDatabase db = MainScreenActivity.getPlacesDatabase();
-					//Starts activity PlaceFullInfoActivity for the clicked place
-					PlaceData place = db.getPlaceByID(routePlaces.get(itemNoClicked));
-	            	Intent intent = new Intent(getApplicationContext(), PlaceFullInfoActivity.class);
-	            	double dist = PlaceData.getDistanceBetween(place.getLatitude(), place.getLongitude(), latitude, longitude);
-	                intent.putExtra(PlaceFullInfoActivity.EXTRA_DISTANCE, dist);
-	            	//put the place in the intent
-	                intent.putExtra(PlaceFullInfoActivity.EXTRA_PLACE, routePlaces.get(itemNoClicked));
-	                //put the background to include in the intent
-	                intent.putExtra(PlaceFullInfoActivity.EXTRA_BACKGROUND, "");
-	                startActivity(intent);
-				}
-			});
 		}
-		
 		if(filtered){
 			//Add Places List
 			SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -185,43 +232,17 @@ public class RoutePlannerActivity extends Activity {
 			if(pref.getBoolean("filter_restaurants",true)) ls.add(PlaceCategory.RESTAURANT);
 			DatabaseQuery q = new CategoryQuery(ls);
 			DatabaseSorter s = new NameSorter(SortOrder.ASC);
-			final PlacesDatabase d = MainScreenActivity.getPlacesDatabase();
-			final List<Integer> filterPlaces;
-			
+			List<Integer> queryList;
 			if(!pref.getBoolean("filter_visited",true) && pref.getBoolean("filter_unvisited",true)) q = new AndQuery(q, new NotQuery(new VisitedQuery()));
 			if(pref.getBoolean("filter_visited",true) && !pref.getBoolean("filter_unvisited",true)) q = new AndQuery(q, new VisitedQuery());
 			if(!pref.getBoolean("filter_visited",true) && !pref.getBoolean("filter_unvisited",true)) {
-				filterPlaces = new ArrayList<Integer>();
-			} else filterPlaces = d.query(q, s);
-			
-			/*
-			for(Integer i : filterPlaces){
-				PlaceData place = d.getPlaceByID(i);
-				if(curRoute.contains(place)){
-					filterPlaces.remove(i);
-				}
-			} */
-			AddPlaceAdapter adapter2 = new AddPlaceAdapter(this,filterPlaces);
-			ListView addPlacesListView = ((ListView) findViewById(R.id.listRoutePlannerAddPlaces));
-			addPlacesListView.setAdapter(adapter2);
-			
-			addPlacesListView.setOnItemClickListener(new OnItemClickListener() {
-				@Override
-				public void onItemClick(AdapterView<?> arg0, View arg1, int itemNoClicked,
-						long arg3) {
-	                PlacesDatabase db = MainScreenActivity.getPlacesDatabase();
-					//Starts activity PlaceFullInfoActivity for the clicked place
-					PlaceData place = db.getPlaceByID(filterPlaces.get(itemNoClicked));
-	            	Intent intent = new Intent(getApplicationContext(), PlaceFullInfoActivity.class);
-	            	double dist = PlaceData.getDistanceBetween(place.getLatitude(), place.getLongitude(), latitude, longitude);
-	                intent.putExtra(PlaceFullInfoActivity.EXTRA_DISTANCE, dist);
-	            	//put the place in the intent
-	                intent.putExtra(PlaceFullInfoActivity.EXTRA_PLACE, filterPlaces.get(itemNoClicked));
-	                //put the background to include in the intent
-	                intent.putExtra(PlaceFullInfoActivity.EXTRA_BACKGROUND, "");
-	                startActivity(intent);
-				}
-			});	
+				queryList = new ArrayList<Integer>();
+			} else queryList = placesDat.query(q, s);
+			filterPlaces.clear();
+			for(Integer i : queryList){
+				filterPlaces.add(i);
+			}
+			placeAdapter.notifyDataSetChanged();
 		}
 	}
 	
@@ -255,11 +276,14 @@ public class RoutePlannerActivity extends Activity {
 			Button removeButton = (Button) rowView.findViewById(R.id.buttonRouteRemove);
 			numView.setText(String.valueOf(position+1));
 			nameView.setText(item.getName());
-			typeView.setImageResource(item.getCategory().getImageRef(item.getVisited()));
+			typeView.setImageResource(item.getCategory().getImageRefNoBorder(item.getVisited()));
 			upButton.setOnClickListener(new View.OnClickListener() {
 				public void onClick(View v) {
 					if(position > 0){
-						curRoute.changePosition(position, position-1);
+						int i = routePlaces.get(position);
+						routePlaces.remove(position);
+						routePlaces.add(position-1, i);
+						//curRoute.changePosition(position, position-1);
 		                reloadLists(true,false);
 					}
 				}
@@ -267,14 +291,17 @@ public class RoutePlannerActivity extends Activity {
 			downButton.setOnClickListener(new View.OnClickListener() {
 				public void onClick(View v) {
 					if(position < values.size()-1){
-						curRoute.changePosition(position,position+1);
+						int i = routePlaces.get(position);
+						routePlaces.remove(position);
+						routePlaces.add(position+1, i);
+						//curRoute.changePosition(position,position+1);
 						reloadLists(true,false);
 					}
 				}
 			});
 			removeButton.setOnClickListener(new View.OnClickListener() {
 				public void onClick(View v) {
-					curRoute.removePlace(item);	
+					routePlaces.remove(position);
 				    reloadLists(true,false);
 				}
 			});
@@ -302,14 +329,12 @@ public class RoutePlannerActivity extends Activity {
 			ImageView typeView = (ImageView) rowView.findViewById(R.id.add_places_type);
 			Button addRouteView = (Button) rowView.findViewById(R.id.buttonAddPlaces);
 			nameView.setText(item.getName());
-			typeView.setImageResource(item.getCategory().getImageRef(item.getVisited()));
+			typeView.setImageResource(item.getCategory().getImageRefNoBorder(item.getVisited()));
 			addRouteView.setOnClickListener(new View.OnClickListener() {
 				public void onClick(View v) {
-					Log.d("TESTING","ADDTOROUTE");
-					curRoute.addEnd(placeId);
-					curRoute.setList(curRoute.getRouteAsIDArray());
-					Log.d("TESTING","ADDEDTOROUTE");
+					routePlaces.add(placeId);
 	                reloadLists(true,false);
+	                currentRouteListView.setSelection(routeAdapter.getCount() - 1);
 				}
 			});
 			return rowView; 

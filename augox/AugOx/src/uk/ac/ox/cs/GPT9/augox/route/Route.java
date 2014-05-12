@@ -96,8 +96,8 @@ public class Route implements IRoute {
 	// Removes the first element of the list (move along to next point on route)
 	// If we've reached the end returns true, else return false
 	public boolean moveOn() {
-		if (route.size() > 0) {route.remove(0); return true;}
-		return false;
+		if (route.size() > 0) route.remove(0);
+		return !(route.size() > 0);
 	}
 	
 	// tells us whether the route is empty or not

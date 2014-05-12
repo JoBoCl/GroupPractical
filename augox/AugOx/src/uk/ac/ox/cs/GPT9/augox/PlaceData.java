@@ -113,6 +113,8 @@ public class PlaceData {
 	public void updateVisited(boolean visited) { this.visited = visited; }
 	public void updateImage(Drawable image) { this.image = image; }
 	public void updateClicked(boolean clicked) { this.clicked = clicked; }
+	public void updateFourSquareURL(String foursquareurl) { this.foursquareurl = foursquareurl; }
+	public void updatePhoneNumber(String phonenumber) { this.phonenumber = phonenumber; }
 	
 	/*
 	 * Write the place into the given data stream

@@ -36,8 +36,14 @@ public class ListPlacesBySubTypeActivity extends ListActivity {
 		switch(queryType){
 			case 3:
 				items.add("0-9");
-				for(char ch = 'A' ; ch <= 'Z' ; ch++ )
-			        items.add(String.valueOf(ch));
+				int count = 0;
+				String createdString = "";
+				for(char ch = 'A' ; ch <= 'Z' ; ch++ ){
+					if(count == 3) {items.add(createdString); createdString = ""; count = 0;}
+					createdString = createdString + String.valueOf(ch); 
+					count ++;
+				}
+				if(createdString != "") {items.add(createdString); createdString = ""; count = 0;}
 				setTitle("Places by Name");
 				break;
 			case 4:
@@ -64,7 +70,7 @@ public class ListPlacesBySubTypeActivity extends ListActivity {
                 	if(itemNoClicked == 0){
                     	intent0.putExtra(ListPlacesItemsActivity.EXTRA_QUERYDATA,(int) '0' +itemNoClicked);
                     	} else {
-                    	intent0.putExtra(ListPlacesItemsActivity.EXTRA_QUERYDATA, (int) 'A' - 1 + itemNoClicked);
+                    	intent0.putExtra(ListPlacesItemsActivity.EXTRA_QUERYDATA, (int) 'A' + 3*(itemNoClicked-1));
                     }
                 	startActivity(intent0);
             		break;

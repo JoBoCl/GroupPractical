@@ -69,8 +69,6 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 	private final int MAXICONSIZE = 100;
 	private final int MINICONSIZE = 30;
 	
-	private IRoute savedRoute = null;
-	
 	private BeyondarFragmentSupport mBeyondarFragment;
 	private RadarView mRadarView;
 	private RadarWorldPlugin mRadarPlugin;
@@ -148,7 +146,6 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
             public void onProgressChanged(SeekBar seekBar, int progress,boolean fromUser) {
             	mWorld.setArViewDistance(seekBar.getProgress());
             	mRadarPlugin.setMaxDistance(mWorld.getArViewDistance());
-            	//routeChangedListener(savedRoute);
             }       
         });
         mSeekBarMaxDistance.setProgress(mSeekBarMaxDistance.getMax()/2);
@@ -172,6 +169,8 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 		//mViewAdapter = new CustomBeyondarViewAdapter(this);
 		mBeyondarFragment.setBeyondarViewAdapter(new CustomBeyondarViewAdapter(this));
     	mBeyondarFragment.setMaxFarDistance(MAXICONDIST);
+    	
+    	updateMoveonButtonVisibility();
 
         fillWorld();
     }
@@ -234,22 +233,18 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 		mMap.animateCamera(CameraUpdateFactory.zoomTo(19), 2000, null);
    }
    
-   Place savedRouteHead = null;
-   
    @Override
    protected void onResume() {
         super.onResume();
         BeyondarLocationManager.enable();
-        //if (route != null && savedRoute != null && !(savedRoute.hashCode() == (route.hashCode()))) routeChangedListener(savedRoute);
-        if (route != null) routeChanged();
+        routeChanged();
    }
    
    private void routeChanged() {
 	   for (Place p: Places) {
-		   if (!route.empty() && p.placeID == route.getNextAsID()) p.geoPlace.setImageResource(R.drawable.heresign);
-		   else p.geoPlace.setImageResource(placesDatabase.getPlaceByID(p.placeID).getCategory()
-				   .getImageRef(placesDatabase.getPlaceByID(p.placeID).getVisited()));
+		   resetImage(p);
 	   }
+	  updateMoveonButtonVisibility();
    }
 
    private Place findPlace(int placeID) {
@@ -263,8 +258,6 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
    protected void onPause() {
         super.onPause();
         BeyondarLocationManager.disable();
-        if (!route.empty()) savedRouteHead = findPlace(route.getNextAsID());
-        //savedRoute = route;
    }
     
     @Override
@@ -305,13 +298,15 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
                 return true;
             case R.id.action_route_moveon:
             	if (route != null) {
-            		if (!route.empty()) resetImage(route.getNextAsID());
+            		Place old = null;
+            		if (!route.empty()) old = findPlace(route.getNextAsID());
 	            	if (route.moveOn()) { // route is ended
-	            		// TODO: remove icon from bar
+	            		updateMoveonButtonVisibility();
 	            	}
 	            	else { // make the next one be HERE
-	            		
+	            		resetImage(route.getNextAsID());
 	            	}
+	            	if (old != null) resetImage(old);
             	}
             	return true;
             /*
@@ -325,6 +320,12 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
         }
     }
     
+    private void updateMoveonButtonVisibility() {
+    	if (findViewById(R.id.action_route_moveon) == null) return;
+    	if (route != null && !route.empty()) findViewById(R.id.action_route_moveon).setVisibility(View.VISIBLE);
+    	else findViewById(R.id.action_route_moveon).setVisibility(View.GONE);
+    }
+    
     private void resetImage(int p) {
     	resetImage(findPlace(p));
     }   
@@ -333,16 +334,12 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
     }
     private int getImage(Place p) {
     	PlaceData pd = placesDatabase.getPlaceByID(p.placeID);
-    	return pd.getCategory().getImageRef(pd.getVisited());
+    	if (route != null && !route.empty()) return pd.getCategory().getImageRef(pd.getVisited(), p.placeID == route.getNextAsID());
+    	else return pd.getCategory().getImageRef(pd.getVisited());
     }
     
 	@Override
 	public void onClickBeyondarObject(ArrayList<BeyondarObject> beyondarObjects) {
-		/*if (beyondarObjects.size() > 0) {
-			Toast.makeText(this, "Clicked on: " + beyondarObjects.get(0).getName(),
-					Toast.LENGTH_LONG).show();
-		}*/
-		// TODO
 		BeyondarObject clicked = null;
 		for (BeyondarObject beyondarObject: beyondarObjects) {
 			if (beyondarObject.isVisible()) {
@@ -384,7 +381,8 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 		for (Integer placeID: placeIDs) {
 			PlaceData currPlace = placesDatabase.getPlaceByID(placeID);
 			GeoObject currPlaceGeo = new GeoObject(placeID);
-			currPlaceGeo.setGeoPosition(currPlace.getLatitude(), currPlace.getLongitude());
+			//currPlaceGeo.setGeoPosition(currPlace.getLatitude(), currPlace.getLongitude());
+			currPlaceGeo.setGeoPosition(currPlace.getLatitude(), currPlace.getLongitude(), mWorld.getAltitude() + (10*Math.random()-5)/50000);
 			currPlaceGeo.setName(currPlace.getName());
 			currPlaceGeo.setImageResource(currPlace.getCategory().getImageRef(currPlace.getVisited()));
 			Places.add(new Place(placeID, currPlaceGeo, null));
@@ -401,7 +399,7 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 		}
 	}
 	
-	private int sizeIcon (double dist) {
+	/*private int sizeIcon (double dist) {
 		return (int)((1-(dist/mSeekBarMaxDistance.getMax())) * (MAXICONSIZE-MINICONSIZE) + MINICONSIZE);
 	}
 	
@@ -440,9 +438,9 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 			return recycledView;
 		}
 
-	}
+	}*/
 	
-	/*private class CustomBeyondarViewAdapter extends BeyondarViewAdapter {
+	private class CustomBeyondarViewAdapter extends BeyondarViewAdapter {
 
 		LayoutInflater inflater;
 
@@ -490,5 +488,5 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 			
 			return recycledView;
 		}
-	}*/
+	}
 }

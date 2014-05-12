@@ -26,6 +26,8 @@ public class NewsFeed {
 	private PlaceData place; // place we want news about
 	private PlaceFullInfoActivity activity; // parent activity for displaying results
 	private boolean dirty = true; // represents whether next call to start should be respected
+	private NewsFeedImageGatherer newsFeedImageGatherer = new NewsFeedImageGatherer(this); // for getting the image
+	private boolean haveImageUrl = false; // ready to start gathering when a call has declared finished
 	
 	//function common to News Modules for reading a stream of information from the Internet
 	public static String readResponse(HttpsURLConnection connection) {
@@ -121,8 +123,8 @@ public class NewsFeed {
 	        	ArrayAdapter<String> adapter = new NewsFeedArrayAdapter(activity, results);
 				feedView.setAdapter(adapter);
 				activity.DisplayStars(); // redisplay how many stars there are; might have changed in download
-				activity.DisplayImage(); // same for place image
 				activity.DisplayFoursquareLink(); // and foursquare link
+				activity.DisplayPhoneNumber(); // and phone number off foursquare
 	        }
 	    });
 	}
@@ -162,6 +164,26 @@ public class NewsFeed {
 	public void giveResult(final String output, int priority, NewsFeedSource source) {
 		addNewItem(new NewsFeedItem(output, priority, source));
 		updateNewsFeed(getItems());
+	}
+	
+	public void giveImageUrl(String imageUrl) {
+		newsFeedImageGatherer.giveData(place, imageUrl);
+		haveImageUrl = true;
+	}
+	
+	public void reportFinished() {
+		if (haveImageUrl) {
+			newsFeedImageGatherer.startGathering();
+		}
+	}
+	
+	// So we know to display the image
+	public void imageUpdated() {
+		activity.runOnUiThread(new Runnable(){
+	        public void run() {
+				activity.DisplayImage(); // same for place image
+	        }
+	    });
 	}
 	
 	// Public constructor

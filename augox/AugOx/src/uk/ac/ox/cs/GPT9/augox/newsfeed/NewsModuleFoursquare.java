@@ -63,24 +63,25 @@ public class NewsModuleFoursquare implements INewsModule
 	    			// get link
 	    			try {
 		    			String shortUrl = venue.get("shortUrl").toString();
-		    			// TODO:  Actually use when database updated
+		    			place.updateFourSquareURL(shortUrl);
 	    			}
-	    			catch (Exception e) {/*no photos available*/}
+	    			catch (Exception e) {/*no link available*/}
 	    			
-	    			// get image
+	    			// get phonenumber
+	    			try {
+	    				org.json.simple.JSONObject contact = (org.json.simple.JSONObject)venue.get("contact");
+	    				String phonenumber = contact.get("phone").toString();
+		    			place.updatePhoneNumber(phonenumber);
+	    			}
+	    			catch (Exception e) {/*no number available*/}
+	    			
+	    			// get image url
 	    			try {
 		    			org.json.simple.JSONObject photoGroup = (org.json.simple.JSONObject)((org.json.simple.JSONArray)((org.json.simple.JSONObject)venue.get("photos")).get("groups")).get(0);
 		    			org.json.simple.JSONObject photo = (org.json.simple.JSONObject)((org.json.simple.JSONArray)photoGroup.get("items")).get(0);
 		    			String prefix = (String)photo.get("prefix");
 		    			String suffix = (String)photo.get("suffix");
-		    			URL photourl = new URL(prefix + "800x200" + suffix + "?client_id=" + apiKey + "&client_secret=" + apiSecret + "&v=" + getDate());
-		    			
-		    			HttpsURLConnection photoconnection = (HttpsURLConnection)photourl.openConnection();
-		    			photoconnection.setDoInput(true);
-		    			photoconnection.connect();
-		    	        InputStream input = photoconnection.getInputStream();
-		    	        Bitmap image = BitmapFactory.decodeStream(input);
-		    	        place.updateImage(newsFeed.getDrawable(image));
+		    			newsFeed.giveImageUrl(prefix + "800x200" + suffix + "?client_id=" + apiKey + "&client_secret=" + apiSecret + "&v=" + getDate());
 	    			}
 	    			catch (Exception e) {/*no photos available*/}
 	    			
@@ -99,6 +100,8 @@ public class NewsModuleFoursquare implements INewsModule
 	    				
 	    				newsFeed.giveResult(tips[i], (int)((10*tips.length)/(i+1)) + tipLikes[i], NewsFeedSource.Foursquare);
 	    			}
+	    			
+	    			newsFeed.reportFinished();
 	    		}
 	        } catch(Exception e) {
 	        	// ignore failure; remember, we just want any data we can get, ignore what we can't
