@@ -1,11 +1,15 @@
 package uk.ac.ox.cs.GPT9.augox;
 
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Random;
+
+import javax.net.ssl.HttpsURLConnection;
 
 import uk.ac.ox.cs.GPT9.augox.dbquery.AllQuery;
 import uk.ac.ox.cs.GPT9.augox.dbquery.AndQuery;
@@ -17,7 +21,13 @@ import uk.ac.ox.cs.GPT9.augox.dbquery.RatingRangeQuery;
 import uk.ac.ox.cs.GPT9.augox.dbquery.VisitedQuery;
 import uk.ac.ox.cs.GPT9.augox.dbsort.NameSorter;
 import uk.ac.ox.cs.GPT9.augox.dbsort.SortOrder;
+import uk.ac.ox.cs.GPT9.augox.newsfeed.NewsFeed;
+import uk.ac.ox.cs.GPT9.augox.newsfeed.NewsFeedImageGatherer;
 import android.annotation.TargetApi;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -250,6 +260,17 @@ public class GalleryPickerFragment extends Fragment {
 	}
 
 	private void updateUiElements() {
+		for (int i = 0; i < 3; i++) {
+			if (places[i] != null && placeIds[i] != -1) {
+				try{
+				GalleryImageGatherer gatherer = new GalleryImageGatherer(
+						places[i]);
+				gatherer.giveData(places[i], places[i].getFourSquareURL());
+				gatherer.startGathering();
+				} catch (Exception e) { }
+			}
+		}
+
 		for (int j = 0; j < 3; j++) {
 			if (placeIds[j] == -1) {
 				chosenPlace[j].setText("No suggestion found");
@@ -257,10 +278,50 @@ public class GalleryPickerFragment extends Fragment {
 						R.drawable.common_signin_btn_icon_disabled_dark));
 			} else {
 				chosenPlace[j].setText(places[j].getName());
-				placeImages[j].setImageDrawable(places[j].getImage());
 				placeImages[j].setVisibility(View.VISIBLE);
+				placeImages[j].setImageDrawable(places[j].getImage());
 			}
 			Log.d("Joshua", "Set text for place");
+		}
+	}
+
+	private class GalleryImageGatherer {
+		private String imageUrl;
+
+		class ImageGathererTask extends AsyncTask<Void, Void, Void> {
+
+			@Override
+			protected Void doInBackground(Void... params) {
+				// get image
+				try {
+					URL photourl = new URL(imageUrl);
+
+					HttpsURLConnection photoconnection = (HttpsURLConnection) photourl
+							.openConnection();
+					photoconnection.setDoInput(true);
+					photoconnection.connect();
+					InputStream input = photoconnection.getInputStream();
+					Bitmap image = BitmapFactory.decodeStream(input);
+					place.updateImage(new BitmapDrawable(image));
+				} catch (Exception e) {/* no photos available */
+				}
+				return null;
+			}
+		}
+
+		private PlaceData place;
+
+		public void startGathering() {
+			new ImageGathererTask().execute();
+		}
+
+		public void giveData(PlaceData placeData, String foursquareImageUrl) {
+			place = placeData;
+			imageUrl = foursquareImageUrl;
+		}
+
+		public GalleryImageGatherer(PlaceData placeData) {
+			place = placeData;
 		}
 	}
 }
