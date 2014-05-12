@@ -9,12 +9,6 @@
         android:positiveButtonText="@null"
         android:title="@string/pref_title_autoroute_max_length"  />
     
-    <CheckBoxPreference
-        android:defaultValue="true"
-        android:key="setting_tweets_english"
-        android:summary="@string/pref_description_tweets_english"
-        android:title="@string/pref_title_tweets_english" />
-    
      <ListPreference
         android:defaultValue="1"
         android:entries="@array/pref_arview_max_distance_names"

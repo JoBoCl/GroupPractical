@@ -64,7 +64,7 @@ public enum PlaceCategory {
 	public int getImageRef(boolean visited) { return getImageRef(visited,false);}
 	
 	public int getImageRefNoBorder(boolean visited){ 
-		if(visited) return imageRefNoBorder; else return imageRefTickNoBorder;}
+		if(visited) return imageRefTickNoBorder; else return imageRefNoBorder;}
 	/*
 	 * Return the category with the given ID
 	 */

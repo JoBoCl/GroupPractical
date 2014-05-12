@@ -29,7 +29,7 @@
         <item>20</item>
     </string-array>
     
-    <string name="pref_title_arview_max_distance">Maximum Auto Route Length</string>
+    <string name="pref_title_arview_max_distance">Maximum AR View Distance</string>
     <string-array name="pref_arview_max_distance_names">
         <item>50m</item>
         <item>100m</item>
