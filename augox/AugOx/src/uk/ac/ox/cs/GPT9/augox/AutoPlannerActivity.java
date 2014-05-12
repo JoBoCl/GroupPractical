@@ -2,12 +2,17 @@ package uk.ac.ox.cs.GPT9.augox;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import uk.ac.ox.cs.GPT9.augox.route.IRoute;
 import uk.ac.ox.cs.GPT9.augox.route.Route;
 import android.annotation.TargetApi;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -22,6 +27,7 @@ import android.widget.RatingBar;
 import android.widget.RatingBar.OnRatingBarChangeListener;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
+import android.widget.Toast;
 
 @TargetApi(11)
 public class AutoPlannerActivity extends FragmentActivity {
@@ -31,15 +37,24 @@ public class AutoPlannerActivity extends FragmentActivity {
 
 	private SeekBar activityCount;
 
+	private static Map<Integer, Integer[]> seenPlaces;
+
+	public static List<Integer> getSeenPlaces() {
+		List<Integer> values = new ArrayList<Integer>();
+		for (Integer[] placeIds : seenPlaces.values())
+			for (Integer placeId : placeIds)
+				values.add(placeId);
+
+		return values;
+	}
+
 	private static boolean allowRepeats = false;
 	private CheckBox allowRepeatsCheckbox;
 
-	private static boolean allowVisited = false;
-	private RadioGroup visitedUnvisitedPicker;
+	private static boolean allowVisited = true;
+	private static boolean allowUnvisited = true;
 
 	private Button finished;
-
-	private int lastVisible = 0;
 
 	// Note: accurate to 50m.
 	private static double maxDistance = 0.0f;
@@ -47,6 +62,12 @@ public class AutoPlannerActivity extends FragmentActivity {
 
 	private static float minRating = 0;
 	private RatingBar minRatingBar;
+
+	private CheckBox allowVisitedCheckbox;
+
+	private CheckBox allowUnvisitedCheckbox;
+
+	private int ACTIVITY_LIMIT;
 
 	public static void getPlaces() {
 		List<Integer> routeList = new ArrayList<Integer>();
@@ -63,11 +84,12 @@ public class AutoPlannerActivity extends FragmentActivity {
 		return _route;
 	}
 
-	/**
-	 * @return the allowVisited
-	 */
 	public static boolean allowingVisited() {
 		return allowVisited;
+	}
+
+	public static boolean allowingUnvisited() {
+		return allowUnvisited;
 	}
 
 	public static boolean areRepeatsAllowed() {
@@ -92,15 +114,24 @@ public class AutoPlannerActivity extends FragmentActivity {
 		Log.d("Joshua", "onCreate of AutoPlanner, before other stuff");
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_auto_planner);
-		
-		_route = new Integer[getResources().getInteger(R.integer.activity_limit)];
+
+		SharedPreferences sharedPref = MainScreenActivity.getSharedPref();
+		ACTIVITY_LIMIT = ((int) (Integer.parseInt(sharedPref.getString( "setting_autoroute_max_length", "1"))));
+
+		_route = new Integer[getResources()
+				.getInteger(R.integer.activity_limit)];
+
+		seenPlaces = new TreeMap<Integer, Integer[]>();
 
 		activities = new GalleryPickerFragment[getResources().getInteger(
 				R.integer.activity_limit)];
 		LinearLayout galleryLayout = (LinearLayout) findViewById(R.id.galleryHolders);
+
 		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+
 		Log.d("Joshua", "Before loop start");
-		for (int i = 0; i < getResources().getInteger(R.integer.activity_limit); i++) {
+
+		for (int i = 0; i < ACTIVITY_LIMIT; i++) {
 			_route[i] = -1;
 			activities[i] = GalleryPickerFragment.newInstance(i);
 			Log.d("Joshua", "Added fragment to activities");
@@ -109,8 +140,14 @@ public class AutoPlannerActivity extends FragmentActivity {
 		}
 		ft.commit();
 		Log.d("Joshua", "Committed changes");
+
 		updateViewableActivities(0);
+
+
+		Log.d("Joshua", sharedPref.toString());
+
 		activityCount = ((SeekBar) findViewById(R.id.activityCount));
+		activityCount.setMax(ACTIVITY_LIMIT);
 		activityCount
 				.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 					public void onProgressChanged(SeekBar seekBar,
@@ -129,8 +166,11 @@ public class AutoPlannerActivity extends FragmentActivity {
 		finished = ((Button) findViewById(R.id.routeFinished));
 		finished.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View paramAnonymousView) {
-				MainScreenActivity.getCurrentRoute().setList(Arrays.asList(_route));
-				
+				MainScreenActivity.getCurrentRoute().setList(
+						Arrays.asList(_route));
+				Toast.makeText(getApplicationContext(),
+						"Route created, click the radar to view",
+						Toast.LENGTH_LONG).show();
 				finish();
 			}
 		});
@@ -148,21 +188,26 @@ public class AutoPlannerActivity extends FragmentActivity {
 					}
 				});
 
-		visitedUnvisitedPicker = (RadioGroup) findViewById(R.id.visitedUnvisitedPicker);
-		visitedUnvisitedPicker
-				.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-
+		allowVisitedCheckbox = (CheckBox) findViewById(R.id.visited);
+		allowVisitedCheckbox.setChecked(false);
+		allowVisitedCheckbox
+				.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 					@Override
-					public void onCheckedChanged(RadioGroup group, int checkedId) {
-						switch (checkedId) {
-						case R.id.visited:
-							allowVisited = true;
-							break;
+					public void onCheckedChanged(CompoundButton buttonView,
+							boolean isChecked) {
+						allowVisited = !allowVisited;
+						updateGalleries();
+					}
+				});
 
-						case R.id.unvisited:
-							allowVisited = false;
-							break;
-						}
+		allowUnvisitedCheckbox = (CheckBox) findViewById(R.id.unvisited);
+		allowUnvisitedCheckbox.setChecked(false);
+		allowUnvisitedCheckbox
+				.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+					@Override
+					public void onCheckedChanged(CompoundButton buttonView,
+							boolean isChecked) {
+						allowUnvisited = !allowUnvisited;
 						updateGalleries();
 					}
 				});
@@ -181,7 +226,8 @@ public class AutoPlannerActivity extends FragmentActivity {
 
 		routeDistance = (SeekBar) findViewById(R.id.routeDistance);
 		// Currently set to 4km
-		routeDistance.setMax(80);
+		routeDistance.setMax((int) (Float.parseFloat(sharedPref.getString(
+				"setting_arview_max_distance", "1")) * 20));
 		routeDistance.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 			@Override
 			public void onStopTrackingTouch(SeekBar seekBar) {
@@ -203,8 +249,8 @@ public class AutoPlannerActivity extends FragmentActivity {
 	}
 
 	private void updateGalleries() {
-		for (int i = 0; i < getResources().getInteger(R.integer.activity_limit); i++) {
-				activities[i].preferencesUpdated();
+		for (int i = 0; i < ACTIVITY_LIMIT; i++) {
+			activities[i].preferencesUpdated();
 		}
 	}
 
@@ -215,7 +261,7 @@ public class AutoPlannerActivity extends FragmentActivity {
 
 	private void updateViewableActivities(int visibleActivities) {
 		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-		for (int i = 0; i < getResources().getInteger(R.integer.activity_limit); i++) {
+		for (int i = 0; i < ACTIVITY_LIMIT; i++) {
 			if (i < visibleActivities) {
 				ft.show(activities[i]);
 				Log.d("Joshua", "Showed gallery " + Integer.toString(i));
@@ -225,12 +271,19 @@ public class AutoPlannerActivity extends FragmentActivity {
 			}
 		}
 		ft.commit();
-		lastVisible = visibleActivities;
 	}
 
 	public static void updatePlace(int index) {
-		Log.d("updatePlace", "Gallery " + Integer.toString(index) + " sends update " + Integer.toString(activities[index].getSelectedPlace()));
+		Log.d("updatePlace",
+				"Gallery "
+						+ Integer.toString(index)
+						+ " sends update "
+						+ Integer.toString(activities[index].getSelectedPlace()));
 		_route[index] = activities[index].getSelectedPlace();
 		Log.d("updatePlace", Arrays.toString(activities));
+	}
+
+	public static void updateSeenPlaces(Integer offset, Integer[] chosenPlaceIds) {
+		seenPlaces.put(offset, chosenPlaceIds);
 	}
 }
