@@ -494,7 +494,7 @@
   <tag k="name" v="blanco"/>
   <tag k="augox_category" v="4"/>
   <tab k="augox_rating" v="3"/>
-  <tag k="description" v="Obscure bar, club & local fringe theatre far from the centre."/>
+  <tag k="description" v="Obscure bar, club &amp; local fringe theatre far from the centre."/>
   <tag k="augox_phonenumber" v=""/>
   <tag k="augox_twitterhandle" v=""/>
   <tag k="augox_foursquareid" v="5258ae5d11d2f84dcc3e5d58"/>
@@ -634,7 +634,7 @@
   <tag k="name" v="Clems"/>
   <tag k="augox_category" v="4"/>
   <tab k="augox_rating" v="3"/>
-  <tag k="description" v="Oxford Student Bar & Club on Cowley road"/>
+  <tag k="description" v="Oxford Student Bar &amp; Club on Cowley road"/>
   <tag k="augox_phonenumber" v=""/>
   <tag k="augox_twitterhandle" v="clemsBar"/>
   <tag k="augox_foursquareid" v="4f403c3ee4b062d5cb6f2406"/>
@@ -744,7 +744,7 @@
   <tag k="name" v="Joe's"/>
   <tag k="augox_category" v="4"/>
   <tab k="augox_rating" v="3"/>
-  <tag k="description" v="Open everyday for breakfast, lunch, dinner & cocktails, from 9.30am till late.  Try their delicious menu, with favourites like Deep fried brie with cranberry dip, smoked haddock kedgeree, BBQ ribs, burgers and much more...."/>
+  <tag k="description" v="Open everyday for breakfast, lunch, dinner &amp; cocktails, from 9.30am till late.  Try their delicious menu, with favourites like Deep fried brie with cranberry dip, smoked haddock kedgeree, BBQ ribs, burgers and much more...."/>
   <tag k="augox_phonenumber" v=""/>
   <tag k="augox_twitterhandle" v=""/>
   <tag k="augox_foursquareid" v="4c1383a8a1010f47c0b04a18"/>
@@ -874,7 +874,7 @@
   <tag k="name" v="Sojo"/>
   <tag k="augox_category" v="3"/>
   <tab k="augox_rating" v="3"/>
-  <tag k="description" v=Spicy, rustic Szechuan, Shanghainese and Cantonese dishes served in a buzzy, modern dining room.""/>
+  <tag k="description" v="Spicy, rustic Szechuan, Shanghainese and Cantonese dishes served in a buzzy, modern dining room."/>
   <tag k="augox_phonenumber" v=""/>
   <tag k="augox_twitterhandle" v=""/>
   <tag k="augox_foursquareid" v="4b55b5bbf964a520c0ec27e3"/>
@@ -1234,7 +1234,7 @@
   <tag k="name" v="St Catherine's College"/>
   <tag k="augox_category" v="2"/>
   <tab k="augox_rating" v="3"/>
-  <tag k="description" v="St Catherine's College is one of the constituent colleges of the University of Oxford in England. Its motto is Nova et Vetera, which translates as: "the new and the old"."/>
+  <tag k="description" v="St Catherine's College is one of the constituent colleges of the University of Oxford in England. Its motto is Nova et Vetera, which translates as: 'the new and the old'."/>
   <tag k="augox_phonenumber" v=""/>
   <tag k="augox_twitterhandle" v="St_Catz"/>
   <tag k="augox_foursquareid" v="4b52efa4f964a520f18a27e3"/>
@@ -1484,7 +1484,7 @@
   <tag k="name" v="Keble College Acland Site"/>
   <tag k="augox_category" v="2"/>
   <tab k="augox_rating" v="3"/>
-  <tag k="description" v="The Acland site occupies the space between the new University Humanities Quarter and the Science & Engineering Area with its complex of laboratories and departments. This area of Oxford just to the north of the city centre has become the epicentre of the 21st century University. Less than five minutes’ walk from the main College, those living and working in the new facilities are fully integrated into the life of Keble."/>
+  <tag k="description" v="The Acland site occupies the space between the new University Humanities Quarter and the Science &amp; Engineering Area with its complex of laboratories and departments. This area of Oxford just to the north of the city centre has become the epicentre of the 21st century University. Less than five minutes’ walk from the main College, those living and working in the new facilities are fully integrated into the life of Keble."/>
   <tag k="augox_phonenumber" v=""/>
   <tag k="augox_twitterhandle" v="KebleAlumni"/>
   <tag k="augox_foursquareid" v="4b6703e6f964a52031352be3"/>
