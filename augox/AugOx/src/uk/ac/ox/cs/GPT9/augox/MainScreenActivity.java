@@ -2,6 +2,8 @@ package uk.ac.ox.cs.GPT9.augox;
 
 import uk.ac.ox.cs.GPT9.augox.route.*;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +35,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
+import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -49,6 +52,7 @@ import android.view.View.OnLongClickListener;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 
 public class MainScreenActivity extends FragmentActivity implements OnClickBeyondarObjectListener, OnSharedPreferenceChangeListener {
@@ -161,6 +165,18 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 		//mViewAdapter = new CustomBeyondarViewAdapter(this);
 		mBeyondarFragment.setBeyondarViewAdapter(new CustomBeyondarViewAdapter(this));
     	mBeyondarFragment.setMaxFarDistance(MAXICONDIST);
+    	
+		AssetManager ast = getAssets();
+		try {
+			InputStream inp = ast.open("testdb.dat");
+			MainScreenActivity.getPlacesDatabase().loadFromStream(inp);
+			inp.close();
+			Toast toast = Toast.makeText(getApplicationContext(), "File Loaded", Toast.LENGTH_SHORT);
+			toast.show();
+		} catch (IOException e) {
+			Toast toast = Toast.makeText(getApplicationContext(), e.getLocalizedMessage(), Toast.LENGTH_SHORT);
+			toast.show();
+		}
         
         fillWorld();
     }
