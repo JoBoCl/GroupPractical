@@ -2,6 +2,8 @@ package uk.ac.ox.cs.GPT9.augox;
 
 import uk.ac.ox.cs.GPT9.augox.route.*;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +19,7 @@ import com.beyondar.android.plugin.radar.RadarView;
 import com.beyondar.android.plugin.radar.RadarWorldPlugin;
 import com.beyondar.android.screenshot.OnScreenshotListener;
 import com.beyondar.android.util.location.BeyondarLocationManager;
+import com.beyondar.android.view.BeyondarViewAdapter;
 import com.beyondar.android.view.OnClickBeyondarObjectListener;
 import com.beyondar.android.world.BeyondarObject;
 import com.beyondar.android.world.GeoObject;
@@ -32,18 +35,25 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
+import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
+import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainScreenActivity extends FragmentActivity implements OnClickBeyondarObjectListener, OnSharedPreferenceChangeListener {
    
@@ -110,8 +120,9 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
         mWorld.setArViewDistance(100);
 		
 		GeoObject user = new GeoObject(USERID);
-		//user.setGeoPosition(mWorld.getLatitude(), mWorld.getLongitude());
-		user.setGeoPosition(51.757674, -1.257535); // 31 Museum Road
+
+		user.setGeoPosition(mWorld.getLatitude(), mWorld.getLongitude());
+		//user.setGeoPosition(51.757674, -1.257535); // 31 Museum Road
 		user.setImageResource(R.drawable.ic_launcher); // TODO give user an oriented custom icon
 		user.setName("User position");
 		mWorld.addBeyondarObject(user);
