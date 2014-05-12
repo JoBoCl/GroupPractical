@@ -88,26 +88,22 @@
         <RatingBar
             android:id="@+id/routeMinimumRating"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:stepSize="1.0" />
 
-        <RadioGroup
-            android:id="@+id/visitedUnvisitedPicker"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-
-            <RadioButton
+            <CheckBox
                 android:id="@+id/visited"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"
                 android:text="Visited Places" />
 
-            <RadioButton
+            <CheckBox
                 android:id="@+id/unvisited"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:checked="true"
                 android:text="Unvisited Places" />
-        </RadioGroup>
     </LinearLayout>
 
 </LinearLayout>
