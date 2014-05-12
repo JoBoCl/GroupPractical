@@ -16,9 +16,6 @@ import uk.ac.ox.cs.GPT9.augox.dbquery.VisitedQuery;
 import uk.ac.ox.cs.GPT9.augox.dbsort.NameSorter;
 import uk.ac.ox.cs.GPT9.augox.dbsort.SortOrder;
 import android.annotation.TargetApi;
-import android.content.Context;
-import android.location.Location;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -217,8 +214,10 @@ public class GalleryPickerFragment extends Fragment {
 
 	private boolean plannedRouteContainsAfter(int id) {
 		Integer[] places = AutoPlannerActivity.getPlannedRoute();
-		for(int i = offset+1; i < getResources().getInteger(R.integer.activity_limit); i++) {
-			if(places[i] == id) return true;
+		for (int i = offset + 1; i < getResources().getInteger(
+				R.integer.activity_limit); i++) {
+			if (places[i] == id)
+				return true;
 		}
 
 		return false;
@@ -235,10 +234,15 @@ public class GalleryPickerFragment extends Fragment {
 
 		query = new AndQuery(query, new RatingRangeQuery((int) minRating, 5));
 
-		// Lat at [0], long at [1]
-		query = new AndQuery(query, new InLocusQuery(
-				MainScreenActivity.getUserLocation()[0],
-				MainScreenActivity.getUserLocation()[1], maxDistance));
+		try {
+			// Lat at [0], long at [1]
+			query = new AndQuery(query, new InLocusQuery(
+					MainScreenActivity.getUserLocation()[0],
+					MainScreenActivity.getUserLocation()[1], maxDistance));
+		} catch (NullPointerException e) {
+			query = new AndQuery(query, new InLocusQuery(51.757674, -1.257535,
+					maxDistance));
+		}
 
 		List<Integer> idList = MainScreenActivity.getPlacesDatabase().query(
 				query, new NameSorter(SortOrder.ASC));
