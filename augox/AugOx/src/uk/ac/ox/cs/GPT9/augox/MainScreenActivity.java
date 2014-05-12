@@ -188,7 +188,7 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
    }
    
    private void startFullInfoActivity(final BeyondarObject geoPlace) {
-	   mBeyondarFragment.takeScreenshot(new OnScreenshotListener() {
+	   /*mBeyondarFragment.takeScreenshot(new OnScreenshotListener() {
 		   @Override
 		   public void onScreenshot (Bitmap screenshot) {
 			   Bundle bundle = new Bundle();
@@ -200,7 +200,11 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 			   intent.putExtra(PlaceFullInfoActivity.EXTRA_PLACE, (int)geoPlace.getId());
 			   startActivity(intent);
 		   }
-	   });
+	   });*/ // TODO: image for background
+	   Intent intent = new Intent(getApplicationContext(), PlaceFullInfoActivity.class);
+	   intent.putExtra(PlaceFullInfoActivity.EXTRA_DISTANCE, geoPlace.getDistanceFromUser()/1000);
+	   intent.putExtra(PlaceFullInfoActivity.EXTRA_PLACE, (int)geoPlace.getId());
+	   startActivity(intent);
    }
    
    private void initializeGMaps() {   
