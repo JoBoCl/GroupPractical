@@ -41,7 +41,7 @@ public class PlaceFullInfoActivity extends Activity {
 			return "unknown";
 		} else if (distanceAsKm < 0.95) {
         	String result = new DecimalFormat(".#").format(distanceAsKm).substring(1) + "00m";
-        	if (result.contains("000 m")) return "0m";
+        	if (result.contains("000m")) return "0m";
         	else return result;
         }
         else {

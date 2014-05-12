@@ -277,11 +277,12 @@ containing a value of this type.
     }
     public static final class id {
         public static final int LinearLayout1=0x7f060005;
-        public static final int action_launch_autoplanner=0x7f060052;
-        public static final int action_launch_filterpanel=0x7f06004f;
-        public static final int action_launch_listplaces=0x7f060050;
-        public static final int action_launch_routeplanner=0x7f060051;
-        public static final int action_launch_settingspanel=0x7f060053;
+        public static final int action_launch_autoplanner=0x7f060053;
+        public static final int action_launch_filterpanel=0x7f060050;
+        public static final int action_launch_listplaces=0x7f060051;
+        public static final int action_launch_routeplanner=0x7f060052;
+        public static final int action_launch_settingspanel=0x7f060054;
+        public static final int action_route_moveon=0x7f06004f;
         public static final int activityCount=0x7f060007;
         public static final int activityText=0x7f060006;
         public static final int add_places_name=0x7f06003c;
@@ -401,6 +402,7 @@ containing a value of this type.
         public static final int action_launch_placefullinfo=0x7f07002a;
         public static final int action_launch_routeplanner=0x7f07002b;
         public static final int action_launch_settingspanel=0x7f07002c;
+        public static final int action_route_moveon=0x7f07003a;
         public static final int action_settings=0x7f07001e;
         public static final int app_name=0x7f07001b;
         /**   Title for notification shown when GooglePlayServices needs to be
@@ -510,13 +512,13 @@ containing a value of this type.
         /**  Location client code resources (prefix with location_client) 
          */
         public static final int location_client_powered_by_google=0x7f07001a;
-        public static final int pref_description_tweets_english=0x7f07003e;
+        public static final int pref_description_tweets_english=0x7f07003f;
         /**  General settings 
          */
-        public static final int pref_header_general=0x7f07003c;
-        public static final int pref_title_arview_max_distance=0x7f070040;
-        public static final int pref_title_autoroute_max_length=0x7f07003f;
-        public static final int pref_title_tweets_english=0x7f07003d;
+        public static final int pref_header_general=0x7f07003d;
+        public static final int pref_title_arview_max_distance=0x7f070041;
+        public static final int pref_title_autoroute_max_length=0x7f070040;
+        public static final int pref_title_tweets_english=0x7f07003e;
         public static final int routePlannerAddPlaces=0x7f070036;
         public static final int routePlannerButtonClear=0x7f070039;
         public static final int routePlannerButtonContinue=0x7f070038;
@@ -524,13 +526,13 @@ containing a value of this type.
         public static final int routePlannerCurrentRoute=0x7f070035;
         public static final int title_activity_auto_planner=0x7f070025;
         public static final int title_activity_database_debugger=0x7f070026;
-        public static final int title_activity_filter_panel=0x7f07003a;
+        public static final int title_activity_filter_panel=0x7f07003b;
         public static final int title_activity_list_places=0x7f070021;
         public static final int title_activity_list_places_by_sub_type=0x7f070022;
         public static final int title_activity_list_places_items=0x7f070023;
         public static final int title_activity_place_full_info=0x7f070020;
         public static final int title_activity_route_planner=0x7f070024;
-        public static final int title_activity_settings_panel=0x7f07003b;
+        public static final int title_activity_settings_panel=0x7f07003c;
     }
     public static final class style {
         /** 

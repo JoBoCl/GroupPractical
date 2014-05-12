@@ -36,5 +36,7 @@
     <string name="routePlannerButtonFilters">Change Filters</string>
     <string name="routePlannerButtonContinue">Continue</string>
     <string name="routePlannerButtonClear">Clear Route</string>
+    
+    <string name="action_route_moveon">Next route place</string>
    
 </resources>

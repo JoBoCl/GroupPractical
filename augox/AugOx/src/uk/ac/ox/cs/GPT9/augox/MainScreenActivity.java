@@ -2,8 +2,6 @@ package uk.ac.ox.cs.GPT9.augox;
 
 import uk.ac.ox.cs.GPT9.augox.route.*;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +17,6 @@ import com.beyondar.android.plugin.radar.RadarView;
 import com.beyondar.android.plugin.radar.RadarWorldPlugin;
 import com.beyondar.android.screenshot.OnScreenshotListener;
 import com.beyondar.android.util.location.BeyondarLocationManager;
-import com.beyondar.android.view.BeyondarViewAdapter;
 import com.beyondar.android.view.OnClickBeyondarObjectListener;
 import com.beyondar.android.world.BeyondarObject;
 import com.beyondar.android.world.GeoObject;
@@ -35,25 +32,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
-import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.view.View.OnLongClickListener;
-import android.widget.ImageView;
 import android.widget.SeekBar;
-import android.widget.Toast;
-import android.widget.TextView;
-
 import android.widget.SeekBar.OnSeekBarChangeListener;
 
 public class MainScreenActivity extends FragmentActivity implements OnClickBeyondarObjectListener, OnSharedPreferenceChangeListener {
@@ -61,12 +50,23 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 	private static PlacesDatabase placesDatabase = new PlacesDatabase();
 	public static PlacesDatabase getPlacesDatabase() { return placesDatabase; }
 	private static IRoute route = new Route();
+
 	public static IRoute getCurrentRoute() { return route; }
 	private final int USERID = 20000; // TODO guarantee uniqueness
 	private final int MAXICONDIST = 50;
 	
-	private IRoute savedRoute = null;
-	
+	private final int MAXICONSIZE = 100;
+	private final int MINICONSIZE = 30;
+	private static GeoObject user;
+
+	public static double[] getUserLocation() {
+		double[] latlong = new double[2];
+		latlong[0] = user.getLatitude();
+		latlong[1] = user.getLongitude();
+
+		return latlong;
+	}
+
 	private BeyondarFragmentSupport mBeyondarFragment;
 	private RadarView mRadarView;
 	private RadarWorldPlugin mRadarPlugin;
@@ -79,18 +79,19 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 
 	private SeekBar mSeekBarMaxDistance;
 	private View mMapFrame;
-	
+
 	private SharedPreferences sharedPref;
-	
+
 	private class Place {
 		public Place(Integer placeID, GeoObject geoPlace, Marker marker) {
 			this.placeID = placeID;
 			this.geoPlace = geoPlace;
-			//this.marker = marker;
+			// this.marker = marker;
 		}
+
 		public int placeID;
 		public GeoObject geoPlace;
-		//public Marker marker;
+		// public Marker marker;
 	}
 	
    @Override
@@ -109,13 +110,14 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
         mWorld.setArViewDistance(100);
 		
 		GeoObject user = new GeoObject(USERID);
-		user.setGeoPosition(mWorld.getLatitude(), mWorld.getLongitude());
+		//user.setGeoPosition(mWorld.getLatitude(), mWorld.getLongitude());
+		user.setGeoPosition(51.757674, -1.257535); // 31 Museum Road
 		user.setImageResource(R.drawable.ic_launcher); // TODO give user an oriented custom icon
 		user.setName("User position");
 		mWorld.addBeyondarObject(user);
         
         BeyondarLocationManager.addWorldLocationUpdate(mWorld);
-		BeyondarLocationManager.addGeoObjectLocationUpdate(user);
+		//BeyondarLocationManager.addGeoObjectLocationUpdate(user);
 
 		// We need to set the LocationManager to the BeyondarLocationManager.
 		BeyondarLocationManager
@@ -143,7 +145,6 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
             public void onProgressChanged(SeekBar seekBar, int progress,boolean fromUser) {
             	mWorld.setArViewDistance(seekBar.getProgress());
             	mRadarPlugin.setMaxDistance(mWorld.getArViewDistance());
-            	//routeChangedListener(savedRoute);
             }       
         });
         mSeekBarMaxDistance.setProgress(mSeekBarMaxDistance.getMax()/2);
@@ -163,12 +164,13 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
         
         sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         sharedPref.registerOnSharedPreferenceChangeListener(this);
-        
-        
+                
 		//mViewAdapter = new CustomBeyondarViewAdapter(this);
 		mBeyondarFragment.setBeyondarViewAdapter(new CustomBeyondarViewAdapter(this));
     	mBeyondarFragment.setMaxFarDistance(MAXICONDIST);
-        
+    	
+    	updateMoveonButtonVisibility();
+
         fillWorld();
     }
    
@@ -185,7 +187,7 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
    }
    
    private void startFullInfoActivity(final BeyondarObject geoPlace) {
-	   mBeyondarFragment.takeScreenshot(new OnScreenshotListener() {
+	   /*mBeyondarFragment.takeScreenshot(new OnScreenshotListener() {
 		   @Override
 		   public void onScreenshot (Bitmap screenshot) {
 			   Bundle bundle = new Bundle();
@@ -197,7 +199,11 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 			   intent.putExtra(PlaceFullInfoActivity.EXTRA_PLACE, (int)geoPlace.getId());
 			   startActivity(intent);
 		   }
-	   });
+	   });*/ // TODO: image for background
+	   Intent intent = new Intent(getApplicationContext(), PlaceFullInfoActivity.class);
+	   intent.putExtra(PlaceFullInfoActivity.EXTRA_DISTANCE, geoPlace.getDistanceFromUser()/1000);
+	   intent.putExtra(PlaceFullInfoActivity.EXTRA_PLACE, (int)geoPlace.getId());
+	   startActivity(intent);
    }
    
    private void initializeGMaps() {   
@@ -211,22 +217,24 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 				mMapFrame.setVisibility(View.GONE);
 			}
 		});
-	   
+
 		mGoogleMapPlugin = new GoogleMapWorldPlugin(this);
 		mGoogleMapPlugin.setGoogleMap(mMap);
-        mWorld.addPlugin(mGoogleMapPlugin);
-        
-        /*for (Place place: Places) {
-        	mMap.addMarker(new MarkerOptions()
-        		.position(new LatLng(place.geoPlace.getLatitude(), place.geoPlace.getLongitude()))
-        		.title(place.geoPlace.getName())
-        		.snippet(placesDatabase.getPlaceByID(place.placeID).getDescription()));
-        }*/
-        refreshVisibility();
-   }
-   
-   private void centreCamera() {
-		mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(mWorld.getLatitude(), mWorld.getLongitude()), 15));
+		mWorld.addPlugin(mGoogleMapPlugin);
+
+		/*
+		 * for (Place place: Places) { mMap.addMarker(new MarkerOptions()
+		 * .position(new LatLng(place.geoPlace.getLatitude(),
+		 * place.geoPlace.getLongitude())) .title(place.geoPlace.getName())
+		 * .snippet
+		 * (placesDatabase.getPlaceByID(place.placeID).getDescription())); }
+		 */
+		refreshVisibility();
+	}
+
+	private void centreCamera() {
+		mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
+				new LatLng(mWorld.getLatitude(), mWorld.getLongitude()), 15));
 		mMap.animateCamera(CameraUpdateFactory.zoomTo(19), 2000, null);
    }
    
@@ -234,15 +242,27 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
    protected void onResume() {
         super.onResume();
         BeyondarLocationManager.enable();
-        //if (route != null && savedRoute != null && !(savedRoute.hashCode() == (route.hashCode()))) routeChangedListener(savedRoute);
+        routeChanged();
+   }
+   
+   private void routeChanged() {
+	   for (Place p: Places) {
+		   resetImage(p);
+	   }
+	  updateMoveonButtonVisibility();
    }
 
-
+   private Place findPlace(int placeID) {
+	   for (Place p: Places) {
+		   if (p.placeID == placeID) return p;
+	   }
+	   return null;
+   }
+   
    @Override
    protected void onPause() {
         super.onPause();
         BeyondarLocationManager.disable();
-        //savedRoute = route;
    }
     
     @Override
@@ -281,6 +301,19 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
             	Intent intent6 = new Intent(this, AutoPlannerActivity.class);
                 startActivity(intent6);
                 return true;
+            case R.id.action_route_moveon:
+            	if (route != null) {
+            		Place old = null;
+            		if (!route.empty()) old = findPlace(route.getNextAsID());
+	            	if (route.moveOn()) { // route is ended
+	            		updateMoveonButtonVisibility();
+	            	}
+	            	else { // make the next one be HERE
+	            		resetImage(route.getNextAsID());
+	            	}
+	            	if (old != null) resetImage(old);
+            	}
+            	return true;
             /*
             case R.id.action_launch_databasedebugger:
             	Intent intent7 = new Intent(this, DatabaseDebuggerActivity.class);
@@ -292,13 +325,26 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
         }
     }
     
+    private void updateMoveonButtonVisibility() {
+    	if (findViewById(R.id.action_route_moveon) == null) return;
+    	if (route != null && !route.empty()) findViewById(R.id.action_route_moveon).setVisibility(View.VISIBLE);
+    	else findViewById(R.id.action_route_moveon).setVisibility(View.GONE);
+    }
+    
+    private void resetImage(int p) {
+    	resetImage(findPlace(p));
+    }   
+    private void resetImage(Place p) {
+    	p.geoPlace.setImageResource(getImage(p));
+    }
+    private int getImage(Place p) {
+    	PlaceData pd = placesDatabase.getPlaceByID(p.placeID);
+    	if (route != null && !route.empty()) return pd.getCategory().getImageRef(pd.getVisited(), p.placeID == route.getNextAsID());
+    	else return pd.getCategory().getImageRef(pd.getVisited());
+    }
+    
 	@Override
 	public void onClickBeyondarObject(ArrayList<BeyondarObject> beyondarObjects) {
-		/*if (beyondarObjects.size() > 0) {
-			Toast.makeText(this, "Clicked on: " + beyondarObjects.get(0).getName(),
-					Toast.LENGTH_LONG).show();
-		}*/
-		// TODO
 		BeyondarObject clicked = null;
 		for (BeyondarObject beyondarObject: beyondarObjects) {
 			if (beyondarObject.isVisible()) {
@@ -320,7 +366,7 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 		mSeekBarMaxDistance.setMax((int) (Float.parseFloat(sharedPref.getString("setting_arview_max_distance", "1"))*1000));
 		refreshVisibility();
 	}
-	
+
 	private List<PlaceCategory> currentCategories() {
 		List<PlaceCategory> pcs = new ArrayList<PlaceCategory>();
 		for (PlaceCategory pc: PlaceCategory.values()) {
@@ -332,15 +378,16 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 		if (sharedPref.getBoolean("filter_restaurants", true)) pcs.add(PlaceCategory.RESTAURANT);*/
 		return pcs;
 	}
-	
+
 	private void fillWorld() {
 		DatabaseQuery dq = new AllQuery();
 		DatabaseSorter ds = new DistanceFromSorter(mWorld.getLongitude(), mWorld.getLatitude(), SortOrder.ASC);
 		List<Integer> placeIDs = placesDatabase.query(dq, ds);
-		for (Integer placeID: placeIDs) {
+		for (Integer placeID : placeIDs) {
 			PlaceData currPlace = placesDatabase.getPlaceByID(placeID);
 			GeoObject currPlaceGeo = new GeoObject(placeID);
-			currPlaceGeo.setGeoPosition(currPlace.getLatitude(), currPlace.getLongitude());
+			//currPlaceGeo.setGeoPosition(currPlace.getLatitude(), currPlace.getLongitude());
+			currPlaceGeo.setGeoPosition(currPlace.getLatitude(), currPlace.getLongitude(), mWorld.getAltitude() + (10*Math.random()-5)/50000);
 			currPlaceGeo.setName(currPlace.getName());
 			currPlaceGeo.setImageResource(currPlace.getCategory().getImageRef(currPlace.getVisited()));
 			Places.add(new Place(placeID, currPlaceGeo, null));
@@ -348,12 +395,12 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 		}
 		refreshVisibility();
 	}
-	
+
 	private void refreshVisibility() { 
 		for (Place place: Places) {
 			boolean vis = (currentCategories().contains(placesDatabase.getPlaceByID(place.placeID).getCategory()));
 			place.geoPlace.setVisible(vis);
-		    //if (place.marker != null) place.marker.setVisible(vis);
+			// if (place.marker != null) place.marker.setVisible(vis);
 		}
 	}
 	
@@ -388,7 +435,7 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 			imageView.setLayoutParams(layoutParams);
 
 			// Once the view is ready we specify the position
-			Point2 poss = beyondarObject.getScreenPositionCenter();
+			Point2 pos = beyondarObject.getScreenPositionCenter();
 			pos.x = pos.x - iconSize/2;
 			pos.y = pos.y - iconSize/2;
 			setPosition(pos);
@@ -447,14 +494,4 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 			return recycledView;
 		}
 	}
-	
-	private void routeChangedListener(IRoute oldRoute) {
-		for (Place p: Places) { 
-			if (!route.empty() && p.placeID == route.getNextAsID()) {
-				p.geoPlace.setImageResource(R.drawable.heresign);
-			}
-			else p.geoPlace.setImageResource(placesDatabase.getPlaceByID(p.placeID).getCategory().getImageRef(placesDatabase.getPlaceByID(p.placeID).getVisited()));
-		}
-	}
-	
 }

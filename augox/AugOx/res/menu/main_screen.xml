@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
+            
+    <item android:id="@+id/action_route_moveon"
+          android:title="@string/action_route_moveon"
+          android:icon="@drawable/heresign"
+          android:showAsAction="always" 
+          android:visibility="gone" />
     
     <item android:id="@+id/action_launch_filterpanel"
           android:title="@string/action_launch_filterpanel"
@@ -24,7 +30,7 @@
     <item android:id="@+id/action_launch_settingspanel"
           android:title="@string/action_launch_settingspanel"
           android:icon="@drawable/ic_action_settings"
-          android:showAsAction="always" />
+          android:showAsAction="always" />    
     
     <!--
     <item android:id="@+id/action_launch_databasedebugger"
