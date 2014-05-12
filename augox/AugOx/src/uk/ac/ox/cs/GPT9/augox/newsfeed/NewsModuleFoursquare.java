@@ -54,11 +54,15 @@ public class NewsModuleFoursquare implements INewsModule
 	        	// if we have data can continue
 	        	if (obj != null) {
 	    			org.json.simple.JSONObject venue = (org.json.simple.JSONObject)(((org.json.simple.JSONObject)((org.json.simple.JSONObject)obj).get("response")).get("venue"));
+	    			
 	    			// get information for rating update and convert from 0-10 to 0-5 integer
-	    			Double theirRating = null;
-	    			if (venue.get("rating") instanceof Double) theirRating = (Double)venue.get("rating");
-	    			int starRating = (int)(theirRating/2);
-	    			place.updateRating(starRating);
+	    			try {
+		    			Double theirRating = null;
+		    			if (venue.get("rating") instanceof Double) theirRating = (Double)venue.get("rating");
+		    			int starRating = (int)(theirRating/2);
+		    			place.updateRating(starRating);
+	    			}
+	    			catch (Exception e) {/*no rating available*/}
 
 	    			// get link
 	    			try {
