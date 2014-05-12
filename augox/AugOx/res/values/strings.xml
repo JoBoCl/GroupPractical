@@ -38,5 +38,7 @@
     <string name="routePlannerButtonClear">Clear Route</string>
     
     <string name="action_route_moveon">Next route place</string>
+    
+    <string name="google_apikey">AIzaSyBN2fi7bdokXVQXmMTGfqWG2oNHjopus-A</string>
    
 </resources>

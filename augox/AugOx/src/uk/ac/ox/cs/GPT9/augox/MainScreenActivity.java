@@ -1,11 +1,19 @@
 package uk.ac.ox.cs.GPT9.augox;
 
+import uk.ac.ox.cs.GPT9.augox.GoogleRouteHelper.DownloadTask;
+import uk.ac.ox.cs.GPT9.augox.newsfeed.NewsFeed;
 import uk.ac.ox.cs.GPT9.augox.route.*;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.net.ssl.HttpsURLConnection;
+
+import org.json.simple.JSONValue;
 
 import uk.ac.ox.cs.GPT9.augox.dbquery.AllQuery;
 import uk.ac.ox.cs.GPT9.augox.dbquery.DatabaseQuery;
@@ -66,14 +74,11 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 	private final int USERID = 20000; // TODO guarantee uniqueness
 	private final int MAXICONDIST = 50;
 	
-	private final int MAXICONSIZE = 100;
-	private final int MINICONSIZE = 30;
-	
 	private BeyondarFragmentSupport mBeyondarFragment;
 	private RadarView mRadarView;
 	private RadarWorldPlugin mRadarPlugin;
 	private World mWorld;
-	private GoogleMap mMap;
+	public static GoogleMap mMap;
 	private GoogleMapWorldPlugin mGoogleMapPlugin;
 	//private BeyondarViewAdapter mViewAdapter;
 	private List<Place> Places = new ArrayList<Place>();
@@ -95,6 +100,26 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 		//public Marker marker;
 	}
 	
+	private void getDirections () {
+		String s = "http://maps.googleapis.com/maps/api/directions/json?";
+		s.concat("origin="); s.concat(mGoogleMapPlugin.getLatLng().toString());
+		s.concat("&destination="); s.concat(new LatLng(route.getNext().getLatitude(),route.getNext().getLongitude()).toString());
+		s.concat("&mode=walking");
+		s.concat("&key="); s.concat((String)getResources().getText(R.string.google_apikey));
+		URL url;
+		try {
+			url = new URL(s);
+			HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
+	    	org.json.simple.JSONObject obj = (org.json.simple.JSONObject)JSONValue.parse(NewsFeed.readResponse(connection));
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,7 +138,7 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 		GeoObject user = new GeoObject(USERID);
 		//user.setGeoPosition(mWorld.getLatitude(), mWorld.getLongitude());
 		user.setGeoPosition(51.757674, -1.257535); // 31 Museum Road
-		user.setImageResource(R.drawable.ic_launcher); // TODO give user an oriented custom icon
+		user.setImageResource(R.drawable.arrowicon); // TODO give user an oriented custom icon
 		user.setName("User position");
 		mWorld.addBeyondarObject(user);
         
@@ -230,6 +255,19 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
         		.snippet(placesDatabase.getPlaceByID(place.placeID).getDescription()));
         }*/
         refreshVisibility();
+        
+        if(!route.empty()){
+            LatLng origin = mGoogleMapPlugin.getLatLng();
+            LatLng dest = new LatLng(route.getNext().getLatitude(), route.getNext().getLongitude());
+
+            // Getting URL to the Google Directions API
+            String url = GoogleRouteHelper.getDirectionsUrl(origin, dest);
+
+            DownloadTask downloadTask = new DownloadTask();
+
+            // Start downloading json data from Google Directions API
+            downloadTask.execute(url);
+        }
    }
    
    private void centreCamera() {
