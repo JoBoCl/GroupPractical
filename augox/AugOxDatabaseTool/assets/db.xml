@@ -1,0 +1,2323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+ <node id="0" lat="51.7507855" lon="-1.2591209">
+  <tag k="name" v="Modern Art Oxford"/>
+  <tag k="augox_category" v="1"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Modern Art Oxford is one of the UK's leading venues for the presentation of modern and contemporary visual art with an established international reputation.  The gallery presents exhibitions of modern and contemporary art. It has a national and international reputation for quality of exhibitions, projects and commissions, which are supported by a learning and engagement programme with audiences in excess of 100,000 each year.  Funded primarily by Arts Council England, all exhibitions and many events, activities and workshops are free for visitors."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="mao_gallery"/>
+  <tag k="augox_foursquareid" v="4b6985ccf964a520cba52be3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="1" lat="51.8115495" lon="-1.2794088">
+  <tag k="name" v="Mayflower"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Mayflower Restaurant provides eat in, take away and delivery services."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4bad0f00f964a52059293be3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="2" lat="51.7534475" lon="-1.2659115">
+  <tag k="name" v="Bangkok House"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="The Bangkok House restaurant, Oxford serves delicious authentic Thai dishes in a relaxed setting. The stunning decor of Bangkok House with elaborate carved wooden chairs adds to experience."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4b4b4ee6f964a520169726e3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="3" lat="51.7536267" lon="-1.2603922">
+  <tag k="name" v="Gourmet Burger Kitchen"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Gourmet Burger Kitchen has a trendy interior and, although a bit more expensive than the average high street burger joint, the delicious burgers and other dishes are huge and freshly prepared with large side orders to match. Catering for vegetarians is provided."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="gbkburgers"/>
+  <tag k="augox_foursquareid" v="4b531026f964a520d38d27e3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="4" lat="51.7543041" lon="-1.2613408">
+  <tag k="name" v="Noodle Nation"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Bright, open-plan cafe with shared seating, colourful abstract artworks and a pan-Asian menu."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="noodle_nation"/>
+  <tag k="augox_foursquareid" v="4b531388f964a520368e27e3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="5" lat="51.7545076" lon="-1.2624617">
+  <tag k="name" v="My Sichuan Restaurant"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Wide range of authentic Sichuan treats including pigs' ears, fried bullfrog, preserved eggs, jellyfish (and many other less adventurous dishes) - plus Karaoke."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4dd02f2322718eed7a63e23d"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="6" lat="51.7174046" lon="-1.197062">
+  <tag k="name" v="Chillies Indian Takeaway"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Chillies Indian Cuisine is a Takeaway in Oxford which serves mainly Indian food."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4ea04cc75c5c8cb41cb4b530"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="8" lat="51.7534515" lon="-1.2633304">
+  <tag k="name" v="Nando's"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Nando's is a South African casual dining restaurant group originating from the Mozambican–Portuguese community with a Portuguese/Mozambiquan theme.  Founded in 1987, Nando's operates about 1,000 outlets in twenty-four countries on five continents and as of 2012 had sales of $650 million.  Nando's specializes in chicken dishes with either lemon and herb, Mango and Lime, medium, hot, extra hot or extra extra hot Peri-Peri marinades (properly known as Galinha a Africana). In some countries, Nando's has other flavour options such as Mediterranean."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="NandosUK"/>
+  <tag k="augox_foursquareid" v="4c0262a2cbd876b02c30f143"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="9" lat="51.7695062" lon="-1.2535624">
+  <tag k="name" v="Cherwell Boat House"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="The Cherwell Boathouse is a boathouse and restaurant on the River Cherwell in Oxford, England. It is located down a small lane off the junction between Chadlington Road and Bardwell Road, which itself is off the Banbury Road in North Oxford."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="CherwellBoath"/>
+  <tag k="augox_foursquareid" v="4bd18cbca8b3a59379dc655f"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="10" lat="51.722591" lon="-1.221147">
+  <tag k="name" v="The Anglo-Asian Restaurant"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Your award winning Tandoori and Balti Take Away ... Truly authentic!!!"/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v=""/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="11" lat="51.7484099" lon="-1.2406955">
+  <tag k="name" v="Temple Lounge"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Casual hub for Arabic and Asian inspired dishes, plus mocktails and milkshakes and a sheesha garden."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="temple_lounge"/>
+  <tag k="augox_foursquareid" v=""/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="12" lat="51.7153587" lon="-1.2914559">
+  <tag k="name" v="The Open University in the South"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="UK's largest university for part-time higher education, offering supported open learning materials for undergrad and postgrad qualifications in many subjects."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="OpenUniversity"/>
+  <tag k="augox_foursquareid" v=""/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="13" lat="51.7514837" lon="-1.2561956">
+  <tag k="name" v="House Bar"/>
+  <tag k="augox_category" v="4"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="A buzzing young bar in central Oxford with its own games room, private terrace with Philippe Starck sofas and a seriously well thought out cocktail list."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="dukebars"/>
+  <tag k="augox_foursquareid" v="4bc0bfd6b492d13acbcba460"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="14" lat="51.7513771" lon="-1.2570415">
+  <tag k="name" v="Museum of Oxford"/>
+  <tag k="augox_category" v="1"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="The Museum of Oxford is a history museum in Oxford, England, covering the history of the City and University of Oxford."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="MuseumofOxford"/>
+  <tag k="augox_foursquareid" v="4bdd821e4ffaa593d98e6ff7"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="15" lat="51.7462279" lon="-1.2329931">
+  <tag k="name" v="Aziz"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Contemporary curries served in dining rooms with doorway arches, chandeliers and white linen."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="AzizOxford"/>
+  <tag k="augox_foursquareid" v="4b22a87df964a520434b24e3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="17" lat="51.7515086" lon="-1.2620471">
+  <tag k="name" v="Pizza Express"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="PizzaExpress is a restaurant group with over 400 restaurants across the United Kingdom and 40 overseas in Europe, Hong Kong, India and the Middle East. It was founded in 1965 by Peter Boizot."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="PizzaExpress"/>
+  <tag k="augox_foursquareid" v="4b69d21bf964a52042b62be3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="16" lat="51.7522761" lon="-1.2491495">
+  <tag k="name" v="The High Table"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Classic and modern dishes and daily menus served in a sleek contemporary restaurant and chic bar."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4bb89453cf2fc9b658a19f02"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="19" lat="51.7516581" lon="-1.2634625">
+  <tag k="name" v="Oxford Castle - Unlocked"/>
+  <tag k="augox_category" v="1"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="900-year old castle/prison with costumed guides and a tower boasting broad panoramas of the city."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="OxfordCastle"/>
+  <tag k="augox_foursquareid" v="4b8e8badf964a520f32733e3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="18" lat="51.7512842" lon="-1.2620475">
+  <tag k="name" v="La Tasca"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="La Tasca Oxford is an authentic Spanish tapas restaurant, situated inside Oxford Castle. This used to be a prison, many years ago, and was then reopened in 2006, by Queen Elizabeth II, as an attractive place for those who love Oxford. They are also very close to Westgate shopping centre, numerous car parks and just five minutes’ walk from the main train station."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="LaTasca"/>
+  <tag k="augox_foursquareid" v="4b53141cf964a520528e27e3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="21" lat="51.7521347" lon="-1.262214">
+  <tag k="name" v="The Living Room"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="The Living Room forms part of the re-development of the historic Oxford castle heritage site in the centre of Oxford. It remains a firm favourite amongst Oxford's discerning diners and those seeking high quality fresh food and cocktails in a stylish environment."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="livingroom_ox1"/>
+  <tag k="augox_foursquareid" v="4b8a5d38f964a5200f6a32e3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="20" lat="51.7519387" lon="-1.2622709">
+  <tag k="name" v="Prezzo"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Located in the centre of Oxford near the magnificent castle and only minutes away from the main shopping area and rail station.  With its stylish contemporary interior and charming terraced al fresco dining area, Prezzo Oxford is the ideal place to relax in the heart of this historic city."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="love_prezzo"/>
+  <tag k="augox_foursquareid" v="4b5313a7f964a5203d8e27e3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="23" lat="51.7471734" lon="-1.2346056">
+  <tag k="name" v="Red Star Noodle Bar"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Lively Pan-Asian cafe serving ramen, soba, bento and curries at long, communal benches."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4b12c3dff964a520a58d23e3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="22" lat="51.7550003" lon="-1.2510659">
+  <tag k="name" v="Edamamé"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Small, bustling Japanese kitchen serving home-style traditional dishes, with a weekly sushi night."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="edamameoxford"/>
+  <tag k="augox_foursquareid" v="4bd1a9c8b221c9b61ee2d5d0"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="25" lat="51.7497232" lon="-1.2432618">
+  <tag k="name" v="Oxford's Grill"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Turkish/Mediterranean cuisine."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="OxfordsGrill"/>
+  <tag k="augox_foursquareid" v="4f47eba9e4b06a774166fb36"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="24" lat="51.7495301" lon="-1.2427299">
+  <tag k="name" v="Kazbar"/>
+  <tag k="augox_category" v="4"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Spanish/Moroccan tapas dishes served in decor of North African lanterns, kilims and mosaic tables."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4b5362eaf964a520289a27e3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="27" lat="51.7529657" lon="-1.2672836">
+  <tag k="name" v="BamBoo"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Oxford's only Korean restaurant Bamboo is located at the Royal Oxford Hotel ground floor and offers delicious Eastern cuisine. The restaurant can seat up to 100 customers at a time and there is a private room for up to 20 people. English and Continental breakfast is served every day from 7am until 10:30am. Lunch is available between 12pm and 3pm and dinner between 6pm and 10pm (last order)."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="5155e97ce4b0fe49f1153c3b"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="26" lat="51.7486672" lon="-1.2403631">
+  <tag k="name" v="Nando's"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Nando's is a South African casual dining restaurant group originating from the Mozambican–Portuguese community with a Portuguese/Mozambiquan theme.  Founded in 1987, Nando's operates about 1,000 outlets in twenty-four countries on five continents and as of 2012 had sales of $650 million.  Nando's specializes in chicken dishes with either lemon and herb, Mango and Lime, medium, hot, extra hot or extra extra hot Peri-Peri marinades (properly known as Galinha a Africana). In some countries, Nando's has other flavour options such as Mediterranean."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="NandosUK"/>
+  <tag k="augox_foursquareid" v="4b8a7682f964a520ca6d32e3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="29" lat="51.7523327" lon="-1.2560422">
+  <tag k="name" v="The Mitre"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Classic, traditional grill house that serves up half a dozen takes on steak, plus ribs and wings."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4bfaea368f32ef3beefc04aa"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="28" lat="51.7526613" lon="-1.2651527">
+  <tag k="name" v="Las Iguanas"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Las Iguanas is a restaurant trying too hard to be cool serving Brazilian, Mexican and South American food"/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="Iguanasoxford"/>
+  <tag k="augox_foursquareid" v="4bdc60dbfed22d7f3ee257c9"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="31" lat="51.753356" lon="-1.2623797">
+  <tag k="name" v="Zizzi"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Located on busy George Street, Zizzi Oxford is close to the bus and railway stations in the centre of town and in the heart of the theatre and cinema district. The restaurant itself is heavily influenced by local legend C.S. Lewis, writer of one of the most popular books of all time, The Lion, the Witch and the Wardrobe. Silver birch trees referencing the forest scenes from the book and lighting features alluding to the snow drops in Narnia welcome diners. So, whether it's for a business meeting, a family get-together, a party or a romantic meal, the team at Zizzi in Oxford looks forward to your visit."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="WeAreZizzi"/>
+  <tag k="augox_foursquareid" v="4b531323f964a5202d8e27e3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="30" lat="51.7510737" lon="-1.2625799">
+  <tag k="name" v="O3 Gallery"/>
+  <tag k="augox_category" v="1"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="O3 Art Gallery Oxford presents a dynamic programme of selling exhibitions by regional artists, offering the very best contemporary visual and applied arts."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="O3Gallery"/>
+  <tag k="augox_foursquareid" v="4b5c608ef964a5202d2d29e3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="34" lat="51.7474237" lon="-1.2362004">
+  <tag k="name" v="The First Floor"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Large, modern Halal venture with an Indian, Chinese and Thai menu, plus an all-you-can-eat buffet."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="TheFirstFloor"/>
+  <tag k="augox_foursquareid" v="4bc0c03db492d13abacca460"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="35" lat="51.7161396" lon="-1.0917203">
+  <tag k="name" v="Le Manoir aux Quat'Saisons"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Raymond Blanc's luxurious country house restaurant and cookery school, set in landscaped gardens."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="lemanoir"/>
+  <tag k="augox_foursquareid" v=""/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="32" lat="51.7534282" lon="-1.2631468">
+  <tag k="name" v="Yo! Sushi"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Simple, no-frills and spicy Szechuan spot with delivery and takeaway, plus a chef's special menu."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="YOSushi"/>
+  <tag k="augox_foursquareid" v="4b5efb1ff964a520dfa029e3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="33" lat="51.7537627" lon="-1.2605203">
+  <tag k="name" v="Jamie's Italian"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="A stone’s throw from Oxford Playhouse, Jamie’s Italian Oxford showcases an exciting selection of simple, rustic Italian dishes, served in a bustling yet relaxed setting."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="JamiesItalianUK"/>
+  <tag k="augox_foursquareid" v="4b4e2735f964a5202de326e3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="38" lat="51.7532183" lon="-1.2605985">
+  <tag k="name" v="Chutneys Indian Brasserie"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Long-running, casual South Asian restaurant with a long menu and a big choice for vegetarians"/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="535ac2db11d2495b0af460b8"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="39" lat="51.7587992" lon="-1.2612986">
+  <tag k="name" v="Strada"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Strada is a group of contemporary Italian restaurants serving simple, freshly prepared dishes using the finest and freshest ingredients."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="stradatweet"/>
+  <tag k="augox_foursquareid" v="4b891fe7f964a520141e32e3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="36" lat="51.7471058" lon="-1.2351244">
+  <tag k="name" v="Rice Box"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Simple, no-frills and spicy Szechuan spot with delivery and takeaway, plus a chef's special menu."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4b6c317bf964a520b7282ce3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="37" lat="51.7534108" lon="-1.2629992">
+  <tag k="name" v="Giraffe"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="If walking from the station into town centre, you can’t miss them on George St, right opposite the bus station. Pick up a coffee on your way into town, or book their unique round booth for you and up to 5 friends to enjoy dinner and drinks."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="giraffetweet"/>
+  <tag k="augox_foursquareid" v="4b48ce15f964a520cf5726e3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="42" lat="51.7351844" lon="-1.2097043">
+  <tag k="name" v="Dragon Bowl"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Chinese and Japanese take away making freshly cooked hot food for collection and home delivery."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v=""/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="43" lat="51.7585302" lon="-1.2619692">
+  <tag k="name" v="Cafe Rouge"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Café Rouge is a group of French restaurants serving a delicious all-day menu of classic French dishes with a contemporary twist."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="CafeRougeTweet"/>
+  <tag k="augox_foursquareid" v="4b844f7bf964a520f62d31e3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="40" lat="51.7587014" lon="-1.2615525">
+  <tag k="name" v="The Duke of Cambridge"/>
+  <tag k="augox_category" v="4"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Smart bar frequented by students and professionals, with a large cocktail menu and daily happy hour."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="dukebars"/>
+  <tag k="augox_foursquareid" v="4b86c481f964a520d49b31e3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="41" lat="51.7502002" lon="-1.2413849">
+  <tag k="name" v="Qumins"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Smart South Asian-style dining room plus a long menu of conventional and regional dishes."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="QuminsOxford"/>
+  <tag k="augox_foursquareid" v="4bbe493a6a93b7137309ebd2"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="46" lat="51.7585885" lon="-1.2618529">
+  <tag k="name" v="Al-Andalus"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Tile-floored, warmly-decorated tapas joint, with sangria, a garden and weekend flamenco dancers."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4b802dfef964a520ca5930e3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="44" lat="51.7586197" lon="-1.2615518">
+  <tag k="name" v="Angels"/>
+  <tag k="augox_category" v="4"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Ask Angels' bartenders to talk you through their cocktail menu - from the vintage flavours that charmed taste buds in the roaring 20s to the modern classics which no good cocktail menu should be without. As you journey through the menu, be sure to stop at the Angels' Lab to try the drinks created by their own bartenders."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4b7077e3f964a5204c1c2de3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="45" lat="51.7586217" lon="-1.2617617">
+  <tag k="name" v="Pierre Victoire"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Relaxed, candlelit French bistro with wooden furniture, fresh flowers and fixed-price menu options."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4b7077e3f964a5204c1c2de3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="51" lat="51.7472581" lon="-1.2348712">
+  <tag k="name" v="Oxford Thai"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Excellent value Thai restaurant, The Oxford Thai Restaurant serves authentic Thai dishes."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v=""/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="50" lat="51.7169416" lon="-1.2246114">
+  <tag k="name" v="SAE Institute"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Delivering creative media courses since 1976. SAE Institute is where a career in Sound / Audio Engineering, Music Production, Digital Filmmaking, Web Development, 3D / Interactive Animation and Games Programming begins."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="SAEOxford"/>
+  <tag k="augox_foursquareid" v="4bf286a49319a5937604cb51"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="49" lat="51.7460693" lon="-1.2318511">
+  <tag k="name" v="Dil Dunia"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="The Dil Dunia restaurant has been around a while, in fact it’s been in the Oxford area since 1956 and is now situated down the Cowley road in Oxford, a true hot-spot for Indian restaurants.  Dil Dunia is not your average Indian however, because the menu features both Indian and Nepalese cuisine and some fusions of the two, offering a unique and interesting dining experience.  The restaurant is open 7 days a week, and also operate a take-away service and a Sunday banquet. Dil Dunia claim their dishes to be free from artificial colourings."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4b86dd75f964a52098a231e3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="48" lat="51.7460304" lon="-1.2317648">
+  <tag k="name" v="blanco"/>
+  <tag k="augox_category" v="4"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Obscure bar, club & local fringe theatre far from the centre."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="5258ae5d11d2f84dcc3e5d58"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="55" lat="51.7503524" lon="-1.2418242">
+  <tag k="name" v="Pink Giraffe"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Traditional Chinese spot known for its vegetarian and vegan dishes and soya-based meat alternatives."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4bc8a9130050b713f3dcba3b"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="54" lat="51.7461907" lon="-1.2328473">
+  <tag k="name" v="Bar Aroma"/>
+  <tag k="augox_category" v="4"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Established in 2004 Bar Aroma has gone through 2 refurbishments including recent extension adding an outdoor heated garden offering a comfortable surrounding convenient for smokers and also shisha.  There is seating to suit your needs, big enough for party bookings, or just a romantic cocktail for two. You can enjoy alongside one of their many new cocktails, in an extensive list that caters to all tastes. "/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="BAR_AROMA"/>
+  <tag k="augox_foursquareid" v="4ba961abf964a5205e233ae3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="53" lat="51.7465946" lon="-1.2337144">
+  <tag k="name" v="Verde"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="An Oxford-based family-run business, passionate about running their Italian restaurant with locally sourced food and providing a dedicated service."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="VerdeOxford"/>
+  <tag k="augox_foursquareid" v="4c56b494b7a31b8d187a4eda"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="52" lat="51.7470685" lon="-1.2350217">
+  <tag k="name" v="Cafe Nour"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Formerly Café Nour. Lebanese and Moroccan fusion cuisine, plus shisha. Loads of vegetarian options."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4b6c9b01f964a52004462ce3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="59" lat="51.764549" lon="-1.2618701">
+  <tag k="name" v="Luna Caprese"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Located in heart of central North Oxford, Luna Caprese is renowned for serving authentic Italian food full of flavour in a vibrant, warm and friendly atmosphere, by people who have a passion for food and service since 1962."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4e4175fad164f2d277c34774"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="58" lat="51.7478424" lon="-1.2367043">
+  <tag k="name" v="Mirch Masala"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Fully-licensed Indian eatery serving kormas, rogans and biryanis, plus an all-you-can-eat buffet."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="mirchmasalaOXF"/>
+  <tag k="augox_foursquareid" v="4b5f48f1f964a520f4b129e3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="57" lat="51.7489169" lon="-1.2411098">
+  <tag k="name" v="Hi-Lo"/>
+  <tag k="augox_category" v="4"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="The Hi-Lo Jamaican Eating House opened in Oxford in 1981. Still in the same hands, the Hi-Lo has become a well established part of the Oxford scene and is one of the oldest restaurants in the city."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4c097c11bbc676b04b4a48d5"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="56" lat="51.7506524" lon="-1.2401494">
+  <tag k="name" v="Thai Orchid"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="East Oxford restaurant Thai Orchid Restaurant serves a vast range delicious, authentic Thai dishes. The relaxed and friendly atmosphere is complemented by the restaurant interior is stylish with orange trees, plants and Thai works of art."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4c54751c06901b8d8866d74b"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="63" lat="51.7533992" lon="-1.2628177">
+  <tag k="name" v="Cafe Opium"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Serving food from all over China, claiming to be committed to using the freshest and best quality ingredients in all their dishes"/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4c027bc79a7920a18b75ce79"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="62" lat="51.7469523" lon="-1.1371567">
+  <tag k="name" v="Cinnamons"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="An Indian Restaurant claiming to cook using healthy methods of cooking and the finest, freshest ingredients"/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4fa59e3fe4b0baf7cd7cdf2d"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="61" lat="51.7521886" lon="-1.256756">
+  <tag k="name" v="Pizza Hut"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Pizza Hut is an American restaurant chain and international franchise that offers different styles of pizza along with side dishes including salad, pasta, buffalo wings, breadsticks, garlic bread and desserts."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="pizzahut"/>
+  <tag k="augox_foursquareid" v="4d0a168c64716ea86d22de10"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="60" lat="51.7645467" lon="-1.2622526">
+  <tag k="name" v="Chez Gaston"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Pancake restaurant. This is a nice cosy little cafe-restaurant which specialises in crepes and galettes with a few other options. They do all-buckwheat galettes, though you need to check the fillings are gluten-free. Wheelchairs accommodated by arrangement"/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4bf7db634a67c928363d24cf"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="68" lat="51.7488889" lon="-1.240998">
+  <tag k="name" v="Door 74"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Try to use locally sourced/in season free range and organic produce.  Also open for coffee, drinks, daily lunch specials and weekend brunch.  Private dining area available for hire"/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="door74oxford"/>
+  <tag k="augox_foursquareid" v="4bf811265efe2d7fac076a34"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="69" lat="51.7503035" lon="-1.2435634">
+  <tag k="name" v="Clems"/>
+  <tag k="augox_category" v="4"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Oxford Student Bar & Club on Cowley road"/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="clemsBar"/>
+  <tag k="augox_foursquareid" v="4f403c3ee4b062d5cb6f2406"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="70" lat="51.7464715" lon="-1.2334025">
+  <tag k="name" v="Jaipur"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Indian restaurant opposite Manzil Way, noted for its friendly service (formerly Jaipur). Does takeaway with a 15 per cent discount on collection. Also delivery service throughout lunch time."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4bd1f32c41b9ef3bc0fcfce5"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="71" lat="51.7755783" lon="-1.2639213">
+  <tag k="name" v="Saffron"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Indian restaurant with sleek contemporary decor, a low-key vibe and chef's speciality menu options."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4d56e6d2e7f1a1cd0abf0ca5"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="64" lat="51.7533701" lon="-1.2625352">
+  <tag k="name" v="Pizza Hut"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Pizza Hut is an American restaurant chain and international franchise that offers different styles of pizza along with side dishes including salad, pasta, buffalo wings, breadsticks, garlic bread and desserts."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="pizzahut"/>
+  <tag k="augox_foursquareid" v="4b603d98f964a52078db29e3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="65" lat="51.7538069" lon="-1.2612334">
+  <tag k="name" v="Angrid Thai"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Thai restaurant on Gloucester Green."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4bfeb89ae584c928d9206d25"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="66" lat="51.7536283" lon="-1.2600029">
+  <tag k="name" v="Peninsula"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Situated close to The Apollo, Oxford, The Peninsula restauramnt on George Street is visited by many celebraties who perform at the Oxford theatre. Exquisite Chinese food is served at this fine restaurant."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v=""/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="67" lat="51.7647503" lon="-1.261534">
+  <tag k="name" v="Jee Saheb"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Restaurant in North Parade serving Asian cuisine."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4bdb2dd363c5c9b6c8b52668"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="76" lat="51.7538971" lon="-1.2596433">
+  <tag k="name" v="Bella Italia"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Bella Italia is a group of traditional Italian restaurants offering a broad, family-friendly menu of pizzas, pastas, salads and meat and fish mains."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="Big_Bella"/>
+  <tag k="augox_foursquareid" v="4b53108ff964a520df8d27e3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="77" lat="51.7579867" lon="-1.2637336">
+  <tag k="name" v="Sugar Brown"/>
+  <tag k="augox_category" v="4"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Sugar Brown is Jericho's most chilled venue, perfectly located at the Walton Street end of Little Clarendon, serving a selection of mediterranean pizzas and salads, wines and spirits.  Enjoy a relaxing drink in the lower lounge, out on the patio underneath the stars or by the bar, grooving the night away to chilled beats till late."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4d6bd1907e3eba7a5a2bf74c"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="78" lat="51.7580796" lon="-1.2637446">
+  <tag k="name" v="Raoul's"/>
+  <tag k="augox_category" v="4"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Dimly-lit, intimate lounge bar on 2 floors, known for its huge cocktail menu and late-night buzz."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="RaoulsBarOxford"/>
+  <tag k="augox_foursquareid" v="4b6c70dcf964a5205a3a2ce3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="79" lat="51.7781886" lon="-1.2672867">
+  <tag k="name" v="Oxford Wine Cafe"/>
+  <tag k="augox_category" v="4"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Providing regular informal tasting events taking place on the premises, they bring the best wine from all over the world"/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="OxfordWineCafe"/>
+  <tag k="augox_foursquareid" v="5108d3e0067da2d018ba7040"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="72" lat="51.7778232" lon="-1.2647155">
+  <tag k="name" v="Joe's"/>
+  <tag k="augox_category" v="4"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Open everyday for breakfast, lunch, dinner & cocktails, from 9.30am till late.  Try their delicious menu, with favourites like Deep fried brie with cranberry dip, smoked haddock kedgeree, BBQ ribs, burgers and much more...."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4c1383a8a1010f47c0b04a18"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="74" lat="51.7767389" lon="-1.264906">
+  <tag k="name" v="Florios"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Pizzeria proud of their family-friendly atmosphere with both British and Italian dishes."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v=""/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="75" lat="51.753761" lon="-1.2594773">
+  <tag k="name" v="ASK Italian"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="ASK Italian offers Italian cuisine in a fun and relaxing environment. Book a table, read the menus and find out more about the man behind it all: Theo Randall."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="ASKItalian"/>
+  <tag k="augox_foursquareid" v="4be6faf0d4f7c9b646492720"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="85" lat="51.7785431" lon="-1.2664185">
+  <tag k="name" v="Cibo!"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Homemade pasta and pizza, fresh tasting Italian dishes and their own live yeast (as an attraction)"/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4ce7c35a678aa093274be4ea"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="84" lat="51.7760508" lon="-1.2645982">
+  <tag k="name" v="XI'AN"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Serves a wide selection of Chinese cuisine in the North of Oxford, eat in or take away"/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4c0015e037850f476cb4973f"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="87" lat="51.792944" lon="-1.2849692">
+  <tag k="name" v="Trax Motor Project"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="TRAX works with 13 - 19 year olds who are interested in mechanics, offering a variety of mechanics-based programmes, as well as catering and hospitality"/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v=""/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="86" lat="51.7778952" lon="-1.2653188">
+  <tag k="name" v="LB's"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="A Summertown restaurant speicalising in Lebanese cuisine, freshly prepared daily, who also provide catering for parties, weddings etc. - collect or deliver"/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4c4ed24bea24c9b62d554c16"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="81" lat="51.7805393" lon="-1.2664859">
+  <tag k="name" v="Dancing Dragon"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Cheap and cheerful eat-as-much-as-you-like Chinese buffet restaurant with entertainment and karaoke on request, as well as takeaway and outside catering.  Children under 120cm pay half price."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4bb1de77f964a5207da73ce3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="80" lat="51.7784649" lon="-1.2667269">
+  <tag k="name" v="Portabello"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="You’ll find Portabello Restaurant and Bar located in the heart of Summertown, North Oxford. Nestled amongst restaurants, bars, boutiques, galleries and the theatre on South Parade it has a menu is geared to serving modern British cuisine in casual and relaxed surroundings."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4bcf102968f976b02df56683"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="83" lat="51.77594" lon="-1.2645584">
+  <tag k="name" v="Spice Lounge"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Pan-Indian dishes served in a serene, contemporary dining room and on an outside terrace."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="SpiceLoungeOx"/>
+  <tag k="augox_foursquareid" v="4b748378f964a52028e12de3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="82" lat="51.7785088" lon="-1.266073">
+  <tag k="name" v="Hong Kong House"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Simple Chinese restaurant in the north of Oxford"/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4bae0cbef964a5209b7e3be3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="93" lat="51.7483875" lon="-1.2353717">
+  <tag k="name" v="The Union"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="The world's most famous debating society, situated in the heart of Oxford University."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="OxfordUnion"/>
+  <tag k="augox_foursquareid" v="4b732a7ff964a5205e9f2de3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="92" lat="51.748982" lon="-1.2413967">
+  <tag k="name" v="Cafe Tarifa"/>
+  <tag k="augox_category" v="4"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Moroccan-style bar with occasional live music."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="cafe_tarifa"/>
+  <tag k="augox_foursquareid" v="4b5deca6f964a520157429e3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="95" lat="51.7531836" lon="-1.266041">
+  <tag k="name" v="Sojo"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v=Spicy, rustic Szechuan, Shanghainese and Cantonese dishes served in a buzzy, modern dining room.""/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4b55b5bbf964a520c0ec27e3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="94" lat="51.7535234" lon="-1.2590876">
+  <tag k="name" v="The Nosebag"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="One of Oxford's longest-established independent restaurants specialising in piping hot, filling soups, homemade casseroles, a selection of cakes and, they claim, a good range of vegetarian options"/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4b794f3bf964a52055f32ee3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="89" lat="51.7524911" lon="-1.2532889">
+  <tag k="name" v="Quod"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Upmarket hotel venue decorated with young British art, serving a familiar all-day brasserie menu."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4b3b4fddf964a5205e7225e3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="88" lat="51.7579291" lon="-1.2605834">
+  <tag k="name" v="Software Engineering Centre"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v=""/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4bf00b7e70779521c8523e7c"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="91" lat="51.748249" lon="-1.238934">
+  <tag k="name" v="Majliss"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Indian and Bengali dishes in a smart dining room with leather furniture and recessed lighting."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4b59fc44f964a520d2a528e3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="90" lat="51.7413442" lon="-1.230185">
+  <tag k="name" v="Everest Nepalese"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="It is their aim to bring Oxford the best of Nepalese cuisine, taking pride in using fresh ingredients to make their simply spiced, authentic dishes."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4bcf5d32046076b0aa2a6e71"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="102" lat="51.7513641" lon="-1.2973512">
+  <tag k="name" v="Bilash"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Bilash in central Carterton is proud to serve wholesome and unpretentious Indian food as a shared dining experience."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v=""/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="103" lat="51.7520765" lon="-1.2564624">
+  <tag k="name" v="At Thai"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Thai food upstairs on Oxford's High Street. Wheelchair friendly. Wifi access available."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4b631c09f964a520bc632ae3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="100" lat="51.7484395" lon="-1.2393355">
+  <tag k="name" v="Taberu Sushi Bento Ramen"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Based in Cowley road providing Japanese food, specialising in sushi, bento and ramen, a la carte or take away."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="5259389411d2ad1a5dc18f10"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="101" lat="51.7518707" lon="-1.2564534">
+  <tag k="name" v="Chiang Mai Kitchen"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Chiang Mai Kitchen was opened in 1993 with the aim of providing delicious, authentic Thai food in a beautiful and unique historical setting."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4b7d96a8f964a52073c82fe3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="98" lat="51.7518985" lon="-1.254731">
+  <tag k="name" v="Baby Love Bar"/>
+  <tag k="augox_category" v="4"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Trendy venue for cocktails and an eclectic soundtrack of pop, drum and bass, indie and electro.  Recently changed location.  Long live the glorious Baby Love and all its happy memories"/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4b847c02f964a520313831e3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="99" lat="51.7512625" lon="-1.2976631">
+  <tag k="name" v="Tong San"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Among the takeaways to be found in Botley is Tong San at 20 The Square. Tong Sanproduces a full range of takeaway food all day long."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v=""/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="96" lat="51.7535887" lon="-1.2605604">
+  <tag k="name" v="Byron"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Proper hamburgers with good Scottish beef with a good craft beer."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="byronhamburgers"/>
+  <tag k="augox_foursquareid" v="4f4c73ec771640e0662b7094"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="97" lat="51.7425113" lon="-1.2349154">
+  <tag k="name" v="Oli's Thai"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="A Thai cafe and shop on Magdalen Rd in Oxford.  Food is available between 12 and 2.30 at lunchtimes, and 5 and 9.30 in the evenings."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="olisthai"/>
+  <tag k="augox_foursquareid" v="5235bc8211d26b39eb845d51"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="110" lat="51.7816908" lon="-1.3743445">
+  <tag k="name" v="SnaX"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v=""/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v=""/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="111" lat="51.7610843" lon="-1.2674011">
+  <tag k="name" v="Mamma Mia Pizzeria"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Mouth-watering Italian food. Delicious Antipasti, pizzas ranging from the classic Marguerita to their own pizza Mamma Mia, and pasta with sauces or al forno.  Fixed-price lunch for £6.95, party menu and take away available"/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4bbc674451b89c748557872a"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="108" lat="51.7828689" lon="-1.3704765">
+  <tag k="name" v="Ready Steady Spice"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v=""/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="Readysteadyspic"/>
+  <tag k="augox_foursquareid" v=""/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="109" lat="51.7651766" lon="-1.2535616">
+  <tag k="name" v="Talbot Bar"/>
+  <tag k="augox_category" v="4"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v=""/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v=""/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="106" lat="51.7512971" lon="-1.223759">
+  <tag k="name" v="First Class Cusine"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v=""/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v=""/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="107" lat="51.7804993" lon="-1.3736067">
+  <tag k="name" v="Harrisons"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v=""/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v=""/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="104" lat="51.7703909" lon="-1.2589225">
+  <tag k="name" v="Spires Bar &amp; Restaurant"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v=""/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4b50dd88f964a520f63527e3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="105" lat="51.7846733" lon="-1.377077">
+  <tag k="name" v="Smarts"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v=""/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v=""/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="119" lat="51.755611808695654" lon="-1.252415747826087">
+  <tag k="name" v="Harris Manchester College"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Harris Manchester College is a constituent college of the University of Oxford in the United Kingdom."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4cab7d205a1e95216f228ece"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="118" lat="51.7509813" lon="-1.2624373">
+  <tag k="name" v="The Big Bang"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Traditional British spot serving homemade takes on classic dishes, with regular jazz nights."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="bigbangox"/>
+  <tag k="augox_foursquareid" v="4b7da726f964a52070cc2fe3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="117" lat="51.7556372" lon="-1.2599083">
+  <tag k="name" v="Ashmolean Restaurant"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Fashionable spot above a renowned art museum, serving Modern European dishes with British flavours."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4b76a9e3f964a52020572ee3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="116" lat="51.7462171" lon="-1.2564256">
+  <tag k="name" v="The Folly"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Open for breakfast, brunch, lunch, dinner and drinks, the folly can meet your needs any time of the day. quirky cocktails and a wide selection of wines sit alongside a carefully crafted seasonal menu, whilst music and a late license until the early hours on thursday and friday make the folly the perfect place to start and end the party."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="No1FollyBridge"/>
+  <tag k="augox_foursquareid" v="4e01b68b1495692a4bb9aaa3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="115" lat="51.7517544" lon="-1.25892">
+  <tag k="name" v="Maxwell's"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="American-style eatery/bar with large portions of country-style dishes, such as BBQ ribs and burgers."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="MaxwellsOxford"/>
+  <tag k="augox_foursquareid" v="4b5310fcf964a520ed8d27e3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="114" lat="51.7438594" lon="-1.2315435">
+  <tag k="name" v="Stone Mason House"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="St Cross college accommodation, comprised of 44 single bedrooms, with 8 flats with 4-7 bedrooms each"/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v=""/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="113" lat="51.7539181" lon="-1.2623515">
+  <tag k="name" v="Taylors"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Oxford's own gourmet sandwich and deli company.  an independent, family owned gourmet food emporium and an Oxford institution"/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4c6e71a2f338236a595c0a1b"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="112" lat="51.7784331" lon="-1.2669485">
+  <tag k="name" v="Mamma Mia Pizzeria"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Mouth-watering Italian food. Delicious Antipasti, pizzas ranging from the classic Marguerita to their own pizza Mamma Mia, and pasta with sauces or al forno.  Fixed-price lunch for £6.95, party menu and take away available"/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4bbc674451b89c748557872a"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="127" lat="51.766365900000004" lon="-1.2629585541666666">
+  <tag k="name" v="St Hugh's College"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="St Hugh's College is one of the constituent colleges of the University of Oxford. It is located on a fourteen and a half acre site on St Margaret's Road, to the North of the city centre."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="StHughsCollege"/>
+  <tag k="augox_foursquareid" v="4c22c39d34faef3ba0b6586d"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="126" lat="51.7609589" lon="-1.2672241">
+  <tag k="name" v="Manos"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v=""/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4b6ac687f964a520bedf2be3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="125" lat="51.749570299999995" lon="-1.1295397562499998">
+  <tag k="name" v="Oxford Brookes University, Wheatley Campus"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v=""/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="oxford_brookes"/>
+  <tag k="augox_foursquareid" v=""/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="124" lat="51.75439590833334" lon="-1.2243405541666665">
+  <tag k="name" v="Oxford Brookes University Gipsy Lane Site"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v=""/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="oxford_brookes"/>
+  <tag k="augox_foursquareid" v=""/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="123" lat="51.75553504166666" lon="-1.2298248999999999">
+  <tag k="name" v="Oxford Brookes University Headington Hill Site"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v=""/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="oxford_brookes"/>
+  <tag k="augox_foursquareid" v="4c20d5ba4889a593eaf92620"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="122" lat="51.75247556551722" lon="-1.2154729620689655">
+  <tag k="name" v="Old Road Campus, University of Oxford"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v=""/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v=""/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="121" lat="51.755982729166675" lon="-1.2448053166666664">
+  <tag k="name" v="St Catherine's College"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="St Catherine's College is one of the constituent colleges of the University of Oxford in England. Its motto is Nova et Vetera, which translates as: "the new and the old"."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="St_Catz"/>
+  <tag k="augox_foursquareid" v="4b52efa4f964a520f18a27e3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="120" lat="51.75646578" lon="-1.2608209000000001">
+  <tag k="name" v="St Cross College"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="St Cross College is a constituent college of the University of Oxford in England. It is an all-graduate college with traditional-style buildings on a central site in St Giles', just south of Pusey Street."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="StCrossCollege"/>
+  <tag k="augox_foursquareid" v="4c7e6ca3b33a224be7d7da81"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="137" lat="51.758640069230786" lon="-1.2580029307692309">
+  <tag k="name" v="Keble College"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Keble College is one of the constituent colleges of the University of Oxford in England. Its main buildings are on Parks Road, opposite the University Museum and the University Parks."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="Keble_JCR"/>
+  <tag k="augox_foursquareid" v="4b6703e6f964a52031352be3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="136" lat="51.75276841333333" lon="-1.2623671066666668">
+  <tag k="name" v="Nuffield College"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Nuffield College is one of the constituent colleges of the University of Oxford in England. It is a graduate college and specialises in the social sciences, particularly economics, politics and sociology"/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="NuffieldCollege"/>
+  <tag k="augox_foursquareid" v="4bd590fa7b1876b018e68a86"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="139" lat="51.75288619347826" lon="-1.2550153543478257">
+  <tag k="name" v="Brasenose College"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Brasenose College is one of the constituent colleges of the University of Oxford in the United Kingdom. It was founded in 1509, with the College library and current chapel added in the mid-seventeenth century."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="BNC_Members"/>
+  <tag k="augox_foursquareid" v="4b9b9c94f964a5207c1336e3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="138" lat="51.753311312000015" lon="-1.251433112">
+  <tag k="name" v="The Queen's College"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="The Queen's College is a constituent college of the University of Oxford, England. The college was founded in 1341 by Robert de Eglesfield in honour of Queen Philippa of Hainault."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="QCJCR"/>
+  <tag k="augox_foursquareid" v="4b1ed14cf964a520ff1f24e3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="141" lat="51.7533983909091" lon="-1.2571888909090907">
+  <tag k="name" v="Jesus College"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Jesus College is one of the colleges of the University of Oxford in England. It is in the centre of the city, on a site between Turl Street, Ship Street, Cornmarket Street and Market Street."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="JesusAlumni"/>
+  <tag k="augox_foursquareid" v="4b572888f964a520b32828e3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="140" lat="51.75282913469389" lon="-1.2553691836734693">
+  <tag k="name" v="Lincoln College"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Lincoln College is one of the constituent colleges of the University of Oxford in the United Kingdom. Lincoln was founded in 1427 by Richard Fleming, then Bishop of Lincoln. It is the ninth oldest of Oxford University's colleges."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="LincolnAlumni"/>
+  <tag k="augox_foursquareid" v="4b228a82f964a520ae4824e3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="143" lat="51.75881723571429" lon="-1.2544679285714284">
+  <tag k="name" v="Science Area"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="The Science Area in Oxford, England, is where most of the science departments at Oxford University are located. The main part of the Science Area is located to the south of the University Parks and to the north of South Parks Road, bounded by Parks Road to the west. Some departments are also located south of South Parks Road. Close by to the northwest, further departments are located in a triangle of land bounded by the Banbury Road to the west, Keble Road to the south, and Parks Road to the northeast, opposite the University Parks."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4fbae8bce4b0f1ce5b70f2da"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="142" lat="51.753889949999994" lon="-1.2555249714285712">
+  <tag k="name" v="Exeter College"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Exeter College is one of the constituent colleges of the University of Oxford in England and the fourth oldest college of the University."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="ExeterCollegeOx"/>
+  <tag k="augox_foursquareid" v="4b87423af964a52001b931e3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="129" lat="51.755588146428565" lon="-1.2666529571428573">
+  <tag k="name" v="Worcester College"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Worcester College is one of the constituent colleges of the University of Oxford in England. The college was founded in 1714 by the benefaction of Sir Thomas Cookes, a Worcestershire baronet, with the college gaining its name from the county of Worcestershire. Its predecessor, Gloucester College, had been an institution of learning on the same site since the late 13th century until the Dissolution of the Monasteries in 1539."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4b61bb4ff964a520431f2ae3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="128" lat="51.751818318181805" lon="-1.2538203757575757">
+  <tag k="name" v="Oriel College"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Oriel College is a constituent college of the University of Oxford in Oxford, England. Located in Oriel Square, the college has the distinction of being the oldest royal foundation in Oxford."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="OrielOxford"/>
+  <tag k="augox_foursquareid" v="4b72cddaf964a52076892de3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="131" lat="51.748668432" lon="-1.2457039600000002">
+  <tag k="name" v="St Hilda's College"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="St Hilda's College is one of the constituent colleges of the University of Oxford in England. The college was founded in 1893 as a hall for women, and remained an all-women's college until 2008."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="StHildasCollege"/>
+  <tag k="augox_foursquareid" v="4c48acbc19fde21ed0780c76"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="130" lat="51.759365159999994" lon="-1.24965168">
+  <tag k="name" v="Linacre College"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Linacre College is a constituent college of the University of Oxford in the UK whose members comprise fellows and postgraduate students."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="LinacreCollege"/>
+  <tag k="augox_foursquareid" v="4b4a3fc2f964a520b18026e3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="133" lat="51.76346259230768" lon="-1.2628281230769232">
+  <tag k="name" v="St Antony's College"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="St Antony's College is one of the constituent colleges of the University of Oxford in England. Founded in 1950 as the result of the gift of French merchant Sir Antonin Besse of Aden, St Antony's is one of the most cosmopolitan of the University of Oxford's colleges and is considered to be a centre of excellence for study and research in the fields of international relations, economics,politics, and area studies."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="StAntsCollege"/>
+  <tag k="augox_foursquareid" v="4b6cb3c8f964a520804d2ce3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="132" lat="51.750837628571425" lon="-1.243169942857143">
+  <tag k="name" v="Florey Building"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="The Florey Building is an excellent choice for groups and parties who wish to stay in Oxford and take advantage of all that the city has to offer, but are on a limited budget. The building has 76 rooms over four floors. Two rooms on each of the first, second and third floors can made into twin rooms. The top floor of the building has 18 rooms which have a mezzanine level and can also be made into twin rooms. There is a dining/common room on the lower ground floor where a Continental breakfast can be served, and a small garden at ground floor level. The common room can also be used for meetings. The building is a famous example of James Stirling’s architecture, after whom the annual Stirling Prize for architecture is named."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v=""/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="135" lat="51.75437345294116" lon="-1.2535473745098038">
+  <tag k="name" v="Hertford College"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Hertford College is a constituent college of the University of Oxford in England. It is located on Catte Street in the centre of Oxford, directly opposite the main gate to the Bodleian Library."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="HertfordCollege"/>
+  <tag k="augox_foursquareid" v="4c2c9a0b721695210d617f8f"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="134" lat="51.761895689999996" lon="-1.2615221699999999">
+  <tag k="name" v="St Anne's College"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="St Anne's College is one of the constituent colleges of the University of Oxford in England. Formerly a women's college, it has been coeducational since 1979."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="StAnnesCollege"/>
+  <tag k="augox_foursquareid" v="4b6c7dc2f964a520693e2ce3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="152" lat="51.75249555833335" lon="-1.261259825">
+  <tag k="name" v="St Peter's College"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="St Peter's College is one of the constituent colleges of the University of Oxford, Oxford, United Kingdom, located in New Inn Hall Street. It occupies the site of two of the University's oldest Inns, both of which were founded in the 13th century."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="SPC_Alumni"/>
+  <tag k="augox_foursquareid" v="4cc070d0611abfb70387a605"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="153" lat="51.7438812" lon="-1.2403680400000001">
+  <tag k="name" v="Greyfriars"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Greyfriars Hall, situated on the Iffley Road in East Oxford, was one of the smallest constituent Halls of the University of Oxford in England. Its previous status as a Permanent Private Hall (PPH) referred to the fact that it was governed by an outside institution (the Order of Friars Minor Capuchin, a Franciscan Order), rather than by its fellows as is a College. Greyfriars had one of the most distinctive buildings in Oxford; it is the only flint-stone Norman-style building in the city, and its green spire is prominently visible along the Iffley Road and from the University's Roger Bannister running track."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="5016874fe4b0f16434543217"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="154" lat="51.75719314444444" lon="-1.2530793722222224">
+  <tag k="name" v="Mansfield College"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Mansfield College, Oxford is one of the constituent colleges of the University of Oxford in England. As of December 2012, the college comprises 214 undergraduates, 102 graduates, 36 visiting students and 58 fellows and academics."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="MansfieldOxford"/>
+  <tag k="augox_foursquareid" v="4be468ce2468c928eabbfe42"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="155" lat="51.75863633214285" lon="-1.2557061571428572">
+  <tag k="name" v="Oxford University Museum of Natural History"/>
+  <tag k="augox_category" v="1"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="The Oxford University Museum of Natural History, sometimes known simply as the Oxford University Museum, is a museumdisplaying many of the University of Oxford's natural history specimens, located on Parks Road in Oxford, England. It also contains alecture theatre which is used by the University's chemistry, zoology and mathematics departments. The University Museum provides the only access into the adjoining Pitt Rivers Museum."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="morethanadodo"/>
+  <tag k="augox_foursquareid" v="4bdd821e4ffaa593d98e6ff7"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="156" lat="51.75615775714285" lon="-1.2640903428571428">
+  <tag k="name" v="Walton Street, Exeter College"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Exeter College is one of the constituent colleges of the University of Oxford in England and the fourth oldest college of the University."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="ExeterCollegeOx"/>
+  <tag k="augox_foursquareid" v=""/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="157" lat="51.7500732375" lon="-1.2652111999999998">
+  <tag k="name" v="Oxford and Cherwell Valley College"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Based in Oxford, it runs schools, further education colleges and work-based training across Oxfordshire and Berkshire, and delivers higher-education and international study programmes too."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4ba60fa5f964a520003139e3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="158" lat="51.75002085" lon="-1.2713467166666665">
+  <tag k="name" v="Bellerby's College"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Bellerbys College is a series of four colleges for international students based in the UK (Oxford, Cambridge, London and Brighton), and owned by Study Group International who also operate language schools under the name Embassy. Bellerbys College is coeducational, and teaches students from over 120 different countries."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="bellerbys"/>
+  <tag k="augox_foursquareid" v="4d590c00c88da1cdc8733568"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="159" lat="51.760910207692305" lon="-1.2611785384615384">
+  <tag k="name" v="Keble College Acland Site"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="The Acland site occupies the space between the new University Humanities Quarter and the Science & Engineering Area with its complex of laboratories and departments. This area of Oxford just to the north of the city centre has become the epicentre of the 21st century University. Less than five minutes’ walk from the main College, those living and working in the new facilities are fully integrated into the life of Keble."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="KebleAlumni"/>
+  <tag k="augox_foursquareid" v="4b6703e6f964a52031352be3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="144" lat="51.760716800000004" lon="-1.25939160625">
+  <tag k="name" v="Keble Triangle"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="The Keble Triangle and South Parks Science Area are two sites with approximately 24.2 acres, and have almost a million square feet of built space. There is a conservation area surrounding the South Parks Science Area, including the University Museum, Library and Observatory. The conservation area lies east and south of the Keble Triangle. This 50 year masterplan has been developed to maximise the quality and quantity of the scientific research facilities at Oxford University, helping them maintain their lead in the research community."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v=""/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="145" lat="51.76383476363637" lon="-1.260108309090909">
+  <tag k="name" v="Kellogg College"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Kellogg College is Oxford's 36th college and was founded with financial assistance from the W.K. Kellogg Foundation. It is one of the largest and most international graduate constituent colleges of the University of Oxford in England."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="KelloggOx"/>
+  <tag k="augox_foursquareid" v="4bf198f0324cc9b6043acc92"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="146" lat="51.74059390000001" lon="-1.2931507733333334">
+  <tag k="name" v="Oxford Brookes University (Harcourt Hill Campus)"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Oxford Brookes University’s Harcourt Hill Campus is home to the Westminster Institute of Education. Harcourt Hill Campus is located 10 minutes to the west of Oxford city centre. Harcourt Hill is an attractive 110 acre campus which overlooks the wider city, it provides a unique learning experience and offers the beneﬁts of a complete community on one site, such as its own sports centre and Student Union bar. The campus is linked to the University’s other campuses at Headington and Wheatley by a regular bus service which runs via the city centre."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="oxford_brookes"/>
+  <tag k="augox_foursquareid" v=""/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="147" lat="51.754249144444444" lon="-1.255441022222222">
+  <tag k="name" v="Museum of the History of Science"/>
+  <tag k="augox_category" v="1"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="The Museum of the History of Science, located in Broad Street, Oxford, England, is home to a leading collection of scientific instruments from medieval times to the 17th century."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="MHSOxford"/>
+  <tag k="augox_foursquareid" v="4b1e6130f964a520631924e3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="148" lat="51.756001516666664" lon="-1.2604060333333333">
+  <tag k="name" v="Blackfriars"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Blackfriars, Oxford is a Permanent Private Hall of the University of Oxford. Blackfriars houses three distinct institutions: the Priory of the Holy Spirit, the religious house of the friars, whose current prior is John O'Connor; Blackfriars Studium, the centre of theological studies of the English Province of the Dominican Friars (although it numbers members of other orders and lay people among its students and lecturers); and Blackfriars Hall, one of the constituent educational institutions of the University of Oxford. The current Regent of both the Hall and Studium is Fr Simon Gaine. The name Blackfriars is commonly used to denote a house of the Dominican Friars in England."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="BlackfriarsHall"/>
+  <tag k="augox_foursquareid" v="4c76c952a5676dcb5f9a1621"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="149" lat="51.7610467" lon="-1.2633300125">
+  <tag k="name" v="Green Templeton College"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Green Templeton College is a constituent college of the University of Oxford in the United Kingdom. It is the university's newest college having come into existence on 1 October 2008 from the merger of Green College and Templeton College"/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4ba8b2dbf964a520e9e739e3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="150" lat="51.75508959583333" lon="-1.2497021958333334">
+  <tag k="name" v="Holywell Buildings"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="The Holywell Buildings are located in central Oxford, England. It currently houses the majority of Balliol College's postgraduate population. It is on the corner of St Cross Road and Manor Road, next to St Cross Church, which has become the College Historic Collections Centre."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4c6e18e44d24b60c45f6d7d8"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="151" lat="51.72065416470588" lon="-1.1997643176470592">
+  <tag k="name" v="Oxford &amp; Cherwell Valley College"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Based in Oxford, it runs schools, further education colleges and work-based training across Oxfordshire and Berkshire, and delivers higher-education and international study programmes too."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4ba60fa5f964a520003139e3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="171" lat="51.76009528000001" lon="-1.26638288">
+  <tag k="name" v="Loch Fyne"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v=""/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4b92ca67f964a5200c1c34e3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="170" lat="51.756954300000004" lon="-1.2606669399999997">
+  <tag k="name" v="Regents Park College"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Regent's Park College is a Permanent Private Hall of the University of Oxford, situated in central Oxford, just off St Giles'. Founded in 1810, the College moved to its present site in 1927, and became a licenced Hall of the University in 1957."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="regentsoxford"/>
+  <tag k="augox_foursquareid" v="4dcbb29be4cde609a39dbea2"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="169" lat="51.75867213" lon="-1.25506333">
+  <tag k="name" v="Pitt Rivers Museum"/>
+  <tag k="augox_category" v="1"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="The Pitt Rivers Museum is a museum displaying the archaeological and anthropological collections of the University of Oxford in Oxford, England.  The museum is located to the east of the Oxford University Museum of Natural History, and can only be accessed through that building.  The museum was founded in 1884 by Lt-General Augustus Pitt Rivers, who donated his collection to the University of Oxford with the condition that a permanent lecturer in anthropology must be appointed. Museum staff are involved in teaching Archaeology and Anthropology at the University even today."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="Pitt_Rivers"/>
+  <tag k="augox_foursquareid" v="5101265b8302126a98a8d171"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="168" lat="51.755754200000005" lon="-1.2503305727272729">
+  <tag k="name" v="Balliol College - Jowett Walk"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Home of Balliol's Sports Feilds, as well as their three newest buildings of accommodation"/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="BalliolOxford"/>
+  <tag k="augox_foursquareid" v="4c095007bbc676b068fc47d5"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="175" lat="51.75337422222222" lon="-1.2528057916666666">
+  <tag k="name" v="All Souls College"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="All Souls College, Oxford is a constituent college of the University of Oxford in England. Unique to All Souls, all of its members automatically become Fellows."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="AllSoulsLibrary"/>
+  <tag k="augox_foursquareid" v="4b92a622f964a520920d34e3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="174" lat="51.76142101666667" lon="-1.2681267666666667">
+  <tag k="name" v="The Bombay"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v=""/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4c4739be1ddec92894af9c32"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="173" lat="51.76084853" lon="-1.2669419899999999">
+  <tag k="name" v="Arzoo Oxford"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Famous curry house for students on nights out, particularly because of its byob policy."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="50560724e4b0e7a97850f47f"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="172" lat="51.76043142857143" lon="-1.2663675285714286">
+  <tag k="name" v="The Standard Tandoori"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Serving authentic Bengali and South Asian food since 1972 in hip Jericho.  Classier than Arzoo's"/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4ca246557f84224b2dfcba58"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="163" lat="51.75191691372549" lon="-1.2511572941176476">
+  <tag k="name" v="University College"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="University College, is a constituent college of the University of Oxford in England. It was founded in 1249. As of 2009 the college had an estimated financial endowment of £110m."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="UnivOxford"/>
+  <tag k="augox_foursquareid" v="4c8b36e752a98cfa153234e9"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="162" lat="51.76090715714286" lon="-1.2676397">
+  <tag k="name" v="Brasserie Blanc"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Brasserie Blanc is the home of simple, hearty French cuisine, proud of their lovingly prepared food, warm welcome and friendly team"/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4ba54a54f964a520c9f638e3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="161" lat="51.76075622222223" lon="-1.266687188888889">
+  <tag k="name" v="Branca"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Vibrant Italian eatery with exposed bricks and a terrace serving small plates and stone-baked pizza."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="brancaoxford"/>
+  <tag k="augox_foursquareid" v="4bad08e9f964a520d3263be3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="160" lat="51.75951265333333" lon="-1.2647773666666668">
+  <tag k="name" v="Freud"/>
+  <tag k="augox_category" v="4"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Freud is a café-bar at 119 Walton Street in Jericho, Oxford, England. The Freud café is located opposite Great Clarendon Street and the Oxford University Press is also opposite to the south."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4bad0f21f964a52065293be3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="167" lat="51.74889625789475" lon="-1.2388445157894734">
+  <tag k="name" v="James Mellon Hall"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Many graduates live in James Mellon Hall, an annexe on Rectory and Cowley Roads around fifteen minutes' walk or less than ten minutes' cycle from the main site of Oriel. These rooms have ensuite bathrooms and share good kitchen facilities."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4c0fcd0dce57c92861d580d2"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="166" lat="51.75054704047621" lon="-1.2537236690476192">
+  <tag k="name" v="Corpus Christi College"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Corpus Christi College is one of the constituent colleges of the University of Oxford in the United Kingdom. Founded in 1517, it is the 12th oldest college in Oxford, with an estimated financial endowment of £58m as of 2006."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="CCCOxfordAccess"/>
+  <tag k="augox_foursquareid" v="4cf3d8478333224bedc6178e"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="165" lat="51.75051820714287" lon="-1.2549993809523805">
+  <tag k="name" v="Christ Church"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Christ Church, is a constituent college of the University of Oxford in England. As well as being a college, Christ Church is also the cathedral church of the diocese of Oxford, namely Christ Church Cathedral, Oxford."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="ChCh_Oxford"/>
+  <tag k="augox_foursquareid" v="4b7ac9d2f964a520d23c2fe3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="164" lat="51.75302867941176" lon="-1.2498953617647057">
+  <tag k="name" v="St Edmund Hall"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="St Edmund Hall is a constituent college of the University of Oxford in England. The college has a claim to be the oldest academical society for the education of undergraduates in any university."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="StEdmundHall"/>
+  <tag k="augox_foursquareid" v="4c8cb76ded3ab60cb1156a21"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="186" lat="51.755663999999996" lon="-1.25796935">
+  <tag k="name" v="Balliol College"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Balliol College, founded in 1263, is one of the constituent colleges of the University of Oxford in England. Among the college's alumni are three former prime ministers, five Nobel laureates, and a number of literary figures and philosophers."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="BalliolOxford"/>
+  <tag k="augox_foursquareid" v="4c095007bbc676b068fc47d5"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="187" lat="51.75793127000001" lon="-1.2609335900000003">
+  <tag k="name" v="St Benet's Hall"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="St Benet's Hall (known colloquially as Benet's) is a Permanent Private Hall (PPH) of the University of Oxford. Established in 1897 by Ampleforth Abbey, it is a Benedictine foundation whose principal historic function was to allow its monks to study for secular degrees as undergraduates within the University. Today, most members of the Hall are not monks, but lay undergraduates. The Hall, which is still owned by Ampleforth Abbey, has a Benedictine and Roman Catholic ethos. However, there is no requirement that members of the Hall should be Catholics."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="StBenetsHallBC"/>
+  <tag k="augox_foursquareid" v="4e393d8562e16ad099efe4ad"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="184" lat="51.75727420735294" lon="-1.2585610500000004">
+  <tag k="name" v="St John's College"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="St John's College is a constituent college of the University of Oxford. It was founded in 1555 by the merchant Sir Thomas White, intended to provide a source of educated Roman Catholic clerics to support the Counter-Reformation under Queen Mary."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="StJohnsOx"/>
+  <tag k="augox_foursquareid" v="4bc6319651b376b000261b6f"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="185" lat="51.7576695" lon="-1.2571593444444444">
+  <tag k="name" v="EPA Science Centre"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="The EPA Centre is owned by Lincoln College and located on Museum Road, 5 minutes from the main College. The Centre is centrally located in the historic city of Oxford, and warmly welcomes guests during the summer vacation."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v=""/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="190" lat="51.7597004" lon="-1.2611275149999999">
+  <tag k="name" v="Language Centre"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Oxford University Language Centre offers language courses"/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4eddf9c3722e1da30670341c"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="191" lat="51.75114091346153" lon="-1.251156425">
+  <tag k="name" v="Merton College"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Merton College (in full: The House or College of Scholars of Merton in the University of Oxford) is one of theconstituent colleges of the University of Oxford in England. Its foundation can be traced back to the 1260s when Walter de Merton, chancellor to Henry III and later to Edward I, first drew up statutes for an independent academic community and established endowments to support it. The important feature of Walter's foundation was that this college was to be self-governing and that the endowments were directly vested in the Warden and Fellows."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="MertonCollege"/>
+  <tag k="augox_foursquareid" v="4ba8e83af964a520eaf839e3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="188" lat="51.759153528571424" lon="-1.2608276428571428">
+  <tag k="name" v="Wok &amp; Roll"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Family-run sit-down and takeaway Asian restaurant with regular specials and a spacious dining area."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4c4c8582bad7a593946262ad"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="189" lat="51.75192465" lon="-1.255083325">
+  <tag k="name" v="Bear Lane Complex"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v=""/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v=""/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="178" lat="51.75570201739131" lon="-1.2537139826086958">
+  <tag k="name" v="Wadham College"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Wadham College is one of the constituent colleges of the University of Oxford in the United Kingdom. It is located in the centre of Oxford, at the intersection of Broad Street and Parks Road."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="wadhamoxford"/>
+  <tag k="augox_foursquareid" v="4bc4c4d7920eb713933e1f2c"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="179" lat="51.75287203846154" lon="-1.2573933076923076">
+  <tag k="name" v="Wagamama"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Wagamama offers fantastic japanese food in a contemporary environment throughout the uk"/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="wagamama_uk"/>
+  <tag k="augox_foursquareid" v="4b4e8e10f964a52040f126e3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="176" lat="51.75555077500002" lon="-1.2481458416666666">
+  <tag k="name" v="St Cross Rd Annexe"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Accommodation for St Cross college.  49 single bedrooms, distributed in 2 flats of three bedrooms, and 9 flats of five bedrooms."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="StCrossCollege"/>
+  <tag k="augox_foursquareid" v=""/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="177" lat="51.759066159999996" lon="-1.26127527">
+  <tag k="name" v="Browns"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Delicious food, a unique atmosphere and a great choice of wines, beers and cocktails."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="BrownsOxford"/>
+  <tag k="augox_foursquareid" v="4b77255ff964a5200f822ee3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="182" lat="51.76272904062498" lon="-1.2599777">
+  <tag k="name" v="Wycliffe Hall"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Wycliffe Hall is a Church of England theological college and a Permanent Private Hall of the University of Oxford in the United Kingdom. The college is named after John Wycliffe, master of Balliol College, Oxford in the 14th century."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="WycliffeFriends"/>
+  <tag k="augox_foursquareid" v="4beac5c0415e20a15667e5bb"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="183" lat="51.75514845333334" lon="-1.2569695755555552">
+  <tag k="name" v="Trinity College"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Trinity College is one of the constituent colleges of the University of Oxford in England. The college was founded in 1555 by Sir Thomas Pope, on land previously occupied by Durham College, home to Benedictine monks from Durham Cathedral."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="TrinityOxford"/>
+  <tag k="augox_foursquareid" v="4b7aada9f964a520d9362fe3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="180" lat="51.815668493333334" lon="-1.2820464666666667">
+  <tag k="name" v="Gurkha Village"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Order delicious Nepalese takeaway food from Gurkha Village in Kidlington; sit back, relax and enjoy your Nepalese food delivered to your door."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4b4e8e10f964a52040f126e3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="181" lat="51.756548939130425" lon="-1.2473676391304347">
+  <tag k="name" v="Holywell Manor"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Holywell Manor is a building in central Oxford, England. It currently houses the majority of Balliol College's postgraduate population."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="BalliolOxford"/>
+  <tag k="augox_foursquareid" v="4da0f4fd9935a093e629966f"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="205" lat="51.753128471681414" lon="-1.2433574672566374">
+  <tag k="name" v="Magdalen College"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Magdalen College is one of the constituent colleges of the University of Oxford in England. As of 2011, the college had an estimated financial endowment of £168.1 million."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="magdalenoxford"/>
+  <tag k="augox_foursquareid" v=""/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="204" lat="51.75287831999999" lon="-1.2710342000000001">
+  <tag k="name" v="Mick's Cafe"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v=""/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v=""/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="207" lat="51.7521792875" lon="-1.264171225">
+  <tag k="name" v="Oxford University Estates Services"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Estates Services is responsible for the management and strategic direction of Oxford University's functional and commercial estate"/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v=""/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="206" lat="51.75484041627906" lon="-1.245290681395349">
+  <tag k="name" v="Holywell Mill"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="The present Mill House was built in 1888 by Clapton Ford in seventeenth-century style, and is a Grade II Listed Building.  A beautiful building with history."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v=""/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="201" lat="51.7641814375" lon="-1.2106736500000002">
+  <tag k="name" v="The Black Boy"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Stylish venue with an upmarket pub-style menu, plus a swish dining room, garden and bedrooms."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4bb8e58f3db7b71383c0219a"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="200" lat="51.75404261923079" lon="-1.2514867374999998">
+  <tag k="name" v="New College"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="New College is one of the constituent colleges of the University of Oxford in the United Kingdom. The full name of the college is The Warden and Scholars of St Mary's College of Winchester in Oxford."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="NewCollegeOx"/>
+  <tag k="augox_foursquareid" v="4beae24a4f5576b04435b396"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="203" lat="51.75312164050633" lon="-1.2469671417721517">
+  <tag k="name" v="Magdalen College"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Magdalen College is one of the constituent colleges of the University of Oxford in England. As of 2011, the college had an estimated financial endowment of £168.1 million."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="magdalenoxford"/>
+  <tag k="augox_foursquareid" v="4b82e902f964a52093ec30e3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="202" lat="51.758879879999995" lon="-1.21450574">
+  <tag k="name" v="The Mirahai"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v=""/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v=""/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="197" lat="51.75997004" lon="-1.21049338">
+  <tag k="name" v="Dong Dong"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Chinese Noodle Bar located in Headington.  Dine in or take away"/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4bfe9ddf4e5d0f47b4da7c1f"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="196" lat="51.752505539999994" lon="-1.0896816599999999">
+  <tag k="name" v="Museum of Rural Life"/>
+  <tag k="augox_category" v="1"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v=""/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4c407bdcff711b8d6f681005"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="199" lat="51.75995191" lon="-1.2126817">
+  <tag k="name" v="Rosemary"/>
+  <tag k="augox_category" v="4"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Modern Asian eatery serving lunch and dinner. Large groups catered for; also external catering."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4e04b83eb61c7592ae706621"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="198" lat="51.76040198333334" lon="-1.2092996833333334">
+  <tag k="name" v="Bar Meze"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Every taste is catered for, from the widest choice of hot or cold starters (mezes) to exotic lamb and chicken, freshest fish and mixed feasts for the heartiest of appetites.  Find also vegetarian and salad selection, as well as upgraded wine list"/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4c3e097551dee21e6a0eea6e"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="193" lat="51.75063705" lon="-1.25443385">
+  <tag k="name" v="Christ Church Picture Gallery"/>
+  <tag k="augox_category" v="1"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="A picture gallery in Christ Church"/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="ChCh_Oxford"/>
+  <tag k="augox_foursquareid" v="4b8d1a93f964a52027e832e3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="192" lat="51.76591566111111" lon="-1.2127018777777778">
+  <tag k="name" v="Stoke House"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v=""/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4f1b40e6e4b05c50e2722d38"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="195" lat="51.760392714285715" lon="-1.2091151714285715">
+  <tag k="name" v="Asian Mama"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Generic Chinese Restaurant 685"/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4e3ef4d262e19d610982ea94"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="194" lat="51.74839721666667" lon="-1.2383058333333334">
+  <tag k="name" v="Mario's Pizzeria"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Mario's is where you go for a truly genuine Italian experience... and where Italians are reminded of their grandmothers' kitchens.  Regular set menu and daily specials.  Perfect for social and group dining"/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4fb7faace4b051542283135e"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="220" lat="51.74652073636364" lon="-1.2273709909090906">
+  <tag k="name" v="Sinnet Court"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v=""/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4c8bfb1755fba093a8585bab"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="221" lat="51.748569280000005" lon="-1.23990658">
+  <tag k="name" v="Route 66"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v=""/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="51e84633498e14e876dde3cb"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="222" lat="51.765693356250004" lon="-1.253030734375">
+  <tag k="name" v="Lady Margaret Hall"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Lady Margaret Hall is one of the constituent colleges of the University of Oxford in England, located at the end of Norham Gardens in north Oxford. As of 2006 the college had an estimated financial endowment of £34m."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4bfea7e4e584c928e0026d25"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="223" lat="51.75705252" lon="-1.26608431">
+  <tag k="name" v="Al Shami"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Al-Shami has provided Lebanese food and hospitality in Oxford since 1988.  The restaurant is open every day of the year, from noon until midnight.  A take away service is available"/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4b9e8293f964a52042ea36e3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="216" lat="51.760370038461545" lon="-1.2624765307692307">
+  <tag k="name" v="Radcliffe Observatory Quarter"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="The Radcliffe Observatory Quarter is a major University of Oxford development project in Oxford, England, in the estate of the old Radcliffe Infirmary hospital. The site, covering 10 acres is in central north Oxford."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="radcliffescilib"/>
+  <tag k="augox_foursquareid" v="4d83644450913704aa78675b"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="217" lat="51.755113786206884" lon="-1.2579668862068967">
+  <tag k="name" v="Balliol College"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Balliol College, founded in 1263, is one of the constituent colleges of the University of Oxford in England. Among the college's alumni are three former prime ministers, five Nobel laureates, and a number of literary figures and philosophers."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="BalliolOxford"/>
+  <tag k="augox_foursquareid" v="4c095007bbc676b068fc47d5"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="218" lat="51.74609724999999" lon="-1.2404335312500003">
+  <tag k="name" v="The Cardo Building"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Queen's College accommodation.  The Cardo Building is located on the Iffley Road close to the Oxford University Sports Ground. It offers comfortable accommodation in a welcoming environment and has a spacious common room and a breakfast room where a Continental breakfast can be served."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="51df3480498e4bc8b6c2d0ca"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="219" lat="51.75363092" lon="-1.2286234600000001">
+  <tag k="name" v="Oxford Brookes University Centre for Sport"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Whether you want to join a work-out class for fun or compete at an elite level, the Centre for Sport has something for everyone."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="oxford_brookes"/>
+  <tag k="augox_foursquareid" v="4b6c6caef964a5200b392ce3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="212" lat="51.74685074374998" lon="-1.2394240437499997">
+  <tag k="name" v="St Stephen's House"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="St Stephen’s House, Oxford, colloquially known as Staggers, is an Anglican theological college and one of six religious Permanent Private Halls of the University of Oxford, England."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="sshoxford"/>
+  <tag k="augox_foursquareid" v="4e07bc58b0fbba5eee1e3f03"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="213" lat="51.75236545" lon="-1.2677480687500002">
+  <tag k="name" v="The Jam Factory"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="A modern European restaurant, bar and art gallery, set in a cavernous former marmalade factory."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="TheJamFactory"/>
+  <tag k="augox_foursquareid" v="4b5986ecf964a520368b28e3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="214" lat="51.74879660526316" lon="-1.2560447315789474">
+  <tag k="name" v="Bate Collection of Musical Instruments"/>
+  <tag k="augox_category" v="1"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="A collection of musical instruments belonging to Bate"/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="52158c2011d281c3cb8b6a5a"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="215" lat="51.74939735714286" lon="-1.2663668714285714">
+  <tag k="name" v="The Lodge"/>
+  <tag k="augox_category" v="4"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="A burlesque club.  Lap-dancing license revoked in 2012."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="LodgeOxford"/>
+  <tag k="augox_foursquareid" v="51492040e4b0187c907112b8"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="208" lat="51.735007875" lon="-1.2153286375">
+  <tag k="name" v="Karma"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Sure to hit you at some point"/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v=""/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="209" lat="51.72538146249999" lon="-1.2531294687500003">
+  <tag k="name" v="Saïd Business School Executive Education Centre"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v=""/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4b8b8d08f964a5208ba232e3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="210" lat="51.76431495833333" lon="-1.2610900749999998">
+  <tag k="name" v="Gee's"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Mediterranean grills and sharing plates served up in an elegant glass conservatory, bar and terrace."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="GeesRestaurant"/>
+  <tag k="augox_foursquareid" v="4bafa569f964a52068133ce3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="211" lat="51.7243098117647" lon="-1.1339944117647056">
+  <tag k="name" v="Ripon College Cuddesdon"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="A centre of Excellence in Theological Training and Research.  At the centre of this vision is a residential community, living a life of prayer, study and service"/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4c248d36136d20a1acf2e161"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="234" lat="51.74960435714286" lon="-1.258418557142857">
+  <tag k="name" v="Campion Hall"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Campion Hall is one of the Permanent Private Halls of the University of Oxford in England. It is one of the smallest constituent institutions of the university, consisting of under forty members."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4e94349bb63439ea012f32cd"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="233" lat="51.75907021627909" lon="-1.2623998279069772">
+  <tag k="name" v="Somerville College"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Somerville College is one of the constituent colleges of the University of Oxford in England. Founded in 1879 as Somerville Hall, it was one of the first women's colleges in Oxford. Today, around 50% of students are male."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="SomervilleOx"/>
+  <tag k="augox_foursquareid" v="4b631396f964a5204c612ae3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="232" lat="51.74548746000001" lon="-1.23046034">
+  <tag k="name" v="Yeti"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="May not be found"/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4ed29499d3e3521ce846efc7"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="231" lat="51.745346559999994" lon="-1.2301013">
+  <tag k="name" v="Atomic Pizza"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Unique restaurant with wall murals, toys and memorabilia, serving pizzas, burgers and hot wings."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="Atomicpizzas"/>
+  <tag k="augox_foursquareid" v="4ee25cf95c5cfd2133be98f9"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="230" lat="51.74842246666666" lon="-1.2396624">
+  <tag k="name" v="Atomic Burger"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Buzzing burger joint with retro memorabilia, serving buffalo wings, milkshakes and margaritas."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="Atomicburgers"/>
+  <tag k="augox_foursquareid" v="4b509db3f964a5209b2927e3"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="229" lat="51.76613866" lon="-1.215495705">
+  <tag k="name" v="Beatrice Webb House"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v=""/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4fa51e90e4b0ac15cf752cbf"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="228" lat="51.76641236818182" lon="-1.21552875">
+  <tag k="name" v="Beko"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v=""/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v="4c6ea17ef338236ad3f00a1b"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="227" lat="51.76656498999999" lon="-1.21526524">
+  <tag k="name" v="Bowen"/>
+  <tag k="augox_category" v="2"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v=""/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v=""/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="226" lat="51.75172432857143" lon="-1.2620042999999999">
+  <tag k="name" v="1855 Wine Bar and Bistro"/>
+  <tag k="augox_category" v="4"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Open from dawn to dusk, serving eclectic and exceptional wines, carefully matched seasonal produce and fantastic wood roasted coffees."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="1855oxford"/>
+  <tag k="augox_foursquareid" v="52ada671498e1390fcc97e9e"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="225" lat="51.75269822999999" lon="-1.2714339266666665">
+  <tag k="name" v="The One"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="This stylish and modern restaurant blends a variety of different Asian and English cuisines into an extensive and delectable menu. Featuring Chinese, Thai, and Japanese tastes combing this to the traditions of the English menu. The One provides a contemporary and relaxing dining experience. Large groups and private parties are accommodated."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v=""/>
+  <tag k="augox_foursquareid" v=""/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+ <node id="224" lat="51.75402411" lon="-1.25672204">
+  <tag k="name" v="Turl Street Kitchen"/>
+  <tag k="augox_category" v="3"/>
+  <tab k="augox_rating" v="3"/>
+  <tag k="description" v="Modern British dishes served in a Georgian restaurant with rustic tables and stripped floors.  Very hipster."/>
+  <tag k="augox_phonenumber" v=""/>
+  <tag k="augox_twitterhandle" v="turlstkitchen"/>
+  <tag k="augox_foursquareid" v="4e808bc8775be483e6f7bcbb"/>
+  <tag k="augox_foursquareurl" v=""/>
+ </node>
+</database>
