@@ -167,24 +167,20 @@ public class NewsFeed {
 	}
 	
 	public void giveImageUrl(String imageUrl) {
-		giveResult("DEBUG:  getting image url", 10, NewsFeedSource.Foursquare);
 		newsFeedImageGatherer.giveData(place, imageUrl);
 		haveImageUrl = true;
 	}
 	
 	public void reportFinished() {
 		if (haveImageUrl) {
-			giveResult("DEBUG:  trying to get image", 10, NewsFeedSource.Foursquare);
 			newsFeedImageGatherer.startGathering();
 		}
 	}
 	
 	// So we know to display the image
 	public void imageUpdated() {
-		giveResult("DEBUG:  calling imageUpdated", 10, NewsFeedSource.Foursquare);
 		activity.runOnUiThread(new Runnable(){
 	        public void run() {
-				//giveResult("DEBUG:  trying to get image", 10, NewsFeedSource.Foursquare);
 				activity.DisplayImage(); // same for place image
 	        }
 	    });

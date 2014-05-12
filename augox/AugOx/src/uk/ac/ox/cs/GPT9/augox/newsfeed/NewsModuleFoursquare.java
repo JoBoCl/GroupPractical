@@ -100,6 +100,8 @@ public class NewsModuleFoursquare implements INewsModule
 	    				
 	    				newsFeed.giveResult(tips[i], (int)((10*tips.length)/(i+1)) + tipLikes[i], NewsFeedSource.Foursquare);
 	    			}
+	    			
+	    			newsFeed.reportFinished();
 	    		}
 	        } catch(Exception e) {
 	        	// ignore failure; remember, we just want any data we can get, ignore what we can't
