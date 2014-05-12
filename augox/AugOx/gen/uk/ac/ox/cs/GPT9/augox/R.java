@@ -368,7 +368,6 @@ containing a value of this type.
         public static final int mini_info_view=0x7f03000f;
         public static final int news_feed_item_1=0x7f030010;
         public static final int session_planner=0x7f030011;
-        public static final int stars=0x7f030012;
     }
     public static final class menu {
         public static final int auto_planner=0x7f0c0000;
