@@ -18,16 +18,50 @@
 	
 	    <com.beyondar.android.plugin.radar.RadarView
 	        android:id="@+id/radarView"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"
 	        android:src="@drawable/radar_north_small" />
 	</FrameLayout>
 
-    <SeekBar
-        android:id="@+id/distanceSlider"
+    <RelativeLayout
+        android:id="@+id/sliderLayout" 
+        android:layout_gravity="right|bottom" 
         android:layout_width="240dp"
-        android:layout_height="wrap_content" 
-        android:layout_gravity="bottom|right"
-        android:max="1000" />
+        android:layout_height="wrap_content">
+        
+        <SeekBar
+	        android:id="@+id/distanceSlider"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content" 
+	        android:layout_alignParentBottom="true"
+	        android:layout_alignParentRight="true"
+	        android:max="1000" />
+        
+        <TextView
+            android:id="@+id/distanceSliderText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_above="@+id/distanceSlider"
+            android:text="- Max view distance -" />
+        
+        <TextView
+            android:id="@+id/zeroDist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/distanceSlider"
+            android:layout_alignLeft="@+id/distanceSlider"
+            android:layout_marginTop="4dp"
+            android:layout_marginLeft="7dp"
+            android:text="0m" />
+        <TextView
+            android:id="@+id/maxDist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:layout_above="@+id/distanceSlider"
+            android:layout_alignRight="@+id/distanceSlider"
+            android:layout_marginTop="4dp"
+            android:layout_marginRight="7dp" />
+    </RelativeLayout>
 	
 </FrameLayout>

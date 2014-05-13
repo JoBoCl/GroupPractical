@@ -1,19 +1,11 @@
 package uk.ac.ox.cs.GPT9.augox;
 
-import uk.ac.ox.cs.GPT9.augox.GoogleRouteHelper.DownloadTask;
-import uk.ac.ox.cs.GPT9.augox.newsfeed.NewsFeed;
 import uk.ac.ox.cs.GPT9.augox.route.*;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.net.ssl.HttpsURLConnection;
-
-import org.json.simple.JSONValue;
 
 import uk.ac.ox.cs.GPT9.augox.dbquery.AllQuery;
 import uk.ac.ox.cs.GPT9.augox.dbquery.DatabaseQuery;
@@ -26,17 +18,11 @@ import com.beyondar.android.plugin.googlemap.GoogleMapWorldPlugin;
 import com.beyondar.android.plugin.radar.RadarView;
 import com.beyondar.android.plugin.radar.RadarWorldPlugin;
 import com.beyondar.android.util.location.BeyondarLocationManager;
-import com.beyondar.android.util.math.geom.Point2;
 import com.beyondar.android.view.BeyondarViewAdapter;
 import com.beyondar.android.view.OnClickBeyondarObjectListener;
 import com.beyondar.android.world.BeyondarObject;
 import com.beyondar.android.world.GeoObject;
 import com.beyondar.android.world.World;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.GoogleMap.OnMapLongClickListener;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 
 import android.content.Context;
@@ -55,7 +41,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.View.OnLongClickListener;
-import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.SeekBar;
 import android.widget.Toast;
 import android.widget.TextView;
@@ -89,10 +75,8 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 	}
 
 	private SeekBar mSeekBarMaxDistance;
-	private View mMapFrame;
-	
-	
 
+	private TextView mMaxDistanceText;
 	private static SharedPreferences sharedPref;
 
 	/**
@@ -113,26 +97,6 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 		//public Marker marker;
 	}
 	
-	private void getDirections () {
-		String s = "http://maps.googleapis.com/maps/api/directions/json?";
-		s.concat("origin="); s.concat(mGoogleMapPlugin.getLatLng().toString());
-		s.concat("&destination="); s.concat(new LatLng(route.getNext().getLatitude(),route.getNext().getLongitude()).toString());
-		s.concat("&mode=walking");
-		s.concat("&key="); s.concat((String)getResources().getText(R.string.google_apikey));
-		URL url;
-		try {
-			url = new URL(s);
-			HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
-	    	org.json.simple.JSONObject obj = (org.json.simple.JSONObject)JSONValue.parse(NewsFeed.readResponse(connection));
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -151,6 +115,9 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 		mGoogleMapPlugin = new GoogleMapWorldPlugin(this);
 		mGoogleMapPlugin.setGoogleMap(GoogleMapsActivity.mMap);
 		mWorld.addPlugin(mGoogleMapPlugin);
+		       
+        sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        sharedPref.registerOnSharedPreferenceChangeListener(this);
 		
 		user = new GeoObject(USERID);
 		user.setGeoPosition(mWorld.getLatitude(), mWorld.getLongitude());
@@ -178,6 +145,9 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
         mWorld.addPlugin(mRadarPlugin);
         
         mSeekBarMaxDistance = ((android.widget.SeekBar)findViewById(R.id.distanceSlider));
+        mSeekBarMaxDistance.setMax((int)(Float.parseFloat(sharedPref.getString("setting_arview_max_distance", "1"))*1000));
+        mMaxDistanceText = ((TextView)findViewById(R.id.maxDist));
+        mMaxDistanceText.setText(PlaceFullInfoActivity.distanceAsString(((double)mSeekBarMaxDistance.getMax())/1000));
         mSeekBarMaxDistance.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
         	@Override       
             public void onStopTrackingTouch(SeekBar seekBar) { }       
@@ -187,13 +157,11 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 
             @Override       
             public void onProgressChanged(SeekBar seekBar, int progress,boolean fromUser) {
-            	mWorld.setArViewDistance(seekBar.getProgress());
-            	mRadarPlugin.setMaxDistance(mWorld.getArViewDistance());
+            	mWorld.setArViewDistance(progress);
+            	mRadarPlugin.setMaxDistance(progress);
             }       
         });
         mSeekBarMaxDistance.setProgress(mSeekBarMaxDistance.getMax()/2);
-        mWorld.setArViewDistance(mSeekBarMaxDistance.getProgress());
-        mRadarPlugin.setMaxDistance(mSeekBarMaxDistance.getProgress());
         
         mRadarView.setOnLongClickListener(new OnLongClickListener() {
         	public boolean onLongClick(View rv) {        		
@@ -209,9 +177,6 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
         });
 
         mBeyondarFragment.setOnClickBeyondarObjectListener(this);
-        
-        sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        sharedPref.registerOnSharedPreferenceChangeListener(this);
                 
 		//mViewAdapter = new CustomBeyondarViewAdapter(this);
 		mBeyondarFragment.setBeyondarViewAdapter(new CustomBeyondarViewAdapter(this));
@@ -422,11 +387,12 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 
 	@Override
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-		mSeekBarMaxDistance.setMax((int) (Float.parseFloat(sharedPref.getString("setting_arview_max_distance", "1"))*1000));
+		mSeekBarMaxDistance.setMax((int)(Float.parseFloat(sharedPref.getString("setting_arview_max_distance", "1"))*1000));
+		mMaxDistanceText.setText(PlaceFullInfoActivity.distanceAsString(((double)mSeekBarMaxDistance.getMax())/1000));
 		refreshVisibility();
 	}
 	
-	private List<PlaceCategory> currentCategories() {
+	private static List<PlaceCategory> currentCategories() {
 		List<PlaceCategory> pcs = new ArrayList<PlaceCategory>();
 		for (PlaceCategory pc: PlaceCategory.values()) {
 			if (sharedPref.getBoolean(pc.getFilter(), true)) pcs.add(pc);
@@ -455,54 +421,13 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 		refreshVisibility();
 	}
 	
-	private void refreshVisibility() { 
+	public static void refreshVisibility() { 
 		for (Place place: Places) {
 			boolean vis = (currentCategories().contains(placesDatabase.getPlaceByID(place.placeID).getCategory()));
 			place.geoPlace.setVisible(vis);
 		    //if (place.marker != null) place.marker.setVisible(vis);
 		}
 	}
-	
-	/*private int sizeIcon (double dist) {
-		return (int)((1-(dist/mSeekBarMaxDistance.getMax())) * (MAXICONSIZE-MINICONSIZE) + MINICONSIZE);
-	}
-	
-	private class CustomBeyondarViewAdapter extends BeyondarViewAdapter {
-
-		LayoutInflater inflater;
-
-		public CustomBeyondarViewAdapter(Context context) {
-			super(context);
-			inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		}
-
-		@Override
-		public View getView(BeyondarObject beyondarObject, View recycledView, ViewGroup parent) {
-			if (beyondarObject.getId() == USERID) return null;
-			if (!currentCategories().contains(placesDatabase.getPlaceByID((int)beyondarObject.getId()).getCategory())) {
-				return null;
-			}
-			if (recycledView == null) {
-				recycledView = inflater.inflate(R.layout.beyondar_object_view, null);
-			}
-
-			ImageView imageView = (ImageView) recycledView.findViewById(R.id.iconView);
-			imageView.setBackgroundResource(R.drawable.ic_launcher);
-			
-			int iconSize = sizeIcon((int)beyondarObject.getDistanceFromUser());
-			RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(iconSize, iconSize);
-			imageView.setLayoutParams(layoutParams);
-
-			// Once the view is ready we specify the position
-			Point2 pos = beyondarObject.getScreenPositionCenter();
-			pos.x = pos.x - iconSize/2;
-			pos.y = pos.y - iconSize/2;
-			setPosition(pos);
-			
-			return recycledView;
-		}
-
-	}*/
 	
 	private class CustomBeyondarViewAdapter extends BeyondarViewAdapter {
 
@@ -519,10 +444,11 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 				return null;
 			}
 			if (recycledView == null) {
-				recycledView = inflater.inflate(R.layout.mini_info_view, null);
+				//recycledView = inflater.inflate(R.layout.mini_info_view, null);
+				recycledView = inflater.inflate(R.layout.test_newminiinfo, null);
 			}
 
-			TextView textView = (TextView) recycledView.findViewById(R.id.placeName);
+			/*TextView textView = (TextView) recycledView.findViewById(R.id.placeName);
 			textView.setText(beyondarObject.getName().concat("\n").concat(PlaceFullInfoActivity.distanceAsString(beyondarObject.getDistanceFromUser()/1000)));
 			
 			List<ImageView> stars = new ArrayList<ImageView>();
@@ -533,13 +459,19 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 			stars.add((ImageView)recycledView.findViewById(R.id.imageViewStar5));
 			int rating = (placesDatabase.getPlaceByID((int)beyondarObject.getId()).getRating());
 			for (int i = 0; i < rating; i++) stars.get(i).setVisibility(View.VISIBLE);
-			for (int i = rating; i <= 4; i++) stars.get(i).setVisibility(View.INVISIBLE);
+			for (int i = rating; i <= 4; i++) stars.get(i).setVisibility(View.INVISIBLE);*/
+			
+			//TextView placeName = (TextView)recycledView.findViewById(R.id.placeName);
+			//placeName.setText(beyondarObject.getName());
+			TextView distance = (TextView)recycledView.findViewById(R.id.placeNameDistance);
+			distance.setText(beyondarObject.getName() + " (" + (PlaceFullInfoActivity.distanceAsString(beyondarObject.getDistanceFromUser()/1000) + ")"));
+			RatingBar ratingBar = (RatingBar)recycledView.findViewById(R.id.ratingBar);
+			ratingBar.setRating((float)(placesDatabase.getPlaceByID((int)beyondarObject.getId()).getRating()));
 			
 			//boolean open = (placesDatabase.getPlaceByID((int)beyondarObject.getId()).getOpeningHours().isOpenAt(null));
-			recycledView.setBackgroundColor(getResources().getColor(R.color.red));
-			textView.setTextColor(getResources().getColor(R.color.white));
-			
-			
+			/*recycledView.setBackgroundColor(getResources().getColor(R.color.red));
+			textView.setTextColor(getResources().getColor(R.color.white));*/
+						
 			// Once the view is ready we specify the position
 			setPosition(beyondarObject.getScreenPositionTopRight());
 			

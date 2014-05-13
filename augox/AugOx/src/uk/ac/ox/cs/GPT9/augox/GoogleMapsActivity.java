@@ -2,7 +2,10 @@ package uk.ac.ox.cs.GPT9.augox;
 
 import uk.ac.ox.cs.GPT9.augox.GoogleRouteHelper.DownloadTask;
 import uk.ac.ox.cs.GPT9.augox.route.IRoute;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
@@ -68,8 +71,7 @@ public class GoogleMapsActivity extends FragmentActivity {
 			}
 		});
 		
-		//MainScreenActivity.user.setVisible(true);
-		
+		MainScreenActivity.refreshVisibility();
 		routeChanged();
     }
    
@@ -96,14 +98,17 @@ public class GoogleMapsActivity extends FragmentActivity {
 		if(!route.empty()){
            LatLng origin = MainScreenActivity.mGoogleMapPlugin.getLatLng();
            LatLng dest = new LatLng(route.getNext().getLatitude(), route.getNext().getLongitude());
-
-           // Getting URL to the Google Directions API
-           String url = GoogleRouteHelper.getDirectionsUrl(origin, dest);
-
-           DownloadTask downloadTask = new DownloadTask();
-
-           // Start downloading json data from Google Directions API
-           downloadTask.execute(url);
+        	 
+        	NetworkInfo activeNetwork = ((ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
+        	if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {           
+	           // Getting URL to the Google Directions API
+	           String url = GoogleRouteHelper.getDirectionsUrl(origin, dest);
+	
+	           DownloadTask downloadTask = new DownloadTask();
+	
+	           // Start downloading json data from Google Directions API
+	           downloadTask.execute(url);
+        	}
        }
    }
 }
