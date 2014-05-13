@@ -365,12 +365,10 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 	            	if (old != null) resetImage(old);
             	}
             	return true;
-            /*
             case R.id.action_launch_databasedebugger:
             	Intent intent7 = new Intent(this, DatabaseDebuggerActivity.class);
                 startActivity(intent7);
                 return true;
-            */
             default:
                 return super.onOptionsItemSelected(item);
         }
