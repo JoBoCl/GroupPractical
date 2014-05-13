@@ -13,7 +13,7 @@
     <string name="title_activity_route_planner">Route Planner</string>
     <string name="title_activity_auto_planner">AutoPlanner</string>
     <string name="title_activity_database_debugger">Database Debugger</string>
-    <string name="action_launch_autoplanner">AutoPlanner</string>
+    <string name="action_launch_autoplanner">Auto Planner</string>
     <string name="action_launch_filterpanel">Filters</string>
     <string name="action_launch_listplaces">Places List</string>
     <string name="action_launch_placefullinfo">Place Full Info</string>
@@ -34,6 +34,6 @@
     <string name="routePlannerButtonClear">Clear Route</string>
     <string name="action_route_moveon">Next route place</string>
     <string name="google_apikey">AIzaSyBN2fi7bdokXVQXmMTGfqWG2oNHjopus-A</string>
-    <string name="title_activity_google_maps">GoogleMapsActivity</string>
+    <string name="title_activity_google_maps">Map View</string>
 
 </resources>
