@@ -26,5 +26,11 @@
         android:layout_height="wrap_content"
         android:text="Test Full Info Screen"
         android:onClick="testFullInfo" />
+    <Button
+        android:id="@+id/btn_fetchRatings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fetch All Ratings"
+        android:onClick="fetchRatings" />
 
 </LinearLayout>

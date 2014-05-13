@@ -5,7 +5,13 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
+import uk.ac.ox.cs.GPT9.augox.dbquery.AllQuery;
+import uk.ac.ox.cs.GPT9.augox.dbquery.DatabaseQuery;
+import uk.ac.ox.cs.GPT9.augox.dbsort.DatabaseSorter;
+import uk.ac.ox.cs.GPT9.augox.dbsort.NameSorter;
+import uk.ac.ox.cs.GPT9.augox.dbsort.SortOrder;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.AssetManager;
@@ -74,6 +80,20 @@ public class DatabaseDebuggerActivity extends Activity {
 		intent.putExtra(PlaceFullInfoActivity.EXTRA_BACKGROUND, "");
 		intent.putExtra(PlaceFullInfoActivity.EXTRA_DISTANCE, 13.37);
 		startActivity(intent);
+	}
+	
+	public void fetchRatings(View view) {
+		DatabaseQuery x = new AllQuery();
+		DatabaseSorter y = new NameSorter(SortOrder.ASC);
+		List<Integer> placeIds = MainScreenActivity.getPlacesDatabase().query(x,  y);
+		MassRatingsGetter ratingsGetter = new MassRatingsGetter();
+		ratingsGetter.giveData(this, placeIds);
+		ratingsGetter.startCall();
+	}
+	
+	public void reportDone() {
+		Toast toast = Toast.makeText(getApplicationContext(), "Ratings Fetched", Toast.LENGTH_SHORT);
+		toast.show();
 	}
 
 }
