@@ -126,6 +126,9 @@ public class GalleryPickerFragment extends Fragment {
 			chosenPlace[i].setOnClickListener(placeClickedListener);
 			placeImages[i].setOnClickListener(placeClickedListener);
 		}
+		
+		chosenPlace[0].setChecked(true);
+		lastChecked = 1;
 
 		final ArrayList<RadioButton> categoryRadioButtons;
 		categoryChoice = ((RadioGroup) view.findViewById(R.id.categoryChoice));
@@ -164,6 +167,7 @@ public class GalleryPickerFragment extends Fragment {
 								placeIds = choosePlaces(cat);
 								matchPlaceIds();
 								updateUiElements();
+								updateAutoPlanner();
 							}
 						}
 					}
@@ -186,6 +190,8 @@ public class GalleryPickerFragment extends Fragment {
 				}
 			}
 		});
+		
+		preferencesUpdated();
 
 		return view;
 	}
@@ -208,11 +214,14 @@ public class GalleryPickerFragment extends Fragment {
 
 			Random random = new Random();
 
-			for (int i = 0; i < 3; i++) {
-				chosenPlaceIds[i] = idList.get(random.nextInt(idList.size()));
-				idList.remove(chosenPlaceIds[i]);
+			try {
+				for (int i = 0; i < 3; i++) {
+					chosenPlaceIds[i] = idList
+							.get(random.nextInt(idList.size()));
+					idList.remove(chosenPlaceIds[i]);
+				}
+			} catch (Exception e) {
 			}
-
 		}
 
 		AutoPlannerActivity.updateSeenPlaces(offset, chosenPlaceIds);
@@ -236,26 +245,34 @@ public class GalleryPickerFragment extends Fragment {
 
 		query = new AndQuery(query, new RatingRangeQuery((int) minRating, 5));
 
-		if(offset == 0) 
-		try {
-			// Lat at [0], long at [1]
-			query = new AndQuery(query, new InLocusQuery(
-					MainScreenActivity.getUserLocation()[0],
-					MainScreenActivity.getUserLocation()[1], maxDistance));
-		} catch (NullPointerException e) {
-			query = new AndQuery(query, new InLocusQuery(51.759684, -1.258468,
-					maxDistance));
-			// If no user data found, use CS Dept
-		}
-		 else if(offset > 0) try {
-			 double latitude = AutoPlannerActivity.getPreviousLatitude(offset);
-			 double longitude = AutoPlannerActivity.getPreviousLongitude(offset);
-			 query = new AndQuery(query, new InLocusQuery(latitude, longitude, maxDistance));
-		 } catch (NullPointerException e) {
-			 query = new AndQuery(query, new InLocusQuery(51.759684, -1.258468,
-					maxDistance));
-			// If no user data found, use CS Dept
-		 } else throw new IllegalStateException("Gallery fragment index should not be negative");
+		if (offset == 0)
+			try {
+				// Lat at [0], long at [1]
+				query = new AndQuery(query, new InLocusQuery(
+						MainScreenActivity.getUserLocation()[0],
+						MainScreenActivity.getUserLocation()[1], maxDistance));
+			} catch (NullPointerException e) {
+				query = new AndQuery(query, new InLocusQuery(51.759684,
+						-1.258468, maxDistance));
+				// If no user data found, use CS Dept
+			}
+		else if (offset > 0)
+			try {
+				double latitude = AutoPlannerActivity
+						.getPreviousLatitude(offset);
+				double longitude = AutoPlannerActivity
+						.getPreviousLongitude(offset);
+				Log.d("Joshua", Double.toString(latitude) + ", " + Double.toString(longitude));
+				query = new AndQuery(query, new InLocusQuery(latitude,
+						longitude, maxDistance));
+			} catch (NullPointerException e) {
+				query = new AndQuery(query, new InLocusQuery(51.759684,
+						-1.258468, maxDistance));
+				// If no user data found, use CS Dept
+			}
+		else
+			throw new IllegalStateException(
+					"Gallery fragment index should not be negative");
 		// if offset is negative, we've got bigger problems
 
 		List<Integer> idList = MainScreenActivity.getPlacesDatabase().query(
@@ -273,12 +290,13 @@ public class GalleryPickerFragment extends Fragment {
 	private void updateUiElements() {
 		for (int i = 0; i < 3; i++) {
 			if (places[i] != null && placeIds[i] != -1) {
-				try{
-				GalleryImageGatherer gatherer = new GalleryImageGatherer(
-						places[i]);
-				gatherer.giveData(places[i], places[i].getFourSquareURL());
-				gatherer.startGathering();
-				} catch (Exception e) { }
+				try {
+					GalleryImageGatherer gatherer = new GalleryImageGatherer(
+							places[i]);
+					gatherer.giveData(places[i], places[i].getFourSquareURL());
+					gatherer.startGathering();
+				} catch (Exception e) {
+				}
 			}
 		}
 
