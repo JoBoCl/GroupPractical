@@ -286,4 +286,12 @@ public class AutoPlannerActivity extends FragmentActivity {
 	public static void updateSeenPlaces(Integer offset, Integer[] chosenPlaceIds) {
 		seenPlaces.put(offset, chosenPlaceIds);
 	}
+
+	public static double getPreviousLongitude(int offset) {
+		return MainScreenActivity.getPlacesDatabase().getPlaceByID(activities[offset-1].getSelectedPlace()).getLongitude();
+	}
+
+	public static double getPreviousLatitude(int offset) {
+		return MainScreenActivity.getPlacesDatabase().getPlaceByID(activities[offset-1].getSelectedPlace()).getLongitude();
+	}
 }

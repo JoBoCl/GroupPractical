@@ -236,6 +236,7 @@ public class GalleryPickerFragment extends Fragment {
 
 		query = new AndQuery(query, new RatingRangeQuery((int) minRating, 5));
 
+		if(offset == 0) 
 		try {
 			// Lat at [0], long at [1]
 			query = new AndQuery(query, new InLocusQuery(
@@ -246,6 +247,16 @@ public class GalleryPickerFragment extends Fragment {
 					maxDistance));
 			// If no user data found, use CS Dept
 		}
+		 else if(offset > 0) try {
+			 double latitude = AutoPlannerActivity.getPreviousLatitude(offset);
+			 double longitude = AutoPlannerActivity.getPreviousLongitude(offset);
+			 query = new AndQuery(query, new InLocusQuery(latitude, longitude, maxDistance));
+		 } catch (NullPointerException e) {
+			 query = new AndQuery(query, new InLocusQuery(51.759684, -1.258468,
+					maxDistance));
+			// If no user data found, use CS Dept
+		 } else throw new IllegalStateException("Gallery fragment index should not be negative");
+		// if offset is negative, we've got bigger problems
 
 		List<Integer> idList = MainScreenActivity.getPlacesDatabase().query(
 				query, new NameSorter(SortOrder.ASC));
