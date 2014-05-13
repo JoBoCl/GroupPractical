@@ -221,43 +221,6 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 	   startActivity(intent);
    }
    
-   /*private void initializeGMaps() {   
-		mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
-		if (mMap == null){
-			return;
-		}
-		mMapFrame = (View)findViewById(R.id.map_frame);
-		mMap.setOnMapLongClickListener(new OnMapLongClickListener() {
-			public void onMapLongClick(LatLng l) {
-				mMapFrame.setVisibility(View.GONE);
-			}
-		});
-	   
-		mGoogleMapPlugin = new GoogleMapWorldPlugin(this);
-		mGoogleMapPlugin.setGoogleMap(mMap);
-        mWorld.addPlugin(mGoogleMapPlugin);
-        
-        refreshVisibility();
-        
-        if(!route.empty()){
-            LatLng origin = mGoogleMapPlugin.getLatLng();
-            LatLng dest = new LatLng(route.getNext().getLatitude(), route.getNext().getLongitude());
-
-            // Getting URL to the Google Directions API
-            String url = GoogleRouteHelper.getDirectionsUrl(origin, dest);
-
-            DownloadTask downloadTask = new DownloadTask();
-
-            // Start downloading json data from Google Directions API
-            downloadTask.execute(url);
-        }
-   }
-   
-   private void centreCamera() {
-		mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(mWorld.getLatitude(), mWorld.getLongitude()), 15));
-		mMap.animateCamera(CameraUpdateFactory.zoomTo(19), 2000, null);
-   }*/
-   
    @Override
    protected void onResume() {
         super.onResume();
@@ -444,33 +407,13 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 				return null;
 			}
 			if (recycledView == null) {
-				//recycledView = inflater.inflate(R.layout.mini_info_view, null);
-				recycledView = inflater.inflate(R.layout.test_newminiinfo, null);
+				recycledView = inflater.inflate(R.layout.mini_info_view, null);
 			}
 
-			/*TextView textView = (TextView) recycledView.findViewById(R.id.placeName);
-			textView.setText(beyondarObject.getName().concat("\n").concat(PlaceFullInfoActivity.distanceAsString(beyondarObject.getDistanceFromUser()/1000)));
-			
-			List<ImageView> stars = new ArrayList<ImageView>();
-			stars.add((ImageView)recycledView.findViewById(R.id.imageViewStar1));
-			stars.add((ImageView)recycledView.findViewById(R.id.imageViewStar2));
-			stars.add((ImageView)recycledView.findViewById(R.id.imageViewStar3));
-			stars.add((ImageView)recycledView.findViewById(R.id.imageViewStar4));
-			stars.add((ImageView)recycledView.findViewById(R.id.imageViewStar5));
-			int rating = (placesDatabase.getPlaceByID((int)beyondarObject.getId()).getRating());
-			for (int i = 0; i < rating; i++) stars.get(i).setVisibility(View.VISIBLE);
-			for (int i = rating; i <= 4; i++) stars.get(i).setVisibility(View.INVISIBLE);*/
-			
-			//TextView placeName = (TextView)recycledView.findViewById(R.id.placeName);
-			//placeName.setText(beyondarObject.getName());
 			TextView distance = (TextView)recycledView.findViewById(R.id.placeNameDistance);
 			distance.setText(beyondarObject.getName() + " (" + (PlaceFullInfoActivity.distanceAsString(beyondarObject.getDistanceFromUser()/1000) + ")"));
 			RatingBar ratingBar = (RatingBar)recycledView.findViewById(R.id.ratingBar);
 			ratingBar.setRating((float)(placesDatabase.getPlaceByID((int)beyondarObject.getId()).getRating()));
-			
-			//boolean open = (placesDatabase.getPlaceByID((int)beyondarObject.getId()).getOpeningHours().isOpenAt(null));
-			/*recycledView.setBackgroundColor(getResources().getColor(R.color.red));
-			textView.setTextColor(getResources().getColor(R.color.white));*/
 						
 			// Once the view is ready we specify the position
 			setPosition(beyondarObject.getScreenPositionTopRight());
