@@ -1,19 +1,12 @@
 package uk.ac.ox.cs.GPT9.augox;
 
 import uk.ac.ox.cs.GPT9.augox.GoogleRouteHelper.DownloadTask;
-import uk.ac.ox.cs.GPT9.augox.newsfeed.NewsFeed;
 import uk.ac.ox.cs.GPT9.augox.route.*;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.net.ssl.HttpsURLConnection;
-
-import org.json.simple.JSONValue;
 
 import uk.ac.ox.cs.GPT9.augox.dbquery.AllQuery;
 import uk.ac.ox.cs.GPT9.augox.dbquery.DatabaseQuery;
@@ -25,7 +18,6 @@ import com.beyondar.android.fragment.BeyondarFragmentSupport;
 import com.beyondar.android.plugin.googlemap.GoogleMapWorldPlugin;
 import com.beyondar.android.plugin.radar.RadarView;
 import com.beyondar.android.plugin.radar.RadarWorldPlugin;
-import com.beyondar.android.screenshot.OnScreenshotListener;
 import com.beyondar.android.util.location.BeyondarLocationManager;
 import com.beyondar.android.view.BeyondarViewAdapter;
 import com.beyondar.android.view.OnClickBeyondarObjectListener;
@@ -44,10 +36,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.content.res.AssetManager;
-import android.graphics.Bitmap;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
@@ -108,26 +98,6 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 		public int placeID;
 		public GeoObject geoPlace;
 		// public Marker marker;
-	}
-	
-	private void getDirections () {
-		String s = "http://maps.googleapis.com/maps/api/directions/json?";
-		s.concat("origin="); s.concat(mGoogleMapPlugin.getLatLng().toString());
-		s.concat("&destination="); s.concat(new LatLng(route.getNext().getLatitude(),route.getNext().getLongitude()).toString());
-		s.concat("&mode=walking");
-		s.concat("&key="); s.concat((String)getResources().getText(R.string.google_apikey));
-		URL url;
-		try {
-			url = new URL(s);
-			HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
-	    	org.json.simple.JSONObject obj = (org.json.simple.JSONObject)JSONValue.parse(NewsFeed.readResponse(connection));
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 	
    @Override
