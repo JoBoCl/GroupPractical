@@ -6,7 +6,6 @@
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
-    
     <string name="title_activity_place_full_info">Full Info</string>
     <string name="title_activity_list_places">Local Places</string>
     <string name="title_activity_list_places_by_sub_type">Places</string>
@@ -14,15 +13,13 @@
     <string name="title_activity_route_planner">Route Planner</string>
     <string name="title_activity_auto_planner">AutoPlanner</string>
     <string name="title_activity_database_debugger">Database Debugger</string>
-    
-    <string name="action_launch_autoplanner">AutoPlanner</string>
+    <string name="action_launch_autoplanner">Auto Planner</string>
     <string name="action_launch_filterpanel">Filters</string>
     <string name="action_launch_listplaces">Places List</string>
     <string name="action_launch_placefullinfo">Place Full Info</string>
     <string name="action_launch_routeplanner">Route Planner</string>
     <string name="action_launch_settingspanel">Settings</string>
     <string name="action_launch_databasedebugger">Database Debugger</string>
-    
     <string name="fullinfo_distanceaway">away</string>
     <string name="fullinfo_feedtitle">Live Social Feed</string>
     <string name="fullinfo_namegoeshere">Name goes here</string>
@@ -30,15 +27,13 @@
     <string name="fullinfo_descriptiongoeshere">Description goes here</string>
     <string name="fullinfo_attribution">Tweets provided by Twitter.  Image, rating and tips provided by Foursquare</string>
     <string name="fullinfo_attributionWithLink">Tweets provided by Twitter.  Image, rating and tips provided by Foursquare at</string>
-    
     <string name="routePlannerCurrentRoute">Current Route</string>
     <string name="routePlannerAddPlaces">Add Places</string>
     <string name="routePlannerButtonFilters">Change Filters</string>
     <string name="routePlannerButtonContinue">Continue</string>
     <string name="routePlannerButtonClear">Clear Route</string>
-    
     <string name="action_route_moveon">Next route place</string>
-    
     <string name="google_apikey">AIzaSyBN2fi7bdokXVQXmMTGfqWG2oNHjopus-A</string>
-   
+    <string name="title_activity_google_maps">Map View</string>
+
 </resources>

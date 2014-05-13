@@ -3,7 +3,7 @@
             
     <item android:id="@+id/action_route_moveon"
           android:title="@string/action_route_moveon"
-          android:icon="@drawable/heresign"
+          android:icon="@drawable/ic_action_next"
           android:showAsAction="always" 
           android:visibility="gone" />
     

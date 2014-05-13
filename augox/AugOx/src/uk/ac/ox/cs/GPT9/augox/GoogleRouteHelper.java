@@ -16,6 +16,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 public class GoogleRouteHelper {
@@ -31,7 +32,7 @@ public class GoogleRouteHelper {
         String sensor = "sensor=false";
  
         // Building the parameters to the web service
-        String parameters = str_origin+"&"+str_dest+"&"+sensor;
+        String parameters = str_origin+"&"+str_dest+"&"+sensor+"&mode=walking";
  
         // Output format
         String output = "json";
@@ -167,7 +168,7 @@ public class GoogleRouteHelper {
             }
  
             // Drawing polyline in the Google Map for the i-th route
-            MainScreenActivity.mMap.addPolyline(lineOptions);
+            GoogleMapsActivity.routeLine = GoogleMapsActivity.mMap.addPolyline(lineOptions);
         }
     }
 }
