@@ -116,7 +116,8 @@ public class AutoPlannerActivity extends FragmentActivity {
 		setContentView(R.layout.activity_auto_planner);
 
 		SharedPreferences sharedPref = MainScreenActivity.getSharedPref();
-		ACTIVITY_LIMIT = ((int) (Integer.parseInt(sharedPref.getString( "setting_autoroute_max_length", "1"))));
+		ACTIVITY_LIMIT = ((int) (Integer.parseInt(sharedPref.getString(
+				"setting_autoroute_max_length", "1"))));
 
 		_route = new Integer[getResources()
 				.getInteger(R.integer.activity_limit)];
@@ -142,7 +143,6 @@ public class AutoPlannerActivity extends FragmentActivity {
 		Log.d("Joshua", "Committed changes");
 
 		updateViewableActivities(0);
-
 
 		Log.d("Joshua", sharedPref.toString());
 
@@ -189,7 +189,7 @@ public class AutoPlannerActivity extends FragmentActivity {
 				});
 
 		allowVisitedCheckbox = (CheckBox) findViewById(R.id.visited);
-		allowVisitedCheckbox.setChecked(false);
+		allowVisitedCheckbox.setChecked(true);
 		allowVisitedCheckbox
 				.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 					@Override
@@ -201,7 +201,7 @@ public class AutoPlannerActivity extends FragmentActivity {
 				});
 
 		allowUnvisitedCheckbox = (CheckBox) findViewById(R.id.unvisited);
-		allowUnvisitedCheckbox.setChecked(false);
+		allowUnvisitedCheckbox.setChecked(true);
 		allowUnvisitedCheckbox
 				.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 					@Override
@@ -228,6 +228,8 @@ public class AutoPlannerActivity extends FragmentActivity {
 		// Currently set to 4km
 		routeDistance.setMax((int) (Float.parseFloat(sharedPref.getString(
 				"setting_arview_max_distance", "1")) * 20));
+		routeDistance.setProgress((int) (Float.parseFloat(sharedPref.getString(
+				"setting_arview_max_distance", "1")) * 10));
 		routeDistance.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 			@Override
 			public void onStopTrackingTouch(SeekBar seekBar) {
@@ -288,10 +290,14 @@ public class AutoPlannerActivity extends FragmentActivity {
 	}
 
 	public static double getPreviousLongitude(int offset) {
-		return MainScreenActivity.getPlacesDatabase().getPlaceByID(activities[offset-1].getSelectedPlace()).getLongitude();
+		return MainScreenActivity.getPlacesDatabase()
+				.getPlaceByID(activities[offset - 1].getSelectedPlace())
+				.getLongitude();
 	}
 
 	public static double getPreviousLatitude(int offset) {
-		return MainScreenActivity.getPlacesDatabase().getPlaceByID(activities[offset-1].getSelectedPlace()).getLongitude();
+		return MainScreenActivity.getPlacesDatabase()
+				.getPlaceByID(activities[offset - 1].getSelectedPlace())
+				.getLatitude();
 	}
 }
