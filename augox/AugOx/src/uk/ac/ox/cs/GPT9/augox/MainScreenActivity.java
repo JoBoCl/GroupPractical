@@ -92,8 +92,17 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 	private SeekBar mSeekBarMaxDistance;
 	private View mMapFrame;
 	
-	private SharedPreferences sharedPref;
 	
+
+	private static SharedPreferences sharedPref;
+
+	/**
+	 * @return the sharedPref
+	 */
+	public static SharedPreferences getSharedPref() {
+		return sharedPref;
+	}
+
 	public class Place {
 		public Place(Integer placeID, GeoObject geoPlace, Marker marker) {
 			this.placeID = placeID;

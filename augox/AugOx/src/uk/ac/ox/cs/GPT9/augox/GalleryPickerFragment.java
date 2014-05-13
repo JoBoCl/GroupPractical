@@ -1,11 +1,17 @@
 package uk.ac.ox.cs.GPT9.augox;
 
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Random;
 
+import javax.net.ssl.HttpsURLConnection;
+
+import uk.ac.ox.cs.GPT9.augox.dbquery.AllQuery;
 import uk.ac.ox.cs.GPT9.augox.dbquery.AndQuery;
 import uk.ac.ox.cs.GPT9.augox.dbquery.CategoryQuery;
 import uk.ac.ox.cs.GPT9.augox.dbquery.DatabaseQuery;
@@ -15,7 +21,13 @@ import uk.ac.ox.cs.GPT9.augox.dbquery.RatingRangeQuery;
 import uk.ac.ox.cs.GPT9.augox.dbquery.VisitedQuery;
 import uk.ac.ox.cs.GPT9.augox.dbsort.NameSorter;
 import uk.ac.ox.cs.GPT9.augox.dbsort.SortOrder;
+import uk.ac.ox.cs.GPT9.augox.newsfeed.NewsFeed;
+import uk.ac.ox.cs.GPT9.augox.newsfeed.NewsFeedImageGatherer;
 import android.annotation.TargetApi;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -29,7 +41,6 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
-import android.widget.TextView;
 
 @TargetApi(11)
 public class GalleryPickerFragment extends Fragment {
@@ -40,7 +51,7 @@ public class GalleryPickerFragment extends Fragment {
 	private int lastChecked;
 	private int offset;
 	private CheckBox ownPlan;
-	private int[] placeIds = new int[3];
+	private Integer[] placeIds = new Integer[3];
 	private PlaceCategory currentCat;
 	private ImageView[] placeImages = new ImageView[3];
 
@@ -57,6 +68,7 @@ public class GalleryPickerFragment extends Fragment {
 	public void preferencesUpdated() {
 		allowRepeats = AutoPlannerActivity.areRepeatsAllowed();
 		allowVisited = AutoPlannerActivity.allowingVisited();
+		allowUnvisited = AutoPlannerActivity.allowingUnvisited();
 		maxDistance = AutoPlannerActivity.getMaxDistance();
 		minRating = AutoPlannerActivity.getMinRating();
 
@@ -67,11 +79,13 @@ public class GalleryPickerFragment extends Fragment {
 
 	private boolean allowRepeats = false;
 
-	private boolean allowVisited = false;
+	private boolean allowVisited = true;
 
 	private double maxDistance = 0.0f;
 
 	private float minRating = 0;
+
+	private boolean allowUnvisited = true;
 
 	public Integer getSelectedPlace() {
 		if (ownPlan.isChecked()) {
@@ -95,12 +109,6 @@ public class GalleryPickerFragment extends Fragment {
 		chosenPlace[2] = ((RadioButton) view.findViewById(R.id.chosenPlace2));
 		Log.d("Joshua", "Get radio buttons");
 
-		Calendar localTime = Calendar.getInstance();
-		LocalTime start = new LocalTime(localTime.YEAR, localTime.MONTH,
-				localTime.DATE, localTime.HOUR + offset, 0);
-		TextView startTime = (TextView) view.findViewById(R.id.startTime);
-		startTime.setText(String.format("Start Time - %d:00", start.getHour()));
-
 		OnClickListener placeClickedListener = new OnClickListener() {
 			public void onClick(View view) {
 				for (int i = 0; i < 3; i++) {
@@ -118,6 +126,9 @@ public class GalleryPickerFragment extends Fragment {
 			chosenPlace[i].setOnClickListener(placeClickedListener);
 			placeImages[i].setOnClickListener(placeClickedListener);
 		}
+		
+		chosenPlace[0].setChecked(true);
+		lastChecked = 1;
 
 		final ArrayList<RadioButton> categoryRadioButtons;
 		categoryChoice = ((RadioGroup) view.findViewById(R.id.categoryChoice));
@@ -156,6 +167,7 @@ public class GalleryPickerFragment extends Fragment {
 								placeIds = choosePlaces(cat);
 								matchPlaceIds();
 								updateUiElements();
+								updateAutoPlanner();
 							}
 						}
 					}
@@ -178,6 +190,8 @@ public class GalleryPickerFragment extends Fragment {
 				}
 			}
 		});
+		
+		preferencesUpdated();
 
 		return view;
 	}
@@ -186,63 +200,80 @@ public class GalleryPickerFragment extends Fragment {
 		AutoPlannerActivity.updatePlace(offset);
 	}
 
-	private int[] choosePlaces(List<Integer> idList) {
-		int[] chosenPlaceIds = new int[3];
+	private Integer[] choosePlaces(List<Integer> idList) {
+		Integer[] chosenPlaceIds = new Integer[3];
+
 		for (int i = 0; i < 3; i++) {
 			chosenPlaceIds[i] = -1;
 		}
-		int chosen = 0;
-		finished: if (allowRepeats) {
-			for (int id : idList) {
-				chosenPlaceIds[chosen] = id;
-				chosen++;
-				if (chosen == 3)
-					break finished;
-			}
-		} else {
-			for (int id : idList)
-				if (!plannedRouteContainsAfter(id)) {
-					chosenPlaceIds[chosen] = id;
-					chosen++;
-					if (chosen == 3)
-						break finished;
+
+		if (!allowRepeats)
+			idList.removeAll(AutoPlannerActivity.getSeenPlaces());
+
+		if (idList.size() > 0) {
+
+			Random random = new Random();
+
+			try {
+				for (int i = 0; i < 3; i++) {
+					chosenPlaceIds[i] = idList
+							.get(random.nextInt(idList.size()));
+					idList.remove(chosenPlaceIds[i]);
 				}
+			} catch (Exception e) {
+			}
 		}
+
+		AutoPlannerActivity.updateSeenPlaces(offset, chosenPlaceIds);
 
 		return chosenPlaceIds;
 	}
 
-	private boolean plannedRouteContainsAfter(int id) {
-		Integer[] places = AutoPlannerActivity.getPlannedRoute();
-		for (int i = offset + 1; i < getResources().getInteger(
-				R.integer.activity_limit); i++) {
-			if (places[i] == id)
-				return true;
-		}
-
-		return false;
-	}
-
-	private int[] choosePlaces(PlaceCategory category) {
+	private Integer[] choosePlaces(PlaceCategory category) {
 		DatabaseQuery query = new CategoryQuery(
 				Collections.singletonList(category));
 
-		if (allowVisited)
-			query = new AndQuery(query, new VisitedQuery());
-		else
-			query = new AndQuery(query, new NotQuery(new VisitedQuery()));
+		// If both checked, allow everything within all constraints
+		if (!(allowVisited && allowUnvisited))
+			if (allowVisited)
+				query = new AndQuery(query, new VisitedQuery());
+			else if (allowUnvisited)
+				query = new AndQuery(query, new NotQuery(new VisitedQuery()));
+			else
+				query = new NotQuery(new AllQuery());
+		// If neither checked, allow nothing
 
 		query = new AndQuery(query, new RatingRangeQuery((int) minRating, 5));
 
-		try {
-			// Lat at [0], long at [1]
-			query = new AndQuery(query, new InLocusQuery(
-					MainScreenActivity.getUserLocation()[0],
-					MainScreenActivity.getUserLocation()[1], maxDistance));
-		} catch (NullPointerException e) {
-			query = new AndQuery(query, new InLocusQuery(51.757674, -1.257535,
-					maxDistance));
-		}
+		if (offset == 0)
+			try {
+				// Lat at [0], long at [1]
+				query = new AndQuery(query, new InLocusQuery(
+						MainScreenActivity.getUserLocation()[0],
+						MainScreenActivity.getUserLocation()[1], maxDistance));
+			} catch (NullPointerException e) {
+				query = new AndQuery(query, new InLocusQuery(51.759684,
+						-1.258468, maxDistance));
+				// If no user data found, use CS Dept
+			}
+		else if (offset > 0)
+			try {
+				double latitude = AutoPlannerActivity
+						.getPreviousLatitude(offset);
+				double longitude = AutoPlannerActivity
+						.getPreviousLongitude(offset);
+				Log.d("Joshua", Double.toString(latitude) + ", " + Double.toString(longitude));
+				query = new AndQuery(query, new InLocusQuery(latitude,
+						longitude, maxDistance));
+			} catch (NullPointerException e) {
+				query = new AndQuery(query, new InLocusQuery(51.759684,
+						-1.258468, maxDistance));
+				// If no user data found, use CS Dept
+			}
+		else
+			throw new IllegalStateException(
+					"Gallery fragment index should not be negative");
+		// if offset is negative, we've got bigger problems
 
 		List<Integer> idList = MainScreenActivity.getPlacesDatabase().query(
 				query, new NameSorter(SortOrder.ASC));
@@ -257,6 +288,18 @@ public class GalleryPickerFragment extends Fragment {
 	}
 
 	private void updateUiElements() {
+		for (int i = 0; i < 3; i++) {
+			if (places[i] != null && placeIds[i] != -1) {
+				try {
+					GalleryImageGatherer gatherer = new GalleryImageGatherer(
+							places[i]);
+					gatherer.giveData(places[i], places[i].getFourSquareURL());
+					gatherer.startGathering();
+				} catch (Exception e) {
+				}
+			}
+		}
+
 		for (int j = 0; j < 3; j++) {
 			if (placeIds[j] == -1) {
 				chosenPlace[j].setText("No suggestion found");
@@ -264,10 +307,50 @@ public class GalleryPickerFragment extends Fragment {
 						R.drawable.common_signin_btn_icon_disabled_dark));
 			} else {
 				chosenPlace[j].setText(places[j].getName());
-				placeImages[j].setImageDrawable(places[j].getImage());
 				placeImages[j].setVisibility(View.VISIBLE);
+				placeImages[j].setImageDrawable(places[j].getImage());
 			}
 			Log.d("Joshua", "Set text for place");
+		}
+	}
+
+	private class GalleryImageGatherer {
+		private String imageUrl;
+
+		class ImageGathererTask extends AsyncTask<Void, Void, Void> {
+
+			@Override
+			protected Void doInBackground(Void... params) {
+				// get image
+				try {
+					URL photourl = new URL(imageUrl);
+
+					HttpsURLConnection photoconnection = (HttpsURLConnection) photourl
+							.openConnection();
+					photoconnection.setDoInput(true);
+					photoconnection.connect();
+					InputStream input = photoconnection.getInputStream();
+					Bitmap image = BitmapFactory.decodeStream(input);
+					place.updateImage(new BitmapDrawable(image));
+				} catch (Exception e) {/* no photos available */
+				}
+				return null;
+			}
+		}
+
+		private PlaceData place;
+
+		public void startGathering() {
+			new ImageGathererTask().execute();
+		}
+
+		public void giveData(PlaceData placeData, String foursquareImageUrl) {
+			place = placeData;
+			imageUrl = foursquareImageUrl;
+		}
+
+		public GalleryImageGatherer(PlaceData placeData) {
+			place = placeData;
 		}
 	}
 }
