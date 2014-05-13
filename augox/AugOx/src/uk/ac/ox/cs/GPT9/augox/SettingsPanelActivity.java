@@ -56,7 +56,6 @@ public class SettingsPanelActivity extends PreferenceActivity {
 		if (!isSimplePreferences(this)) {
 			return;
 		} 
-		Toast.makeText(this, "testing", Toast.LENGTH_LONG).show();
 		getFragmentManager().beginTransaction().replace(android.R.id.content, 
 				new GeneralPreferenceFragment()).commit();
 		// In the simplified UI, fragments are not used at all and we instead
