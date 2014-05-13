@@ -35,6 +35,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
@@ -54,6 +55,7 @@ public class GalleryPickerFragment extends Fragment {
 	private Integer[] placeIds = new Integer[3];
 	private PlaceCategory currentCat;
 	private ImageView[] placeImages = new ImageView[3];
+	private Button reloadChoices;
 
 	private PlaceData[] places = new PlaceData[3];
 
@@ -192,6 +194,19 @@ public class GalleryPickerFragment extends Fragment {
 		});
 
 		preferencesUpdated();
+
+		reloadChoices = ((Button) view.findViewById(R.id.reloadChoices));
+		reloadChoices.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				placeIds = choosePlaces(currentCat);
+				matchPlaceIds();
+				updateUiElements();
+				updateAutoPlanner();
+
+			}
+		});
 
 		return view;
 	}
