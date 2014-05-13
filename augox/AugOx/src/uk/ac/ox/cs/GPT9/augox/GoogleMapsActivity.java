@@ -5,9 +5,7 @@ import uk.ac.ox.cs.GPT9.augox.route.IRoute;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.widget.Toast;
 
-import com.beyondar.android.plugin.googlemap.GoogleMapWorldPlugin;
 import com.beyondar.android.util.location.BeyondarLocationManager;
 import com.beyondar.android.world.GeoObject;
 import com.beyondar.android.world.World;
@@ -24,7 +22,6 @@ public class GoogleMapsActivity extends FragmentActivity {
 	private IRoute route;
 	private World mWorld;
 	public static GoogleMap mMap;
-	private GoogleMapWorldPlugin mGoogleMapPlugin;
 	
 	public static Polyline routeLine = null;
 	
@@ -41,25 +38,27 @@ public class GoogleMapsActivity extends FragmentActivity {
 		if (mMap == null){
 			return;
 		}
+		
+		MainScreenActivity.mGoogleMapPlugin.setGoogleMap(GoogleMapsActivity.mMap);
 
 		// As we want to use GoogleMaps, we are going to create the plugin and
 		// attach it to the World
-		mGoogleMapPlugin = new GoogleMapWorldPlugin(this);
+		//mGoogleMapPlugin = new GoogleMapPlugin(this);
 		// Then we need to set the map in to the GoogleMapPlugin
-		mGoogleMapPlugin.setGoogleMap(mMap);
+		//mGoogleMapPlugin.setGoogleMap(mMap);
 		// Now that we have the plugin created let's add it to our world.
 		// NOTE: It is better to load the plugins before start adding object in to the world.
-		mWorld.addPlugin(mGoogleMapPlugin);
+		//mWorld.addPlugin(mGoogleMapPlugin);
 
 		//mMap.setOnMarkerClickListener(this);
 
-		mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mGoogleMapPlugin.getLatLng(), 15));
+		mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(MainScreenActivity.mGoogleMapPlugin.getLatLng(), 15));
 		mMap.animateCamera(CameraUpdateFactory.zoomTo(19), 2000, null);
                
 		mMap.setOnInfoWindowClickListener(new OnInfoWindowClickListener(){
 			@Override
 			public void onInfoWindowClick(Marker marker) {
-				GeoObject geoPlace = mGoogleMapPlugin.getGeoObjectOwner(marker);
+				GeoObject geoPlace = MainScreenActivity.mGoogleMapPlugin.getGeoObjectOwner(marker);
 				if (geoPlace != null) {
 					Intent intent = new Intent(getApplicationContext(), PlaceFullInfoActivity.class);
 					intent.putExtra(PlaceFullInfoActivity.EXTRA_DISTANCE, geoPlace.getDistanceFromUser()/1000); // TODO: make it work
@@ -69,13 +68,22 @@ public class GoogleMapsActivity extends FragmentActivity {
 			}
 		});
 		
+		//MainScreenActivity.user.setVisible(true);
+		
 		routeChanged();
     }
    
    @Override
    protected void onResume() {
         super.onResume();
+        //MainScreenActivity.user.setVisible(true);
+        //BeyondarLocationManager.enable();
         routeChanged();
+   }
+   @Override
+   protected void onPause() {
+	   super.onPause();
+	   //BeyondarLocationManager.disable();
    }
    
    private void routeChanged() {
@@ -86,7 +94,7 @@ public class GoogleMapsActivity extends FragmentActivity {
 	   if (routeLine != null) routeLine.remove();
 	   
 		if(!route.empty()){
-           LatLng origin = mGoogleMapPlugin.getLatLng();
+           LatLng origin = MainScreenActivity.mGoogleMapPlugin.getLatLng();
            LatLng dest = new LatLng(route.getNext().getLatitude(), route.getNext().getLongitude());
 
            // Getting URL to the Google Directions API

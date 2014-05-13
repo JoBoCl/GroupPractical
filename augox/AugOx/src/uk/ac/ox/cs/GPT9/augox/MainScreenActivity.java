@@ -74,8 +74,7 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 	private RadarView mRadarView;
 	private RadarWorldPlugin mRadarPlugin;
 	public static World mWorld;
-	public static GoogleMap mMap;
-	private GoogleMapWorldPlugin mGoogleMapPlugin;
+	public static GoogleMapWorldPlugin mGoogleMapPlugin;
 	public static List<Place> Places = new ArrayList<Place>();
 	private List<BeyondarObject> infoViewOn = new ArrayList<BeyondarObject>();
 
@@ -148,12 +147,16 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
         mWorld = new World(this);
 		mBeyondarFragment.setWorld(mWorld);
         mWorld.setArViewDistance(100);
+        
+		mGoogleMapPlugin = new GoogleMapWorldPlugin(this);
+		mGoogleMapPlugin.setGoogleMap(GoogleMapsActivity.mMap);
+		mWorld.addPlugin(mGoogleMapPlugin);
 		
 		user = new GeoObject(USERID);
-		//user.setGeoPosition(mWorld.getLatitude(), mWorld.getLongitude());
-		user.setGeoPosition(51.757674, -1.257535); // 31 Museum Road
+		user.setGeoPosition(mWorld.getLatitude(), mWorld.getLongitude());
+		//user.setGeoPosition(51.757674, -1.257535); // 31 Museum Road
 		user.setImageResource(R.drawable.arrowicon); // TODO give user an oriented custom icon
-		user.setVisible(false);
+		user.setVisible(true);
 		user.setName("User position");
 		mWorld.addBeyondarObject(user);
         
@@ -200,7 +203,7 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
         		Intent intent2 = new Intent(getApplicationContext(), GoogleMapsActivity.class);
             	intent2.putExtra(ListPlacesActivity.EXTRA_LATITUDE, mWorld.getLatitude());
             	intent2.putExtra(ListPlacesActivity.EXTRA_LONGITUDE, mWorld.getLongitude());
-            	user.setVisible(true);
+            	//user.setVisible(true);
             	startActivity(intent2);
 				return true; }
         });
@@ -215,6 +218,8 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
     	mBeyondarFragment.setMaxFarDistance(MAXICONDIST);
     	
     	updateMoveonButtonVisibility();
+    	
+    	//GoogleMapsActivity.mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
 
         fillWorld();
     }
@@ -251,7 +256,7 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 	   startActivity(intent);
    }
    
-   private void initializeGMaps() {   
+   /*private void initializeGMaps() {   
 		mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
 		if (mMap == null){
 			return;
@@ -267,12 +272,6 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 		mGoogleMapPlugin.setGoogleMap(mMap);
         mWorld.addPlugin(mGoogleMapPlugin);
         
-        /*for (Place place: Places) {
-        	mMap.addMarker(new MarkerOptions()
-        		.position(new LatLng(place.geoPlace.getLatitude(), place.geoPlace.getLongitude()))
-        		.title(place.geoPlace.getName())
-        		.snippet(placesDatabase.getPlaceByID(place.placeID).getDescription()));
-        }*/
         refreshVisibility();
         
         if(!route.empty()){
@@ -292,13 +291,13 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
    private void centreCamera() {
 		mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(mWorld.getLatitude(), mWorld.getLongitude()), 15));
 		mMap.animateCamera(CameraUpdateFactory.zoomTo(19), 2000, null);
-   }
+   }*/
    
    @Override
    protected void onResume() {
         super.onResume();
         BeyondarLocationManager.enable();
-        user.setVisible(false);
+        //user.setVisible(false);
         routeChanged();
    }
    
