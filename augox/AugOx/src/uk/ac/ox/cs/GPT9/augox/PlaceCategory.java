@@ -7,8 +7,10 @@ public enum PlaceCategory {
 	/*
 	 * Enumerations
 	 */
-	//(ID,Name,FilterPreferenceString,Icon,IconForVisited)
-	UNKNOWN (0, "*UNKNOWN*","",0,0,0,0,0,0),
+	
+	//(ID,Name,Filter preference string,Icon,Icon for visited,Icon with no border, Icon visited with no border,
+	//		Icon for the next place in the route, Icon visited for the next place in the route)
+	UNKNOWN (0, "*UNKNOWN*","",0,0,0,0,0,0), //not intended for any place that is shown to the user
 	MUSEUM (1, "Museum","filter_museums",R.drawable.museumicon,R.drawable.museumicontick,R.drawable.museumiconnoborder,
 			R.drawable.museumiconticknoborder,R.drawable.museumiconnext,R.drawable.museumiconticknext),
 	COLLEGE (2, "College","filter_colleges",R.drawable.collegeicon,R.drawable.collegeicontick,R.drawable.collegeiconnoborder,
@@ -54,6 +56,7 @@ public enum PlaceCategory {
 	public String getName() { return name; }
 	public String getFilter() {return filterName;}
 	
+	//get the correct icon for the category based on whether a place is visited or the next in the route
 	public int getImageRef(boolean visited, boolean nextInRoute) {
 		if(visited) 
 			if(nextInRoute) return imageRefNextTick; else return imageRefTick;
