@@ -1,54 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content" >
+        android:layout_width="0dip"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:background="@drawable/bubble_white_normal" >
 
-    <TextView
-        android:id="@+id/placeName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true" >"
-    </TextView>
-    
-        <ImageView
-            android:id="@+id/imageViewStar1"
+	    <TextView
+	        android:id="@+id/placeNameDistance"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+	        android:layout_alignParentTop="true" />
+
+        <RatingBar
+            android:id="@+id/ratingBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/placeName"
-            android:layout_below="@+id/placeName"
-            android:src="@android:drawable/star_off" />
-
-        <ImageView
-            android:id="@+id/imageViewStar2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/imageViewStar1"
-            android:layout_below="@+id/placeName"
-            android:src="@android:drawable/star_off" />
-
-        <ImageView
-            android:id="@+id/imageViewStar3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/imageViewStar2"
-            android:layout_below="@+id/placeName"
-            android:src="@android:drawable/star_off" />
-
-        <ImageView
-            android:id="@+id/imageViewStar4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/imageViewStar3"
-            android:layout_below="@+id/placeName"
-            android:src="@android:drawable/star_off" />
-
-        <ImageView
-            android:id="@+id/imageViewStar5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/imageViewStar4"
-            android:layout_below="@+id/placeName"
-            android:src="@android:drawable/star_off" />
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/placeNameDistance"
+            android:isIndicator="true"
+            style="?android:attr/ratingBarStyleSmall" />
 
 </RelativeLayout>

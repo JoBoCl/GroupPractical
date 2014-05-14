@@ -156,6 +156,7 @@ class GoogleMapGeoObjectPlugin implements GeoObjectPlugin {
 
 	@Override
 	public void onVisibilityChanged(boolean visible) {
+		if (mMarker != null) mMarker.setVisible(visible);
 	}
 
 	@Override

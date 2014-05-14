@@ -45,7 +45,7 @@ public class PlaceFullInfoActivity extends Activity {
         	else return result;
         }
         else {
-        	return new DecimalFormat("#.#").format(distanceAsKm) + " km";
+        	return new DecimalFormat("#.#").format(distanceAsKm) + "km";
         }
 	}
 
