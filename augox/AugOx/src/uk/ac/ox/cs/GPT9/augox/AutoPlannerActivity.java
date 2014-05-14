@@ -37,8 +37,12 @@ public class AutoPlannerActivity extends FragmentActivity {
 
 	private SeekBar activityCount;
 
+	// ADT seenPlaces : Integer -> {Integer}
+	//     seenPlaces(i) = activities[i],places
+	// for all x in seenPlaces(i), for all y in seenPlaces(j), for i != j, x != y
 	private static Map<Integer, Integer[]> seenPlaces;
 
+	// Returns codomain of seenPlaces
 	public static List<Integer> getSeenPlaces() {
 		List<Integer> values = new ArrayList<Integer>();
 		for (Integer[] placeIds : seenPlaces.values())
@@ -115,17 +119,21 @@ public class AutoPlannerActivity extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_auto_planner);
 
+		// Access single object for shared preferences
 		SharedPreferences sharedPref = MainScreenActivity.getSharedPref();
+		
+		// Update activity limit for use across class
 		ACTIVITY_LIMIT = ((int) (Integer.parseInt(sharedPref.getString(
 				"setting_autoroute_max_length", "1"))));
 
-		_route = new Integer[getResources()
-				.getInteger(R.integer.activity_limit)];
+		// Initialise new local blank route
+		_route = new Integer[ACTIVITY_LIMIT];
 
+		// Initialise new list of places that have been seen and ignored by the user
 		seenPlaces = new TreeMap<Integer, Integer[]>();
 
-		activities = new GalleryPickerFragment[getResources().getInteger(
-				R.integer.activity_limit)];
+		//
+		activities = new GalleryPickerFragment[ACTIVITY_LIMIT];
 		LinearLayout galleryLayout = (LinearLayout) findViewById(R.id.galleryHolders);
 
 		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
