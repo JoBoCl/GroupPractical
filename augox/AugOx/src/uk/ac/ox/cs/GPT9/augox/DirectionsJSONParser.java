@@ -10,6 +10,9 @@ import org.json.JSONObject;
  
 import com.google.android.gms.maps.model.LatLng;
  
+
+// see: http://wptrafficanalyzer.in/blog/driving-route-from-my-location-to-destination-in-google-maps-android-api-v2/
+// referenced 14/05/2014
 public class DirectionsJSONParser {
  
     /** Receives a JSONObject and returns a list of lists containing latitude and longitude */

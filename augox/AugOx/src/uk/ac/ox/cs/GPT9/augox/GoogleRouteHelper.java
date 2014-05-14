@@ -18,6 +18,8 @@ import android.util.Log;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.PolylineOptions;
 
+// see: http://wptrafficanalyzer.in/blog/driving-route-from-my-location-to-destination-in-google-maps-android-api-v2/
+// referenced 14/05/2014
 public class GoogleRouteHelper {
     public static String getDirectionsUrl(LatLng origin,LatLng dest){
     	 
