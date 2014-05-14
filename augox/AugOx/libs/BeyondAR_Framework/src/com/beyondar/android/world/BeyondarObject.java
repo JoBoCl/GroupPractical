@@ -446,8 +446,8 @@ public class BeyondarObject implements Plugable<BeyondarObjectPlugin> {
 	 *            True to set it visible, false to don't render it.
 	 */
 	public void setVisible(boolean visible) {
-		if (visible == this.mVisible)
-			return;
+		//if (visible == this.mVisible)
+			//return;
 		this.mVisible = visible;
 		synchronized (lockPlugins) {
 			for (BeyondarObjectPlugin plugin : plugins) {

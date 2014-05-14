@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import uk.ac.ox.cs.GPT9.augox.dbquery.AllQuery;
-import uk.ac.ox.cs.GPT9.augox.dbquery.DatabaseQuery;
+import uk.ac.ox.cs.GPT9.augox.dbquery.DatabaseQuery;	
 import uk.ac.ox.cs.GPT9.augox.dbsort.DatabaseSorter;
 import uk.ac.ox.cs.GPT9.augox.dbsort.DistanceFromSorter;
 import uk.ac.ox.cs.GPT9.augox.dbsort.SortOrder;
@@ -23,6 +23,7 @@ import com.beyondar.android.view.OnClickBeyondarObjectListener;
 import com.beyondar.android.world.BeyondarObject;
 import com.beyondar.android.world.GeoObject;
 import com.beyondar.android.world.World;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 
 import android.content.Context;
@@ -66,13 +67,14 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 
 	public static GeoObject user;
 
-	public static double[] getUserLocation() {
-		double[] latlong = new double[2];
-		latlong[0] = user.getLatitude();
-		latlong[1] = user.getLongitude();
-
-		return latlong;
-	}
+ 	public static double[] getUserLocation() {
+ 		LatLng latLng = mGoogleMapPlugin.getLatLng();
+  		double[] latlong = new double[2];
+ 		latlong[0] = latLng.latitude;
+ 		latlong[1] = latLng.longitude;
+  
+  		return latlong;
+  	}
 
 	private SeekBar mSeekBarMaxDistance;
 
@@ -121,7 +123,7 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 		
 		user = new GeoObject(USERID);
 		user.setGeoPosition(mWorld.getLatitude(), mWorld.getLongitude());
-		//user.setGeoPosition(51.757674, -1.257535); // 31 Museum Road
+		//user.setGeoPosition(51.759828, -1.258454); // Comp Sci Dept
 		user.setImageResource(R.drawable.arrowicon); // TODO give user an oriented custom icon
 		user.setVisible(true);
 		user.setName("User position");

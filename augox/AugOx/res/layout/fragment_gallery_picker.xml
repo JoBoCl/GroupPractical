@@ -95,10 +95,25 @@
         </LinearLayout>
     </RadioGroup>
 
-    <CheckBox
-        android:id="@+id/missSession"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="No, thanks, I&apos;ve got my own plans" />
+
+     <LinearLayout
+          android:layout_width="match_parent"
+
+         android:layout_height="wrap_content" >
+ 
+         <CheckBox
+             android:id="@+id/missSession"
+             android:layout_width="0dp"
+             android:layout_height="wrap_content"
+             android:layout_weight="1"
+             android:text="No, thanks, I&apos;ve got my own plans" />
+ 
+         <Button
+             android:id="@+id/reloadChoices"
+             android:layout_width="0dp"
+             android:layout_height="wrap_content"
+             android:layout_weight="1"
+             android:text="Give me more choices" />
+     </LinearLayout>
 
 </LinearLayout>
