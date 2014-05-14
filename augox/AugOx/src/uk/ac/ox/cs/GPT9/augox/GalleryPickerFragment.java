@@ -35,6 +35,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
@@ -54,6 +55,7 @@ public class GalleryPickerFragment extends Fragment {
 	private Integer[] placeIds = new Integer[3];
 	private PlaceCategory currentCat;
 	private ImageView[] placeImages = new ImageView[3];
+	private Button reloadChoices;
 
 	private PlaceData[] places = new PlaceData[3];
 
@@ -126,7 +128,7 @@ public class GalleryPickerFragment extends Fragment {
 			chosenPlace[i].setOnClickListener(placeClickedListener);
 			placeImages[i].setOnClickListener(placeClickedListener);
 		}
-		
+
 		chosenPlace[0].setChecked(true);
 		lastChecked = 1;
 
@@ -190,8 +192,21 @@ public class GalleryPickerFragment extends Fragment {
 				}
 			}
 		});
-		
+
 		preferencesUpdated();
+
+		reloadChoices = ((Button) view.findViewById(R.id.reloadChoices));
+		reloadChoices.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				placeIds = choosePlaces(currentCat);
+				matchPlaceIds();
+				updateUiElements();
+				updateAutoPlanner();
+
+			}
+		});
 
 		return view;
 	}
@@ -248,9 +263,16 @@ public class GalleryPickerFragment extends Fragment {
 		if (offset == 0)
 			try {
 				// Lat at [0], long at [1]
-				query = new AndQuery(query, new InLocusQuery(
-						MainScreenActivity.getUserLocation()[0],
-						MainScreenActivity.getUserLocation()[1], maxDistance));
+				if (MainScreenActivity.getUserLocation()[0] == 0.0
+						&& MainScreenActivity.getUserLocation()[1] == 0.0)
+
+					query = new AndQuery(query, new InLocusQuery(51.759684,
+							-1.258468, maxDistance));
+				else
+					query = new AndQuery(query, new InLocusQuery(
+							MainScreenActivity.getUserLocation()[0],
+							MainScreenActivity.getUserLocation()[1],
+							maxDistance));
 			} catch (NullPointerException e) {
 				query = new AndQuery(query, new InLocusQuery(51.759684,
 						-1.258468, maxDistance));
@@ -262,7 +284,9 @@ public class GalleryPickerFragment extends Fragment {
 						.getPreviousLatitude(offset);
 				double longitude = AutoPlannerActivity
 						.getPreviousLongitude(offset);
-				Log.d("Joshua", Double.toString(latitude) + ", " + Double.toString(longitude));
+				Log.d("Joshua",
+						Double.toString(latitude) + ", "
+								+ Double.toString(longitude));
 				query = new AndQuery(query, new InLocusQuery(latitude,
 						longitude, maxDistance));
 			} catch (NullPointerException e) {

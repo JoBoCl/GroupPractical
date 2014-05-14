@@ -293,9 +293,10 @@ containing a value of this type.
         public static final int add_places_type=0x7f060042;
         public static final int allowRepeats=0x7f06000a;
         public static final int beyondarFragment=0x7f060016;
-        public static final int btn_loaddatabase=0x7f060012;
-        public static final int btn_testFullInfo=0x7f060014;
-        public static final int btn_writedatabasetoexternal=0x7f060013;
+        public static final int btn_fetchRatings=0x7f060014;
+        public static final int btn_loaddatabase=0x7f060011;
+        public static final int btn_testFullInfo=0x7f060013;
+        public static final int btn_writedatabasetoexternal=0x7f060012;
         public static final int buttonAddEnd=0x7f060027;
         public static final int buttonAddNext=0x7f060026;
         public static final int buttonAddPlaces=0x7f060044;
@@ -312,9 +313,9 @@ containing a value of this type.
         public static final int checkBoxRouteFilterRestaurants=0x7f060032;
         public static final int checkBoxRouteFilterUnvisited=0x7f06002e;
         public static final int checkBoxRouteFilterVisited=0x7f06002d;
-        public static final int chosenPlace0=0x7f06003c;
-        public static final int chosenPlace1=0x7f06003e;
-        public static final int chosenPlace2=0x7f060040;
+        public static final int chosenPlace0=0x7f06003b;
+        public static final int chosenPlace1=0x7f06003d;
+        public static final int chosenPlace2=0x7f06003f;
         public static final int current_route_name=0x7f060047;
         public static final int current_route_number=0x7f060045;
         public static final int current_route_type=0x7f060046;
@@ -342,23 +343,23 @@ containing a value of this type.
         public static final int list_places_item_type=0x7f06004e;
         public static final int list_places_single_view=0x7f060054;
         public static final int map=0x7f060015;
-        public static final int missSession=0x7f060041;
+        public static final int missSession=0x7f060040;
         public static final int newsFeedSource=0x7f060051;
         public static final int newsFeedText=0x7f060052;
         public static final int none=0x7f060000;
         public static final int normal=0x7f060001;
-        public static final int placeImage0=0x7f06003b;
-        public static final int placeImage1=0x7f06003d;
-        public static final int placeImage2=0x7f06003f;
+        public static final int placeImage0=0x7f06003a;
+        public static final int placeImage1=0x7f06003c;
+        public static final int placeImage2=0x7f06003e;
         public static final int placeName=0x7f060055;
-        public static final int placesGroup=0x7f06003a;
+        public static final int placesGroup=0x7f060039;
         public static final int radarView=0x7f060017;
+        public static final int reloadChoices=0x7f060041;
         public static final int routeDistance=0x7f06000c;
         public static final int routeFinished=0x7f060009;
         public static final int routeMinimumRating=0x7f06000e;
         public static final int satellite=0x7f060002;
         public static final int scrollView1=0x7f060037;
-        public static final int startTime=0x7f060039;
         public static final int terrain=0x7f060003;
         public static final int textRoutePlannerCurrentRoute=0x7f06002b;
         public static final int textView1=0x7f06000b;
@@ -369,9 +370,8 @@ containing a value of this type.
         public static final int textViewFeedTitle=0x7f060024;
         public static final int textViewName=0x7f06001b;
         public static final int textViewPhoneNumber=0x7f06002a;
-        public static final int unvisited=0x7f060011;
-        public static final int visited=0x7f060010;
-        public static final int visitedUnvisitedPicker=0x7f06000f;
+        public static final int unvisited=0x7f060010;
+        public static final int visited=0x7f06000f;
     }
     public static final class integer {
         public static final int activity_limit=0x7f080001;
@@ -387,16 +387,14 @@ containing a value of this type.
         public static final int activity_route_planner=0x7f030006;
         public static final int beyondar_object_view=0x7f030007;
         public static final int fragment_gallery_picker=0x7f030008;
-        public static final int gallery_picker=0x7f030009;
-        public static final int listview_item_add_places=0x7f03000a;
-        public static final int listview_item_current_route=0x7f03000b;
-        public static final int listview_item_filters=0x7f03000c;
-        public static final int listview_item_list_places=0x7f03000d;
-        public static final int listview_item_news_feed=0x7f03000e;
-        public static final int listview_standard_layout=0x7f03000f;
-        public static final int mini_info_view=0x7f030010;
-        public static final int news_feed_item_1=0x7f030011;
-        public static final int session_planner=0x7f030012;
+        public static final int listview_item_add_places=0x7f030009;
+        public static final int listview_item_current_route=0x7f03000a;
+        public static final int listview_item_filters=0x7f03000b;
+        public static final int listview_item_list_places=0x7f03000c;
+        public static final int listview_item_news_feed=0x7f03000d;
+        public static final int listview_standard_layout=0x7f03000e;
+        public static final int mini_info_view=0x7f03000f;
+        public static final int news_feed_item_1=0x7f030010;
     }
     public static final class menu {
         public static final int auto_planner=0x7f0c0000;
