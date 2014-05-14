@@ -23,6 +23,7 @@ import com.beyondar.android.view.OnClickBeyondarObjectListener;
 import com.beyondar.android.world.BeyondarObject;
 import com.beyondar.android.world.GeoObject;
 import com.beyondar.android.world.World;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 
 import android.content.Context;
@@ -206,78 +207,6 @@ public class MainScreenActivity extends FragmentActivity implements
    
    private void loadDatabase(String filename) {
 	   AssetManager ast = getAssets();
-=======
-
-		mRadarView = (RadarView) findViewById(R.id.radarView);
-		// Create the Radar module
-		mRadarPlugin = new RadarWorldPlugin(this);
-		// set the radar view in to our radar module
-		mRadarPlugin.setRadarView(mRadarView);
-		// Set how far (in meters) we want to display in the view
-		mRadarPlugin.setMaxDistance(mWorld.getArViewDistance());
-		// and finally let's add the module
-		mWorld.addPlugin(mRadarPlugin);
-
-		mSeekBarMaxDistance = ((android.widget.SeekBar) findViewById(R.id.distanceSlider));
-		mSeekBarMaxDistance
-				.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
-					@Override
-					public void onStopTrackingTouch(SeekBar seekBar) {
-					}
-
-					@Override
-					public void onStartTrackingTouch(SeekBar seekBar) {
-					}
-
-					@Override
-					public void onProgressChanged(SeekBar seekBar,
-							int progress, boolean fromUser) {
-						mWorld.setArViewDistance(seekBar.getProgress());
-						mRadarPlugin.setMaxDistance(mWorld.getArViewDistance());
-					}
-				});
-		mSeekBarMaxDistance.setProgress(mSeekBarMaxDistance.getMax() / 2);
-		mWorld.setArViewDistance(mSeekBarMaxDistance.getProgress());
-		mRadarPlugin.setMaxDistance(mSeekBarMaxDistance.getProgress());
-
-		mRadarView.setOnLongClickListener(new OnLongClickListener() {
-			public boolean onLongClick(View rv) {
-				// if (mGoogleMapPlugin == null) initializeGMaps();
-				// centreCamera();
-				// mMapFrame.setVisibility(View.VISIBLE);
-				Intent intent2 = new Intent(getApplicationContext(),
-						GoogleMapsActivity.class);
-				intent2.putExtra(ListPlacesActivity.EXTRA_LATITUDE,
-						mWorld.getLatitude());
-				intent2.putExtra(ListPlacesActivity.EXTRA_LONGITUDE,
-						mWorld.getLongitude());
-				// user.setVisible(true);
-				startActivity(intent2);
-				return true;
-			}
-		});
-
-		mBeyondarFragment.setOnClickBeyondarObjectListener(this);
-
-		sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-		sharedPref.registerOnSharedPreferenceChangeListener(this);
-
-		// mViewAdapter = new CustomBeyondarViewAdapter(this);
-		mBeyondarFragment.setBeyondarViewAdapter(new CustomBeyondarViewAdapter(
-				this));
-		mBeyondarFragment.setMaxFarDistance(MAXICONDIST);
-
-		updateMoveonButtonVisibility();
-
-		// GoogleMapsActivity.mMap = ((SupportMapFragment)
-		// getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
-
-		fillWorld();
-	}
-
-	private void loadDatabase(String filename) {
-		AssetManager ast = getAssets();
->>>>>>> master
 		try {
 			InputStream inp = ast.open(filename);
 			getPlacesDatabase().loadFromStream(inp);
@@ -288,7 +217,6 @@ public class MainScreenActivity extends FragmentActivity implements
 					Toast.LENGTH_LONG);
 			toast.show();
 		}
-<<<<<<< HEAD
    }
    
    private void startFullInfoActivity(final BeyondarObject geoPlace) {
@@ -339,96 +267,6 @@ public class MainScreenActivity extends FragmentActivity implements
         BeyondarLocationManager.disable();
    }
     
-    @Override
-=======
-	}
-
-	private void startFullInfoActivity(final BeyondarObject geoPlace) {
-		/*
-		 * mBeyondarFragment.takeScreenshot(new OnScreenshotListener() {
-		 * 
-		 * @Override public void onScreenshot (Bitmap screenshot) { Bundle
-		 * bundle = new Bundle(); Bitmap ss2 =
-		 * Bitmap.createScaledBitmap(screenshot, screenshot.getWidth()/4,
-		 * screenshot.getHeight()/4, true); bundle.putParcelable("background",
-		 * (Parcelable)ss2); Intent intent = new Intent(getApplicationContext(),
-		 * PlaceFullInfoActivity.class);
-		 * intent.putExtra(PlaceFullInfoActivity.EXTRA_BACKGROUND, bundle);
-		 * intent.putExtra(PlaceFullInfoActivity.EXTRA_DISTANCE,
-		 * geoPlace.getDistanceFromUser()/1000);
-		 * intent.putExtra(PlaceFullInfoActivity.EXTRA_PLACE,
-		 * (int)geoPlace.getId()); startActivity(intent); } });
-		 */// TODO: image for background
-		Intent intent = new Intent(getApplicationContext(),
-				PlaceFullInfoActivity.class);
-		intent.putExtra(PlaceFullInfoActivity.EXTRA_DISTANCE,
-				geoPlace.getDistanceFromUser() / 1000);
-		intent.putExtra(PlaceFullInfoActivity.EXTRA_PLACE,
-				(int) geoPlace.getId());
-		startActivity(intent);
-	}
-
-	/*
-	 * private void initializeGMaps() { mMap = ((SupportMapFragment)
-	 * getSupportFragmentManager().findFragmentById(R.id.map)).getMap(); if
-	 * (mMap == null){ return; } mMapFrame = (View)findViewById(R.id.map_frame);
-	 * mMap.setOnMapLongClickListener(new OnMapLongClickListener() { public void
-	 * onMapLongClick(LatLng l) { mMapFrame.setVisibility(View.GONE); } });
-	 * 
-	 * mGoogleMapPlugin = new GoogleMapWorldPlugin(this);
-	 * mGoogleMapPlugin.setGoogleMap(mMap); mWorld.addPlugin(mGoogleMapPlugin);
-	 * 
-	 * refreshVisibility();
-	 * 
-	 * if(!route.empty()){ LatLng origin = mGoogleMapPlugin.getLatLng(); LatLng
-	 * dest = new LatLng(route.getNext().getLatitude(),
-	 * route.getNext().getLongitude());
-	 * 
-	 * // Getting URL to the Google Directions API String url =
-	 * GoogleRouteHelper.getDirectionsUrl(origin, dest);
-	 * 
-	 * DownloadTask downloadTask = new DownloadTask();
-	 * 
-	 * // Start downloading json data from Google Directions API
-	 * downloadTask.execute(url); } }
-	 * 
-	 * private void centreCamera() {
-	 * mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new
-	 * LatLng(mWorld.getLatitude(), mWorld.getLongitude()), 15));
-	 * mMap.animateCamera(CameraUpdateFactory.zoomTo(19), 2000, null); }
-	 */
-
-	@Override
-	protected void onResume() {
-		super.onResume();
-		BeyondarLocationManager.enable();
-		// user.setVisible(false);
-		routeChanged();
-	}
-
-	public void routeChanged() {
-		for (Place p : Places) {
-			resetImage(p);
-		}
-		updateMoveonButtonVisibility();
-	}
-
-	private Place findPlace(int placeID) {
-		for (Place p : Places) {
-			if (p.placeID == placeID)
-				return p;
-		}
-		return null;
-	}
-
-	@Override
-	protected void onPause() {
-		super.onPause();
-		BeyondarLocationManager.disable();
-	}
-
-	@Override
->>>>>>> master
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main_screen, menu);
