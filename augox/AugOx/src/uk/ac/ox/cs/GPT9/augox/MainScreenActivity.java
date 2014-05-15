@@ -24,6 +24,7 @@ import com.beyondar.android.world.BeyondarObject;
 import com.beyondar.android.world.GeoObject;
 import com.beyondar.android.world.World;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 
 import android.content.Context;
 import android.content.Intent;
@@ -42,6 +43,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.View.OnLongClickListener;
 import android.widget.RatingBar;
+import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.Toast;
 import android.widget.TextView;
@@ -51,8 +53,10 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
    
 	// "Global" variables
 	private static PlacesDatabase placesDatabase = new PlacesDatabase();
+
 	public static PlacesDatabase getPlacesDatabase() { return placesDatabase; }
 	private static IRoute route = new Route();
+
 	public static IRoute getCurrentRoute() { return route; }
 	
 	// BeyondAR objects
@@ -90,6 +94,7 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 			this.placeID = placeID;
 			this.geoPlace = geoPlace;
 		}
+
 		public int placeID;
 		public GeoObject geoPlace;
 	}
@@ -176,7 +181,9 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 			getPlacesDatabase().loadFromStream(inp);
 			inp.close();
 		} catch (IOException e) {
-			Toast toast = Toast.makeText(getApplicationContext(), "Cricital Error! The database could not be loaded.", Toast.LENGTH_LONG);
+			Toast toast = Toast.makeText(getApplicationContext(),
+					"Cricital Error! The database could not be loaded.",
+					Toast.LENGTH_LONG);
 			toast.show();
 		}
    }
@@ -232,7 +239,6 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
         BeyondarLocationManager.disable(); // pause gps service
    }
     
-    @Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main_screen, menu);
@@ -317,7 +323,7 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 	@Override
 	public void onClickBeyondarObject(ArrayList<BeyondarObject> beyondarObjects) {
 		BeyondarObject clicked = null;
-		for (BeyondarObject beyondarObject: beyondarObjects) {
+		for (BeyondarObject beyondarObject : beyondarObjects) {
 			if (beyondarObject.isVisible()) {
 				clicked = beyondarObject;
 				break;
@@ -345,6 +351,7 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 		List<PlaceCategory> pcs = new ArrayList<PlaceCategory>();
 		for (PlaceCategory pc: PlaceCategory.values()) {
 			if (sharedPref.getBoolean(pc.getFilter(), true)) pcs.add(pc);
+				pcs.add(pc);
 		}
 		return pcs;
 	}
@@ -353,6 +360,7 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 	private void fillWorld() {
 		DatabaseQuery dq = new AllQuery();
 		DatabaseSorter ds = new DistanceFromSorter(mWorld.getLongitude(), mWorld.getLatitude(), SortOrder.ASC);
+				mWorld.getLatitude(), SortOrder.ASC);
 		List<Integer> placeIDs = placesDatabase.query(dq, ds);
 		for (Integer placeID: placeIDs) {
 			PlaceData currPlace = placesDatabase.getPlaceByID(placeID);
@@ -401,14 +409,14 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 						
 			// Once the view is ready we specify the position
 			setPosition(beyondarObject.getScreenPositionTopRight());
-			
+
 			recycledView.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					startFullInfoActivity(beyondarObject);
-				}; 
+				};
 			});
-			
+
 			return recycledView;
 		}
 	}

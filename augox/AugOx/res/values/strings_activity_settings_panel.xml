@@ -34,14 +34,18 @@
         <item>100m</item>
         <item>200m</item>
         <item>500m</item>
+        <item>800m</item>
         <item>1km</item>
+        <item>1.5km</item>
         <item>2km</item>
     </string-array>
     <string-array name="pref_arview_max_distance_values">
         <item>0.1</item>
         <item>0.2</item>
         <item>0.5</item>
+        <item>0.8</item>
         <item>1</item>
+        <item>1.5</item>
         <item>2</item>
     </string-array>
 </resources>

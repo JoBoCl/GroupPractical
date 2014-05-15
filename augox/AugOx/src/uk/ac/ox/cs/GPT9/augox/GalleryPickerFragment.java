@@ -59,7 +59,6 @@ public class GalleryPickerFragment extends Fragment {
 
 	private PlaceData[] places = new PlaceData[3];
 
-	// Factory method to creat new instance with saved offset value
 	public static GalleryPickerFragment newInstance(int offset) {
 		GalleryPickerFragment localGalleryPickerFragment = new GalleryPickerFragment();
 		Bundle localBundle = new Bundle();
@@ -68,7 +67,6 @@ public class GalleryPickerFragment extends Fragment {
 		return localGalleryPickerFragment;
 	}
 
-	// Update preferences for route
 	public void preferencesUpdated() {
 		allowRepeats = AutoPlannerActivity.areRepeatsAllowed();
 		allowVisited = AutoPlannerActivity.allowingVisited();
@@ -91,7 +89,6 @@ public class GalleryPickerFragment extends Fragment {
 
 	private boolean allowUnvisited = true;
 
-	// If user has selected somewhere, return that place's ID, else return null
 	public Integer getSelectedPlace() {
 		if (ownPlan.isChecked()) {
 			return null;
@@ -114,7 +111,6 @@ public class GalleryPickerFragment extends Fragment {
 		chosenPlace[2] = ((RadioButton) view.findViewById(R.id.chosenPlace2));
 		Log.d("Joshua", "Get radio buttons");
 
-		// Update selected place
 		OnClickListener placeClickedListener = new OnClickListener() {
 			public void onClick(View view) {
 				for (int i = 0; i < 3; i++) {
@@ -217,6 +213,19 @@ public class GalleryPickerFragment extends Fragment {
 		 
 		 			}
 		 		});
+
+		reloadChoices = ((Button) view.findViewById(R.id.reloadChoices));
+		reloadChoices.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				placeIds = choosePlaces(currentCat);
+				matchPlaceIds();
+				updateUiElements();
+				updateAutoPlanner();
+
+			}
+		});
 
 		return view;
 	}
