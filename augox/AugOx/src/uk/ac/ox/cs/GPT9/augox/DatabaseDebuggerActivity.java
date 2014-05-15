@@ -21,6 +21,11 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Toast;
 
+/**
+ * This activity exists for debugging the database only, and is not part of the
+ * main program. It consists of a handful of buttons that perform tasks used in
+ * the construction of the database.
+ */
 public class DatabaseDebuggerActivity extends Activity {
 
 	@Override
@@ -36,6 +41,9 @@ public class DatabaseDebuggerActivity extends Activity {
 		return true;
 	}
 	
+	/*
+	 * Populate database from binary file
+	 */
 	public void loadDatabase(View view) {
 		AssetManager ast = getAssets();
 		try {
@@ -50,6 +58,9 @@ public class DatabaseDebuggerActivity extends Activity {
 		}
 	}
 	
+	/*
+	 * Write database to binary file
+	 */
 	public void writeDatabaseToExternal(View view) {
 	    if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
 	    	//File root = Environment.getExternalStorageDirectory();
@@ -74,6 +85,9 @@ public class DatabaseDebuggerActivity extends Activity {
 	    }
 	}
 	
+	/*
+	 * Launch place info screen for first place in database
+	 */
 	public void testFullInfo(View view) {
 		Intent intent = new Intent(this, PlaceFullInfoActivity.class);
 		intent.putExtra(PlaceFullInfoActivity.EXTRA_PLACE, 0);
@@ -82,6 +96,9 @@ public class DatabaseDebuggerActivity extends Activity {
 		startActivity(intent);
 	}
 	
+	/*
+	 * Pull foursquare data for all places in database and log to database
+	 */
 	public void fetchRatings(View view) {
 		DatabaseQuery x = new AllQuery();
 		DatabaseSorter y = new NameSorter(SortOrder.ASC);
@@ -91,6 +108,9 @@ public class DatabaseDebuggerActivity extends Activity {
 		ratingsGetter.startCall();
 	}
 	
+	/*
+	 * Callback for foursquare data scraping
+	 */
 	public void reportDone() {
 		Toast toast = Toast.makeText(getApplicationContext(), "Ratings Fetched", Toast.LENGTH_SHORT);
 		toast.show();

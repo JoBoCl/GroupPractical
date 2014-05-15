@@ -6,6 +6,9 @@ import uk.ac.ox.cs.GPT9.augox.MainScreenActivity;
 import uk.ac.ox.cs.GPT9.augox.PlaceData;
 import uk.ac.ox.cs.GPT9.augox.PlacesDatabase;
 
+/**
+ * Sort query results by distance from given GPS coordinates
+ */
 public class DistanceFromSorter implements DatabaseSorter {
 	/*
 	 * Variables
