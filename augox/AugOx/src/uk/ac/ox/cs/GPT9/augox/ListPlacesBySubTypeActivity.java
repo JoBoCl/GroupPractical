@@ -15,6 +15,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+//Activity for getting more information from the user about the list they want.
 public class ListPlacesBySubTypeActivity extends ListActivity {
 	/*
 	 * Intent Constants
@@ -32,12 +33,14 @@ public class ListPlacesBySubTypeActivity extends ListActivity {
 		latitude = intent.getDoubleExtra(EXTRA_LATITUDE,Double.valueOf(0));
 		longitude = intent.getDoubleExtra(EXTRA_LONGITUDE,Double.valueOf(0));
 		queryType = intent.getIntExtra(EXTRA_QUERYTYPE, 0);
+		//populate the listview based on the value passed in the intent of EXTRA_QUERYTYPE. This refers to the type of list the user wants (local places, places by category etc) 
 		final List<String> items = new ArrayList<String>();
 		switch(queryType){
-			case 3:
+			case 3: //places by name
 				items.add("0-9");
 				int count = 0;
 				String createdString = "";
+				//create a list f strings, 0-9 followed by the alphabet in triplets
 				for(char ch = 'A' ; ch <= 'Z' ; ch++ ){
 					if(count == 3) {items.add(createdString); createdString = ""; count = 0;}
 					createdString = createdString + String.valueOf(ch); 
@@ -46,9 +49,10 @@ public class ListPlacesBySubTypeActivity extends ListActivity {
 				if(createdString != "") {items.add(createdString); createdString = ""; count = 0;}
 				setTitle("Places by Name");
 				break;
-			case 4:
+			case 4: //places by type
+				//create a list of categories.
 				for(PlaceCategory cat : PlaceCategory.values()){
-					if(cat.getID() != 0)
+					if(cat.getID() != 0) //i.e. not UNKNOWN (which is not intended to be used)
 						items.add(cat.getName());
 				}
 				setTitle("Places by Type");
@@ -60,13 +64,14 @@ public class ListPlacesBySubTypeActivity extends ListActivity {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int itemNoClicked,
 					long arg3) {
-				//Starts activity PlaceFullInfoActivity for the clicked place
+				//Starts activity ListPlacesItemActivity to display places to the user
             	switch(queryType){
-            	case 3:
+            	case 3: //places by name
             		Intent intent0 = new Intent(getApplicationContext(), ListPlacesItemsActivity.class);
                 	intent0.putExtra(ListPlacesItemsActivity.EXTRA_LATITUDE, latitude);
                 	intent0.putExtra(ListPlacesItemsActivity.EXTRA_LONGITUDE, longitude);
                 	intent0.putExtra(ListPlacesItemsActivity.EXTRA_QUERYTYPE, 3);
+                	//calculate the first character in the text of the item pressed.
                 	if(itemNoClicked == 0){
                     	intent0.putExtra(ListPlacesItemsActivity.EXTRA_QUERYDATA,(int) '0' +itemNoClicked);
                     	} else {
@@ -74,7 +79,7 @@ public class ListPlacesBySubTypeActivity extends ListActivity {
                     }
                 	startActivity(intent0);
             		break;
-            	case 4:
+            	case 4: //places by type
             		Intent intent1 = new Intent(getApplicationContext(), ListPlacesItemsActivity.class);
                 	intent1.putExtra(ListPlacesItemsActivity.EXTRA_LATITUDE, latitude);
                 	intent1.putExtra(ListPlacesItemsActivity.EXTRA_LONGITUDE, longitude);
@@ -90,6 +95,7 @@ public class ListPlacesBySubTypeActivity extends ListActivity {
 		setListAdapter(adapter);
 	}
 	
+	//ArrayAdapter for displaying strings in a list view.
 	public class MyStringAdapter extends ArrayAdapter<String> {
 		private Context context;
 		private List<String> values;

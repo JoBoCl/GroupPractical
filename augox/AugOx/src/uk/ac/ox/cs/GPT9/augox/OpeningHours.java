@@ -14,6 +14,11 @@ import android.util.Log;
  * Represents the times that some place is open. Given that there are complex
  * ways this information can be defined, a basic abstraction from the raw data
  * is provided.
+ * 
+ * NOTE: Features that would use this class were cut during development, so
+ * some more complex features were ultimately not implemented (namely checking
+ * when next open/closed) or have broken implementations (namely bulletproof
+ * OSM data mining). The core functionality is fully functional, however.
  */
 public class OpeningHours {
 	/*

@@ -5,6 +5,9 @@ import java.util.Comparator;
 import uk.ac.ox.cs.GPT9.augox.MainScreenActivity;
 import uk.ac.ox.cs.GPT9.augox.PlacesDatabase;
 
+/**
+ * Sort query results by rating
+ */
 public class RatingSorter implements DatabaseSorter {
 	/*
 	 * Variables

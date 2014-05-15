@@ -129,9 +129,11 @@ public class GalleryPickerFragment extends Fragment {
 			placeImages[i].setOnClickListener(placeClickedListener);
 		}
 
+		// Initialise
 		chosenPlace[0].setChecked(true);
 		lastChecked = 1;
 
+		// Create list of radiobuttons, one for each category, and add to activity
 		final ArrayList<RadioButton> categoryRadioButtons;
 		categoryChoice = ((RadioGroup) view.findViewById(R.id.categoryChoice));
 		categoryChoice.setOrientation(RadioGroup.HORIZONTAL);
@@ -155,6 +157,7 @@ public class GalleryPickerFragment extends Fragment {
 
 		currentCat = PlaceCategory.UNKNOWN;
 
+		// Refresh choices on category change
 		categoryChoice
 				.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
@@ -181,6 +184,8 @@ public class GalleryPickerFragment extends Fragment {
 		matchPlaceIds();
 		Log.d("Joshua", "Create list of places");
 		updateUiElements();
+		
+		// Allow user to opt out of choices
 		ownPlan = ((CheckBox) view.findViewById(R.id.missSession));
 		ownPlan.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
@@ -194,6 +199,20 @@ public class GalleryPickerFragment extends Fragment {
 		});
 
 		preferencesUpdated();
+		
+		// Allow user to view more choices
+		reloadChoices = ((Button) view.findViewById(R.id.reloadChoices));
+		 		reloadChoices.setOnClickListener(new OnClickListener() {
+		 
+		 			@Override
+		 			public void onClick(View v) {
+		 				placeIds = choosePlaces(currentCat);
+		 				matchPlaceIds();
+		 				updateUiElements();
+		 				updateAutoPlanner();
+		 
+		 			}
+		 		});
 
 		reloadChoices = ((Button) view.findViewById(R.id.reloadChoices));
 		reloadChoices.setOnClickListener(new OnClickListener() {
@@ -211,10 +230,12 @@ public class GalleryPickerFragment extends Fragment {
 		return view;
 	}
 
+	// Update AutoRoutePlanner with chosen place
 	private void updateAutoPlanner() {
 		AutoPlannerActivity.updatePlace(offset);
 	}
 
+	// Returns IDs of chosen places
 	private Integer[] choosePlaces(List<Integer> idList) {
 		Integer[] chosenPlaceIds = new Integer[3];
 
@@ -222,9 +243,11 @@ public class GalleryPickerFragment extends Fragment {
 			chosenPlaceIds[i] = -1;
 		}
 
+		// If not allowing repeats, remove all previously seen activities
 		if (!allowRepeats)
 			idList.removeAll(AutoPlannerActivity.getSeenPlaces());
 
+		// If sufficiently large list
 		if (idList.size() > 0) {
 
 			Random random = new Random();
@@ -235,10 +258,11 @@ public class GalleryPickerFragment extends Fragment {
 							.get(random.nextInt(idList.size()));
 					idList.remove(chosenPlaceIds[i]);
 				}
-			} catch (Exception e) {
+			} catch (Exception e) { // Only needed if initial list size < 3
 			}
 		}
 
+		// Update list of seen places to ensureno repeats
 		AutoPlannerActivity.updateSeenPlaces(offset, chosenPlaceIds);
 
 		return chosenPlaceIds;
@@ -305,13 +329,16 @@ public class GalleryPickerFragment extends Fragment {
 		return choosePlaces(idList);
 	}
 
+	// Associate places and IDs
 	private void matchPlaceIds() {
 		for (int i = 0; i < 3; i++)
 			places[i] = MainScreenActivity.getPlacesDatabase().getPlaceByID(
 					placeIds[i]);
 	}
 
+	// Update name and picture
 	private void updateUiElements() {
+		// Start gathering pictures
 		for (int i = 0; i < 3; i++) {
 			if (places[i] != null && placeIds[i] != -1) {
 				try {
@@ -338,6 +365,7 @@ public class GalleryPickerFragment extends Fragment {
 		}
 	}
 
+	// Adapted from Matthew's NewsFeedImageGatherer class
 	private class GalleryImageGatherer {
 		private String imageUrl;
 

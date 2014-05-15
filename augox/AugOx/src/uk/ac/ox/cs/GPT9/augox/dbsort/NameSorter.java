@@ -6,6 +6,9 @@ import java.util.Comparator;
 import uk.ac.ox.cs.GPT9.augox.MainScreenActivity;
 import uk.ac.ox.cs.GPT9.augox.PlacesDatabase;
 
+/**
+ * Sort query results alphabetically by name
+ */
 public class NameSorter implements DatabaseSorter {
 	/*
 	 * Variables

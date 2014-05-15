@@ -37,8 +37,12 @@ public class AutoPlannerActivity extends FragmentActivity {
 
 	private SeekBar activityCount;
 
+	// ADT seenPlaces : Integer -> {Integer}
+	//     seenPlaces(i) = activities[i],places
+	// for all x in seenPlaces(i), for all y in seenPlaces(j), for i != j, x != y
 	private static Map<Integer, Integer[]> seenPlaces;
 
+	// Returns codomain of seenPlaces
 	public static List<Integer> getSeenPlaces() {
 		List<Integer> values = new ArrayList<Integer>();
 		for (Integer[] placeIds : seenPlaces.values())
@@ -69,6 +73,7 @@ public class AutoPlannerActivity extends FragmentActivity {
 
 	private int ACTIVITY_LIMIT;
 
+	// Update MSA with places chosen by the user
 	public static void getPlaces() {
 		List<Integer> routeList = new ArrayList<Integer>();
 		for (int j = 0; j < activities.length; j++) {
@@ -115,23 +120,28 @@ public class AutoPlannerActivity extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_auto_planner);
 
+		// Access single object for shared preferences
 		SharedPreferences sharedPref = MainScreenActivity.getSharedPref();
+		
+		// Update activity limit for use across class
 		ACTIVITY_LIMIT = ((int) (Integer.parseInt(sharedPref.getString(
 				"setting_autoroute_max_length", "1"))));
 
-		_route = new Integer[getResources()
-				.getInteger(R.integer.activity_limit)];
+		// Initialise new local blank route
+		_route = new Integer[ACTIVITY_LIMIT];
 
+		// Initialise new list of places that have been seen and ignored by the user
 		seenPlaces = new TreeMap<Integer, Integer[]>();
 
-		activities = new GalleryPickerFragment[getResources().getInteger(
-				R.integer.activity_limit)];
+		//
+		activities = new GalleryPickerFragment[ACTIVITY_LIMIT];
 		LinearLayout galleryLayout = (LinearLayout) findViewById(R.id.galleryHolders);
 
 		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 
 		Log.d("Joshua", "Before loop start");
 
+		// Add gallery pickers to the activity
 		for (int i = 0; i < ACTIVITY_LIMIT; i++) {
 			_route[i] = -1;
 			activities[i] = GalleryPickerFragment.newInstance(i);
@@ -142,16 +152,19 @@ public class AutoPlannerActivity extends FragmentActivity {
 		ft.commit();
 		Log.d("Joshua", "Committed changes");
 
+		// Hide all galleries to ensure correct initialisation
 		updateViewableActivities(0);
 
 		Log.d("Joshua", sharedPref.toString());
 
+		// Set up slider
 		activityCount = ((SeekBar) findViewById(R.id.activityCount));
 		activityCount.setMax(ACTIVITY_LIMIT);
 		activityCount
 				.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 					public void onProgressChanged(SeekBar seekBar,
 							int newValue, boolean userChange) {
+						// Update number of visible activities
 						updateViewableActivities(newValue);
 					}
 
@@ -163,6 +176,8 @@ public class AutoPlannerActivity extends FragmentActivity {
 							SeekBar paramAnonymousSeekBar) {
 					}
 				});
+				
+		// Set up finished button
 		finished = ((Button) findViewById(R.id.routeFinished));
 		finished.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View paramAnonymousView) {
@@ -176,6 +191,7 @@ public class AutoPlannerActivity extends FragmentActivity {
 		});
 		Log.d("Joshua", "Finished onCreate");
 
+		// Set up filters
 		allowRepeatsCheckbox = (CheckBox) findViewById(R.id.allowRepeats);
 		allowRepeatsCheckbox.setChecked(false);
 		allowRepeatsCheckbox
@@ -225,9 +241,10 @@ public class AutoPlannerActivity extends FragmentActivity {
 				});
 
 		routeDistance = (SeekBar) findViewById(R.id.routeDistance);
-		// Currently set to 4km
+		// Initialise routeDistance based on preferences
 		routeDistance.setMax((int) (Float.parseFloat(sharedPref.getString(
 				"setting_arview_max_distance", "1")) * 20));
+		// Set starting value to halfway mark
 		routeDistance.setProgress((int) (Float.parseFloat(sharedPref.getString(
 				"setting_arview_max_distance", "1")) * 10));
 		routeDistance.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
@@ -251,6 +268,7 @@ public class AutoPlannerActivity extends FragmentActivity {
 	}
 
 	private void updateGalleries() {
+		// Get new filter values
 		for (int i = 0; i < ACTIVITY_LIMIT; i++) {
 			activities[i].preferencesUpdated();
 		}
@@ -262,6 +280,7 @@ public class AutoPlannerActivity extends FragmentActivity {
 	}
 
 	private void updateViewableActivities(int visibleActivities) {
+		// Show/hide galleries as user increases/decreases number of choices
 		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 		for (int i = 0; i < ACTIVITY_LIMIT; i++) {
 			if (i < visibleActivities) {
@@ -276,6 +295,7 @@ public class AutoPlannerActivity extends FragmentActivity {
 	}
 
 	public static void updatePlace(int index) {
+		// Update route
 		Log.d("updatePlace",
 				"Gallery "
 						+ Integer.toString(index)
@@ -286,16 +306,19 @@ public class AutoPlannerActivity extends FragmentActivity {
 	}
 
 	public static void updateSeenPlaces(Integer offset, Integer[] chosenPlaceIds) {
+		// seenPlaces = seenPlaces_0 (+) offset -> chosenPlaceIds
 		seenPlaces.put(offset, chosenPlaceIds);
 	}
 
 	public static double getPreviousLongitude(int offset) {
+		// For the gallery at offset, return the location of the place chosen by the gallery at offset-1
 		return MainScreenActivity.getPlacesDatabase()
 				.getPlaceByID(activities[offset - 1].getSelectedPlace())
 				.getLongitude();
 	}
 
 	public static double getPreviousLatitude(int offset) {
+		// For the gallery at offset, return the location of the place chosen by the gallery at offset-1
 		return MainScreenActivity.getPlacesDatabase()
 				.getPlaceByID(activities[offset - 1].getSelectedPlace())
 				.getLatitude();

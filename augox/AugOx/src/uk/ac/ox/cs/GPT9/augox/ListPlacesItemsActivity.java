@@ -27,6 +27,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+//Activity for displaying a list of items to the user via a query call to the database
 public class ListPlacesItemsActivity extends ListActivity {
 	/*
 	 * Intent Constants
@@ -40,21 +41,26 @@ public class ListPlacesItemsActivity extends ListActivity {
 	private double longitude = 0;
 	private int queryType = 0;
 
+	//reload the list on coming back to the activity.
 	protected void onResume(){
 		super.onResume();
 		setup();
 	}
+	
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setup();
 	}
 	
-	private void setup(){
+	private void setup(){ //populate the listview
+		//get values from the intent
 		Intent intent = getIntent();
 		latitude = intent.getDoubleExtra(EXTRA_LATITUDE,Double.valueOf(0));
 		longitude = intent.getDoubleExtra(EXTRA_LONGITUDE,Double.valueOf(0));
 		radius = 2;
 		queryType = intent.getIntExtra(EXTRA_QUERYTYPE, 0);
+		
+		//set up queries and a sort for the database
 		DatabaseQuery q = null;
 		DatabaseSorter s = new NameSorter(SortOrder.ASC);
 		final PlacesDatabase db = MainScreenActivity.getPlacesDatabase();
@@ -79,10 +85,11 @@ public class ListPlacesItemsActivity extends ListActivity {
 				q = createNumQuery();
 				setTitle("Places: 0..9");
 			} else {
+				//create a query that finds all places beginning with three adjacent letters where queryDataChar is the first letter
 				q = new NameStartsWithQuery(String.valueOf( (char) queryDataChar));
 				q = new OrQuery(q, new NameStartsWithQuery(String.valueOf( (char) (queryDataChar+1))));
 				
-				if((char) queryDataChar == 'Y'){
+				if((char) queryDataChar == 'Y'){ //edge case as 26 is not divisible by 3, so requires one pair.
 					setTitle("Places: " + (char) (queryDataChar) + (char) (queryDataChar+1));
 				} else {
 					q = new OrQuery(q, new NameStartsWithQuery(String.valueOf( (char) (queryDataChar+2))));
@@ -101,7 +108,7 @@ public class ListPlacesItemsActivity extends ListActivity {
 			q = null;
 			break;
 		}		
-
+		//query the database
 		final List<Integer> places = db.query(q,s);
 		if(places.size() != 0){
 			//set click listener for clicking on a list element
@@ -114,9 +121,10 @@ public class ListPlacesItemsActivity extends ListActivity {
 	            	Intent intent = new Intent(getApplicationContext(), PlaceFullInfoActivity.class);
 	            	//put the place in the intent
 	                intent.putExtra(PlaceFullInfoActivity.EXTRA_PLACE, places.get(itemNoClicked));
-	                //put the background to include in the intent
+	                //calculate the distance between the user and the clicked place
 	                double dist = PlaceData.getDistanceBetween(place.getLatitude(), place.getLongitude(), latitude, longitude);
 	                intent.putExtra(PlaceFullInfoActivity.EXTRA_DISTANCE, dist);
+	                //put the background to include in the intent, "" as not passing an image.
 	                intent.putExtra(PlaceFullInfoActivity.EXTRA_BACKGROUND, "");
 	                startActivity(intent);
 				}
@@ -125,17 +133,21 @@ public class ListPlacesItemsActivity extends ListActivity {
 			MyPlaceAdapter adapter = new MyPlaceAdapter(this,places);
 			setListAdapter(adapter);
 		} else {
+			//if there were no results found from the query...
 			List<String> noneFoundList = new ArrayList<String>(); noneFoundList.add("No Places Found");
 			MyStringAdapter adapter = new MyStringAdapter(this,noneFoundList);
 			setListAdapter(adapter);
 		}
 	}
 	
+	//method for creating a query that returns all places beginning with a number
 	private DatabaseQuery createNumQuery(){
 		DatabaseQuery q = new NameStartsWithQuery("0");
 		for(int i = 1;i<=9;i++) q = new OrQuery(q,new NameStartsWithQuery(String.valueOf(i)));
 		return q;
 	}
+	
+	//ArrayAdapter for displaying a place in a listView
 	public class MyPlaceAdapter extends ArrayAdapter<Integer> {
 		private Context context;
 		private List<Integer> values;
@@ -147,23 +159,25 @@ public class ListPlacesItemsActivity extends ListActivity {
 		
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
+			//populate the view
 			PlacesDatabase db = MainScreenActivity.getPlacesDatabase();
 			PlaceData item = db.getPlaceByID(values.get(position));
 			LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			View rowView = inflater.inflate(R.layout.listview_item_list_places, parent,false);
+			//get the individual views within a single item of the listView
 			TextView nameView = (TextView) rowView.findViewById(R.id.list_places_item_name);
 			ImageView pictureView = (ImageView) rowView.findViewById(R.id.list_places_item_type);
 			TextView distView = (TextView) rowView.findViewById(R.id.list_places_item_distance);
+			//set the values of these views using information about the place
 			nameView.setText(item.getName());
 			pictureView.setImageResource(item.getCategory().getImageRef(item.getVisited()));
 			distView.setText(PlaceFullInfoActivity.distanceAsString(PlaceData.getDistanceBetween(
 					latitude,longitude,item.getLatitude(),item.getLongitude())));
-			//distView.setText(String.format("%.1f", PlaceData.getDistanceBetween(
-			//		latitude,longitude,item.getLatitude(),item.getLongitude()))+"km"); 
 			return rowView;
 		}
 	}
 	
+	//ArrayAdapter for displaying a string in a listView
 	public class MyStringAdapter extends ArrayAdapter<String> {
 		private Context context;
 		private List<String> values;
@@ -175,6 +189,7 @@ public class ListPlacesItemsActivity extends ListActivity {
 		
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
+			//populate the view
 			LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			View rowView = inflater.inflate(R.layout.listview_standard_layout, parent,false);
 			TextView nameView = (TextView) rowView.findViewById(R.id.list_places_single_view);

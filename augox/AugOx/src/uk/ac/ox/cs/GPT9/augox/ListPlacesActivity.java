@@ -14,6 +14,8 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+
+//Activity for the top level of displaying a list
 public class ListPlacesActivity extends ListActivity {
 	/*
 	 * Intent Constants
@@ -25,10 +27,10 @@ public class ListPlacesActivity extends ListActivity {
 
 	protected void onResume(){
 		super.onResume();
-		//setup();
 	}
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
+		//get values passed through intent
 		Intent intent = getIntent();
 		latitude = intent.getDoubleExtra(EXTRA_LATITUDE,Double.valueOf(0));
 		longitude = intent.getDoubleExtra(EXTRA_LONGITUDE,Double.valueOf(0));
@@ -36,6 +38,7 @@ public class ListPlacesActivity extends ListActivity {
 	}
 	
 	private void setup(){
+		//add items to the listView on the screen
 		setTitle("Place List");
 		final List<String> places = new ArrayList<String>();
 		places.add("Local Places"); 
@@ -49,9 +52,10 @@ public class ListPlacesActivity extends ListActivity {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int itemNoClicked,
 					long arg3) {
-				//Starts activity PlaceFullInfoActivity for the clicked place
+				//Starts next activity based on the item clicked.
             	switch(itemNoClicked){
             	case 0: //local places
+            		//enough information to show user the list they want, so ListPlacesItemsActivity required
                 	Intent intent0 = new Intent(getApplicationContext(), ListPlacesItemsActivity.class);
                 	intent0.putExtra(ListPlacesItemsActivity.EXTRA_LATITUDE, latitude);
                 	intent0.putExtra(ListPlacesItemsActivity.EXTRA_LONGITUDE, longitude);
@@ -59,6 +63,7 @@ public class ListPlacesActivity extends ListActivity {
                 	startActivity(intent0);
             		break;
             	case 1: //visited places
+            		//enough information to show user the list they want, so ListPlacesItemsActivity required
             		Intent intent1 = new Intent(getApplicationContext(), ListPlacesItemsActivity.class);
                 	intent1.putExtra(ListPlacesItemsActivity.EXTRA_LATITUDE, latitude);
                 	intent1.putExtra(ListPlacesItemsActivity.EXTRA_LONGITUDE, longitude);
@@ -66,6 +71,7 @@ public class ListPlacesActivity extends ListActivity {
                 	startActivity(intent1);
             		break;
             	case 2: //places to visit
+            		//enough information to show user the list they want, so ListPlacesItemsActivity required
             		Intent intent2 = new Intent(getApplicationContext(), ListPlacesItemsActivity.class);
                 	intent2.putExtra(ListPlacesItemsActivity.EXTRA_LATITUDE, latitude);
                 	intent2.putExtra(ListPlacesItemsActivity.EXTRA_LONGITUDE, longitude);
@@ -73,6 +79,7 @@ public class ListPlacesActivity extends ListActivity {
                 	startActivity(intent2);
             		break;
             	case 3: //places by name
+            		//more information required from user so ListPlaceBySubTypeActivity required
             		Intent intent3 = new Intent(getApplicationContext(), ListPlacesBySubTypeActivity.class);
                 	intent3.putExtra(ListPlacesBySubTypeActivity.EXTRA_LATITUDE, latitude);
                 	intent3.putExtra(ListPlacesBySubTypeActivity.EXTRA_LONGITUDE, longitude);
@@ -80,6 +87,7 @@ public class ListPlacesActivity extends ListActivity {
                 	startActivity(intent3);
             		break;
             	case 4: //place by type
+            		//more information required from user so ListPlaceBySubTypeActivity required
             		Intent intent4 = new Intent(getApplicationContext(), ListPlacesBySubTypeActivity.class);
                 	intent4.putExtra(ListPlacesBySubTypeActivity.EXTRA_LATITUDE, latitude);
                 	intent4.putExtra(ListPlacesBySubTypeActivity.EXTRA_LONGITUDE, longitude);
@@ -94,6 +102,7 @@ public class ListPlacesActivity extends ListActivity {
 		setListAdapter(adapter);
 	}
 	
+	//ArrayAdapter for displaying items in a listView
 	public class MyStringAdapter extends ArrayAdapter<String> {
 		private Context context;
 		private List<String> values;
@@ -105,6 +114,7 @@ public class ListPlacesActivity extends ListActivity {
 		
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
+			//populate the view
 			LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			View rowView = inflater.inflate(R.layout.listview_standard_layout, parent,false);
 			TextView nameView = (TextView) rowView.findViewById(R.id.list_places_single_view);

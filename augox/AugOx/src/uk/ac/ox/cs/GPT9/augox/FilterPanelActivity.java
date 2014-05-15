@@ -18,22 +18,13 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-/**
- * A {@link PreferenceActivity} that presents a set of application settings. On
- * handset devices, settings are presented as a single list. On tablets,
- * settings are split by category, with category headers shown to the left of
- * the list of settings.
- * <p>
- * See <a href="http://developer.android.com/design/patterns/settings.html">
- * Android Design: Settings</a> for design guidelines and the <a
- * href="http://developer.android.com/guide/topics/ui/settings.html">Settings
- * API Guide</a> for more information on developing a Settings UI.
- */
+
 public class FilterPanelActivity extends ListActivity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		//create a list of all of the filters
 		List<FilterItem> items = new ArrayList<FilterItem>();
 		items.add(new FilterItem("Visited", R.drawable.visitedicon, "filter_visited"));
 		items.add(new FilterItem("Unvisited",R.drawable.unvisitedicon,"filter_unvisited"));
@@ -41,11 +32,12 @@ public class FilterPanelActivity extends ListActivity {
 			if(cat.getID() != 0)
 				items.add(new FilterItem(cat.getName(),cat.getImageRef(false),cat.getFilter()));
 		}
-		
+		//set up an adapter to display the filters in a listView
 		FilterAdapter adapter = new FilterAdapter(this,items);
 		setListAdapter(adapter);
 	} 
 	
+	//A specialised ArrayAdapter for displaying items in a listView
 	public class FilterAdapter extends ArrayAdapter<FilterItem> {
 		private Context context;
 		private List<FilterItem> values;
@@ -60,16 +52,18 @@ public class FilterPanelActivity extends ListActivity {
 		
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
+			//set up an item of the listView
 			LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			View rowView = inflater.inflate(R.layout.listview_item_filters, parent,false);
 			final FilterItem item = values.get(position);
+			//find and set the image, text and checkbox of the item
 			ImageView iconView = (ImageView) rowView.findViewById(R.id.filters_image);
 			TextView nameView = (TextView) rowView.findViewById(R.id.filters_name);
 			final CheckBox checkView = (CheckBox) rowView.findViewById(R.id.filters_checkbox);
 			iconView.setImageResource(item.imageRef);
 			nameView.setText(item.name);
 			checkView.setChecked(pref.getBoolean(item.filterString,true));
-			
+			//click listener for changing the state of a filter
 			checkView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -82,6 +76,7 @@ public class FilterPanelActivity extends ListActivity {
 		}
 	}
 	
+	//class representing an item in the listView representing one filter.
 	private class FilterItem{
 		private String name;
 		private int imageRef;
@@ -93,55 +88,4 @@ public class FilterPanelActivity extends ListActivity {
 			this.filterString = filterString;
 		}
 	}
-	
-	
-	/*
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_filters);
-		LinearLayout l = (LinearLayout) findViewById(R.id.filtersLayout);
-		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        final SharedPreferences.Editor editor = pref.edit();
-        //final CheckBox checkAllCB = new CheckBox(getApplicationContext());
-        final CheckBox visitedCB = new CheckBox(getApplicationContext());
-        final CheckBox unvisitedCB = new CheckBox(getApplicationContext());
-        //checkAllCB.setText("Enable All"); 
-        visitedCB.setText("Visited"); 
-        visitedCB.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				editor.putBoolean("filter_visited",visitedCB.isChecked());
-				editor.commit();
-			}
-		});
-        unvisitedCB.setText("Unvisited");
-        unvisitedCB.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				editor.putBoolean("filter_unvisited",unvisitedCB.isChecked());
-				editor.commit();
-			}
-		});
-        visitedCB.setChecked(pref.getBoolean("filter_visited", true));
-        unvisitedCB.setChecked(pref.getBoolean("filter_unvisited", true));
-        l.addView(visitedCB); l.addView(unvisitedCB);
-		for(final PlaceCategory cat : PlaceCategory.values()){
-			if(cat.getID() != 0){
-				final CheckBox cb = new CheckBox(getApplicationContext());
-	            cb.setText(cat.getName());
-	            cb.setChecked(pref.getBoolean(cat.getFilter(), true));
-	    		
-	    		cb.setOnClickListener(new View.OnClickListener() {
-	    			@Override
-	    			public void onClick(View v) {
-	    				editor.putBoolean(cat.getFilter(),cb.isChecked());
-	    				editor.commit();
-	    			}
-	    		});
-	            l.addView(cb);
-			}
-		}
-	} 
-	*/
 }
