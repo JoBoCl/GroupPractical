@@ -360,7 +360,6 @@ public class MainScreenActivity extends FragmentActivity implements OnClickBeyon
 	private void fillWorld() {
 		DatabaseQuery dq = new AllQuery();
 		DatabaseSorter ds = new DistanceFromSorter(mWorld.getLongitude(), mWorld.getLatitude(), SortOrder.ASC);
-				mWorld.getLatitude(), SortOrder.ASC);
 		List<Integer> placeIDs = placesDatabase.query(dq, ds);
 		for (Integer placeID: placeIDs) {
 			PlaceData currPlace = placesDatabase.getPlaceByID(placeID);
